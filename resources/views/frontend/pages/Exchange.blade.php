@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title','UMQ AL WADI FURNITURE TRADING ||  Exchange & Return Policy')
+@section('title','Shoukat Nimco Center ||  Exchange & Return Policy')
 
 @section('main-content')
 

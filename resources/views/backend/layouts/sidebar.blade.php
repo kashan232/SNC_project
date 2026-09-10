@@ -126,7 +126,13 @@
     </a>
   </li>
 
-  <!-- Reviews -->
+      <!-- Outlets -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('outlet.index')}}">
+        <i class="fas fa-fw fa-store"></i>
+        <span>Outlets</span></a>
+    </li>
+    <!-- Reviews -->
   <li class="nav-item">
     <a class="nav-link" href="{{route('review.index')}}">
       <i class="fas fa-comments"></i>

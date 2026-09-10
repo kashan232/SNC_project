@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 
-@section('title','UMQ AL WADI FURNITURE TRADING || Banner Create')
+@section('title','Shoukat Nimco Center || Banner Create')
 
 @section('main-content')
 

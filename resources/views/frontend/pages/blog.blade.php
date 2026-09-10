@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title','UMQ AL WADI FURNITURE TRADING ||  Blog Page')
+@section('title','Shoukat Nimco Center ||  Blog Page')
 
 @section('main-content')
     <!-- Breadcrumbs -->

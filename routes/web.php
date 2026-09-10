@@ -173,6 +173,7 @@
         Route::resource('/order', 'OrderController');
         // Shipping
         Route::resource('/shipping', 'ShippingController');
+        Route::resource('/outlet', 'App\Http\Controllers\OutletController');
         // Coupon
         Route::resource('/coupon', 'CouponController');
         // Settings

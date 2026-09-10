@@ -59,7 +59,7 @@ class AdminController extends Controller
     public function settingsUpdate(Request $request)
     {
         // validate request
-        $this->validate($request, [
+        $this->validate($request,[
             'short_des'   => 'required|string',
             'description' => 'required|string',
             'photo'       => 'required',
@@ -67,6 +67,7 @@ class AdminController extends Controller
             'address'     => 'required|string',
             'email'       => 'required|email',
             'phone'       => 'required|string',
+            'theme_color'=>'required|string',
         ]);
 
         $data = $request->all();

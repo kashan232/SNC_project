@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title', 'UMQ AL WADI FURNITURE TRADING || Terms of Service')
+@section('title', 'Shoukat Nimco Center || Terms of Service')
 @section('main-content')
 <div class="breadcrumbs">
     <div class="container">
@@ -22,10 +22,10 @@
                 <div class="policy-content" style="background: #fbfbfb; padding: 50px; border-radius: 12px; border-top: 5px solid #036b41; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
                     <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-bottom: 30px;">Terms of Service</h2>
                     
-                    <p style="color: #555; line-height: 1.8; margin-bottom: 20px;">Welcome to UMQ AL WADI FURNITURE TRADING. These terms and conditions outline the rules and regulations for the use of our website and the purchase of our premium furniture products.</p>
+                    <p style="color: #555; line-height: 1.8; margin-bottom: 20px;">Welcome to Shoukat Nimco Center. These terms and conditions outline the rules and regulations for the use of our website and the purchase of our premium furniture products.</p>
                     
                     <h4 style="font-size: 20px; font-weight: 700; color: #333; margin: 30px 0 15px;">1. Acceptance of Terms</h4>
-                    <p style="color: #555; line-height: 1.8; margin-bottom: 20px;">By accessing this website, we assume you accept these terms and conditions. Do not continue to use UMQ AL WADI FURNITURE TRADING if you do not agree to take all of the terms and conditions stated on this page.</p>
+                    <p style="color: #555; line-height: 1.8; margin-bottom: 20px;">By accessing this website, we assume you accept these terms and conditions. Do not continue to use Shoukat Nimco Center if you do not agree to take all of the terms and conditions stated on this page.</p>
                     
                     <h4 style="font-size: 20px; font-weight: 700; color: #333; margin: 30px 0 15px;">2. Products and Pricing</h4>
                     <p style="color: #555; line-height: 1.8; margin-bottom: 20px;">All products are subject to availability. We reserve the right to discontinue any product at any time. Prices for our products are subject to change without notice. We shall not be liable to you or to any third-party for any modification, price change, suspension, or discontinuance of the Service.</p>

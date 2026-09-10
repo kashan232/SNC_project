@@ -55,7 +55,7 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Email Address<span>*</span></label>
-                                    <input type="email" name="email" placeholder="example@gmail.com" value="{{ old('email') }}"
+                                    <input type="email" name="email" placeholder="Hafizansari@yahoo.com" value="{{ old('email') }}"
                                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                     @error('email')
                                     <span class='text-danger'>{{$message}}</span>

@@ -1,228 +1,181 @@
 <!-- Start Footer Area -->
 <style>
-	/* Premium Footer Styling */
+	/* Light Clean Modern Footer */
 	.footer {
-		background: #023a23; /* Deep rich brand green */
-		color: #e0e0e0;
-		padding-top: 0;
+		background: #ffffff;
+		color: #333333;
 		font-family: 'Poppins', sans-serif;
+		border-top: 1px solid #eeeeee;
+	}
+	.footer .footer-top {
+		padding: 60px 0 20px 0;
 	}
 	.footer .single-footer h4 {
-		color: #ffffff;
-		font-family: 'Orbitron', sans-serif;
+		color: #111111;
 		font-size: 18px;
 		margin-bottom: 25px;
-		font-weight: 600;
+		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 1px;
+		letter-spacing: 0.5px;
 	}
 	.footer .single-footer ul li {
 		margin-bottom: 12px;
 	}
 	.footer .single-footer ul li a {
-		color: #b0c4b9;
+		color: #555555;
 		transition: all 0.3s ease;
 		text-decoration: none;
 		font-size: 15px;
+		font-weight: 500;
 	}
 	.footer .single-footer ul li a:hover {
-		color: #ffffff;
-		padding-left: 8px; /* Hover indent effect */
+		color: var(--primary-color);
+		padding-left: 5px;
 	}
-	.footer .foot-white-text {
-		color: #b0c4b9;
+	.footer .foot-desc {
+		color: #666666;
 		line-height: 1.8;
-		margin-top: 20px;
-		font-size: 15px;
+		font-size: 14px;
+		margin-top: 15px;
 	}
+	.footer .contact ul li {
+		color: #555555;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: flex-start;
+		font-size: 14px;
+		line-height: 1.6;
+		font-weight: 500;
+	}
+	.footer .contact ul li i {
+		margin-right: 15px;
+		color: var(--primary-color);
+		margin-top: 4px;
+		font-size: 18px;
+	}
+	/* Socials */
 	.footer .social {
 		display: flex;
 		gap: 15px;
-		margin-top: 25px;
+		margin-top: 15px;
 	}
 	.footer .social a i {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 40px;
-		height: 40px;
+		width: 35px;
+		height: 35px;
 		border-radius: 50%;
-		background: rgba(255,255,255,0.08);
-		color: #fff !important;
+		background: #f4f4f4;
+		color: var(--primary-color) !important;
 		transition: all 0.3s ease;
-		font-size: 18px !important;
-		padding: 0 !important;
+		font-size: 16px !important;
 	}
 	.footer .social a:hover i {
-		background: #036b41;
-		transform: translateY(-5px);
-		box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+		background: var(--primary-color);
+		color: #ffffff !important;
+		transform: translateY(-3px);
+		box-shadow: 0 4px 10px rgba(211,84,0,0.2);
 	}
-	.footer .contact ul li {
-		color: #b0c4b9;
-		margin-bottom: 15px;
-		display: flex;
-		align-items: flex-start;
-		font-size: 15px;
-		line-height: 1.6;
-	}
-	.footer .contact ul li i {
-		margin-right: 15px;
-		color: #fff;
-		margin-top: 4px;
-		font-size: 18px;
-	}
+
+	/* Red Bottom Bar */
 	.footer .copyright {
-		background: #012b1a; /* Darker bottom bar */
-		padding: 25px 0;
-		margin-top: 60px;
-		border-top: 1px solid rgba(255,255,255,0.05);
+		background: var(--primary-color);
+		padding: 15px 0;
 	}
-	.footer .copyright p {
-		color: #8fa89b;
-		margin: 0;
-		font-size: 14px;
-	}
-	.developer-credit {
-		text-align: right;
-		color: #8fa89b;
+	.footer .bottom-links {
+		text-align: center;
+		color: #ffffff;
 		font-size: 13px;
-		line-height: 1.6;
-	}
-	.developer-credit span {
-		color: #fff;
 		font-weight: 700;
-		font-family: 'Orbitron', sans-serif;
-		letter-spacing: 1px;
+		letter-spacing: 0.5px;
 	}
-	.developer-credit .dev-contact {
-		display: inline-block;
-		font-size: 13px;
-		color: #012b1a;
-		background: #25D366; /* WhatsApp Green */
-		padding: 4px 12px;
-		border-radius: 20px;
-		margin-top: 8px;
-		font-weight: 700;
+	.footer .bottom-links a {
+		color: #ffffff;
 		text-decoration: none;
-		transition: all 0.3s ease;
+		margin: 0 10px;
+		transition: opacity 0.3s;
 	}
-	.developer-credit .dev-contact:hover {
-		background: #fff;
-		transform: scale(1.05);
-	}
-	@media(max-width: 768px) {
-		.developer-credit {
-			text-align: center;
-			margin-top: 20px;
-			padding-top: 20px;
-			border-top: 1px solid rgba(255,255,255,0.05);
-		}
-		.footer .copyright .left {
-			text-align: center;
-		}
+	.footer .bottom-links a:hover {
+		opacity: 0.8;
 	}
 </style>
 
 <footer class="footer">
+	
+
 	<!-- Footer Top -->
-	<div class="footer-top" style="padding: 60px 0 40px 0;">
+	<div class="footer-top">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-5 col-md-6 col-12 mb-4 mb-lg-0">
-					<!-- Single Widget -->
-					<div class="single-footer about text-white">
+				<!-- Brand Info -->
+				<div class="col-lg-4 col-md-6 col-12 mb-5 mb-lg-0">
+					<div class="single-footer about">
 						<div class="logo">
-							<a href="{{route('home')}}"><img src="{{asset('logo_white.png')}}" style="width: 220px;" alt="Logo"></a>
+							<a href="{{route('home')}}">
+                                <img src="{{asset('images/footer_logo.jpg')}}" alt="Shoukat Nimco Center Logo" style="width: 130px; height: 130px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 10px;">
+                            </a>
 						</div>
 						@php
 						$settings = DB::table('settings')->first();
 						@endphp
-						<p class="text foot-white-text">{!! $settings->description !!}</p>
+						<p class="foot-desc">{!! $settings->description !!}</p>
+					</div>
+				</div>
+				
+				<!-- Contact Us -->
+				<div class="col-lg-3 col-md-6 col-12 mb-5 mb-lg-0">
+					<div class="single-footer contact-widget">
+						<h4>Contact Us</h4>
+						<div class="contact">
+							<ul>
+								<li><i class="ti-mobile"></i> <span>{!! strip_tags($settings->phone) !!}</span></li>
+								<li><i class="ti-location-pin"></i> <span>{!! strip_tags($settings->address) !!}</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
 
-						<!-- Social Media Icons -->
+				<!-- Follow Us -->
+				<div class="col-lg-2 col-md-6 col-12 mb-5 mb-lg-0">
+					<div class="single-footer links">
+						<h4>Follow Us</h4>
 						<div class="social">
+							<a href="https://www.facebook.com/profile.php?id=61577716630042&mibextid=XvxkBK8d3ZMQiiMC" target="_blank">
+								<i class="ti-facebook"></i>
+							</a>
+							<a href="https://www.instagram.com/Shoukat Nimco Center.pk/" target="_blank">
+								<i class="ti-instagram"></i>
+							</a>
 							<a href="https://wa.me/{{ preg_replace('/\D/', '', $settings->phone) }}" target="_blank">
 								<i class="bi bi-whatsapp"></i>
 							</a>
-							<a href="https://www.facebook.com/profile.php?id=61577716630042&mibextid=XvxkBK8d3ZMQiiMC" target="_blank">
-								<i class="bi bi-facebook"></i>
-							</a>
-							<a href="https://www.instagram.com/UMQ AL WADI FURNITURE TRADING.pk/" target="_blank">
-								<i class="bi bi-instagram"></i>
-							</a>
 						</div>
 					</div>
-					<!-- End Single Widget -->
 				</div>
-				<div class="col-lg-2 col-md-6 col-12 mb-4 mb-lg-0">
-					<!-- Single Widget -->
+
+				<!-- Help -->
+				<div class="col-lg-3 col-md-6 col-12">
 					<div class="single-footer links">
-						<h4>Shop</h4>
+						<h4>Help</h4>
 						<ul>
-							<li><a href="{{route('product-grids')}}">All Products</a></li>
-							<li><a href="#">Office Chairs</a></li>
-							<li><a href="#">Gaming Chairs</a></li>
-							<li><a href="#">New Arrivals</a></li>
-							<li><a href="#">Best Sellers</a></li>
-						</ul>
-					</div>
-					<!-- End Single Widget -->
-				</div>
-				<div class="col-lg-2 col-md-6 col-12 mb-4 mb-lg-0">
-					<!-- Single Widget -->
-					<div class="single-footer links">
-						<h4>Support</h4>
-						<ul>
-							<li><a href="{{ route('contact') }}">Contact Support</a></li>
+							<li><a href="{{ route('contact') }}">Submit Your Complaint</a></li>
 							<li><a href="{{ route('about-us') }}">About Us</a></li>
 							<li><a href="{{ route('home') }}#return-policy">Returns & Exchanges</a></li>
-							<li><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
-							<li><a href="{{ route('shipping-policy') }}">Shipping Policy</a></li>
-							<li><a href="{{ route('terms-of-service') }}">Terms of Service</a></li>
 						</ul>
 					</div>
-					<!-- End Single Widget -->
-				</div>
-				<div class="col-lg-3 col-md-6 col-12">
-					<!-- Single Widget -->
-					<div class="single-footer contact-widget">
-						<h4>Get In Touch</h4>
-						<!-- Single Widget -->
-						<div class="contact">
-							<ul>
-								<li><i class="ti-location-pin"></i> <span>{!! strip_tags($settings->address) !!}</span></li>
-								<li><i class="ti-mobile"></i> <span>{!! strip_tags($settings->phone) !!}</span></li>
-								<li><i class="ti-email"></i> <span>{!! strip_tags($settings->email) !!}</span></li>
-							</ul>
-						</div>
-						<!-- End Single Widget -->
-					</div>
-					<!-- End Single Widget -->
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End Footer Top -->
-	
-	<!-- Copyright & Developer Credit -->
+
+	<!-- Red Copyright Bar -->
 	<div class="copyright">
 		<div class="container">
-			<div class="inner">
-				<div class="row align-items-center">
-					<div class="col-lg-6 col-md-6 col-12">
-						<div class="left">
-							<p>Copyright © {{date('Y')}} <a href="{{route('home')}}" style="color: #fff; font-weight:600; text-decoration: none;">UMQ AL WADI FURNITURE TRADING</a>. All Rights Reserved.</p>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 col-12">
-						<div class="developer-credit">
-							Developed by <span>KASHAN SHAIKH</span> <br>
-							Web Design & Software Development Services <br>
-							<a href="https://wa.me/923173859647" target="_blank" class="dev-contact">
-								<i class="bi bi-whatsapp"></i> +92 317-3859647
-							</a>
-						</div>
+			<div class="row align-items-center">
+				<div class="col-12">
+					<div class="bottom-links">
+						POWERED BY <a href="https://wa.me/923173836223" target="_blank" style="text-decoration:underline;">PROWAVE TECHNOLOGIES</a> | <a href="https://wa.me/923173836223"><i class="bi bi-whatsapp" style="margin-right:2px;"></i>+92 317 3836223</a> | <a href="{{ route('privacy-policy') }}">PRIVACY POLICY</a> | <a href="{{ route('home') }}#faqs">FAQS</a>
 					</div>
 				</div>
 			</div>

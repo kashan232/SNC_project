@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title','UMQ AL WADI FURNITURE TRADING ||  Track Order')
+@section('title','Shoukat Nimco Center ||  Track Order')
 
 @section('main-content')
 <!-- Courier Style Tracking Section -->
@@ -122,7 +122,7 @@
                             <div class="row mt-5">
                                 <div class="col-12">
                                     <div class="tcs-info-box" style="padding: 0; overflow: hidden;">
-                                        <h4 style="background: #036b41; color: #fff; padding: 15px 20px; font-size: 16px; font-weight: 700; margin: 0;">Order Items</h4>
+                                        <h4 style="background: var(--primary-color); color: #fff; padding: 15px 20px; font-size: 16px; font-weight: 700; margin: 0;">Order Items</h4>
                                         <div class="table-responsive">
                                             <table class="table" style="margin-bottom: 0;">
                                                 <thead style="background: #f4f6f9;">
@@ -145,7 +145,7 @@
                                                         </td>
                                                         <td style="padding: 15px 20px; border-bottom: 1px solid #eee; vertical-align: middle;">Rs. {{number_format($cart->price, 2)}}</td>
                                                         <td style="padding: 15px 20px; border-bottom: 1px solid #eee; vertical-align: middle;">{{$cart->quantity}}</td>
-                                                        <td style="padding: 15px 20px; border-bottom: 1px solid #eee; vertical-align: middle; text-align: right; font-weight: 700; color: #036b41;">Rs. {{number_format($cart->amount, 2)}}</td>
+                                                        <td style="padding: 15px 20px; border-bottom: 1px solid #eee; vertical-align: middle; text-align: right; font-weight: 700; color: var(--primary-color);">Rs. {{number_format($cart->amount, 2)}}</td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
@@ -159,8 +159,8 @@
                                                         <td style="padding: 15px 20px; text-align: right; font-weight: 700; color: #333;">Rs. {{number_format($order->shipping->price ?? 0, 2)}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="3" style="padding: 15px 20px; text-align: right; font-weight: 800; color: #023a23; font-size: 16px;">Grand Total</td>
-                                                        <td style="padding: 15px 20px; text-align: right; font-weight: 800; color: #036b41; font-size: 16px;">Rs. {{number_format($order->total_amount, 2)}}</td>
+                                                        <td colspan="3" style="padding: 15px 20px; text-align: right; font-weight: 800; color: var(--hover-color); font-size: 16px;">Grand Total</td>
+                                                        <td style="padding: 15px 20px; text-align: right; font-weight: 800; color: var(--primary-color); font-size: 16px;">Rs. {{number_format($order->total_amount, 2)}}</td>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -184,11 +184,11 @@
         padding-bottom: 80px;
     }
     .tracking-banner {
-        background: #036b41;
+        background: var(--primary-color);
         padding: 60px 0 100px;
     }
     .tracking-banner h1 {
-        font-family: 'Orbitron', sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -223,7 +223,7 @@
         background: #fafafa;
     }
     .tcs-input-group button {
-        background: #036b41;
+        background: var(--primary-color);
         color: #fff;
         border: none;
         padding: 0 40px;
@@ -234,7 +234,7 @@
         transition: all 0.3s ease;
     }
     .tcs-input-group button:hover {
-        background: #023a23;
+        background: var(--hover-color);
     }
     .track-hint {
         color: #888;
@@ -248,7 +248,7 @@
         font-size: 22px;
         font-weight: 700;
         color: #333;
-        border-bottom: 2px solid #036b41;
+        border-bottom: 2px solid var(--primary-color);
         padding-bottom: 10px;
         margin-bottom: 25px;
         display: inline-block;
@@ -336,8 +336,8 @@
     }
     .timeline-item.active .status::before,
     .timeline-item.success .status::before {
-        background: #036b41;
-        box-shadow: 0 0 0 3px rgba(3, 107, 65, 0.2);
+        background: var(--primary-color);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 20%, transparent);
     }
     .timeline-item.danger .status::before {
         background: #ea4335;

@@ -7,30 +7,30 @@
 <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-<title>UMQ AL WADI FURNITURE TRADING Pakistan | Premium Men's Shirts for Style, Comfort & Confidence</title>
+<title>Shoukat Nimco Center Pakistan | Premium Men's Shirts for Style, Comfort & Confidence</title>
 
 <!-- Meta Description -->
-<meta name="description" content="Discover UMQ AL WADI FURNITURE TRADING Pakistan – your destination for premium men's shirts crafted with timeless style, modern comfort, and quality you can trust. Elevate your wardrobe with UMQ AL WADI FURNITURE TRADING's exclusive shirt collection loved by thousands worldwide.">
+<meta name="description" content="Discover Shoukat Nimco Center Pakistan – your destination for premium men's shirts crafted with timeless style, modern comfort, and quality you can trust. Elevate your wardrobe with Shoukat Nimco Center's exclusive shirt collection loved by thousands worldwide.">
 
 <!-- Meta Keywords -->
-<meta name="keywords" content="UMQ AL WADI FURNITURE TRADING, UMQ AL WADI FURNITURE TRADING Pakistan, UMQ AL WADI FURNITURE TRADING shirts, premium men's shirts, designer shirts Pakistan, formal shirts, casual shirts, cotton shirts, luxury men's fashion, stylish shirts, mens clothing Pakistan, branded shirts, comfort wear, online shirts Pakistan">
+<meta name="keywords" content="Shoukat Nimco Center, Shoukat Nimco Center Pakistan, Shoukat Nimco Center shirts, premium men's shirts, designer shirts Pakistan, formal shirts, casual shirts, cotton shirts, luxury men's fashion, stylish shirts, mens clothing Pakistan, branded shirts, comfort wear, online shirts Pakistan">
 
 <!-- Author & Robots -->
-<meta name="author" content="UMQ AL WADI FURNITURE TRADING">
+<meta name="author" content="Shoukat Nimco Center">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph / Facebook -->
-<meta property="og:title" content="UMQ AL WADI FURNITURE TRADING Pakistan | Premium Men's Shirts for Style, Comfort & Confidence">
-<meta property="og:description" content="Shop UMQ AL WADI FURNITURE TRADING’s premium shirt collection. Timeless design meets unmatched comfort. Trusted by thousands of men across Pakistan.">
-<meta property="og:url" content="https://UMQ AL WADI FURNITURE TRADING.pk/">
+<meta property="og:title" content="Shoukat Nimco Center Pakistan | Premium Men's Shirts for Style, Comfort & Confidence">
+<meta property="og:description" content="Shop Shoukat Nimco Center’s premium shirt collection. Timeless design meets unmatched comfort. Trusted by thousands of men across Pakistan.">
+<meta property="og:url" content="https://Shoukat Nimco Center.pk/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://UMQ AL WADI FURNITURE TRADING.pk/assets/images/preview.jpg">
+<meta property="og:image" content="https://Shoukat Nimco Center.pk/assets/images/preview.jpg">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="UMQ AL WADI FURNITURE TRADING Pakistan | Premium Men's Shirts for Style, Comfort & Confidence">
-<meta name="twitter:description" content="Explore UMQ AL WADI FURNITURE TRADING – Pakistan’s top choice for premium men’s shirts combining comfort and style.">
-<meta name="twitter:image" content="https://UMQ AL WADI FURNITURE TRADING.pk/assets/images/preview.jpg">
+<meta name="twitter:title" content="Shoukat Nimco Center Pakistan | Premium Men's Shirts for Style, Comfort & Confidence">
+<meta name="twitter:description" content="Explore Shoukat Nimco Center – Pakistan’s top choice for premium men’s shirts combining comfort and style.">
+<meta name="twitter:image" content="https://Shoukat Nimco Center.pk/assets/images/preview.jpg">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

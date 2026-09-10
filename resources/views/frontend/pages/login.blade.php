@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title','UMQ AL WADI FURNITURE TRADING ||  Login Page')
+@section('title','Shoukat Nimco Center ||  Login Page')
 
 @section('main-content')
     <!-- Breadcrumbs -->
@@ -31,8 +31,8 @@
                         <!-- Form -->
                         
         <div class="auth-left">
-            <h2>Welcome to UMQ AL WADI</h2>
-            <p>Discover the finest premium furniture to elevate your space. Join our community today.</p>
+            <h2>Welcome to Shoukat Nimco Center</h2>
+            <p>Discover the finest Nimco, Bakery Items, and Sweets to delight your taste buds. Join our community today.</p>
         </div>
         <div class="auth-right">
             <h2>Sign In</h2>
@@ -84,7 +84,7 @@
 @endsection
 @push('styles')
 
-<style>    /* Ultra Premium Split Layout for Auth Pages */
+<style>    /* Ultra Premium Split Layout for Auth Pages (Red Theme) */
     .shop.login {
         background: #f4f7f6 !important;
         padding: 50px 0 !important;
@@ -112,7 +112,7 @@
     }
     .auth-left {
         width: 45%;
-        background: linear-gradient(135deg, rgba(3, 107, 65, 0.9), rgba(2, 58, 35, 0.9)), url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover;
+        background: linear-gradient(135deg, color-mix(in srgb, var(--primary-color) 90%, transparent), color-mix(in srgb, var(--hover-color) 90%, transparent)), url('{{asset('images/banners/main_banner.jpg')}}') center/cover;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -120,7 +120,7 @@
         color: #fff;
     }
     .auth-left h2 {
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 28px !important;
         font-weight: 800 !important;
         margin-bottom: 15px !important;
@@ -135,7 +135,7 @@
     .auth-left p {
         font-size: 15px !important;
         line-height: 1.6 !important;
-        color: #e0f2eb !important;
+        color: #fce8e8 !important;
         margin-bottom: 0 !important;
         text-align: left !important;
         font-weight: 400 !important;
@@ -148,10 +148,10 @@
         justify-content: center;
     }
     .auth-right h2 {
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 26px !important;
         font-weight: 800 !important;
-        color: #023a23 !important;
+        color: var(--primary-color) !important;
         text-align: center !important;
         margin-bottom: 5px !important;
         line-height: 1.3 !important;
@@ -169,13 +169,14 @@
     .shop.login .form .form-group input {
         height: 45px !important;
         border-radius: 6px !important;
-        border: 2px solid #e1e8e5 !important;
-        background: #fafcfb !important;
+        border: 2px solid #f0f0f0 !important;
+        background: #fafafa !important;
         padding: 0 15px !important;
         margin-bottom: 5px !important;
+        font-family: 'Poppins', sans-serif !important;
     }
     .shop.login .form .form-group input:focus {
-        border-color: #036b41 !important;
+        border-color: var(--primary-color) !important;
         background: #fff !important;
         box-shadow: none !important;
     }
@@ -192,27 +193,31 @@
         line-height: 45px !important;
         border-radius: 6px !important;
         font-size: 14px !important;
+        font-weight: 600 !important;
         text-transform: uppercase !important;
         letter-spacing: 0.5px !important;
         padding: 0 !important;
         text-align: center !important;
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         border: none !important;
-        box-shadow: none !important;
+        box-shadow: 0 4px 10px rgba(211,84,0,0.2) !important;
+        font-family: 'Poppins', sans-serif !important;
     }
     .shop.login .form .btn:hover {
-        background: #023a23 !important;
+        background: var(--hover-color) !important;
         color: #fff !important;
+        transform: translateY(-2px);
     }
     .shop.login .form a.btn {
         background: transparent !important;
-        color: #036b41 !important;
-        border: 2px solid #036b41 !important;
+        color: var(--primary-color) !important;
+        border: 2px solid var(--primary-color) !important;
         line-height: 41px !important; /* adjust for border */
+        box-shadow: none !important;
     }
     .shop.login .form a.btn:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
     }
     @media (max-width: 768px) {

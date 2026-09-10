@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>UMQ AL WADI FURNITURE TRADING ||  Login Page</title>
+  <title>Shoukat Nimco Center ||  Login Page</title>
   @include('backend.layouts.head')
 
 </head>

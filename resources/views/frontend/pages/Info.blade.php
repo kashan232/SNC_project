@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title','UMQ AL WADI FURNITURE TRADING ||  About Us')
+@section('title','Shoukat Nimco Center ||  About Us')
 
 @section('main-content')
 
@@ -30,8 +30,8 @@
 							@php
 								$settings=DB::table('settings')->get();
 							@endphp
-							<h3>Welcome To <span>UMQ AL WADI FURNITURE TRADING</span></h3>
-							<p>At UMQ AL WADI FURNITURE TRADING, we craft premium Shirts blending timeless style with unmatched comfort. Trusted by thousands of customers worldwide.</p>
+							<h3>Welcome To <span>Shoukat Nimco Center</span></h3>
+							<p>At Shoukat Nimco Center, we craft premium Shirts blending timeless style with unmatched comfort. Trusted by thousands of customers worldwide.</p>
 							<div class="button">
 								<a href="{{route('blog')}}" class="btn">Our Blog</a>
 								<a href="{{route('contact')}}" class="btn primary">Contact Us</a>

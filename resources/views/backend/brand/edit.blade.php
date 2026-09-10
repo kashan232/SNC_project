@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title','UMQ AL WADI FURNITURE TRADING ||  Brand Edit')
+@section('title','Shoukat Nimco Center ||  Brand Edit')
 @section('main-content')
 
 <div class="card">

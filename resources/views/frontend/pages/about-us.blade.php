@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title','UMQ AL WADI FURNITURE TRADING ||  About Us')
+@section('title','Shoukat Nimco Center ||  About Us')
 
 @section('main-content')
 
@@ -28,7 +28,7 @@
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="about-content" style="padding-right: 30px;">
                         <span style="color: #036b41; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Discover Our Story</span>
-                        <h2 style="font-family: 'Orbitron', sans-serif; font-size: 38px; font-weight: 800; margin: 15px 0 25px; color: #222; line-height: 1.3;">Welcome to <br> <span style="color: #036b41;">UMQ AL WADI</span></h2>
+                        <h2 style="font-family: 'Orbitron', sans-serif; font-size: 38px; font-weight: 800; margin: 15px 0 25px; color: #222; line-height: 1.3;">Welcome to <br> <span style="color: #036b41;">Shoukat Nimco Center</span></h2>
                         <p style="font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 20px;">
                             We are passionate about transforming ordinary spaces into inspiring environments. With a commitment to quality craftsmanship and modern design, our curated collection of premium home furniture, ergonomic office setups, and high-performance gaming chairs is tailored to elevate your lifestyle and workspace.
                         </p>
@@ -41,7 +41,7 @@
                 <div class="col-lg-6 col-md-12 col-12 mt-5 mt-lg-0">
                     <div class="about-image position-relative" style="padding-left: 20px;">
                         <!-- Real Store Image (Portrait) -->
-                        <img src="{{asset('about_us_store.jpg')}}" alt="UMQ AL WADI Store" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
+                        <img src="{{asset('about_us_store.jpg')}}" alt="Shoukat Nimco Center Store" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
                         
                         <!-- Decorative Badge -->
                         <div class="experience-badge" style="position: absolute; bottom: -30px; left: -10px; background: #036b41; color: white; padding: 25px 30px; border-radius: 8px; box-shadow: 0 10px 20px rgba(3, 107, 65, 0.4); text-align: center; border: 3px solid #fff;">

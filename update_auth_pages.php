@@ -1,114 +1,179 @@
 <?php
+$files = [
+    'resources/views/frontend/pages/login.blade.php',
+    'resources/views/frontend/pages/register.blade.php'
+];
 
-$login_path = 'resources/views/frontend/pages/login.blade.php';
-$register_path = 'resources/views/frontend/pages/register.blade.php';
-
-$auth_styles = '
-<style>
-    /* Premium Auth Pages Design */
-    .shop.login.section {
-        background: #f7f9fb;
-        padding: 80px 0 !important;
+foreach ($files as $file) {
+    $content = file_get_contents($file);
+    
+    // Replace text
+    $content = str_replace(
+        'Discover the finest premium furniture to elevate your space.',
+        'Discover the finest Nimco, Bakery Items, and Sweets to delight your taste buds.',
+        $content
+    );
+    
+    // Replace CSS Block
+    $old_css_start = '<style>    /* Ultra Premium Split Layout for Auth Pages */';
+    $old_css_end = '</style>';
+    
+    // Find everything between these tags and replace
+    // Actually we can just do a regex replace for the entire style block
+    
+    $new_css = <<<CSS
+<style>    /* Ultra Premium Split Layout for Auth Pages (Red Theme) */
+    .shop.login {
+        background: #f4f7f6 !important;
+        padding: 50px 0 !important;
+        min-height: calc(100vh - 100px);
+        display: flex;
+        align-items: center;
     }
-    .login-form {
-        background: #fff;
-        padding: 50px 40px;
-        border-radius: 15px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-        border-top: 5px solid #036b41;
+    .shop.login .container {
+        max-width: 900px !important;
     }
-    .login-form h2 {
-        font-family: \'Orbitron\', sans-serif;
-        font-size: 32px;
-        font-weight: 800;
-        color: #023a23;
-        text-align: center;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-        letter-spacing: 1px;
+    .shop.login .col-lg-6.offset-lg-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-left: 0;
     }
-    .login-form p {
-        text-align: center;
-        color: #666;
-        margin-bottom: 30px;
-        font-size: 15px;
+    .shop.login .login-form {
+        background: #fff !important;
+        padding: 0 !important;
+        border-radius: 15px !important;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1) !important;
+        border: none !important;
+        display: flex !important;
+        flex-direction: row !important;
+        overflow: hidden;
     }
-    .login-form .form-group label {
-        font-weight: 600;
-        color: #333;
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
-    .login-form .form-group label span {
-        color: #ea4335;
-    }
-    .login-form .form-group input {
-        width: 100%;
-        padding: 15px 20px;
-        border: 1px solid #e5e5e5;
-        border-radius: 8px;
-        background: #fdfdfd;
-        font-size: 14px;
-        transition: all 0.3s ease;
-    }
-    .login-form .form-group input:focus {
-        border-color: #036b41;
-        background: #fff;
-        box-shadow: 0 0 0 3px rgba(3, 107, 65, 0.1);
-        outline: none;
-    }
-    .login-form .login-btn {
+    .auth-left {
+        width: 45%;
+        background: linear-gradient(135deg, rgba(230, 32, 32, 0.9), rgba(180, 15, 15, 0.9)), url('{{asset('images/banners/main_banner.jpg')}}') center/cover;
         display: flex;
         flex-direction: column;
-        gap: 15px;
-        margin-top: 15px;
-    }
-    .login-form .login-btn button[type="submit"] {
-        width: 100%;
-        background: #036b41;
+        justify-content: center;
+        padding: 40px 30px;
         color: #fff;
-        padding: 14px;
-        font-size: 16px;
-        font-weight: 700;
-        text-transform: uppercase;
-        border: none;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(3, 107, 65, 0.2);
     }
-    .login-form .login-btn button[type="submit"]:hover {
-        background: #023a23;
+    .auth-left h2 {
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 28px !important;
+        font-weight: 800 !important;
+        margin-bottom: 15px !important;
+        color: #fff !important;
+        line-height: 1.4 !important;
+        padding-bottom: 0 !important;
+        text-align: left !important;
+    }
+    .shop.login .login-form h2:before {
+        display: none !important;
+    }
+    .auth-left p {
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+        color: #fce8e8 !important;
+        margin-bottom: 0 !important;
+        text-align: left !important;
+        font-weight: 400 !important;
+    }
+    .auth-right {
+        width: 55%;
+        padding: 40px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .auth-right h2 {
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 26px !important;
+        font-weight: 800 !important;
+        color: #e62020 !important;
+        text-align: center !important;
+        margin-bottom: 5px !important;
+        line-height: 1.3 !important;
+        padding-bottom: 0 !important;
+    }
+    .auth-right > p {
+        text-align: center !important;
+        margin-bottom: 25px !important;
+        color: #888 !important;
+        font-size: 14px !important;
+    }
+    .shop.login .form {
+        margin-top: 0 !important;
+    }
+    .shop.login .form .form-group input {
+        height: 45px !important;
+        border-radius: 6px !important;
+        border: 2px solid #f0f0f0 !important;
+        background: #fafafa !important;
+        padding: 0 15px !important;
+        margin-bottom: 5px !important;
+        font-family: 'Poppins', sans-serif !important;
+    }
+    .shop.login .form .form-group input:focus {
+        border-color: #e62020 !important;
+        background: #fff !important;
+        box-shadow: none !important;
+    }
+    .shop.login .form .login-btn {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        gap: 15px !important;
+        margin-top: 15px !important;
+    }
+    .shop.login .form .btn {
+        flex: 1 !important;
+        height: 45px !important;
+        line-height: 45px !important;
+        border-radius: 6px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        padding: 0 !important;
+        text-align: center !important;
+        background: #e62020 !important;
+        color: #fff !important;
+        border: none !important;
+        box-shadow: 0 4px 10px rgba(230,32,32,0.2) !important;
+        font-family: 'Poppins', sans-serif !important;
+    }
+    .shop.login .form .btn:hover {
+        background: #cc1818 !important;
+        color: #fff !important;
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(3, 107, 65, 0.3);
     }
-    .login-form .login-btn a.btn {
-        width: 100%;
-        background: transparent;
-        color: #036b41;
-        padding: 12px;
-        font-size: 15px;
-        font-weight: 700;
-        text-transform: uppercase;
-        border: 2px solid #036b41;
-        border-radius: 8px;
-        text-align: center;
-        transition: all 0.3s ease;
+    .shop.login .form a.btn {
+        background: transparent !important;
+        color: #e62020 !important;
+        border: 2px solid #e62020 !important;
+        line-height: 41px !important; /* adjust for border */
+        box-shadow: none !important;
     }
-    .login-form .login-btn a.btn:hover {
-        background: #036b41;
-        color: #fff;
+    .shop.login .form a.btn:hover {
+        background: #e62020 !important;
+        color: #fff !important;
     }
-</style>
-';
+    @media (max-width: 768px) {
+        .shop.login .login-form {
+            flex-direction: column !important;
+        }
+        .auth-left, .auth-right {
+            width: 100%;
+        }
+        .auth-left {
+            padding: 30px;
+        }
+    }</style>
+CSS;
 
-function updateFile($path, $auth_styles) {
-    $content = file_get_contents($path);
-    // Remove old inline <style> block from @push(\'styles\')
-    $content = preg_replace('/<style>.*?<\/style>/s', $auth_styles, $content);
-    file_put_contents($path, $content);
+    $content = preg_replace('/<style>.*?\/\* Ultra Premium Split Layout for Auth Pages \*\/.*?<\/style>/s', $new_css, $content);
+    
+    file_put_contents($file, $content);
 }
 
-updateFile($login_path, $auth_styles);
-updateFile($register_path, $auth_styles);
-
-echo "Auth pages updated with premium design.\n";
+echo "Login and Register pages updated to Red theme with Nimco text.\n";

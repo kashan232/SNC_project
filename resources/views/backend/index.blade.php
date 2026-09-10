@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title','UMQ AL WADI FURNITURE TRADING ||  DASHBOARD')
+@section('title','Shoukat Nimco Center ||  DASHBOARD')
 @section('main-content')
 <div class="container-fluid">
     @include('backend.layouts.notification')

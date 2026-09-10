@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title', 'UMQ AL WADI FURNITURE TRADING || Privacy Policy')
+@section('title', 'Shoukat Nimco Center || Privacy Policy')
 @section('main-content')
 <div class="breadcrumbs">
     <div class="container">
@@ -22,7 +22,7 @@
                 <div class="policy-content" style="background: #fbfbfb; padding: 50px; border-radius: 12px; border-top: 5px solid #036b41; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
                     <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-bottom: 30px;">Privacy Policy</h2>
                     
-                    <p style="color: #555; line-height: 1.8; margin-bottom: 20px;">At UMQ AL WADI FURNITURE TRADING, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
+                    <p style="color: #555; line-height: 1.8; margin-bottom: 20px;">At Shoukat Nimco Center, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
                     
                     <h4 style="font-size: 20px; font-weight: 700; color: #333; margin: 30px 0 15px;">1. Information We Collect</h4>
                     <p style="color: #555; line-height: 1.8; margin-bottom: 20px;">We may collect personal information such as your name, email address, phone number, and shipping address when you register for an account, place an order, or subscribe to our newsletter. We also collect non-personal data automatically, such as IP addresses and browser types, to improve user experience.</p>

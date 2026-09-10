@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title','UMQ AL WADI FURNITURE TRADING')
+@section('title','Shoukat Nimco Center')
 @section('main-content')
 <style>
     /* Floating Action Buttons */
@@ -41,7 +41,7 @@
         text-decoration: none !important;
     }
     .single-product .product-action a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
     }
     .single-product .product-action a i {
@@ -190,7 +190,7 @@
         display: inline-block;
         padding: 10px 25px;
         background-color: #fff;
-        color: #036b41; /* Theme green */
+        color: var(--primary-color); /* Theme green */
         font-weight: 600;
         font-size: 14px;
         text-transform: uppercase;
@@ -202,7 +202,7 @@
     }
 
     .single-banner .content a:hover {
-        background-color: #036b41;
+        background-color: var(--primary-color);
         color: #fff;
         border: 1px solid #fff;
     }
@@ -222,8 +222,11 @@
         }
 
         #Gslider .carousel-inner {
-            height: auto !important;
-        }
+        height: 85vh;
+    }
+    #Gslider .carousel-item {
+        height: 100%;
+    }
 
         #Gslider .carousel-inner img {
             height: 100vh;
@@ -234,11 +237,11 @@
         }
 
         .header.shop .list-main li i {
-            color: #036b41;
+            color: var(--primary-color);
         }
 
         .header.shop .top-left .list-main li i {
-            color: #036b41;
+            color: var(--primary-color);
             font-size: 10px;
         }
 
@@ -269,15 +272,18 @@
         }
 
         #Gslider .carousel-inner {
-            height: auto !important;
-        }
+        height: 85vh;
+    }
+    #Gslider .carousel-item {
+        height: 100%;
+    }
 
         .header.shop .list-main li i {
-            color: #036b41;
+            color: var(--primary-color);
         }
 
         .header.shop .top-left .list-main li i {
-            color: #036b41;
+            color: var(--primary-color);
             font-size: 10px;
         }
 
@@ -333,14 +339,14 @@
         letter-spacing: 2px;
         text-transform: uppercase;
         margin-bottom: 10px;
-        background: #036b41;
+        background: var(--primary-color);
         display: inline-block;
         padding: 4px 12px;
         border-radius: 4px;
     }
     .midium-banner .single-banner .content h3 {
         color: #fff !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 32px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -353,7 +359,7 @@
     }
     .midium-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         font-size: 14px !important;
         font-weight: 700 !important;
         padding: 12px 30px !important;
@@ -368,7 +374,7 @@
         visibility: visible !important;
     }
     .midium-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px);
     }
@@ -466,7 +472,7 @@
         text-align: center;
     }
     .owl-carousel .owl-nav div {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         width: 45px !important;
         height: 45px !important;
@@ -553,7 +559,7 @@
         margin-bottom: 15px !important;
     }
     .small-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         padding: 10px 25px !important;
         border-radius: 30px !important;
@@ -641,7 +647,7 @@
         text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .small-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         padding: 12px 30px !important;
         border-radius: 30px !important;
@@ -701,7 +707,7 @@
     }
     .small-banner .single-banner .content h3 {
         color: #fff !important; 
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 26px !important;
         font-weight: 800 !important;
         text-transform: uppercase !important;
@@ -711,7 +717,7 @@
     }
     .small-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         padding: 12px 30px !important;
         border-radius: 4px !important;
         font-weight: 800 !important;
@@ -723,7 +729,7 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
     }
     .small-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px) !important;
     }
@@ -772,14 +778,14 @@
         letter-spacing: 2px !important;
         text-transform: uppercase !important;
         margin-bottom: 15px !important;
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         display: inline-block !important;
         padding: 6px 15px !important;
         border-radius: 30px !important;
     }
     .midium-banner .single-banner .content h3 {
         color: #023a23 !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 30px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -787,11 +793,11 @@
         text-shadow: none !important;
     }
     .midium-banner .single-banner .content h3 span {
-        color: #036b41 !important; 
+        color: var(--primary-color) !important; 
         text-decoration: underline !important; 
     }
     .midium-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         font-size: 14px !important;
         font-weight: 700 !important;
@@ -801,11 +807,11 @@
         letter-spacing: 1px !important;
         transition: all 0.3s ease !important;
         display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1.2 !important; box-shadow: 0 4px 15px rgba(3, 107, 65, 0.3) !important;
-        border: 2px solid #036b41 !important;
+        border: 2px solid var(--primary-color) !important;
     }
     .midium-banner .single-banner .content a:hover {
         background: transparent !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         transform: translateY(-3px) !important;
     }
     /* Revert Midium Banner to the Original Behtreen Design */
@@ -855,14 +861,14 @@
         letter-spacing: 2px !important;
         text-transform: uppercase !important;
         margin-bottom: 10px !important;
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         display: inline-block !important;
         padding: 4px 12px !important;
         border-radius: 4px !important;
     }
     .midium-banner .single-banner .content h3 {
         color: #fff !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 32px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -875,7 +881,7 @@
     }
     .midium-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         font-size: 14px !important;
         font-weight: 700 !important;
         padding: 12px 30px !important;
@@ -887,7 +893,7 @@
         border: none !important;
     }
     .midium-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px) !important;
     }
@@ -1039,7 +1045,7 @@
         justify-content: center !important;
         align-items: center !important;
         flex-wrap: wrap !important;
-        gap: 8px !important;
+        gap: 6px !important;
     }
     .single-product .product-img .button-head {
         display: flex !important;
@@ -1070,7 +1076,7 @@
             <div class="carousel-caption  text-left">
                 <h1 class="wow fadeInDown">{{$banner->title}}</h1>
                 <p>{!! html_entity_decode($banner->description) !!}</p>
-                <a class="btn btn-lg ws-btn wow fadeInUpBig" href="{{route('product-grids')}}" role="button">Shop Now<i class="far fa-arrow-alt-circle-right"></i></i></a>
+                <a class="btn btn-lg ws-btn wow fadeInUpBig" href="{{route('product-grids')}}" role="button">Explore Menu <i class="ti-arrow-right"></i></a>
             </div>
         </div>
         @endforeach
@@ -1097,1047 +1103,138 @@
 
 
 
-
-
-
-
-
-<!-- Start Small Banner  -->
-<section class="small-banner section">
-    <div class="container-fluid">
-        <div class="row">
-            @php
-            $category_lists=DB::table('categories')->where('status','active')->limit(3)->get();
-            @endphp
-            @if($category_lists)
-            @foreach($category_lists as $cat)
-            @if($cat->is_parent==1)
-            <!-- Single Banner  -->
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <div class="single-banner">
-                    @if($cat->photo)
-                    <img src="{{$cat->photo}}" alt="{{$cat->photo}}">
-                    @else
-                    <img src="https://via.placeholder.com/600x370" alt="#">
-                    @endif
-                    <div class="content">
-                        <h3>{{$cat->title}}</h3>
-                        <a href="{{route('product-cat',$cat->slug)}}">Discover Now</a>
-                    </div>
-                </div>
-            </div>
-            @endif
-            <!-- /End Single Banner  -->
-            @endforeach
-            @endif
-        </div>
-    </div>
-</section>
-<!-- End Small Banner -->
-
-<!-- Start Shop Services Area -->
+<!-- Start Categories Section (Carousel) -->
 <style>
-    /* Floating Action Buttons */
-    .single-product .product-img .button-head {
-        background: transparent !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        position: absolute !important;
-        bottom: 15px !important;
-        left: 0 !important;
-        width: 100% !important;
-        border: none !important;
-        z-index: 9 !important;
-    }
-    
-    .single-product .product-action {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: center !important;
-        align-items: center !important;
-        width: 100% !important;
-        float: none !important;
-    }
-
-    .single-product .product-action a {
-        color: #333 !important;
-        font-size: 18px !important;
-        margin: 0 5px !important;
-        width: 40px !important;
-        height: 40px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        border-radius: 50% !important;
-        background: #fff !important;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
-        transition: all 0.3s ease !important;
-        text-decoration: none !important;
-    }
-    .single-product .product-action a:hover {
-        background: #036b41 !important;
-        color: #fff !important;
-    }
-    .single-product .product-action a i {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    .service-card {
+    .category-scroll-container {
+        padding: 50px 0;
         background: #ffffff;
-        padding: 40px 30px;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        transition: all 0.4s ease;
-        border: 1px solid #f0f0f0;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-        height: 100%;
     }
-    .service-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(3, 107, 65, 0.15);
-        border-color: #036b41;
-    }
-    .service-icon-box {
-        width: 85px;
-        height: 85px;
-        background: #eaf3ee;
-        border-radius: 50%;
+    .category-item {
         display: flex;
+        flex-direction: column;
         align-items: center;
+        text-decoration: none !important;
+        padding: 10px;
+    }
+    .category-img-box {
+        width: 125px;
+        height: 125px;
+        border-radius: 28px;
+        background: #f4f4f4;
+        display: flex;
         justify-content: center;
-        margin: 0 auto 25px;
-        transition: all 0.4s ease;
-    }
-    .service-card:hover .service-icon-box {
-        background: #036b41;
-        transform: scale(1.1);
-    }
-    .service-icon-box i {
-        font-size: 38px;
-        color: #036b41;
-        transition: all 0.4s ease;
-    }
-    .service-card:hover .service-icon-box i {
-        color: #ffffff;
-    }
-    .service-card h4 {
-        font-size: 20px;
-        font-weight: 700;
-        color: #222;
-        margin-bottom: 12px;
-        text-transform: capitalize;
-    }
-    .service-card p {
-        font-size: 15px;
-        color: #666;
-        line-height: 1.6;
-        margin: 0;
-    }
-    .service-card::before {
-        content: "";
-        position: absolute;
-        top: -30px;
-        right: -30px;
-        width: 120px;
-        height: 120px;
-        background: rgba(3, 107, 65, 0.03);
-        border-radius: 50%;
-        z-index: -1;
-        transition: all 0.4s ease;
-    }
-    .service-card:hover::before {
-        transform: scale(3);
-        background: rgba(3, 107, 65, 0.05);
-    }
-    /* Midium Banner (Featured Products) Redesign */
-    .midium-banner {
-        padding: 60px 0 !important;
-    }
-    .midium-banner .single-banner {
-        border-radius: 12px;
+        align-items: center;
         overflow: hidden;
-        position: relative;
-        height: 350px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease;
+        margin: 0 auto;
     }
-    .midium-banner .single-banner img {
+    .category-item:hover .category-img-box {
+        transform: scale(1.05);
+    }
+    .category-img-box img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.5s ease;
     }
-    .midium-banner .single-banner:hover img {
-        transform: scale(1.05);
-    }
-    .midium-banner .single-banner::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(3,107,65,0.4) 100%);
-        z-index: 1;
-    }
-    .midium-banner .single-banner .content {
-        position: absolute;
-        top: 50% !important;
-        left: 40px !important;
-        transform: translateY(-50%) !important;
-        z-index: 2;
-        text-align: left !important;
-        padding: 0 !important;
-        width: 80%;
-    }
-    .midium-banner .single-banner .content p {
-        color: #fff !important;
-        font-size: 14px !important;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-        background: #036b41;
-        display: inline-block;
-        padding: 4px 12px;
-        border-radius: 4px;
-    }
-    .midium-banner .single-banner .content h3 {
-        color: #fff !important;
-        font-family: 'Orbitron', sans-serif !important;
-        font-size: 32px !important;
-        font-weight: 800 !important;
-        line-height: 1.3 !important;
-        margin-bottom: 20px !important;
-        text-shadow: none !important;
-        background: transparent !important;
-    }
-    .midium-banner .single-banner .content h3 span {
-        color: #fff !important; text-decoration: underline; /* Make discount pop, or use a distinct green/yellow */
-    }
-    .midium-banner .single-banner .content a {
-        background: #fff !important;
-        color: #036b41 !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        padding: 12px 30px !important;
-        border-radius: 30px !important;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s ease !important;
-        display: inline-block;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-        text-shadow: none !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
-    .midium-banner .single-banner .content a:hover {
-        background: #036b41 !important;
-        color: #fff !important;
-        transform: translateY(-3px);
-    }
-    /* Uniform Product Card Heights */
-    
-        flex-direction: column;
-        
-    }
-    .single-product .product-img {
-        position: relative;
-        width: 100%;
-        padding-top: 120%; /* Enforce a fixed aspect ratio for images */
-        background: #fff;
-        overflow: hidden;
-    }
-    .single-product .product-img a {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .single-product .product-img img {
-        max-height: 100%;
-        width: auto !important;
-        max-width: 100%;
-        object-fit: contain;
-    }
-    .single-product .product-content {
-        flex-grow: 1;
-        display: flex;
-        
-        justify-content: flex-end;
-    }
-
-    /* Fix Card Heights and Image Contain */
-    
-        flex-direction: column;
-        
-        justify-content: space-between;
-        background: #fff;
-    }
-    .single-product .product-img {
-        position: relative;
-        width: 100%;
-        height: 300px; /* Fixed height for all images */
-        background: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    .single-product .product-img a {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .single-product .product-img img {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto !important;
-        height: auto !important;
-        object-fit: contain;
-    }
-    .single-product .product-content {
-        padding-top: 15px;
-    }
-
-    /* Perfect Global Section Padding */
-    .section {
-        padding: 70px 0 !important;
-    }
-    .section-title {
-        margin-bottom: 50px !important;
-    }
-    .small-banner.section {
-        padding: 40px 0 !important;
-    }
-    .midium-banner {
-        padding: 70px 0 !important;
-    }
-    /* Add Padding to Product Images inside Cards */
-    .single-product .product-img {
-        padding: 20px !important;
-    }
-    
-    /* Better Design for Slider Navigation Arrows */
-    .owl-carousel .owl-nav {
-        margin-top: 30px !important;
+    .category-name {
+        margin-top: 15px;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--primary-color);
         text-align: center;
+        line-height: 1.2;
     }
-    .owl-carousel .owl-nav div {
-        background: #036b41 !important;
-        color: #fff !important;
-        width: 45px !important;
-        height: 45px !important;
-        
+    /* Customize Owl Nav for Category */
+    .category-slider .owl-nav div {
+        background: #fff;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
         text-align: center;
-        border-radius: 50% !important;
-        font-size: 20px !important;
-        transition: all 0.3s ease !important;
-        display: inline-block !important;
-        margin: 0 10px !important;
-        box-shadow: 0 4px 10px rgba(3, 107, 65, 0.3);
-    }
-    .owl-carousel .owl-nav div:hover {
-        background: #222 !important;
-        color: #fff !important;
-        transform: translateY(-3px) !important;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    }
-    .owl-carousel .owl-nav div i {
-        
-    }
-    /* Fix Slider Icon Alignment */
-    .owl-carousel .owl-nav div {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        line-height: normal !important;
-        padding: 0 !important;
-    }
-    .owl-carousel .owl-nav div i {
-        line-height: normal !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        display: block !important;
-    }
-    /* Premium Small Banner Design for White-Background Products */
-    .small-banner .single-banner {
-        background: linear-gradient(135deg, #f0f7f4 0%, #d1e8de 100%);
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-        height: 350px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .small-banner .single-banner img {
-        width: 80%;
-        height: 80%;
-        object-fit: contain;
-        mix-blend-mode: multiply; /* Magically removes the white background */
-        transition: transform 0.5s ease;
-        opacity: 0.85; /* Blend nicely with the text */
-    }
-    .small-banner .single-banner:hover img {
-        transform: scale(1.1);
-        opacity: 1;
-    }
-    
-          flex-direction: column !important;
-          justify-content: center !important;
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        
-        align-items: center;
-        justify-content: flex-end;
-        text-align: center;
-        z-index: 2;
-        padding-bottom: 30px;
-        background: linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 50%);
+        top: 35%;
+        transform: translateY(-50%);
+        font-size: 16px;
+        transition: 0.3s;
     }
-    .small-banner .single-banner .content h3 {
-        color: #023a23 !important; 
-        font-family: 'Orbitron', sans-serif;
-        font-size: 22px !important;
-        font-weight: 800 !important;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 15px !important;
+    .category-slider .owl-nav div:hover {
+        background: var(--primary-color);
+        color: #fff;
     }
-    .small-banner .single-banner .content a {
-        background: #036b41 !important;
-        color: #fff !important;
-        padding: 10px 25px !important;
-        border-radius: 30px !important;
-        font-weight: 700 !important;
-        text-transform: uppercase;
-        font-size: 13px !important;
-        letter-spacing: 1px;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 10px rgba(3, 107, 65, 0.3);
-    }
-    .small-banner .single-banner .content a:hover {
-        background: #023a23 !important;
-        transform: translateY(-3px);
-    }
-    /* Fixing the Small Banner Content Alignment */
-    
-        flex-direction: column !important; justify-content: center !important;
-        justify-content: flex-end !important;
-        text-align: center !important;
-        z-index: 2 !important;
-        padding: 0 !important;
-        padding-bottom: 20px !important;
-        background: transparent !important;
-    }
-    /* We add a separate pseudo element for the gradient so it doesn't mess with flex */
-    .small-banner .single-banner::before {
-        content: '' !important;
-        position: absolute !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 50% !important;
-        background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%) !important;
-        z-index: 1 !important;
-        pointer-events: none !important;
-    }
-    .small-banner .single-banner h3, 
-    .small-banner .single-banner a {
-        position: relative !important;
-        z-index: 3 !important;
-    }
-    /* Sleek Lifestyle Category Banners */
-    .small-banner .single-banner {
-        background: #000;
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-        height: 350px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .small-banner .single-banner img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        mix-blend-mode: normal !important;
-        transition: transform 0.5s ease;
-        opacity: 0.7; /* Darken image slightly so text is readable */
-    }
-    .small-banner .single-banner:hover img {
-        transform: scale(1.1);
-        opacity: 0.5;
-    }
-    
-        flex-direction: column !important; justify-content: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-        z-index: 2 !important;
-        padding: 20px !important;
-        background: transparent !important;
-    }
-    .small-banner .single-banner::before {
-        display: none !important; /* Remove any previously added gradients */
-    }
-    .small-banner .single-banner .content h3 {
-        color: #fff !important; 
-        font-family: 'Orbitron', sans-serif;
-        font-size: 26px !important;
-        font-weight: 800 !important;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 25px !important;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    .small-banner .single-banner .content a {
-        background: #036b41 !important;
-        color: #fff !important;
-        padding: 12px 30px !important;
-        border-radius: 30px !important;
-        font-weight: 700 !important;
-        text-transform: uppercase;
-        font-size: 14px !important;
-        letter-spacing: 1.5px;
-        transition: all 0.3s ease !important;
-        border: 2px solid transparent !important;
-    }
-    .small-banner .single-banner .content a:hover {
-        background: transparent !important;
-        border: 2px solid #fff !important;
-        transform: translateY(-3px);
-    }
-    /* Restore to the Elegant White-on-Green Lifestyle Design */
-    .small-banner .single-banner {
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-        height: 350px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .small-banner .single-banner img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        mix-blend-mode: normal !important;
-        transition: transform 0.5s ease;
-    }
-    .small-banner .single-banner:hover img {
-        transform: scale(1.1);
-    }
-    /* The soft green gradient overlay */
-    .small-banner .single-banner::before {
-        content: '' !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(3,107,65,0.7) 100%) !important;
-        z-index: 1 !important;
-        pointer-events: none !important;
-        display: block !important;
-    }
-    
-        flex-direction: column !important; justify-content: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-        z-index: 2 !important;
-        padding: 20px !important;
-        background: transparent !important;
-    }
-    .small-banner .single-banner .content h3 {
-        color: #fff !important; 
-        font-family: 'Orbitron', sans-serif !important;
-        font-size: 26px !important;
-        font-weight: 800 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 2px !important;
-        margin-bottom: 25px !important;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
-    }
-    .small-banner .single-banner .content a {
-        background: #fff !important;
-        color: #036b41 !important;
-        padding: 12px 30px !important;
-        border-radius: 4px !important;
-        font-weight: 800 !important;
-        text-transform: uppercase !important;
-        font-size: 14px !important;
-        letter-spacing: 1.5px !important;
-        transition: all 0.3s ease !important;
-        border: none !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-    }
-    .small-banner .single-banner .content a:hover {
-        background: #036b41 !important;
-        color: #fff !important;
-        transform: translateY(-3px) !important;
-    }
-    /* Midium Banner (Featured Products) Redesign for White-Background Products */
-    .midium-banner .single-banner {
-        border-radius: 12px !important;
-        overflow: hidden !important;
-        position: relative !important;
-        height: 350px !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
-        background: linear-gradient(135deg, #f0f7f4 0%, #d1e8de 100%) !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-    .midium-banner .single-banner::before {
-        display: none !important; /* Remove dark overlay */
-    }
-    .midium-banner .single-banner img {
-        width: 50% !important;
-        height: 90% !important;
-        object-fit: contain !important;
-        mix-blend-mode: multiply !important;
-        transition: transform 0.5s ease !important;
-        position: absolute !important;
-        right: 10px !important;
-        bottom: 10px !important;
-    }
-    .midium-banner .single-banner:hover img {
-        transform: scale(1.1) !important;
-    }
-    .midium-banner .single-banner .content {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-        z-index: 2 !important;
-        text-align: left !important;
-        padding: 40px !important;
-        width: 60% !important;
-        background: transparent !important;
-    }
-    .midium-banner .single-banner .content p {
-        color: #fff !important;
-        font-size: 13px !important;
-        font-weight: 700 !important;
-        letter-spacing: 2px !important;
-        text-transform: uppercase !important;
-        margin-bottom: 15px !important;
-        background: #036b41 !important;
-        display: inline-block !important;
-        padding: 6px 15px !important;
-        border-radius: 30px !important;
-    }
-    .midium-banner .single-banner .content h3 {
-        color: #023a23 !important;
-        font-family: 'Orbitron', sans-serif !important;
-        font-size: 30px !important;
-        font-weight: 800 !important;
-        line-height: 1.3 !important;
-        margin-bottom: 25px !important;
-        text-shadow: none !important;
-    }
-    .midium-banner .single-banner .content h3 span {
-        color: #036b41 !important; 
-        text-decoration: underline !important; 
-    }
-    .midium-banner .single-banner .content a {
-        background: #036b41 !important;
-        color: #fff !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        padding: 12px 30px !important;
-        border-radius: 30px !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        transition: all 0.3s ease !important;
-        display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1.2 !important; box-shadow: 0 4px 15px rgba(3, 107, 65, 0.3) !important;
-        border: 2px solid #036b41 !important;
-    }
-    .midium-banner .single-banner .content a:hover {
-        background: transparent !important;
-        color: #036b41 !important;
-        transform: translateY(-3px) !important;
-    }
-    /* Revert Midium Banner to the Original Behtreen Design */
-    .midium-banner .single-banner {
-        border-radius: 12px !important;
-        overflow: hidden !important;
-        position: relative !important;
-        height: 350px !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
-        background: transparent !important;
-        display: block !important;
-    }
-    .midium-banner .single-banner img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        mix-blend-mode: normal !important;
-        transition: transform 0.5s ease !important;
-        position: static !important;
-    }
-    .midium-banner .single-banner:hover img {
-        transform: scale(1.05) !important;
-    }
-    .midium-banner .single-banner::before {
-        content: '' !important;
-        position: absolute !important;
-        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
-        background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(3,107,65,0.4) 100%) !important;
-        z-index: 1 !important;
-        display: block !important;
-    }
-    .midium-banner .single-banner .content {
-        position: absolute !important;
-        top: 50% !important;
-        left: 40px !important;
-        transform: translateY(-50%) !important;
-        z-index: 2 !important;
-        text-align: left !important;
-        padding: 0 !important;
-        width: 80% !important;
-        background: transparent !important;
-    }
-    .midium-banner .single-banner .content p {
-        color: #fff !important;
-        font-size: 14px !important;
-        font-weight: 600 !important;
-        letter-spacing: 2px !important;
-        text-transform: uppercase !important;
-        margin-bottom: 10px !important;
-        background: #036b41 !important;
-        display: inline-block !important;
-        padding: 4px 12px !important;
-        border-radius: 4px !important;
-    }
-    .midium-banner .single-banner .content h3 {
-        color: #fff !important;
-        font-family: 'Orbitron', sans-serif !important;
-        font-size: 32px !important;
-        font-weight: 800 !important;
-        line-height: 1.3 !important;
-        margin-bottom: 20px !important;
-        text-shadow: none !important;
-    }
-    .midium-banner .single-banner .content h3 span {
-        color: #fff !important; 
-        text-decoration: underline !important;
-    }
-    .midium-banner .single-banner .content a {
-        background: #fff !important;
-        color: #036b41 !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        padding: 12px 30px !important;
-        border-radius: 30px !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        transition: all 0.3s ease !important;
-        display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1.2 !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-        border: none !important;
-    }
-    .midium-banner .single-banner .content a:hover {
-        background: #036b41 !important;
-        color: #fff !important;
-        transform: translateY(-3px) !important;
-    }
-    /* === EMERGENCY FIX FOR LAYOUT === */
-    /* 1. Fix Product Cards Layout */
-    .single-product {
-        display: flex !important;
-        flex-direction: column !important;
-        background: #fff !important;
-    }
-    .single-product .product-img {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        height: 300px !important; /* Force image container height */
-        padding: 20px !important;
-    }
-    .single-product .product-img img {
-        max-width: 100% !important;
-        max-height: 100% !important;
-        object-fit: contain !important;
-    }
+    .category-slider .owl-prev { left: -15px; }
+    .category-slider .owl-next { right: -15px; }
 
-    /* 2. Fix Small Banners Layout (Office Chairs etc) */
-    .small-banner .single-banner .content {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-        width: 100% !important;
-        left: 0 !important;
-        padding: 20px !important;
-    }
-    .small-banner .single-banner .content a {
-        display: inline-block !important; /* Prevent stretching */
-        width: auto !important;
-        text-align: center !important;
-        padding: 12px 30px !important;
-        border-radius: 4px !important;
-    }
-
-    /* 3. Fix Medium Banner Layout (Featured) */
-    .midium-banner .single-banner .content {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: center !important;
-    }
-    .midium-banner .single-banner .content a {
-        display: inline-block !important;
-        width: auto !important;
-        text-align: center !important;
-        padding: 12px 30px !important;
-        border-radius: 30px !important;
-    }
-    /* === MOBILE RESPONSIVE FIXES FOR SLIDER === */
     @media (max-width: 768px) {
-        #Gslider .carousel-inner img {
-            min-height: 250px !important;
-            object-fit: cover !important; /* Prevents stretching, crops instead to fit the height */
+        .category-img-box {
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
         }
-        #Gslider .carousel-inner .carousel-caption {
-            padding: 10px !important;
+        .category-name {
+            font-size: 13px;
         }
-        #Gslider .carousel-inner .carousel-caption h1 {
-            font-size: 20px !important;
-            margin-bottom: 10px !important;
-            line-height: 1.3 !important;
-            letter-spacing: 1px !important;
-        }
-        #Gslider .carousel-inner .carousel-caption p {
-            font-size: 12px !important;
-            margin-bottom: 15px !important;
-            line-height: 1.4 !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 2 !important; /* Max 2 lines for description */
-            -webkit-box-orient: vertical !important;
-            overflow: hidden !important;
-        }
-        #Gslider .btn.ws-btn {
-            padding: 8px 20px !important;
-            font-size: 12px !important;
-        }
-    }
-    @media (max-width: 400px) {
-        #Gslider .carousel-inner .carousel-caption h1 {
-            font-size: 16px !important;
-        }
-        #Gslider .carousel-inner .carousel-caption p {
-            font-size: 11px !important;
-        }
-    }
-    /* === FEATURED ITEMS RESPONSIVE FIX === */
-    @media (max-width: 768px) {
-        .midium-banner .single-banner {
-            height: auto !important; /* Allow it to grow if needed */
-            min-height: 250px !important;
-            padding-bottom: 20px !important;
-        }
-        .midium-banner .single-banner .content {
-            padding: 20px !important;
-            width: 100% !important;
-            left: 0 !important;
-            top: 50% !important;
-            transform: translateY(-50%) !important;
-        }
-        .midium-banner .single-banner .content p {
-            font-size: 11px !important;
-            padding: 4px 10px !important;
-            margin-bottom: 10px !important;
-        }
-        .midium-banner .single-banner .content h3 {
-            font-size: 20px !important;
-            line-height: 1.2 !important;
-            margin-bottom: 15px !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 3 !important; /* Limit title to 3 lines */
-            -webkit-box-orient: vertical !important;
-            overflow: hidden !important;
-        }
-        .midium-banner .single-banner .content a {
-            padding: 8px 20px !important;
-            font-size: 12px !important;
-        }
-    }
-    /* === FIX FEATURED PRODUCTS CONTENT & BUTTONS === */
-    .single-product .product-content {
-        display: flex !important;
-        flex-direction: column !important; /* Stack Title and Price vertically */
-        justify-content: flex-start !important;
-        text-align: center !important;
-        padding: 15px 10px !important;
-    }
-    .single-product .product-content h3 {
-        margin-bottom: 8px !important;
-    }
-    .single-product .product-content h3 a {
-        display: block !important;
-        font-size: 14px !important;
-        line-height: 1.4 !important;
-        white-space: normal !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    .single-product .product-content .product-price {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: center !important;
-        align-items: center !important;
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-    }
-    .single-product .product-img .button-head {
-        display: flex !important;
-        flex-direction: row !important;
-        opacity: 1 !important; /* Make buttons visible on mobile */
-        visibility: visible !important;
-        bottom: 10px !important;
-        transform: translateY(0) !important;
-    }
-    .single-product .product-action {
-        flex-direction: row !important;
     }
 </style>
 
-<section class="shop-services section home" style="background-color: #f7f9fb; padding: 100px 0;">
-    <div class="container">
-<div class="row">
-            <div class="col-12">
-                <div class="section-title text-center" style="margin-bottom: 60px;">
-                    <span style="color: #036b41; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; display:block; margin-bottom: 10px;">Our Core Values</span>
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 800; color: #111; margin-top: 5px;">Why Choose <span style="color: #036b41;">Us</span></h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="service-card text-center">
-                    <div class="service-icon-box">
-                        <i class="ti-rocket"></i>
-                    </div>
-                    <h4>Free Shipping</h4>
-                    <p>On all orders over Rs: 1000</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="service-card text-center">
-                    <div class="service-icon-box">
-                        <i class="ti-reload"></i>
-                    </div>
-                    <h4>7 Days Return</h4>
-                    <p>Original box required</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-                <div class="service-card text-center">
-                    <div class="service-icon-box">
-                        <i class="ti-lock"></i>
-                    </div>
-                    <h4>Secure Payment</h4>
-                    <p>100% secure payment</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="service-card text-center">
-                    <div class="service-icon-box">
-                        <i class="ti-tag"></i>
-                    </div>
-                    <h4>Best Price</h4>
-                    <p>Guaranteed best prices</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Shop Services Area -->
-
-<!-- Start About Us Section -->
-<section class="about-us-section section" style="background-color: #fbfbfb; padding: 80px 0;">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 col-md-12 col-12">
-                <div class="about-content" style="padding-right: 30px;">
-                    <span style="color: #036b41; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Discover Our Story</span>
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 38px; font-weight: 800; margin: 15px 0 25px; color: #222; line-height: 1.3;">Welcome to <br> <span style="color: #036b41;">UMQ AL WADI</span></h2>
-                    <p style="font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 20px;">
-                        We are passionate about transforming ordinary spaces into inspiring environments. With a commitment to quality craftsmanship and modern design, our curated collection of premium home furniture, ergonomic office setups, and high-performance gaming chairs is tailored to elevate your lifestyle and workspace.
-                    </p>
-                    <p style="font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 35px;">
-                        Our mission is to provide exceptional value and unparalleled comfort. Every piece in our store is selected with extreme care to ensure durability, standout style, and absolute satisfaction for our customers.
-                    </p>
-                    <a href="{{route('about-us')}}" class="btn ws-btn" style="background-color: #036b41; color: #fff; padding: 14px 35px; border-radius: 4px; text-transform: uppercase; font-weight: 600; letter-spacing: 1.5px; transition: all 0.3s ease; display: inline-block;">Learn More</a>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-12 mt-5 mt-lg-0">
-                <div class="about-image position-relative" style="padding-left: 20px;">
-                    <!-- Real Store Image (Portrait) -->
-                    <img src="{{asset('about_us_store.jpg')}}" alt="UMQ AL WADI Store" style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
-                    
-                    <!-- Decorative Badge -->
-                    <div class="experience-badge" style="position: absolute; bottom: -30px; left: -10px; background: #036b41; color: white; padding: 25px 30px; border-radius: 8px; box-shadow: 0 10px 20px rgba(3, 107, 65, 0.4); text-align: center; border: 3px solid #fff;">
-                        <h3 style="font-size: 36px; font-weight: 800; color: #fff; margin: 0;">100%</h3>
-                        <span style="font-size: 13px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Quality<br>Guaranteed</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End About Us Section -->
-
-<!-- Start Midium Banner  -->
-<section class="midium-banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="section-title text-center" style="margin-bottom: 50px;">
-                    <span style="color: #036b41; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Exclusive Collection</span>
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Featured <span style="color: #036b41;">Items</span></h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            @if($featured)
-            @foreach($featured as $data)
-            <!-- Single Banner  -->
-            <div class="col-lg-6 col-md-6 col-12">
-                <div class="single-banner">
-                    @php
-                    $photo=explode(',',$data->photo);
-                    @endphp
-                    <img src="{{$photo[0]}}" alt="{{$photo[0]}}">
-                    <div class="content">
-                        <p>{{$data->cat_info['title']}}</p>
-                        <h3>{{$data->title}} <br>Up to<span> {{$data->discount}}%</span></h3>
-                        <a href="{{route('product-detail',$data->slug)}}">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-            <!-- /End Single Banner  -->
-            @endforeach
+<section class="category-scroll-container">
+    <div class="container" style="position: relative;">
+        <div class="category-slider owl-carousel owl-theme">
+            @php
+            $category_lists = DB::table('categories')->where('status','active')->where('is_parent',1)->get();
+            @endphp
+            @if($category_lists)
+                @foreach($category_lists as $cat)
+                    <a href="{{route('product-cat',$cat->slug)}}" class="category-item">
+                        <div class="category-img-box">
+                            @if($cat->photo)
+                                <img src="{{$cat->photo}}" alt="{{$cat->title}}">
+                            @else
+                                <img src="https://placehold.co/150x150/f4f4f4/888888?text=Photo" alt="#">
+                            @endif
+                        </div>
+                        <span class="category-name">{{$cat->title}}</span>
+                    </a>
+                @endforeach
             @endif
         </div>
     </div>
 </section>
-<!-- End Midium Banner -->
+
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $('.category-slider').owlCarousel({
+            items: 7,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            smartSpeed: 500,
+            autoplayHoverPause: true,
+            loop: false, // Turn off loop if not enough items
+            merge: true,
+            nav: true,
+            dots: false,
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            responsive: {
+                0: { items: 3, nav: false },
+                576: { items: 4, nav: false },
+                768: { items: 5 },
+                992: { items: 6 },
+                1200: { items: 7 }
+            }
+        });
+    });
+</script>
+@endpush
+<!-- End Categories Section -->
+
+
+
+
+
+
 
 <!-- Start Most Popular -->
 <div class="product-area most-popular section">
@@ -2145,8 +1242,8 @@
 <div class="row">
             <div class="col-12">
                 <div class="section-title text-center" style="margin-bottom: 50px;">
-                    <span style="color: #036b41; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Top Picks</span>
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Featured <span style="color: #036b41;">Products</span></h2>
+                    <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Top Picks</span>
+                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Featured <span style="color: var(--primary-color);">Products</span></h2>
                 </div>
             </div>
         </div>
@@ -2155,38 +1252,28 @@
                 <div class="owl-carousel popular-slider">
                     @foreach($product_lists as $product)
                     @if($product->condition=='hot')
-                    <!-- Start Single Product -->
-                    <div class="single-product">
+                    <!-- Start Clean Product Card -->
+                    <div class="single-product clean-card">
                         <div class="product-img">
                             <a href="{{route('product-detail',$product->slug)}}">
-                                @php
-                                $photo=explode(',',$product->photo);
-                                // dd($photo);
-                                @endphp
+                                @php $photo=explode(',',$product->photo); @endphp
                                 <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-                                <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-                                {{-- <span class="out-of-stock">Hot</span> --}}
                             </a>
-                            <div class="button-head">
-                                <div class="product-action d-flex justify-content-center align-items-center w-100">
-                                            <a title="Add to cart" href="{{route('add-to-cart',$product->slug)}}"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
-                                            <a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class="ti-eye"></i><span>Quick Shop</span></a>
-                                            <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                        </div>
-                            </div>
+                            <a class="clean-wishlist" href="{{route('add-to-wishlist',$product->slug)}}"><i class="ti-heart"></i></a>
                         </div>
                         <div class="product-content">
                             <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
-                            <div class="product-price">
-                                <span class="old">Rs:{{number_format($product->price,2)}}</span>
-                                @php
-                                $after_discount=($product->price-($product->price*$product->discount)/100)
-                                @endphp
-                                <span>Rs:{{number_format($after_discount,2)}}</span>
+                            <div class="price-container">
+                                @php $after_discount=($product->price-($product->price*$product->discount)/100); @endphp
+                                @if($product->discount>0)
+                                    <del>Rs:{{number_format($product->price,2)}}</del>
+                                @endif
+                                <span class="current-price">Rs:{{number_format($after_discount,2)}}</span>
                             </div>
+                            <a class="clean-add-cart" href="{{route('add-to-cart',$product->slug)}}"><i class="ti-plus"></i></a>
                         </div>
                     </div>
-                    <!-- End Single Product -->
+                    <!-- End Clean Product Card -->
                     @endif
                     @endforeach
                 </div>
@@ -2204,8 +1291,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title text-center" style="margin-bottom: 50px;">
-                            <span style="color: #036b41; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Just In</span>
-                            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">New <span style="color: #036b41;">Arrivals</span></h2>
+                            <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Just In</span>
+                            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">New <span style="color: var(--primary-color);">Arrivals</span></h2>
                         </div>
                     </div>
                 </div>
@@ -2216,38 +1303,28 @@
                             $product_lists=DB::table('products')->where('status','active')->orderBy('id','DESC')->limit(12)->get();
                             @endphp
                             @foreach($product_lists as $product)
-                        <!-- Start Single List  -->
-                        <div class="single-product">
+                        <!-- Start Clean Product Card -->
+                        <div class="single-product clean-card">
                             <div class="product-img">
                                 <a href="{{route('product-detail',$product->slug)}}">
-                                    @php
-                                        $photo=explode(',',$product->photo);
-                                    @endphp
+                                    @php $photo=explode(',',$product->photo); @endphp
                                     <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-                                    <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
                                 </a>
-                                <div class="button-head">
-                                    <div class="product-action d-flex justify-content-center align-items-center w-100">
-                                            <a title="Add to cart" href="{{route('add-to-cart',$product->slug)}}"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
-                                            <a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class="ti-eye"></i><span>Quick Shop</span></a>
-                                            <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                        </div>
-                                </div>
+                                <a class="clean-wishlist" href="{{route('add-to-wishlist',$product->slug)}}"><i class="ti-heart"></i></a>
                             </div>
                             <div class="product-content">
                                 <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
-                                <div class="product-price">
-                                    @php
-                                        $after_discount=($product->price-($product->price*$product->discount)/100);
-                                    @endphp
-                                    <span>Rs:{{number_format($after_discount,2)}}</span>
+                                <div class="price-container">
+                                    @php $after_discount=($product->price-($product->price*$product->discount)/100); @endphp
                                     @if($product->discount>0)
-                                        <del style="padding-left:4%;">Rs:{{number_format($product->price,2)}}</del>
+                                        <del>Rs:{{number_format($product->price,2)}}</del>
                                     @endif
+                                    <span class="current-price">Rs:{{number_format($after_discount,2)}}</span>
                                 </div>
+                                <a class="clean-add-cart" href="{{route('add-to-cart',$product->slug)}}"><i class="ti-plus"></i></a>
                             </div>
-                          </div>
-                          <!-- End Single List  -->
+                        </div>
+                        <!-- End Clean Product Card -->
                               @endforeach
                         </div>
                     </div>
@@ -2299,7 +1376,7 @@
         text-decoration: none !important;
     }
     .single-product .product-action a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
     }
     .single-product .product-action a i {
@@ -2319,9 +1396,9 @@
         text-transform: capitalize;
     }
     .filter-tope-group .btn:hover, .filter-tope-group .btn.is-checked, .filter-tope-group .btn.active { 
-        background: #036b41 !important; 
+        background: var(--primary-color) !important; 
         color: #fff !important; 
-        border-color: #036b41; 
+        border-color: var(--primary-color); 
         box-shadow: 0 8px 20px rgba(3, 107, 65, 0.25);
     }
 
@@ -2362,12 +1439,12 @@
         text-overflow: ellipsis;
     }
     .single-product .product-content h3 a:hover {
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
     }
     .single-product .product-content .product-price {
         font-size: 18px;
         font-weight: 800;
-        color: #036b41;
+        color: var(--primary-color);
         display: flex;
         align-items: center;
         gap: 12px;
@@ -2427,7 +1504,7 @@
     
     .single-product .product-action a:hover,
     .single-product .product-action-2 a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: scale(1.1);
     }
@@ -2481,14 +1558,14 @@
         letter-spacing: 2px;
         text-transform: uppercase;
         margin-bottom: 10px;
-        background: #036b41;
+        background: var(--primary-color);
         display: inline-block;
         padding: 4px 12px;
         border-radius: 4px;
     }
     .midium-banner .single-banner .content h3 {
         color: #fff !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 32px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -2501,7 +1578,7 @@
     }
     .midium-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         font-size: 14px !important;
         font-weight: 700 !important;
         padding: 12px 30px !important;
@@ -2516,7 +1593,7 @@
         visibility: visible !important;
     }
     .midium-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px);
     }
@@ -2614,7 +1691,7 @@
         text-align: center;
     }
     .owl-carousel .owl-nav div {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         width: 45px !important;
         height: 45px !important;
@@ -2701,7 +1778,7 @@
         margin-bottom: 15px !important;
     }
     .small-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         padding: 10px 25px !important;
         border-radius: 30px !important;
@@ -2789,7 +1866,7 @@
         text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .small-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         padding: 12px 30px !important;
         border-radius: 30px !important;
@@ -2849,7 +1926,7 @@
     }
     .small-banner .single-banner .content h3 {
         color: #fff !important; 
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 26px !important;
         font-weight: 800 !important;
         text-transform: uppercase !important;
@@ -2859,7 +1936,7 @@
     }
     .small-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         padding: 12px 30px !important;
         border-radius: 4px !important;
         font-weight: 800 !important;
@@ -2871,7 +1948,7 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
     }
     .small-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px) !important;
     }
@@ -2920,14 +1997,14 @@
         letter-spacing: 2px !important;
         text-transform: uppercase !important;
         margin-bottom: 15px !important;
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         display: inline-block !important;
         padding: 6px 15px !important;
         border-radius: 30px !important;
     }
     .midium-banner .single-banner .content h3 {
         color: #023a23 !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 30px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -2935,11 +2012,11 @@
         text-shadow: none !important;
     }
     .midium-banner .single-banner .content h3 span {
-        color: #036b41 !important; 
+        color: var(--primary-color) !important; 
         text-decoration: underline !important; 
     }
     .midium-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         font-size: 14px !important;
         font-weight: 700 !important;
@@ -2949,11 +2026,11 @@
         letter-spacing: 1px !important;
         transition: all 0.3s ease !important;
         display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1.2 !important; box-shadow: 0 4px 15px rgba(3, 107, 65, 0.3) !important;
-        border: 2px solid #036b41 !important;
+        border: 2px solid var(--primary-color) !important;
     }
     .midium-banner .single-banner .content a:hover {
         background: transparent !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         transform: translateY(-3px) !important;
     }
     /* Revert Midium Banner to the Original Behtreen Design */
@@ -3003,14 +2080,14 @@
         letter-spacing: 2px !important;
         text-transform: uppercase !important;
         margin-bottom: 10px !important;
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         display: inline-block !important;
         padding: 4px 12px !important;
         border-radius: 4px !important;
     }
     .midium-banner .single-banner .content h3 {
         color: #fff !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 32px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -3023,7 +2100,7 @@
     }
     .midium-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         font-size: 14px !important;
         font-weight: 700 !important;
         padding: 12px 30px !important;
@@ -3035,7 +2112,7 @@
         border: none !important;
     }
     .midium-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px) !important;
     }
@@ -3187,7 +2264,7 @@
         justify-content: center !important;
         align-items: center !important;
         flex-wrap: wrap !important;
-        gap: 8px !important;
+        gap: 6px !important;
     }
     .single-product .product-img .button-head {
         display: flex !important;
@@ -3206,8 +2283,8 @@
 <div class="row">
             <div class="col-12">
                 <div class="section-title text-center" style="margin-bottom: 50px;">
-                    <span style="color: #036b41; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; display:block; margin-bottom: 10px;">Explore Collection</span>
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 800; color: #111;">Our <span style="color: #036b41;">Products</span></h2>
+                    <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; display:block; margin-bottom: 10px;">Explore Collection</span>
+                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 800; color: #111;">Our <span style="color: var(--primary-color);">Products</span></h2>
                 </div>
             </div>
         </div>
@@ -3297,18 +2374,18 @@
 <!-- End Product Area -->
 
 <!-- Start Return Policy Area -->
-<section id="return-policy" class="return-policy-area section" style="background-color: #fff; padding: 90px 0; position: relative;">
+<section id="return-policy" class="return-policy-area section" style="background-color: #fff; padding: 50px 0; position: relative;">
     <div class="container">
         <div class="section-title text-center" style="margin-bottom: 60px;">
-            <span style="color: #036b41; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Peace of Mind</span>
-            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Hassle-Free <span style="color: #036b41;">Returns</span></h2>
+            <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Peace of Mind</span>
+            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Hassle-Free <span style="color: var(--primary-color);">Returns</span></h2>
         </div>
         <div class="row">
             <!-- Step 1 -->
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="return-step-card text-center" style="background: #fdfdfd; border: 1px solid #eee; padding: 40px 30px; border-radius: 15px; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.02); height: 100%; position: relative; overflow: hidden; margin-bottom:30px;">
                     <div style="width: 70px; height: 70px; background: rgba(3, 107, 65, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px;">
-                        <i class="ti-timer" style="font-size: 30px; color: #036b41;"></i>
+                        <i class="ti-timer" style="font-size: 30px; color: var(--primary-color);"></i>
                     </div>
                     <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #333; font-family: 'Orbitron', sans-serif;">7 Working Days</h4>
                     <p style="font-size: 15px; color: #666; line-height: 1.6; margin-bottom: 0;">You have up to 7 working days from the date of delivery to request a return if you change your mind.</p>
@@ -3316,7 +2393,7 @@
             </div>
             <!-- Step 2 -->
             <div class="col-lg-4 col-md-6 col-12">
-                <div class="return-step-card text-center" style="background: #036b41; padding: 40px 30px; border-radius: 15px; transition: all 0.3s ease; box-shadow: 0 15px 40px rgba(3, 107, 65, 0.2); height: 100%; position: relative; overflow: hidden; margin-bottom:30px; transform: scale(1.05); z-index: 2;">
+                <div class="return-step-card text-center" style="background: var(--primary-color); padding: 40px 30px; border-radius: 15px; transition: all 0.3s ease; box-shadow: 0 15px 40px rgba(3, 107, 65, 0.2); height: 100%; position: relative; overflow: hidden; margin-bottom:30px; transform: scale(1.05); z-index: 2;">
                     <div style="width: 70px; height: 70px; background: rgba(255, 255, 255, 0.15); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px;">
                         <i class="ti-package" style="font-size: 30px; color: #fff;"></i>
                     </div>
@@ -3328,7 +2405,7 @@
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="return-step-card text-center" style="background: #fdfdfd; border: 1px solid #eee; padding: 40px 30px; border-radius: 15px; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.02); height: 100%; position: relative; overflow: hidden; margin-bottom:30px;">
                     <div style="width: 70px; height: 70px; background: rgba(3, 107, 65, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px;">
-                        <i class="ti-wallet" style="font-size: 30px; color: #036b41;"></i>
+                        <i class="ti-wallet" style="font-size: 30px; color: var(--primary-color);"></i>
                     </div>
                     <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #333; font-family: 'Orbitron', sans-serif;">Fast Refund</h4>
                     <p style="font-size: 15px; color: #666; line-height: 1.6; margin-bottom: 0;">Once we receive and inspect the item, your refund will be processed within 5-7 business days.</p>
@@ -3383,7 +2460,7 @@
         text-decoration: none !important;
     }
     .single-product .product-action a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
     }
     .single-product .product-action a i {
@@ -3394,7 +2471,7 @@
         transform: translateY(-10px);
         box-shadow: 0 15px 35px rgba(0,0,0,0.08) !important;
     }
-    .return-step-card[style*="background: #036b41"]:hover {
+    .return-step-card[style*="background: var(--primary-color)"]:hover {
         transform: scale(1.05) translateY(-10px) !important;
         box-shadow: 0 20px 40px rgba(3, 107, 65, 0.3) !important;
     }
@@ -3492,7 +2569,7 @@
         text-align: center;
     }
     .owl-carousel .owl-nav div {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         width: 45px !important;
         height: 45px !important;
@@ -3579,7 +2656,7 @@
         margin-bottom: 15px !important;
     }
     .small-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         padding: 10px 25px !important;
         border-radius: 30px !important;
@@ -3667,7 +2744,7 @@
         text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .small-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         padding: 12px 30px !important;
         border-radius: 30px !important;
@@ -3727,7 +2804,7 @@
     }
     .small-banner .single-banner .content h3 {
         color: #fff !important; 
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 26px !important;
         font-weight: 800 !important;
         text-transform: uppercase !important;
@@ -3737,7 +2814,7 @@
     }
     .small-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         padding: 12px 30px !important;
         border-radius: 4px !important;
         font-weight: 800 !important;
@@ -3749,7 +2826,7 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
     }
     .small-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px) !important;
     }
@@ -3798,14 +2875,14 @@
         letter-spacing: 2px !important;
         text-transform: uppercase !important;
         margin-bottom: 15px !important;
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         display: inline-block !important;
         padding: 6px 15px !important;
         border-radius: 30px !important;
     }
     .midium-banner .single-banner .content h3 {
         color: #023a23 !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 30px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -3813,11 +2890,11 @@
         text-shadow: none !important;
     }
     .midium-banner .single-banner .content h3 span {
-        color: #036b41 !important; 
+        color: var(--primary-color) !important; 
         text-decoration: underline !important; 
     }
     .midium-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         font-size: 14px !important;
         font-weight: 700 !important;
@@ -3827,11 +2904,11 @@
         letter-spacing: 1px !important;
         transition: all 0.3s ease !important;
         display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1.2 !important; box-shadow: 0 4px 15px rgba(3, 107, 65, 0.3) !important;
-        border: 2px solid #036b41 !important;
+        border: 2px solid var(--primary-color) !important;
     }
     .midium-banner .single-banner .content a:hover {
         background: transparent !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         transform: translateY(-3px) !important;
     }
     /* Revert Midium Banner to the Original Behtreen Design */
@@ -3881,14 +2958,14 @@
         letter-spacing: 2px !important;
         text-transform: uppercase !important;
         margin-bottom: 10px !important;
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         display: inline-block !important;
         padding: 4px 12px !important;
         border-radius: 4px !important;
     }
     .midium-banner .single-banner .content h3 {
         color: #fff !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 32px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -3901,7 +2978,7 @@
     }
     .midium-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         font-size: 14px !important;
         font-weight: 700 !important;
         padding: 12px 30px !important;
@@ -3913,7 +2990,7 @@
         border: none !important;
     }
     .midium-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px) !important;
     }
@@ -4065,7 +3142,7 @@
         justify-content: center !important;
         align-items: center !important;
         flex-wrap: wrap !important;
-        gap: 8px !important;
+        gap: 6px !important;
     }
     .single-product .product-img .button-head {
         display: flex !important;
@@ -4082,18 +3159,18 @@
 <!-- End Return Policy Area -->
 
 <!-- Start FAQs Area -->
-<section id="faq" class="faq-area section" style="background-color: #f7f9fb; padding: 80px 0;">
+<section id="faq" class="faq-area section" style="background-color: #f7f9fb; padding: 50px 0;">
     <div class="container">
         <div class="section-title text-center" style="margin-bottom: 50px;">
-            <span style="color: #036b41; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Any Questions?</span>
-            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Frequently Asked <span style="color: #036b41;">Questions</span></h2>
+            <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Any Questions?</span>
+            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Frequently Asked <span style="color: var(--primary-color);">Questions</span></h2>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8 col-12">
                 <div class="accordion" id="faqAccordion">
                     <!-- FAQ 1 -->
                     <div class="card" style="border: none; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                        <div class="card-header" id="headingOne" style="background: #036b41; border-bottom: none; border-radius: 8px; padding: 0;">
+                        <div class="card-header" id="headingOne" style="background: var(--primary-color); border-bottom: none; border-radius: 8px; padding: 0;">
                             <h5 class="mb-0">
                                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 100%; text-align: left; padding: 20px; color: #fff; font-weight: 600; text-decoration: none; font-size: 16px; display: flex; justify-content: space-between; align-items: center;">
                                     How long does delivery take? <i class="ti-angle-down" style="font-size: 12px;"></i>
@@ -4102,13 +3179,13 @@
                         </div>
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
                             <div class="card-body" style="background: #fff; padding: 0 20px 20px; color: #666; line-height: 1.6; border-radius: 0 0 8px 8px;">
-                                We offer fast shipping across the UAE. Standard delivery typically takes 2-5 business days. For customized furniture orders, please allow 10-7 working days.
+                                We offer fast delivery across our service areas. Standard delivery typically takes 1-2 business days. For bulk bakery or nimco orders, please allow 2-3 working days.
                             </div>
                         </div>
                     </div>
                     <!-- FAQ 2 -->
                     <div class="card" style="border: none; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                        <div class="card-header" id="headingTwo" style="background: #036b41; border-bottom: none; border-radius: 8px; padding: 0;">
+                        <div class="card-header" id="headingTwo" style="background: var(--primary-color); border-bottom: none; border-radius: 8px; padding: 0;">
                             <h5 class="mb-0">
                                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%; text-align: left; padding: 20px; color: #fff; font-weight: 600; text-decoration: none; font-size: 16px; display: flex; justify-content: space-between; align-items: center;">
                                     Do you provide installation services? <i class="ti-angle-down" style="font-size: 12px;"></i>
@@ -4117,13 +3194,13 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
                             <div class="card-body" style="background: #fff; padding: 0 20px 20px; color: #666; line-height: 1.6; border-radius: 0 0 8px 8px;">
-                                Yes, professional installation is free for all orders. Our expert team will deliver and assemble your furniture right in your home or office.
+                                Yes! Our items are packed fresh and sealed perfectly so they reach you in the crispiest and best condition possible.
                             </div>
                         </div>
                     </div>
                     <!-- FAQ 3 -->
                     <div class="card" style="border: none; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                        <div class="card-header" id="headingThree" style="background: #036b41; border-bottom: none; border-radius: 8px; padding: 0;">
+                        <div class="card-header" id="headingThree" style="background: var(--primary-color); border-bottom: none; border-radius: 8px; padding: 0;">
                             <h5 class="mb-0">
                                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%; text-align: left; padding: 20px; color: #fff; font-weight: 600; text-decoration: none; font-size: 16px; display: flex; justify-content: space-between; align-items: center;">
                                     Do your products come with a warranty? <i class="ti-angle-down" style="font-size: 12px;"></i>
@@ -4132,7 +3209,7 @@
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
                             <div class="card-body" style="background: #fff; padding: 0 20px 20px; color: #666; line-height: 1.6; border-radius: 0 0 8px 8px;">
-                                Absolutely! All our furniture items come with a standard 1-year warranty against manufacturing defects. Premium gaming and office chairs include a 2-year warranty on mechanisms.
+                                Absolutely! All our food items are prepared fresh daily under strict hygienic conditions. We guarantee the quality and freshness of every nimco pack and bakery item you order.
                             </div>
                         </div>
                     </div>
@@ -4144,32 +3221,32 @@
 <!-- End FAQs Area -->
 
 <!-- Start Contact Area -->
-<section class="contact-area section" style="background-color: #fff; padding: 80px 0;">
+<section class="contact-area section" style="background-color: #fff; padding: 50px 0;">
     <div class="container">
         <div class="section-title text-center" style="margin-bottom: 50px;">
-            <span style="color: #036b41; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Get In Touch</span>
-            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Contact <span style="color: #036b41;">Us</span></h2>
+            <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Get In Touch</span>
+            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Contact <span style="color: var(--primary-color);">Us</span></h2>
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-4 col-12 mb-4">
                 <div class="contact-box text-center" style="padding: 40px 30px; background: #fbfbfb; border-radius: 12px; border: 1px solid #eee; height: 100%; transition: transform 0.3s ease;">
-                    <i class="ti-mobile" style="font-size: 40px; color: #036b41; margin-bottom: 20px; display: inline-block;"></i>
+                    <i class="ti-mobile" style="font-size: 40px; color: var(--primary-color); margin-bottom: 20px; display: inline-block;"></i>
                     <h4 style="font-size: 20px; font-weight: 600; margin-bottom: 12px;">Call Us Now</h4>
                     <p style="color: #666; margin-bottom: 0; font-size: 15px;">+971 123 456 789<br>Mon-Sat, 9AM to 6PM</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-12 mb-4">
-                <div class="contact-box text-center" style="padding: 40px 30px; background: #036b41; border-radius: 12px; box-shadow: 0 15px 30px rgba(3,107,65,0.2); height: 100%; transition: transform 0.3s ease; transform: translateY(-10px);">
+                <div class="contact-box text-center" style="padding: 40px 30px; background: var(--primary-color); border-radius: 12px; box-shadow: 0 15px 30px rgba(3,107,65,0.2); height: 100%; transition: transform 0.3s ease; transform: translateY(-10px);">
                     <i class="ti-email" style="font-size: 40px; color: #fff; margin-bottom: 20px; display: inline-block;"></i>
                     <h4 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #fff;">Email Address</h4>
-                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 0; font-size: 15px;">info@umqalwadi.com<br>support@umqalwadi.com</p>
+                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 0; font-size: 15px;">Hafizansari@yahoo.com<br>Hafizansari@yahoo.com</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-12 mb-4">
                 <div class="contact-box text-center" style="padding: 40px 30px; background: #fbfbfb; border-radius: 12px; border: 1px solid #eee; height: 100%; transition: transform 0.3s ease;">
-                    <i class="ti-location-pin" style="font-size: 40px; color: #036b41; margin-bottom: 20px; display: inline-block;"></i>
+                    <i class="ti-location-pin" style="font-size: 40px; color: var(--primary-color); margin-bottom: 20px; display: inline-block;"></i>
                     <h4 style="font-size: 20px; font-weight: 600; margin-bottom: 12px;">Our Location</h4>
-                    <p style="color: #666; margin-bottom: 0; font-size: 15px;">Dubai, United Arab Emirates<br>Main Furniture Market</p>
+                    <p style="color: #666; margin-bottom: 0; font-size: 15px;">Hyderabad, Pakistan<br>Urdu Bazar</p>
                 </div>
             </div>
         </div>
@@ -4308,6 +3385,484 @@
 @endforeach
 @endif
 <!-- Modal end -->
+
+
+
+
+
+
+
+
+
+<!-- START CLEAN CARD CSS OVERRIDE -->
+<style>
+    /* Reset Clean Card */
+    .clean-card {
+        background: #fff !important;
+        border: 1px solid #f0f0f0 !important;
+        border-radius: 16px !important;
+        margin: 15px !important;
+        padding: 15px !important;
+        text-align: left !important;
+        position: relative !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
+        transition: box-shadow 0.3s ease, transform 0.3s ease !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .clean-card:hover {
+        box-shadow: 0 8px 25px rgba(211,84,0,0.1) !important;
+        transform: translateY(-5px) !important;
+    }
+
+    /* Product Image Box */
+    .clean-card .product-img {
+        background: #f4f4f4 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        height: 220px !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .clean-card .product-img a:not(.clean-wishlist) {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Blend mode to remove white backgrounds */
+    .clean-card .product-img img.default-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        mix-blend-mode: multiply !important;
+        transition: transform 0.4s ease !important;
+    }
+    .clean-card:hover .product-img img.default-img {
+        transform: scale(1.08) !important;
+    }
+
+    /* Wishlist Button */
+    a.clean-wishlist {
+        position: absolute !important;
+        top: 10px !important;
+        right: 10px !important;
+        width: 35px !important;
+        height: 35px !important;
+        background: #fff !important;
+        color: #888 !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 16px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        transition: all 0.2s ease !important;
+        z-index: 5 !important;
+    }
+    a.clean-wishlist:hover {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        transform: scale(1.1) !important;
+    }
+
+    /* Product Content Area */
+    .clean-card .product-content {
+        padding: 20px 50px 10px 10px !important;
+        background: transparent !important;
+        text-align: left !important;
+        position: relative !important;
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+    }
+
+    /* Title */
+    .clean-card .product-content h3 {
+        margin: 0 0 8px 0 !important;
+    }
+    .clean-card .product-content h3 a {
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        color: #111 !important;
+        text-transform: uppercase !important;
+        line-height: 1.3 !important;
+        display: block !important;
+    }
+
+    /* Price Container */
+    .clean-card .price-container {
+        display: flex !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        margin-top: auto !important; /* Push to bottom if title is short */
+    }
+    .clean-card .current-price {
+        font-size: 16px !important;
+        font-weight: 800 !important;
+        color: var(--primary-color) !important;
+    }
+    .clean-card del {
+        font-size: 13px !important;
+        color: #999 !important;
+        text-decoration: line-through !important;
+    }
+
+    /* Add to Cart Button (Bottom Right) */
+    a.clean-add-cart {
+        position: absolute !important;
+        bottom: 10px !important;
+        right: 10px !important;
+        width: 40px !important;
+        height: 40px !important;
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        border-radius: 12px !important; /* Squircle */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 18px !important;
+        box-shadow: 0 4px 10px rgba(211,84,0,0.3) !important;
+        transition: all 0.2s ease !important;
+        z-index: 5 !important;
+        text-decoration: none !important;
+    }
+    a.clean-add-cart:hover {
+        background: var(--hover-color) !important;
+        transform: scale(1.1) !important;
+        color: #fff !important;
+    }
+
+    /* Fix Carousel Arrows overlapping */
+    .popular-slider .owl-nav div {
+        background: #fff !important;
+        color: var(--primary-color) !important;
+        border: 1px solid var(--primary-color) !important;
+        border-radius: 50% !important;
+        width: 35px !important;
+        height: 35px !important;
+        line-height: 33px !important;
+        text-align: center !important;
+        font-size: 16px !important;
+        position: absolute !important;
+        top: 35% !important;
+        transform: translateY(-50%) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .popular-slider .owl-prev { left: -10px !important; }
+    .popular-slider .owl-next { right: -10px !important; }
+
+</style>
+<!-- END CLEAN CARD CSS OVERRIDE -->
+
+
+<!-- GLOBAL FONT OVERRIDE: POPPINS -->
+<style>
+    /* Force Poppins font globally */
+    body, h1, h2, h3, h4, h5, h6, p, a, span, div, li, ul, label, input, button, select, textarea {
+        font-family: 'Poppins', sans-serif !important;
+    }
+    
+    /* Make Banner Text Bold as requested */
+    #Gslider .carousel-inner .carousel-caption h1 {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 800 !important; /* Extra Bold */
+        letter-spacing: 1px !important;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.5) !important;
+    }
+    
+    #Gslider .carousel-inner .carousel-caption p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 600 !important; /* Semi Bold */
+        font-size: 18px !important;
+        text-shadow: 1px 1px 8px rgba(0,0,0,0.5) !important;
+    }
+</style>
+<!-- END GLOBAL FONT OVERRIDE -->
+
+
+<style>
+    /* -------------------------------------
+       PREMIUM HERO BANNER DESIGN (NIMCO)
+       ------------------------------------- */
+    #Gslider {
+        position: relative;
+    }
+    #Gslider .carousel-inner {
+        height: 85vh;
+    }
+    #Gslider .carousel-item {
+        height: 100%;
+    }
+    #Gslider .carousel-inner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right center; /* Focus on the bowls on the right */
+    }
+    
+    /* Overlay to ensure text readability even if the image changes */
+    #Gslider .carousel-item::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+        z-index: 1;
+    }
+
+    #Gslider .carousel-caption {
+        position: absolute;
+        top: 50%;
+        left: 8% !important; /* Push slightly from edge */
+        transform: translateY(-50%);
+        bottom: auto;
+        right: auto;
+        width: 50%; /* Only take up left half */
+        text-align: left !important;
+        z-index: 2;
+        padding: 0;
+    }
+
+    /* Small Premium Badge */
+    #Gslider .carousel-caption::before {
+        content: '🌟 100% FRESH & CRISPY';
+        display: inline-block;
+        background: color-mix(in srgb, var(--primary-color) 20%, transparent);
+        color: #f39c12;
+        border: 1px solid var(--primary-color);
+        padding: 6px 15px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    #Gslider .carousel-inner .carousel-caption h1 {
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 55px !important;
+        font-weight: 800 !important;
+        color: #ffffff !important;
+        line-height: 1.1 !important;
+        text-shadow: none !important;
+        margin-bottom: 25px !important;
+        letter-spacing: -1px !important;
+    }
+
+    #Gslider .carousel-inner .carousel-caption p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 400 !important;
+        font-size: 18px !important;
+        color: #e0e0e0 !important;
+        line-height: 1.6 !important;
+        text-shadow: none !important;
+        margin-bottom: 35px !important;
+        max-width: 85%;
+    }
+
+    /* Primary Button */
+    #Gslider .carousel-caption a.btn {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        padding: 15px 35px !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        border-radius: 5px !important;
+        letter-spacing: 1px;
+        border: none !important;
+        box-shadow: 0 8px 20px color-mix(in srgb, var(--primary-color) 40%, transparent) !important;
+        transition: all 0.3s ease !important;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    #Gslider .carousel-caption a.btn i {
+        margin-left: 10px;
+        font-size: 18px;
+    }
+
+    #Gslider .carousel-caption a.btn:hover {
+        background: var(--hover-color) !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 10px 25px color-mix(in srgb, var(--primary-color) 60%, transparent) !important;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        #Gslider .carousel-inner {
+        height: 85vh;
+    }
+    #Gslider .carousel-item {
+        height: 100%;
+    }
+        #Gslider .carousel-item::before {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%);
+        }
+        #Gslider .carousel-caption {
+            width: 90%;
+            left: 5% !important;
+            top: auto;
+            bottom: 10%;
+            transform: none;
+            text-align: center !important;
+        }
+        #Gslider .carousel-caption::before {
+            margin-bottom: 15px;
+        }
+        #Gslider .carousel-inner .carousel-caption h1 {
+            font-size: 36px !important;
+            text-align: center !important;
+        }
+        #Gslider .carousel-inner .carousel-caption p {
+            font-size: 15px !important;
+            max-width: 100%;
+            text-align: center !important;
+            margin-bottom: 25px !important;
+        }
+        #Gslider .carousel-caption a.btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+<style>
+    /* FINAL OVERRIDE FOR HERO BANNER HEIGHT */
+    section#Gslider .carousel-inner {
+        height: 85vh !important;
+    }
+    section#Gslider .carousel-item {
+        height: 100% !important;
+    }
+    section#Gslider .carousel-inner img.first-slide {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        display: block !important;
+    }
+    @media (max-width: 768px) {
+        section#Gslider .carousel-inner {
+            height: 70vh !important;
+        }
+    }
+</style>
+
+<!-- Start Our Outlets Section -->
+<style>
+    #our-outlets {
+        padding: 50px 0;
+        background-color: #ffffff;
+        font-family: 'Poppins', sans-serif;
+    }
+    #our-outlets .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    #our-outlets .section-title h2 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 15px;
+    }
+    
+    .store-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+    .store-box {
+        background: #fff;
+        border: 1px solid #eaeaea;
+        padding: 30px 25px;
+        border-radius: 8px;
+        text-align: center;
+        transition: all 0.3s ease;
+        height: auto;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .store-box p {
+        flex-grow: 1; /* Pushes the text nicely and prevents overflow */
+        word-break: break-word; /* Ensure long words wrap */
+        display: block !important;
+    }
+    .store-box:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        transform: translateY(-3px);
+    }
+    .store-box .icon {
+        font-size: 28px;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        display: block;
+    }
+    .store-box h4 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+    }
+    .store-box p {
+        font-size: 14px;
+        color: #777;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    @media (max-width: 1200px) {
+        .store-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 991px) {
+        .store-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 767px) {
+        .store-grid { grid-template-columns: 1fr; }
+    }
+</style>
+
+<section id="our-outlets">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Outlets</h2>
+            
+        </div>
+        
+        <div class="store-grid">
+            @php
+                $outlets = \App\Models\Outlet::where('status','active')->get();
+            @endphp
+            @foreach($outlets as $outlet)
+            <div class="store-box">
+                <i class="ti-location-pin icon"></i>
+                <h4>{{$outlet->name}}</h4>
+                <p>{{$outlet->address}}</p>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+<!-- End Our Outlets Section -->
+
 @endsection
 
 @push('styles')
@@ -4353,7 +3908,7 @@
         text-decoration: none !important;
     }
     .single-product .product-action a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
     }
     .single-product .product-action a i {
@@ -4362,10 +3917,10 @@
     }
     /* Professional Banner Sliding */
     #Gslider .carousel-inner {
-        width: 100%;
-        height: auto; 
-        background: #000;
-        position: relative;
+        height: 85vh;
+    }
+    #Gslider .carousel-item {
+        height: 100%;
     }
 
     #Gslider .carousel-inner img {
@@ -4427,7 +3982,7 @@
     }
 
     #Gslider .btn.ws-btn {
-        background-color: #036b41; /* Matches logo green */
+        background-color: var(--primary-color); /* Matches logo green */
         color: #ffffff;
         padding: 14px 40px;
         border-radius: 4px;
@@ -4435,15 +3990,15 @@
         text-transform: uppercase;
         letter-spacing: 1.5px;
         font-weight: 600;
-        border: 2px solid #036b41;
+        border: 2px solid var(--primary-color);
         transition: all 0.3s ease;
         box-shadow: 0 4px 10px rgba(3, 107, 65, 0.4);
     }
 
     #Gslider .btn.ws-btn:hover {
         background-color: transparent;
-        color: #036b41;
-        border-color: #036b41;
+        color: var(--primary-color);
+        border-color: var(--primary-color);
         box-shadow: none;
     }
 
@@ -4460,7 +4015,7 @@
     }
     
     #Gslider .carousel-indicators li.active {
-        background-color: #036b41;
+        background-color: var(--primary-color);
     }
     
     /* Responsive styling for small screens */
@@ -4516,14 +4071,14 @@
         letter-spacing: 2px;
         text-transform: uppercase;
         margin-bottom: 10px;
-        background: #036b41;
+        background: var(--primary-color);
         display: inline-block;
         padding: 4px 12px;
         border-radius: 4px;
     }
     .midium-banner .single-banner .content h3 {
         color: #fff !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 32px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -4536,7 +4091,7 @@
     }
     .midium-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         font-size: 14px !important;
         font-weight: 700 !important;
         padding: 12px 30px !important;
@@ -4551,7 +4106,7 @@
         visibility: visible !important;
     }
     .midium-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px);
     }
@@ -4649,7 +4204,7 @@
         text-align: center;
     }
     .owl-carousel .owl-nav div {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         width: 45px !important;
         height: 45px !important;
@@ -4736,7 +4291,7 @@
         margin-bottom: 15px !important;
     }
     .small-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         padding: 10px 25px !important;
         border-radius: 30px !important;
@@ -4824,7 +4379,7 @@
         text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .small-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         padding: 12px 30px !important;
         border-radius: 30px !important;
@@ -4884,7 +4439,7 @@
     }
     .small-banner .single-banner .content h3 {
         color: #fff !important; 
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 26px !important;
         font-weight: 800 !important;
         text-transform: uppercase !important;
@@ -4894,7 +4449,7 @@
     }
     .small-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         padding: 12px 30px !important;
         border-radius: 4px !important;
         font-weight: 800 !important;
@@ -4906,7 +4461,7 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
     }
     .small-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px) !important;
     }
@@ -4955,14 +4510,14 @@
         letter-spacing: 2px !important;
         text-transform: uppercase !important;
         margin-bottom: 15px !important;
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         display: inline-block !important;
         padding: 6px 15px !important;
         border-radius: 30px !important;
     }
     .midium-banner .single-banner .content h3 {
         color: #023a23 !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 30px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -4970,11 +4525,11 @@
         text-shadow: none !important;
     }
     .midium-banner .single-banner .content h3 span {
-        color: #036b41 !important; 
+        color: var(--primary-color) !important; 
         text-decoration: underline !important; 
     }
     .midium-banner .single-banner .content a {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         font-size: 14px !important;
         font-weight: 700 !important;
@@ -4984,11 +4539,11 @@
         letter-spacing: 1px !important;
         transition: all 0.3s ease !important;
         display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1.2 !important; box-shadow: 0 4px 15px rgba(3, 107, 65, 0.3) !important;
-        border: 2px solid #036b41 !important;
+        border: 2px solid var(--primary-color) !important;
     }
     .midium-banner .single-banner .content a:hover {
         background: transparent !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         transform: translateY(-3px) !important;
     }
     /* Revert Midium Banner to the Original Behtreen Design */
@@ -5038,14 +4593,14 @@
         letter-spacing: 2px !important;
         text-transform: uppercase !important;
         margin-bottom: 10px !important;
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         display: inline-block !important;
         padding: 4px 12px !important;
         border-radius: 4px !important;
     }
     .midium-banner .single-banner .content h3 {
         color: #fff !important;
-        font-family: 'Orbitron', sans-serif !important;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 32px !important;
         font-weight: 800 !important;
         line-height: 1.3 !important;
@@ -5058,7 +4613,7 @@
     }
     .midium-banner .single-banner .content a {
         background: #fff !important;
-        color: #036b41 !important;
+        color: var(--primary-color) !important;
         font-size: 14px !important;
         font-weight: 700 !important;
         padding: 12px 30px !important;
@@ -5070,7 +4625,7 @@
         border: none !important;
     }
     .midium-banner .single-banner .content a:hover {
-        background: #036b41 !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
         transform: translateY(-3px) !important;
     }
@@ -5222,7 +4777,7 @@
         justify-content: center !important;
         align-items: center !important;
         flex-wrap: wrap !important;
-        gap: 8px !important;
+        gap: 6px !important;
     }
     .single-product .product-img .button-head {
         display: flex !important;

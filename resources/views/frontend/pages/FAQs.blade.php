@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title','UMQ AL WADI FURNITURE TRADING ||  FAQs')
+@section('title','Shoukat Nimco Center ||  FAQs')
 
 @section('main-content')
 

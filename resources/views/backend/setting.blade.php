@@ -80,6 +80,13 @@
           @enderror
         </div>
 
+                <div class="form-group">
+          <label for="theme_color" class="col-form-label">Theme Color <span class="text-danger">*</span></label>
+          <input type="color" class="form-control" name="theme_color" required value="{{$data->theme_color ?? '#d35400'}}" style="height: 50px;">
+          @error('theme_color')
+          <span class="text-danger">{{$message}}</span>
+          @enderror
+        </div>
         <div class="form-group mb-3">
            <button class="btn btn-success" type="submit">Update</button>
         </div>
