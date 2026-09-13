@@ -83,6 +83,8 @@
     Route::get('/FAQs', [FrontendController::class, 'FAQs'])->name('FAQs');
     Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy');
     Route::get('/shipping-policy', [FrontendController::class, 'shippingPolicy'])->name('shipping-policy');
+Route::get('/api/areas/{city_id}', 'App\Http\Controllers\AreaController@getAreasByCity');
+Route::post('/api/save-location', 'App\Http\Controllers\AreaController@autoSaveLocation');
     Route::get('/terms-of-service', [FrontendController::class, 'termsOfService'])->name('terms-of-service');
 
     // Cart section
@@ -174,6 +176,8 @@
         // Shipping
         Route::resource('/shipping', 'ShippingController');
         Route::resource('/outlet', 'App\Http\Controllers\OutletController');
+        Route::resource('/city', 'App\Http\Controllers\CityController');
+        Route::resource('/area', 'App\Http\Controllers\AreaController');
         // Coupon
         Route::resource('/coupon', 'CouponController');
         // Settings

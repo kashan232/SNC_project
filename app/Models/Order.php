@@ -42,4 +42,13 @@ class Order extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id');
+    }
 }

@@ -180,59 +180,21 @@
                     <div class="text-center-heading" style="margin-top: 20px;">Please Select City</div>
 
                     <div class="city-grid">
-                        <div class="city-item active" onclick="selectCity(this, 'Karachi')">
-                            <div class="icon-box"><i class="fa fa-building"></i></div>
-                            <span>Karachi</span>
+                        @php
+                            $activeCities = \App\Models\City::where('status', 'active')->get();
+                        @endphp
+                        @foreach($activeCities as $key => $city)
+                        <div class="city-item {{$key == 0 ? 'active' : ''}}" onclick="selectCity(this, '{{$city->name}}', {{$city->id}})">
+                            <div class="icon-box"><i class="{{$city->icon}}"></i></div>
+                            <span>{{$city->name}}</span>
                         </div>
-                        <div class="city-item" onclick="selectCity(this, 'Hyderabad')">
-                            <div class="icon-box"><i class="fa fa-building-o"></i></div>
-                            <span>Hyderabad</span>
-                        </div>
-                        <div class="city-item" onclick="selectCity(this, 'Lahore')">
-                            <div class="icon-box"><i class="fa fa-university"></i></div>
-                            <span>Lahore</span>
-                        </div>
-                        <div class="city-item" onclick="selectCity(this, 'Islamabad')">
-                            <div class="icon-box"><i class="fa fa-tree"></i></div>
-                            <span>Islamabad</span>
-                        </div>
-                        <div class="city-item" onclick="selectCity(this, 'Multan')">
-                            <div class="icon-box"><i class="fa fa-fort-awesome"></i></div>
-                            <span>Multan</span>
-                        </div>
-                        <div class="city-item" onclick="selectCity(this, 'Gujranwala')">
-                            <div class="icon-box"><i class="fa fa-industry"></i></div>
-                            <span>Gujranwala</span>
-                        </div>
-                        <div class="city-item" onclick="selectCity(this, 'Sialkot')">
-                            <div class="icon-box"><i class="fa fa-futbol-o"></i></div>
-                            <span>Sialkot</span>
-                        </div>
-                        <div class="city-item" onclick="selectCity(this, 'Faisalabad')">
-                            <div class="icon-box"><i class="fa fa-industry"></i></div>
-                            <span>Faisalabad</span>
-                        </div>
-                        <div class="city-item" onclick="selectCity(this, 'Rahim Yar Khan')">
-                            <div class="icon-box"><i class="fa fa-map-marker"></i></div>
-                            <span>Rahim Yar<br>Khan</span>
-                        </div>
-                        <div class="city-item" onclick="selectCity(this, 'Bahawalpur')">
-                            <div class="icon-box"><i class="fa fa-university"></i></div>
-                            <span>Bahawalpur</span>
-                        </div>
-                        <div class="city-item" onclick="selectCity(this, 'Larkana')">
-                            <div class="icon-box"><i class="fa fa-map-marker"></i></div>
-                            <span>Larkana</span>
-                        </div>
+                        @endforeach
                     </div>
 
                     <div class="select-location-wrap">
                         <label>Please select your area</label>
                         <select id="areaSelect">
                             <option value="">Select Area</option>
-                            <option value="clifton">Clifton</option>
-                            <option value="dha">DHA</option>
-                            <option value="gulshan">Gulshan-e-Iqbal</option>
                         </select>
                     </div>
                 </div>
@@ -274,12 +236,41 @@
         }
     }
 
-    function selectCity(element, city) {
+    let selectedCityName = '';
+    function selectCity(element, city, cityId) {
         document.querySelectorAll('.city-item').forEach(el => el.classList.remove('active'));
         element.classList.add('active');
-        // Logic for fetching areas based on city
-        console.log("Selected city:", city);
+        selectedCityName = city;
+        
+        let areaSelect = document.getElementById('areaSelect');
+        areaSelect.innerHTML = '<option value="">Loading areas...</option>';
+        
+        fetch(`/api/areas/${cityId}`)
+            .then(res => res.json())
+            .then(areas => {
+                areaSelect.innerHTML = '<option value="">Select Area</option>';
+                areas.forEach(area => {
+                    let option = document.createElement('option');
+                    option.value = area.id;
+                    option.textContent = area.name;
+                    areaSelect.appendChild(option);
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                areaSelect.innerHTML = '<option value="">Failed to load areas</option>';
+            });
     }
+
+    // Load initial areas for the first active city if available
+    window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            let activeCity = document.querySelector('.city-item.active');
+            if(activeCity) {
+                activeCity.click();
+            }
+        }, 500);
+    });
 
     function closeLocationModal() {
         if (typeof jQuery !== 'undefined') {
@@ -304,15 +295,29 @@
                 let lon = position.coords.longitude;
                 
                 // Use OpenStreetMap Nominatim API for free reverse geocoding
-                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=en`)
                     .then(response => response.json())
                     .then(data => {
                         let locName = "Current Location";
                         if(data && data.address) {
-                            let area = data.address.suburb || data.address.neighbourhood || data.address.road || '';
+                            let area = data.address.residential || data.address.neighbourhood || data.address.suburb || data.address.village || data.address.road || '';
                             let city = data.address.city || data.address.town || data.address.state || '';
                             locName = (area ? area + ', ' : '') + city;
                             if(!locName.trim()) locName = "Current Location";
+
+                            // AJAX call to autosave in DB
+                            if (city) {
+                                fetch('/api/save-location', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    },
+                                    body: JSON.stringify({ city: city, area: area })
+                                }).then(res => res.json()).then(data => {
+                                    // Refresh page to load new city in modal if desired, or just quietly succeed
+                                }).catch(err => console.error(err));
+                            }
                         }
                         
                         localStorage.setItem('saved_location_name', locName);
@@ -349,12 +354,27 @@
 
         if(isDelivery) {
             let areaSelect = document.getElementById('areaSelect');
+            
+            // Save City ID and Area ID for checkout page prefill
+            let activeCityEl = document.querySelector('.city-item.active');
+            if(activeCityEl) {
+                let onClickStr = activeCityEl.getAttribute('onclick'); // selectCity(this, 'Name', ID)
+                let matches = onClickStr.match(/,\s*(\d+)\s*\)/);
+                if(matches && matches[1]) {
+                    localStorage.setItem('checkout_city_id', matches[1]);
+                }
+            }
+
             if(areaSelect && areaSelect.selectedIndex > 0) {
                 locName = areaSelect.options[areaSelect.selectedIndex].text;
+                localStorage.setItem('checkout_area_id', areaSelect.options[areaSelect.selectedIndex].value); // Name or ID depending on how we set value
             } else {
-                locName = document.querySelector('.city-item.active span') ? document.querySelector('.city-item.active span').innerText : 'Karachi';
+                locName = activeCityEl ? activeCityEl.querySelector('span').innerText : 'Karachi';
+                localStorage.removeItem('checkout_area_id');
             }
         } else {
+            localStorage.removeItem('checkout_city_id');
+            localStorage.removeItem('checkout_area_id');
             let branchSelect = document.getElementById('branchSelect');
             if(branchSelect && branchSelect.selectedIndex > 0) {
                 locName = branchSelect.options[branchSelect.selectedIndex].text;

@@ -126,7 +126,19 @@
     </a>
   </li>
 
-      <!-- Outlets -->
+          <!-- Cities -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('city.index')}}">
+        <i class="fas fa-fw fa-city"></i>
+        <span>Cities</span></a>
+    </li>
+    <!-- Areas -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('area.index')}}">
+        <i class="fas fa-fw fa-map-marked-alt"></i>
+        <span>Areas</span></a>
+    </li>
+    <!-- Outlets -->
     <li class="nav-item">
       <a class="nav-link" href="{{route('outlet.index')}}">
         <i class="fas fa-fw fa-store"></i>

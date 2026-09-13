@@ -7,7 +7,20 @@
 <!-- Breadcrumbs -->
 <div class="breadcrumbs">
     <div class="container">
-        <div class="row">
+                                @php
+                            $firstName = old('first_name');
+                            $lastName = old('last_name');
+                            $email = old('email');
+                            if (auth()->check()) {
+                                if (!$firstName && !$lastName) {
+                                    $nameParts = explode(' ', auth()->user()->name, 2);
+                                    $firstName = $nameParts[0] ?? '';
+                                    $lastName = $nameParts[1] ?? '';
+                                }
+                                $email = $email ?? auth()->user()->email;
+                            }
+                        @endphp
+                        <div class="row">
             <div class="col-12">
                 <div class="bread-inner">
                     <ul class="bread-list">
@@ -26,18 +39,44 @@
     <div class="container">
         <form class="form" method="POST" action="{{route('cart.order')}}">
             @csrf
-            <div class="row">
+                                    @php
+                            $firstName = old('first_name');
+                            $lastName = old('last_name');
+                            $email = old('email');
+                            if (auth()->check()) {
+                                if (!$firstName && !$lastName) {
+                                    $nameParts = explode(' ', auth()->user()->name, 2);
+                                    $firstName = $nameParts[0] ?? '';
+                                    $lastName = $nameParts[1] ?? '';
+                                }
+                                $email = $email ?? auth()->user()->email;
+                            }
+                        @endphp
+                        <div class="row">
 
                 <div class="col-lg-8 col-12">
                     <div class="checkout-form">
                         <h2>Make Your Checkout Here</h2>
                         <p>Please register in order to checkout more quickly</p>
                         <!-- Form -->
+                                                @php
+                            $firstName = old('first_name');
+                            $lastName = old('last_name');
+                            $email = old('email');
+                            if (auth()->check()) {
+                                if (!$firstName && !$lastName) {
+                                    $nameParts = explode(' ', auth()->user()->name, 2);
+                                    $firstName = $nameParts[0] ?? '';
+                                    $lastName = $nameParts[1] ?? '';
+                                }
+                                $email = $email ?? auth()->user()->email;
+                            }
+                        @endphp
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>First Name<span>*</span></label>
-                                    <input type="text" name="first_name" placeholder="" value="{{old('first_name')}}" value="{{old('first_name')}}">
+                                    <input type="text" name="first_name" placeholder="" value="{{$firstName}}" required>
                                     @error('first_name')
                                     <span class='text-danger'>{{$message}}</span>
                                     @enderror
@@ -46,7 +85,7 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Last Name<span>*</span></label>
-                                    <input type="text" name="last_name" placeholder="" value="{{old('lat_name')}}">
+                                    <input type="text" name="last_name" placeholder="" value="{{$lastName}}" required>
                                     @error('last_name')
                                     <span class='text-danger'>{{$message}}</span>
                                     @enderror
@@ -55,7 +94,7 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Email Address<span>*</span></label>
-                                    <input type="email" name="email" placeholder="Hafizansari@yahoo.com" value="{{ old('email') }}"
+                                    <input type="email" name="email" placeholder="Email" value="{{$email}}"
                                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                     @error('email')
                                     <span class='text-danger'>{{$message}}</span>
@@ -71,41 +110,46 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-12">
+                            
+                                                        <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
-                                    <label>Country<span>*</span></label>
-                                    <select name="country" id="country">
-                                        <option value="PK">Pakistan</option>
+                                    <label>City<span>*</span></label>
+                                    <select name="city_id" id="checkoutCity" class="form-control custom-select" required onchange="fetchCheckoutAreas(this.value)">
+                                        <option value="">Select City</option>
+                                        @php
+                                            $checkoutCities = \App\Models\City::where('status', 'active')->get();
+                                        @endphp
+                                        @foreach($checkoutCities as $c)
+                                            <option value="{{$c->id}}">{{$c->name}}</option>
+                                        @endforeach
                                     </select>
+                                    @error('city_id')
+                                    <span class='text-danger'>{{$message}}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
-                                    <label>Address Line 1<span>*</span></label>
+                                    <label>Area<span>*</span></label>
+                                    <select name="area_id" id="checkoutArea" class="form-control custom-select" required>
+                                        <option value="">Select Area</option>
+                                    </select>
+                                    @error('area_id')
+                                    <span class='text-danger'>{{$message}}</span>
+                                    @enderror
+                                </div>
+                            </div>
+<div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>House No. / Street Address<span>*</span></label>
                                     <input type="text" name="address1" placeholder="" value="{{old('address1')}}">
                                     @error('address1')
                                     <span class='text-danger'>{{$message}}</span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="form-group">
-                                    <label>Address Line 2</label>
-                                    <input type="text" name="address2" placeholder="" value="{{old('address2')}}">
-                                    @error('address2')
-                                    <span class='text-danger'>{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="form-group">
-                                    <label>Postal Code</label>
-                                    <input type="text" name="post_code" placeholder="" value="{{old('post_code')}}">
-                                    @error('post_code')
-                                    <span class='text-danger'>{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
+                            
+                            
 
                         </div>
                         <!--/ End Form -->
@@ -182,7 +226,20 @@
 <!-- Start Shop Services Area  -->
 <section class="shop-services section home">
     <div class="container">
-        <div class="row">
+                                @php
+                            $firstName = old('first_name');
+                            $lastName = old('last_name');
+                            $email = old('email');
+                            if (auth()->check()) {
+                                if (!$firstName && !$lastName) {
+                                    $nameParts = explode(' ', auth()->user()->name, 2);
+                                    $firstName = $nameParts[0] ?? '';
+                                    $lastName = $nameParts[1] ?? '';
+                                }
+                                $email = $email ?? auth()->user()->email;
+                            }
+                        @endphp
+                        <div class="row">
             <div class="col-lg-3 col-md-6 col-12">
                 <!-- Start Single Service -->
                 <div class="single-service">
@@ -228,7 +285,7 @@
 <section class="shop-newsletter section">
     <div class="container">
         <div class="inner-top">
-            <div class="row">
+    <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-12">
                     <!-- Start Newsletter Inner -->
                     <div class="inner">
@@ -298,39 +355,131 @@
 </style>
 @endpush
 @push('scripts')
-<script src="{{asset('frontend/js/nice-select/js/jquery.nice-select.min.js')}}"></script>
-<script src="{{ asset('frontend/js/select2/js/select2.min.js') }}"></script>
 <script>
     $(document).ready(function() {
-        $("select.select2").select2();
+        // Destroy nice-select on these fields so default select works perfectly
+        if ($('#checkoutCity').length) {
+            $('#checkoutCity').niceSelect('destroy');
+            $('#checkoutCity').css('display', 'block');
+        }
+        if ($('#checkoutArea').length) {
+            $('#checkoutArea').niceSelect('destroy');
+            $('#checkoutArea').css('display', 'block');
+        }
+
+        // Pre-select city and area from modal localstorage
+        let savedCityId = localStorage.getItem('checkout_city_id');
+        let savedAreaId = localStorage.getItem('checkout_area_id');
+        
+        if (savedCityId) {
+            $('#checkoutCity').val(savedCityId);
+            fetchCheckoutAreas(savedCityId, savedAreaId);
+        }
     });
-    $('select.nice-select').niceSelect();
-</script>
-<script>
-    function showMe(box) {
-        var checkbox = document.getElementById('shipping').style.display;
-        // alert(checkbox);
-        var vis = 'none';
-        if (checkbox == "none") {
-            vis = 'block';
+
+    function fetchCheckoutAreas(cityId, autoSelectAreaId = null) {
+        let areaSelect = document.getElementById('checkoutArea');
+        areaSelect.innerHTML = '<option value="">Loading areas...</option>';
+        if(!cityId) {
+            areaSelect.innerHTML = '<option value="">Select Area</option>';
+            return;
         }
-        if (checkbox == "block") {
-            vis = "none";
-        }
-        document.getElementById(box).style.display = vis;
+        fetch(`/api/areas/${cityId}`)
+            .then(res => res.json())
+            .then(areas => {
+                areaSelect.innerHTML = '<option value="">Select Area</option>';
+                areas.forEach(area => {
+                    let option = document.createElement('option');
+                    option.value = area.id; 
+                    option.textContent = area.name;
+                    areaSelect.appendChild(option);
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                areaSelect.innerHTML = '<option value="">Failed to load areas</option>';
+            });
     }
 </script>
-<script>
-    $(document).ready(function() {
-        $('.shipping select[name=shipping]').change(function() {
-            let cost = parseFloat($(this).find('option:selected').data('price')) || 0;
-            let subtotal = parseFloat($('.order_subtotal').data('price'));
-            let coupon = parseFloat($('.coupon_price').data('price')) || 0;
-            // alert(coupon);
-            $('#order_total_price span').text('$' + (subtotal + cost - coupon).toFixed(2));
-        });
-
-    });
-</script>
-
+<style>
+    /* Checkout Form Premium Redesign */
+    .checkout .checkout-form {
+        background: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+    }
+    .checkout .checkout-form h2 {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #333;
+    }
+    .checkout .checkout-form p {
+        margin-bottom: 30px;
+        color: #777;
+    }
+    .checkout .form-group label {
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    .checkout .form-group input, 
+    .checkout .form-group select.custom-select {
+        height: 50px;
+        border-radius: 5px;
+        border: 1px solid #e6e6e6;
+        box-shadow: none;
+        padding: 0 20px;
+        width: 100%;
+        background: #f9f9f9;
+        transition: all 0.3s ease;
+    }
+    .checkout .form-group input:focus, 
+    .checkout .form-group select.custom-select:focus {
+        border-color: var(--primary-color, #F7941D);
+        background: #fff;
+    }
+    .checkout .order-details {
+        background: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+    .checkout .single-widget h2 {
+        font-size: 18px;
+        font-weight: 600;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+    .checkout .single-widget .content ul li {
+        font-size: 15px;
+        color: #333;
+        margin-bottom: 15px;
+        font-weight: 500;
+    }
+    .checkout .single-widget .content ul li span {
+        float: right;
+        font-weight: 600;
+    }
+    .checkout .single-widget .content ul li.last {
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+        font-size: 18px;
+        color: var(--primary-color, #F7941D);
+    }
+    .checkout .get-button .btn {
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        padding: 0;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+</style>
 @endpush
