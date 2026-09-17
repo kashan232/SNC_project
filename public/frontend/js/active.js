@@ -169,7 +169,7 @@ window.onload = () => {
 			smartSpeed: 400,
 			autoplayHoverPause:true,
 			nav:true,
-			loop:true,
+			loop:false,
 			merge:true,
 			dots:false,
 			navText: ['<i class=" ti-arrow-left"></i>', '<i class=" ti-arrow-right"></i>'],

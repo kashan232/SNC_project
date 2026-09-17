@@ -49,6 +49,7 @@
 <link rel="stylesheet" href="{{asset('frontend/css/themify-icons.css')}}">
 <!-- Nice Select CSS -->
 <link rel="stylesheet" href="{{asset('frontend/css/niceselect.css')}}">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <!-- Animate CSS -->
 <link rel="stylesheet" href="{{asset('frontend/css/animate.css')}}">
 <!-- Flex Slider CSS -->

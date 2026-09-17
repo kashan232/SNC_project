@@ -193,7 +193,7 @@
 <!-- Bootstrap JS -->
 <script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
 <!-- Color JS -->
-<script src="{{asset('frontend/js/colors.js')}}"></script>
+
 <!-- Slicknav JS -->
 <script src="{{asset('frontend/js/slicknav.min.js')}}"></script>
 <!-- Owl Carousel JS -->
@@ -221,6 +221,17 @@
 <script src="{{asset('frontend/js/active.js')}}"></script>
 
 
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  if(typeof AOS !== 'undefined') {
+      AOS.init({
+          duration: 800,
+          once: true,
+          offset: 100
+      });
+  }
+</script>
 @stack('scripts')
 <script>
 	setTimeout(function() {

@@ -1,0 +1,164 @@
+<!-- Start Categories Section (Carousel) -->
+<style>
+    .category-scroll-container {
+        padding: 50px 0;
+        background: #ffffff;
+    }
+    .category-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none !important;
+        padding: 10px;
+    }
+    .category-img-box {
+        width: 125px;
+        height: 125px;
+        border-radius: 28px;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        transition: transform 0.2s ease;
+        margin: 0 auto;
+    }
+    .category-item:hover .category-img-box {
+        transform: scale(1.05);
+    }
+    .category-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .category-name {
+        margin-top: 15px;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--primary-color);
+        text-align: center;
+        line-height: 1.2;
+    }
+    /* Customize Owl Nav for Category */
+    .category-slider .owl-nav div {
+        background: #fff;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        position: absolute;
+        top: 35%;
+        transform: translateY(-50%);
+        font-size: 16px;
+        transition: 0.3s;
+    }
+    .category-slider .owl-nav div:hover {
+        background: var(--primary-color);
+        color: #fff;
+    }
+    .category-slider .owl-prev { left: -15px; }
+    .category-slider .owl-next { right: -15px; }
+
+    @media (max-width: 768px) {
+        .category-img-box {
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
+        }
+        .category-name {
+            font-size: 13px;
+        }
+    }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<section class="category-scroll-container">
+    <div class="container" style="position: relative;">
+        <div class="category-slider owl-carousel owl-theme">
+            @php
+            $category_lists = DB::table('categories')->where('status','active')->where('is_parent',1)->get();
+            @endphp
+            @if($category_lists)
+                @foreach($category_lists as $cat)
+                    <a href="{{route('product-cat',$cat->slug)}}" class="category-item">
+                        <div class="category-img-box">
+                            @if($cat->photo)
+                                <img src="{{$cat->photo}}" alt="{{$cat->title}}">
+                            @else
+                                <img src="https://placehold.co/150x150/f4f4f4/888888?text=Photo" alt="#">
+                            @endif
+                        </div>
+                        <span class="category-name">{{$cat->title}}</span>
+                    </a>
+                @endforeach
+            @endif
+        </div>
+    </div>
+</section>
+
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $('.category-slider').owlCarousel({
+            items: 7,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            smartSpeed: 500,
+            autoplayHoverPause: true,
+            loop: false, // Turn off loop if not enough items
+            merge: true,
+            nav: true,
+            dots: false,
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            responsive: {
+                0: { items: 3, nav: false },
+                576: { items: 4, nav: false },
+                768: { items: 5 },
+                992: { items: 6 },
+                1200: { items: 7 }
+            }
+        });
+    });
+</script>
+@endpush
+<!-- End Categories Section -->

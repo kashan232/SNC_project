@@ -1058,6 +1058,44 @@
     .single-product .product-action {
         flex-direction: row !important;
     }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
 </style>
 
 <!-- Slider Area -->
@@ -1067,31 +1105,26 @@
         @foreach($banners as $key=>$banner)
         <li data-target="#Gslider" data-slide-to="{{$key}}" class="{{(($key==0)? 'active' : '')}}"></li>
         @endforeach
-
     </ol>
     <div class="carousel-inner" role="listbox">
         @foreach($banners as $key=>$banner)
         <div class="carousel-item {{(($key==0)? 'active' : '')}}">
-            <img class="first-slide" src="{{$banner->photo}}" alt="First slide">
-            <div class="carousel-caption  text-left">
-                <h1 class="wow fadeInDown">{{$banner->title}}</h1>
-                <p>{!! html_entity_decode($banner->description) !!}</p>
-                <a class="btn btn-lg ws-btn wow fadeInUpBig" href="{{route('product-grids')}}" role="button">Explore Menu <i class="ti-arrow-right"></i></a>
-            </div>
+            <img class="first-slide" src="{{$banner->photo}}" alt="Banner Image" style="width: 100%; height: auto; object-fit: cover;">
+            <!-- Caption (optional, removed if you just use images) -->
         </div>
         @endforeach
     </div>
-    <a class="carousel-control-prev" href="#Gslider" role="button" data-slide="prev">
+    
+    <a class="carousel-control-prev" href="#Gslider" role="button" data-slide="prev" style="width: 50px; background: rgba(0,0,0,0.2);">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#Gslider" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#Gslider" role="button" data-slide="next" style="width: 50px; background: rgba(0,0,0,0.2);">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
 </section>
 @endif
-
 <!--/ End Slider Area -->
 
 
@@ -1105,97 +1138,198 @@
 
 <!-- Start Categories Section (Carousel) -->
 <style>
-    .category-scroll-container {
-        padding: 50px 0;
-        background: #ffffff;
+    .kfc-category-section {
+        padding: 60px 0;
+        background: #f4f6f8;
     }
-    .category-item {
+    
+    .kfc-header-wrap {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 40px;
+        padding: 0 15px;
+    }
+
+    .kfc-section-title h2 {
+        font-weight: 900;
+        font-size: 28px;
+        text-transform: uppercase;
+        color: #111;
+        margin: 0 0 5px 0;
+        letter-spacing: -0.5px;
+    }
+
+    .kfc-title-line {
+        width: 60px;
+        height: 3px;
+        background: var(--primary-color);
+    }
+
+    .kfc-view-all {
+        font-weight: 700;
+        font-size: 14px;
+        color: #111;
+        text-transform: uppercase;
         text-decoration: none !important;
-        padding: 10px;
+        position: relative;
+        padding-bottom: 3px;
     }
-    .category-img-box {
-        width: 125px;
-        height: 125px;
-        border-radius: 28px;
-        background: #f4f4f4;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .kfc-view-all::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--primary-color);
+    }
+
+    .kfc-card-item {
+        display: block;
+        text-decoration: none !important;
+        background: #fff;
+        border-radius: 90px 90px 10px 40px;
+        padding: 15px 15px 30px 15px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+        transition: transform 0.3s ease;
+        margin: 10px 5px;
+    }
+
+    .kfc-card-item:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Small decorative dot at bottom right */
+    .kfc-card-item::after {
+        content: '';
+        position: absolute;
+        bottom: 12px;
+        right: 12px;
+        width: 12px;
+        height: 12px;
+        background: #f4f6f8;
+        border-radius: 50%;
+    }
+
+    .kfc-img-box {
+        width: 100%;
+        padding-top: 100%; /* 1:1 Aspect Ratio */
+        position: relative;
+        border-radius: 50%;
+        margin-bottom: 15px;
         overflow: hidden;
-        transition: transform 0.2s ease;
-        margin: 0 auto;
     }
-    .category-item:hover .category-img-box {
-        transform: scale(1.05);
-    }
-    .category-img-box img {
+
+    .kfc-img-box img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
-    }
-    .category-name {
-        margin-top: 15px;
-        font-size: 15px;
-        font-weight: 700;
-        color: var(--primary-color);
-        text-align: center;
-        line-height: 1.2;
-    }
-    /* Customize Owl Nav for Category */
-    .category-slider .owl-nav div {
-        background: #fff;
-        color: var(--primary-color);
-        border: 1px solid var(--primary-color);
         border-radius: 50%;
+        transition: transform 0.4s ease;
+    }
+
+    .kfc-card-item:hover .kfc-img-box img {
+        transform: scale(1.08);
+    }
+
+    .kfc-cat-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .kfc-name-line {
         width: 35px;
-        height: 35px;
-        line-height: 35px;
+        height: 3px;
+        background: var(--primary-color);
+        margin: 8px auto 0;
+    }
+
+    /* KFC Slider Arrows */
+    .kfc-slider .owl-nav div {
+        background: var(--primary-color);
+        color: #fff;
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
         text-align: center;
+        border-radius: 50%;
         position: absolute;
-        top: 35%;
+        top: 40%;
         transform: translateY(-50%);
         font-size: 16px;
         transition: 0.3s;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
-    .category-slider .owl-nav div:hover {
-        background: var(--primary-color);
-        color: #fff;
+    .kfc-slider .owl-nav div:hover {
+        background: #111;
     }
-    .category-slider .owl-prev { left: -15px; }
-    .category-slider .owl-next { right: -15px; }
+    .kfc-slider .owl-prev { left: -40px; }
+    .kfc-slider .owl-next { right: -40px; }
 
+    @media (max-width: 1200px) {
+        .kfc-slider .owl-prev { left: -15px; }
+        .kfc-slider .owl-next { right: -15px; }
+    }
     @media (max-width: 768px) {
-        .category-img-box {
-            width: 90px;
-            height: 90px;
-            border-radius: 20px;
+        .kfc-card-item {
+            padding: 10px 10px 20px 10px;
         }
-        .category-name {
-            font-size: 13px;
+        .kfc-cat-name {
+            font-size: 12px;
         }
+        .kfc-slider .owl-prev { left: -10px; }
+        .kfc-slider .owl-next { right: -10px; }
+        .kfc-section-title h2 { font-size: 22px; }
+    }
+
+    /* Hero Banner Animations (Preserved) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08);
     }
 </style>
 
-<section class="category-scroll-container">
+<section class="kfc-category-section">
     <div class="container" style="position: relative;">
-        <div class="category-slider owl-carousel owl-theme">
+        
+        <div class="kfc-header-wrap">
+            <div class="kfc-section-title">
+                <h2>EXPLORE MENU</h2>
+                <div class="kfc-title-line"></div>
+            </div>
+            <a href="{{route('product-grids')}}" class="kfc-view-all">VIEW ALL</a>
+        </div>
+
+        <div class="kfc-slider owl-carousel owl-theme">
             @php
             $category_lists = DB::table('categories')->where('status','active')->where('is_parent',1)->get();
             @endphp
             @if($category_lists)
                 @foreach($category_lists as $cat)
-                    <a href="{{route('product-cat',$cat->slug)}}" class="category-item">
-                        <div class="category-img-box">
+                    <a href="{{route('product-cat',$cat->slug)}}" class="kfc-card-item">
+                        <div class="kfc-img-box">
                             @if($cat->photo)
                                 <img src="{{$cat->photo}}" alt="{{$cat->title}}">
                             @else
-                                <img src="https://placehold.co/150x150/f4f4f4/888888?text=Photo" alt="#">
+                                <img src="https://placehold.co/200x200/f4f4f4/888888?text=Photo" alt="#">
                             @endif
                         </div>
-                        <span class="category-name">{{$cat->title}}</span>
+                        <div class="kfc-cat-name">{{$cat->title}}</div>
+                        <div class="kfc-name-line"></div>
                     </a>
                 @endforeach
             @endif
@@ -1206,23 +1340,23 @@
 @push('scripts')
 <script>
     $(document).ready(function(){
-        $('.category-slider').owlCarousel({
-            items: 7,
+        $('.kfc-slider').owlCarousel({
+            items: 6,
             autoplay: true,
             autoplayTimeout: 4000,
             smartSpeed: 500,
             autoplayHoverPause: true,
-            loop: false, // Turn off loop if not enough items
-            merge: true,
+            loop: false,
+            margin: 15,
             nav: true,
             dots: false,
             navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
             responsive: {
-                0: { items: 3, nav: false },
-                576: { items: 4, nav: false },
-                768: { items: 5 },
-                992: { items: 6 },
-                1200: { items: 7 }
+                0: { items: 2, margin: 10 },
+                576: { items: 3, margin: 10 },
+                768: { items: 4 },
+                992: { items: 5 },
+                1200: { items: 6 }
             }
         });
     });
@@ -2277,6 +2411,44 @@
     .single-product .product-action {
         flex-direction: row !important;
     }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
 </style>
 <div class="product-area section">
     <div class="container">
@@ -2317,7 +2489,7 @@
                         @if($product_lists)
                         @foreach($product_lists as $key=>$product)
                         <div class="col-sm-12 col-md-6 col-lg-3 p-b-35 isotope-item {{$product->cat_id}}">
-                            <div class="single-product">
+                            <div class="single-product" data-aos="fade-up" data-aos-offset="50">
                                 <div class="product-img">
                                     <a href="{{route('product-detail',$product->slug)}}">
                                         @php
@@ -2373,886 +2545,11 @@
 </div>
 <!-- End Product Area -->
 
-<!-- Start Return Policy Area -->
-<section id="return-policy" class="return-policy-area section" style="background-color: #fff; padding: 50px 0; position: relative;">
-    <div class="container">
-        <div class="section-title text-center" style="margin-bottom: 60px;">
-            <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Peace of Mind</span>
-            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Hassle-Free <span style="color: var(--primary-color);">Returns</span></h2>
-        </div>
-        <div class="row">
-            <!-- Step 1 -->
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="return-step-card text-center" style="background: #fdfdfd; border: 1px solid #eee; padding: 40px 30px; border-radius: 15px; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.02); height: 100%; position: relative; overflow: hidden; margin-bottom:30px;">
-                    <div style="width: 70px; height: 70px; background: rgba(3, 107, 65, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px;">
-                        <i class="ti-timer" style="font-size: 30px; color: var(--primary-color);"></i>
-                    </div>
-                    <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #333; font-family: 'Orbitron', sans-serif;">7 Working Days</h4>
-                    <p style="font-size: 15px; color: #666; line-height: 1.6; margin-bottom: 0;">You have up to 7 working days from the date of delivery to request a return if you change your mind.</p>
-                </div>
-            </div>
-            <!-- Step 2 -->
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="return-step-card text-center" style="background: var(--primary-color); padding: 40px 30px; border-radius: 15px; transition: all 0.3s ease; box-shadow: 0 15px 40px rgba(3, 107, 65, 0.2); height: 100%; position: relative; overflow: hidden; margin-bottom:30px; transform: scale(1.05); z-index: 2;">
-                    <div style="width: 70px; height: 70px; background: rgba(255, 255, 255, 0.15); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px;">
-                        <i class="ti-package" style="font-size: 30px; color: #fff;"></i>
-                    </div>
-                    <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #fff; font-family: 'Orbitron', sans-serif;">Box & Unassembled</h4>
-                    <p style="font-size: 15px; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 0;">Must be in the original box. If the product is fitted or assembled, it is strictly non-returnable.</p>
-                </div>
-            </div>
-            <!-- Step 3 -->
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="return-step-card text-center" style="background: #fdfdfd; border: 1px solid #eee; padding: 40px 30px; border-radius: 15px; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.02); height: 100%; position: relative; overflow: hidden; margin-bottom:30px;">
-                    <div style="width: 70px; height: 70px; background: rgba(3, 107, 65, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px;">
-                        <i class="ti-wallet" style="font-size: 30px; color: var(--primary-color);"></i>
-                    </div>
-                    <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #333; font-family: 'Orbitron', sans-serif;">Fast Refund</h4>
-                    <p style="font-size: 15px; color: #666; line-height: 1.6; margin-bottom: 0;">Once we receive and inspect the item, your refund will be processed within 5-7 business days.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-12 text-center">
-                <a href="#faq" class="btn" style="background: #222; color: #fff; padding: 12px 35px; border-radius: 30px; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; display: inline-block; transition: all 0.3s ease; border: none;">Read Full Policy FAQs</a>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Add some hover effects to the return cards -->
-<style>
-    /* Floating Action Buttons */
-    .single-product .product-img .button-head {
-        background: transparent !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        position: absolute !important;
-        bottom: 15px !important;
-        left: 0 !important;
-        width: 100% !important;
-        border: none !important;
-        z-index: 9 !important;
-    }
-    
-    .single-product .product-action {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: center !important;
-        align-items: center !important;
-        width: 100% !important;
-        float: none !important;
-    }
 
-    .single-product .product-action a {
-        color: #333 !important;
-        font-size: 18px !important;
-        margin: 0 5px !important;
-        width: 40px !important;
-        height: 40px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        border-radius: 50% !important;
-        background: #fff !important;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
-        transition: all 0.3s ease !important;
-        text-decoration: none !important;
-    }
-    .single-product .product-action a:hover {
-        background: var(--primary-color) !important;
-        color: #fff !important;
-    }
-    .single-product .product-action a i {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    .return-step-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.08) !important;
-    }
-    .return-step-card[style*="background: var(--primary-color)"]:hover {
-        transform: scale(1.05) translateY(-10px) !important;
-        box-shadow: 0 20px 40px rgba(3, 107, 65, 0.3) !important;
-    }
-    /* Uniform Product Card Heights */
-    
-        flex-direction: column;
-        
-    }
-    .single-product .product-img {
-        position: relative;
-        width: 100%;
-        padding-top: 120%; /* Enforce a fixed aspect ratio for images */
-        background: #fff;
-        overflow: hidden;
-    }
-    .single-product .product-img a {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .single-product .product-img img {
-        max-height: 100%;
-        width: auto !important;
-        max-width: 100%;
-        object-fit: contain;
-    }
-    .single-product .product-content {
-        flex-grow: 1;
-        display: flex;
-        
-        justify-content: flex-end;
-    }
 
-    /* Fix Card Heights and Image Contain */
-    
-        flex-direction: column;
-        
-        justify-content: space-between;
-        background: #fff;
-    }
-    .single-product .product-img {
-        position: relative;
-        width: 100%;
-        height: 300px; /* Fixed height for all images */
-        background: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    .single-product .product-img a {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .single-product .product-img img {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto !important;
-        height: auto !important;
-        object-fit: contain;
-    }
-    .single-product .product-content {
-        padding-top: 15px;
-    }
 
-    /* Perfect Global Section Padding */
-    .section {
-        padding: 70px 0 !important;
-    }
-    .section-title {
-        margin-bottom: 50px !important;
-    }
-    .small-banner.section {
-        padding: 40px 0 !important;
-    }
-    .midium-banner {
-        padding: 70px 0 !important;
-    }
-    /* Add Padding to Product Images inside Cards */
-    .single-product .product-img {
-        padding: 20px !important;
-    }
-    
-    /* Better Design for Slider Navigation Arrows */
-    .owl-carousel .owl-nav {
-        margin-top: 30px !important;
-        text-align: center;
-    }
-    .owl-carousel .owl-nav div {
-        background: var(--primary-color) !important;
-        color: #fff !important;
-        width: 45px !important;
-        height: 45px !important;
-        
-        text-align: center;
-        border-radius: 50% !important;
-        font-size: 20px !important;
-        transition: all 0.3s ease !important;
-        display: inline-block !important;
-        margin: 0 10px !important;
-        box-shadow: 0 4px 10px rgba(3, 107, 65, 0.3);
-    }
-    .owl-carousel .owl-nav div:hover {
-        background: #222 !important;
-        color: #fff !important;
-        transform: translateY(-3px) !important;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    }
-    .owl-carousel .owl-nav div i {
-        
-    }
-    /* Fix Slider Icon Alignment */
-    .owl-carousel .owl-nav div {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        line-height: normal !important;
-        padding: 0 !important;
-    }
-    .owl-carousel .owl-nav div i {
-        line-height: normal !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        display: block !important;
-    }
-    /* Premium Small Banner Design for White-Background Products */
-    .small-banner .single-banner {
-        background: linear-gradient(135deg, #f0f7f4 0%, #d1e8de 100%);
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-        height: 350px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .small-banner .single-banner img {
-        width: 80%;
-        height: 80%;
-        object-fit: contain;
-        mix-blend-mode: multiply; /* Magically removes the white background */
-        transition: transform 0.5s ease;
-        opacity: 0.85; /* Blend nicely with the text */
-    }
-    .small-banner .single-banner:hover img {
-        transform: scale(1.1);
-        opacity: 1;
-    }
-    
-          flex-direction: column !important;
-          justify-content: center !important;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        
-        align-items: center;
-        justify-content: flex-end;
-        text-align: center;
-        z-index: 2;
-        padding-bottom: 30px;
-        background: linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 50%);
-    }
-    .small-banner .single-banner .content h3 {
-        color: #023a23 !important; 
-        font-family: 'Orbitron', sans-serif;
-        font-size: 22px !important;
-        font-weight: 800 !important;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 15px !important;
-    }
-    .small-banner .single-banner .content a {
-        background: var(--primary-color) !important;
-        color: #fff !important;
-        padding: 10px 25px !important;
-        border-radius: 30px !important;
-        font-weight: 700 !important;
-        text-transform: uppercase;
-        font-size: 13px !important;
-        letter-spacing: 1px;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 10px rgba(3, 107, 65, 0.3);
-    }
-    .small-banner .single-banner .content a:hover {
-        background: #023a23 !important;
-        transform: translateY(-3px);
-    }
-    /* Fixing the Small Banner Content Alignment */
-    
-        flex-direction: column !important; justify-content: center !important;
-        justify-content: flex-end !important;
-        text-align: center !important;
-        z-index: 2 !important;
-        padding: 0 !important;
-        padding-bottom: 20px !important;
-        background: transparent !important;
-    }
-    /* We add a separate pseudo element for the gradient so it doesn't mess with flex */
-    .small-banner .single-banner::before {
-        content: '' !important;
-        position: absolute !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 50% !important;
-        background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%) !important;
-        z-index: 1 !important;
-        pointer-events: none !important;
-    }
-    .small-banner .single-banner h3, 
-    .small-banner .single-banner a {
-        position: relative !important;
-        z-index: 3 !important;
-    }
-    /* Sleek Lifestyle Category Banners */
-    .small-banner .single-banner {
-        background: #000;
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-        height: 350px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .small-banner .single-banner img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        mix-blend-mode: normal !important;
-        transition: transform 0.5s ease;
-        opacity: 0.7; /* Darken image slightly so text is readable */
-    }
-    .small-banner .single-banner:hover img {
-        transform: scale(1.1);
-        opacity: 0.5;
-    }
-    
-        flex-direction: column !important; justify-content: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-        z-index: 2 !important;
-        padding: 20px !important;
-        background: transparent !important;
-    }
-    .small-banner .single-banner::before {
-        display: none !important; /* Remove any previously added gradients */
-    }
-    .small-banner .single-banner .content h3 {
-        color: #fff !important; 
-        font-family: 'Orbitron', sans-serif;
-        font-size: 26px !important;
-        font-weight: 800 !important;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 25px !important;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    .small-banner .single-banner .content a {
-        background: var(--primary-color) !important;
-        color: #fff !important;
-        padding: 12px 30px !important;
-        border-radius: 30px !important;
-        font-weight: 700 !important;
-        text-transform: uppercase;
-        font-size: 14px !important;
-        letter-spacing: 1.5px;
-        transition: all 0.3s ease !important;
-        border: 2px solid transparent !important;
-    }
-    .small-banner .single-banner .content a:hover {
-        background: transparent !important;
-        border: 2px solid #fff !important;
-        transform: translateY(-3px);
-    }
-    /* Restore to the Elegant White-on-Green Lifestyle Design */
-    .small-banner .single-banner {
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-        height: 350px;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .small-banner .single-banner img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        mix-blend-mode: normal !important;
-        transition: transform 0.5s ease;
-    }
-    .small-banner .single-banner:hover img {
-        transform: scale(1.1);
-    }
-    /* The soft green gradient overlay */
-    .small-banner .single-banner::before {
-        content: '' !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(3,107,65,0.7) 100%) !important;
-        z-index: 1 !important;
-        pointer-events: none !important;
-        display: block !important;
-    }
-    
-        flex-direction: column !important; justify-content: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-        z-index: 2 !important;
-        padding: 20px !important;
-        background: transparent !important;
-    }
-    .small-banner .single-banner .content h3 {
-        color: #fff !important; 
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 26px !important;
-        font-weight: 800 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 2px !important;
-        margin-bottom: 25px !important;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
-    }
-    .small-banner .single-banner .content a {
-        background: #fff !important;
-        color: var(--primary-color) !important;
-        padding: 12px 30px !important;
-        border-radius: 4px !important;
-        font-weight: 800 !important;
-        text-transform: uppercase !important;
-        font-size: 14px !important;
-        letter-spacing: 1.5px !important;
-        transition: all 0.3s ease !important;
-        border: none !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-    }
-    .small-banner .single-banner .content a:hover {
-        background: var(--primary-color) !important;
-        color: #fff !important;
-        transform: translateY(-3px) !important;
-    }
-    /* Midium Banner (Featured Products) Redesign for White-Background Products */
-    .midium-banner .single-banner {
-        border-radius: 12px !important;
-        overflow: hidden !important;
-        position: relative !important;
-        height: 350px !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
-        background: linear-gradient(135deg, #f0f7f4 0%, #d1e8de 100%) !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-    .midium-banner .single-banner::before {
-        display: none !important; /* Remove dark overlay */
-    }
-    .midium-banner .single-banner img {
-        width: 50% !important;
-        height: 90% !important;
-        object-fit: contain !important;
-        mix-blend-mode: multiply !important;
-        transition: transform 0.5s ease !important;
-        position: absolute !important;
-        right: 10px !important;
-        bottom: 10px !important;
-    }
-    .midium-banner .single-banner:hover img {
-        transform: scale(1.1) !important;
-    }
-    .midium-banner .single-banner .content {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-        z-index: 2 !important;
-        text-align: left !important;
-        padding: 40px !important;
-        width: 60% !important;
-        background: transparent !important;
-    }
-    .midium-banner .single-banner .content p {
-        color: #fff !important;
-        font-size: 13px !important;
-        font-weight: 700 !important;
-        letter-spacing: 2px !important;
-        text-transform: uppercase !important;
-        margin-bottom: 15px !important;
-        background: var(--primary-color) !important;
-        display: inline-block !important;
-        padding: 6px 15px !important;
-        border-radius: 30px !important;
-    }
-    .midium-banner .single-banner .content h3 {
-        color: #023a23 !important;
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 30px !important;
-        font-weight: 800 !important;
-        line-height: 1.3 !important;
-        margin-bottom: 25px !important;
-        text-shadow: none !important;
-    }
-    .midium-banner .single-banner .content h3 span {
-        color: var(--primary-color) !important; 
-        text-decoration: underline !important; 
-    }
-    .midium-banner .single-banner .content a {
-        background: var(--primary-color) !important;
-        color: #fff !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        padding: 12px 30px !important;
-        border-radius: 30px !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        transition: all 0.3s ease !important;
-        display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1.2 !important; box-shadow: 0 4px 15px rgba(3, 107, 65, 0.3) !important;
-        border: 2px solid var(--primary-color) !important;
-    }
-    .midium-banner .single-banner .content a:hover {
-        background: transparent !important;
-        color: var(--primary-color) !important;
-        transform: translateY(-3px) !important;
-    }
-    /* Revert Midium Banner to the Original Behtreen Design */
-    .midium-banner .single-banner {
-        border-radius: 12px !important;
-        overflow: hidden !important;
-        position: relative !important;
-        height: 350px !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
-        background: transparent !important;
-        display: block !important;
-    }
-    .midium-banner .single-banner img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        mix-blend-mode: normal !important;
-        transition: transform 0.5s ease !important;
-        position: static !important;
-    }
-    .midium-banner .single-banner:hover img {
-        transform: scale(1.05) !important;
-    }
-    .midium-banner .single-banner::before {
-        content: '' !important;
-        position: absolute !important;
-        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
-        background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(3,107,65,0.4) 100%) !important;
-        z-index: 1 !important;
-        display: block !important;
-    }
-    .midium-banner .single-banner .content {
-        position: absolute !important;
-        top: 50% !important;
-        left: 40px !important;
-        transform: translateY(-50%) !important;
-        z-index: 2 !important;
-        text-align: left !important;
-        padding: 0 !important;
-        width: 80% !important;
-        background: transparent !important;
-    }
-    .midium-banner .single-banner .content p {
-        color: #fff !important;
-        font-size: 14px !important;
-        font-weight: 600 !important;
-        letter-spacing: 2px !important;
-        text-transform: uppercase !important;
-        margin-bottom: 10px !important;
-        background: var(--primary-color) !important;
-        display: inline-block !important;
-        padding: 4px 12px !important;
-        border-radius: 4px !important;
-    }
-    .midium-banner .single-banner .content h3 {
-        color: #fff !important;
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 32px !important;
-        font-weight: 800 !important;
-        line-height: 1.3 !important;
-        margin-bottom: 20px !important;
-        text-shadow: none !important;
-    }
-    .midium-banner .single-banner .content h3 span {
-        color: #fff !important; 
-        text-decoration: underline !important;
-    }
-    .midium-banner .single-banner .content a {
-        background: #fff !important;
-        color: var(--primary-color) !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        padding: 12px 30px !important;
-        border-radius: 30px !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        transition: all 0.3s ease !important;
-        display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1.2 !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-        border: none !important;
-    }
-    .midium-banner .single-banner .content a:hover {
-        background: var(--primary-color) !important;
-        color: #fff !important;
-        transform: translateY(-3px) !important;
-    }
-    /* === EMERGENCY FIX FOR LAYOUT === */
-    /* 1. Fix Product Cards Layout */
-    .single-product {
-        display: flex !important;
-        flex-direction: column !important;
-        background: #fff !important;
-    }
-    .single-product .product-img {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        height: 300px !important; /* Force image container height */
-        padding: 20px !important;
-    }
-    .single-product .product-img img {
-        max-width: 100% !important;
-        max-height: 100% !important;
-        object-fit: contain !important;
-    }
 
-    /* 2. Fix Small Banners Layout (Office Chairs etc) */
-    .small-banner .single-banner .content {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-        width: 100% !important;
-        left: 0 !important;
-        padding: 20px !important;
-    }
-    .small-banner .single-banner .content a {
-        display: inline-block !important; /* Prevent stretching */
-        width: auto !important;
-        text-align: center !important;
-        padding: 12px 30px !important;
-        border-radius: 4px !important;
-    }
 
-    /* 3. Fix Medium Banner Layout (Featured) */
-    .midium-banner .single-banner .content {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: center !important;
-    }
-    .midium-banner .single-banner .content a {
-        display: inline-block !important;
-        width: auto !important;
-        text-align: center !important;
-        padding: 12px 30px !important;
-        border-radius: 30px !important;
-    }
-    /* === MOBILE RESPONSIVE FIXES FOR SLIDER === */
-    @media (max-width: 768px) {
-        #Gslider .carousel-inner img {
-            min-height: 250px !important;
-            object-fit: cover !important; /* Prevents stretching, crops instead to fit the height */
-        }
-        #Gslider .carousel-inner .carousel-caption {
-            padding: 10px !important;
-        }
-        #Gslider .carousel-inner .carousel-caption h1 {
-            font-size: 20px !important;
-            margin-bottom: 10px !important;
-            line-height: 1.3 !important;
-            letter-spacing: 1px !important;
-        }
-        #Gslider .carousel-inner .carousel-caption p {
-            font-size: 12px !important;
-            margin-bottom: 15px !important;
-            line-height: 1.4 !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 2 !important; /* Max 2 lines for description */
-            -webkit-box-orient: vertical !important;
-            overflow: hidden !important;
-        }
-        #Gslider .btn.ws-btn {
-            padding: 8px 20px !important;
-            font-size: 12px !important;
-        }
-    }
-    @media (max-width: 400px) {
-        #Gslider .carousel-inner .carousel-caption h1 {
-            font-size: 16px !important;
-        }
-        #Gslider .carousel-inner .carousel-caption p {
-            font-size: 11px !important;
-        }
-    }
-    /* === FEATURED ITEMS RESPONSIVE FIX === */
-    @media (max-width: 768px) {
-        .midium-banner .single-banner {
-            height: auto !important; /* Allow it to grow if needed */
-            min-height: 250px !important;
-            padding-bottom: 20px !important;
-        }
-        .midium-banner .single-banner .content {
-            padding: 20px !important;
-            width: 100% !important;
-            left: 0 !important;
-            top: 50% !important;
-            transform: translateY(-50%) !important;
-        }
-        .midium-banner .single-banner .content p {
-            font-size: 11px !important;
-            padding: 4px 10px !important;
-            margin-bottom: 10px !important;
-        }
-        .midium-banner .single-banner .content h3 {
-            font-size: 20px !important;
-            line-height: 1.2 !important;
-            margin-bottom: 15px !important;
-            display: -webkit-box !important;
-            -webkit-line-clamp: 3 !important; /* Limit title to 3 lines */
-            -webkit-box-orient: vertical !important;
-            overflow: hidden !important;
-        }
-        .midium-banner .single-banner .content a {
-            padding: 8px 20px !important;
-            font-size: 12px !important;
-        }
-    }
-    /* === FIX FEATURED PRODUCTS CONTENT & BUTTONS === */
-    .single-product .product-content {
-        display: flex !important;
-        flex-direction: column !important; /* Stack Title and Price vertically */
-        justify-content: flex-start !important;
-        text-align: center !important;
-        padding: 15px 10px !important;
-    }
-    .single-product .product-content h3 {
-        margin-bottom: 8px !important;
-    }
-    .single-product .product-content h3 a {
-        display: block !important;
-        font-size: 14px !important;
-        line-height: 1.4 !important;
-        white-space: normal !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-    }
-    .single-product .product-content .product-price {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: center !important;
-        align-items: center !important;
-        flex-wrap: wrap !important;
-        gap: 6px !important;
-    }
-    .single-product .product-img .button-head {
-        display: flex !important;
-        flex-direction: row !important;
-        opacity: 1 !important; /* Make buttons visible on mobile */
-        visibility: visible !important;
-        bottom: 10px !important;
-        transform: translateY(0) !important;
-    }
-    .single-product .product-action {
-        flex-direction: row !important;
-    }
-</style>
-<!-- End Return Policy Area -->
-
-<!-- Start FAQs Area -->
-<section id="faq" class="faq-area section" style="background-color: #f7f9fb; padding: 50px 0;">
-    <div class="container">
-        <div class="section-title text-center" style="margin-bottom: 50px;">
-            <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Any Questions?</span>
-            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Frequently Asked <span style="color: var(--primary-color);">Questions</span></h2>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-12">
-                <div class="accordion" id="faqAccordion">
-                    <!-- FAQ 1 -->
-                    <div class="card" style="border: none; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                        <div class="card-header" id="headingOne" style="background: var(--primary-color); border-bottom: none; border-radius: 8px; padding: 0;">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 100%; text-align: left; padding: 20px; color: #fff; font-weight: 600; text-decoration: none; font-size: 16px; display: flex; justify-content: space-between; align-items: center;">
-                                    How long does delivery take? <i class="ti-angle-down" style="font-size: 12px;"></i>
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
-                            <div class="card-body" style="background: #fff; padding: 0 20px 20px; color: #666; line-height: 1.6; border-radius: 0 0 8px 8px;">
-                                We offer fast delivery across our service areas. Standard delivery typically takes 1-2 business days. For bulk bakery or nimco orders, please allow 2-3 working days.
-                            </div>
-                        </div>
-                    </div>
-                    <!-- FAQ 2 -->
-                    <div class="card" style="border: none; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                        <div class="card-header" id="headingTwo" style="background: var(--primary-color); border-bottom: none; border-radius: 8px; padding: 0;">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%; text-align: left; padding: 20px; color: #fff; font-weight: 600; text-decoration: none; font-size: 16px; display: flex; justify-content: space-between; align-items: center;">
-                                    Do you provide installation services? <i class="ti-angle-down" style="font-size: 12px;"></i>
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
-                            <div class="card-body" style="background: #fff; padding: 0 20px 20px; color: #666; line-height: 1.6; border-radius: 0 0 8px 8px;">
-                                Yes! Our items are packed fresh and sealed perfectly so they reach you in the crispiest and best condition possible.
-                            </div>
-                        </div>
-                    </div>
-                    <!-- FAQ 3 -->
-                    <div class="card" style="border: none; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                        <div class="card-header" id="headingThree" style="background: var(--primary-color); border-bottom: none; border-radius: 8px; padding: 0;">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%; text-align: left; padding: 20px; color: #fff; font-weight: 600; text-decoration: none; font-size: 16px; display: flex; justify-content: space-between; align-items: center;">
-                                    Do your products come with a warranty? <i class="ti-angle-down" style="font-size: 12px;"></i>
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
-                            <div class="card-body" style="background: #fff; padding: 0 20px 20px; color: #666; line-height: 1.6; border-radius: 0 0 8px 8px;">
-                                Absolutely! All our food items are prepared fresh daily under strict hygienic conditions. We guarantee the quality and freshness of every nimco pack and bakery item you order.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End FAQs Area -->
-
-<!-- Start Contact Area -->
-<section class="contact-area section" style="background-color: #fff; padding: 50px 0;">
-    <div class="container">
-        <div class="section-title text-center" style="margin-bottom: 50px;">
-            <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Get In Touch</span>
-            <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Contact <span style="color: var(--primary-color);">Us</span></h2>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-12 mb-4">
-                <div class="contact-box text-center" style="padding: 40px 30px; background: #fbfbfb; border-radius: 12px; border: 1px solid #eee; height: 100%; transition: transform 0.3s ease;">
-                    <i class="ti-mobile" style="font-size: 40px; color: var(--primary-color); margin-bottom: 20px; display: inline-block;"></i>
-                    <h4 style="font-size: 20px; font-weight: 600; margin-bottom: 12px;">Call Us Now</h4>
-                    <p style="color: #666; margin-bottom: 0; font-size: 15px;">+971 123 456 789<br>Mon-Sat, 9AM to 6PM</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12 mb-4">
-                <div class="contact-box text-center" style="padding: 40px 30px; background: var(--primary-color); border-radius: 12px; box-shadow: 0 15px 30px rgba(3,107,65,0.2); height: 100%; transition: transform 0.3s ease; transform: translateY(-10px);">
-                    <i class="ti-email" style="font-size: 40px; color: #fff; margin-bottom: 20px; display: inline-block;"></i>
-                    <h4 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #fff;">Email Address</h4>
-                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 0; font-size: 15px;">Hafizansari@yahoo.com<br>Hafizansari@yahoo.com</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12 mb-4">
-                <div class="contact-box text-center" style="padding: 40px 30px; background: #fbfbfb; border-radius: 12px; border: 1px solid #eee; height: 100%; transition: transform 0.3s ease;">
-                    <i class="ti-location-pin" style="font-size: 40px; color: var(--primary-color); margin-bottom: 20px; display: inline-block;"></i>
-                    <h4 style="font-size: 20px; font-weight: 600; margin-bottom: 12px;">Our Location</h4>
-                    <p style="color: #666; margin-bottom: 0; font-size: 15px;">Hyderabad, Pakistan<br>Urdu Bazar</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Contact Area -->
 
 @include('frontend.layouts.newsletter')
 
@@ -3564,6 +2861,44 @@
     .popular-slider .owl-prev { left: -10px !important; }
     .popular-slider .owl-next { right: -10px !important; }
 
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
 </style>
 <!-- END CLEAN CARD CSS OVERRIDE -->
 
@@ -3588,6 +2923,44 @@
         font-weight: 600 !important; /* Semi Bold */
         font-size: 18px !important;
         text-shadow: 1px 1px 8px rgba(0,0,0,0.5) !important;
+    }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
     }
 </style>
 <!-- END GLOBAL FONT OVERRIDE -->
@@ -3739,6 +3112,44 @@
             justify-content: center;
         }
     }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
 </style>
 <style>
     /* FINAL OVERRIDE FOR HERO BANNER HEIGHT */
@@ -3760,104 +3171,173 @@
             height: 70vh !important;
         }
     }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
 </style>
 
 <!-- Start Our Outlets Section -->
 <style>
-    #our-outlets {
-        padding: 50px 0;
-        background-color: #ffffff;
+    #our-outlets-premium {
+        padding: 80px 0;
+        background-color: #f9f9fa;
         font-family: 'Poppins', sans-serif;
+        position: relative;
     }
-    #our-outlets .section-title {
+    #our-outlets-premium .section-title {
         text-align: center;
-        margin-bottom: 50px;
+        margin-bottom: 60px;
     }
-    #our-outlets .section-title h2 {
-        font-size: 32px;
-        font-weight: 700;
-        color: #222;
-        margin-bottom: 15px;
-    }
-    
-    .store-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 25px;
-    }
-    .store-box {
-        background: #fff;
-        border: 1px solid #eaeaea;
-        padding: 30px 25px;
-        border-radius: 8px;
-        text-align: center;
-        transition: all 0.3s ease;
-        height: auto;
-        min-height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-    }
-    .store-box p {
-        flex-grow: 1; /* Pushes the text nicely and prevents overflow */
-        word-break: break-word; /* Ensure long words wrap */
-        display: block !important;
-    }
-    .store-box:hover {
-        border-color: var(--primary-color);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-        transform: translateY(-3px);
-    }
-    .store-box .icon {
-        font-size: 28px;
+    #our-outlets-premium .section-title span {
         color: var(--primary-color);
-        margin-bottom: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 14px;
         display: block;
+        margin-bottom: 10px;
     }
-    .store-box h4 {
-        font-size: 18px;
-        font-weight: 600;
+    #our-outlets-premium .section-title h2 {
+        font-size: 36px;
+        font-weight: 800;
+        color: #222;
+        font-family: 'Orbitron', sans-serif;
+    }
+    .premium-store-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+    .premium-store-box {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        position: relative;
+        text-align: center;
+        border: 1px solid #f1f1f1;
+    }
+    .premium-store-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(3,107,65,0.1);
+        border-color: var(--primary-color);
+    }
+    .store-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        background: rgba(3,107,65,0.05);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 30px auto 15px;
+        color: var(--primary-color);
+        font-size: 32px;
+        transition: all 0.3s ease;
+    }
+    .premium-store-box:hover .store-icon-wrapper {
+        background: var(--primary-color);
+        color: #fff;
+    }
+    .store-details {
+        padding: 0 25px 35px;
+    }
+    .store-details h3 {
+        font-size: 20px;
+        font-weight: 700;
         color: #333;
         margin-bottom: 10px;
-        text-transform: capitalize;
     }
-    .store-box p {
+    .store-details p {
         font-size: 14px;
         color: #777;
         line-height: 1.6;
-        margin: 0;
+        margin-bottom: 15px;
     }
-
-    @media (max-width: 1200px) {
-        .store-grid { grid-template-columns: repeat(3, 1fr); }
+    .store-details .contact-info {
+        display: inline-block;
+        background: #f4f6f8;
+        padding: 8px 15px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #555;
     }
-    @media (max-width: 991px) {
-        .store-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 767px) {
-        .store-grid { grid-template-columns: 1fr; }
+    .store-details .contact-info i {
+        color: var(--primary-color);
+        margin-right: 5px;
     }
 </style>
 
-<section id="our-outlets">
+<section id="our-outlets-premium" class="section">
     <div class="container">
-        <div class="section-title">
+        <div class="section-title" data-aos="fade-up">
+            <span>Find Us Near You</span>
             <h2>Our Outlets</h2>
-            
         </div>
         
-        <div class="store-grid">
+        <div class="premium-store-grid">
             @php
                 $outlets = \App\Models\Outlet::where('status','active')->get();
             @endphp
-            @foreach($outlets as $outlet)
-            <div class="store-box">
-                <i class="ti-location-pin icon"></i>
-                <h4>{{$outlet->name}}</h4>
-                <p>{{$outlet->address}}</p>
-            </div>
-            @endforeach
+            @if($outlets->count() > 0)
+                @foreach($outlets as $outlet)
+                <div class="premium-store-box" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
+                    <div class="store-icon-wrapper">
+                        <i class="ti-location-pin"></i>
+                    </div>
+                    <div class="store-details">
+                        <h3>{{ $outlet->name }}</h3>
+                        <p>{{ $outlet->address }}</p>
+                        @if($outlet->phone)
+                        <div class="contact-info">
+                            <i class="ti-mobile"></i> {{ $outlet->phone }}
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                @endforeach
+            @else
+                <div class="col-12 text-center">
+                    <p>No outlets available at the moment.</p>
+                </div>
+            @endif
         </div>
     </div>
 </section>
@@ -4789,6 +4269,44 @@
     }
     .single-product .product-action {
         flex-direction: row !important;
+    }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
     }
 </style>
 @endpush
