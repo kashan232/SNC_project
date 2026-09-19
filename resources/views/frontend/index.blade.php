@@ -2431,13 +2431,13 @@
         transform: translateY(0);
     }
 </style>
-<div class="product-area section">
+<div class="product-area section" style="background: #c1540b;">
     <div class="container">
 <div class="row">
             <div class="col-12">
                 <div class="section-title text-center" style="margin-bottom: 50px;">
                     <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; display:block; margin-bottom: 10px;">Explore Collection</span>
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 800; color: #111;">Our <span style="color: var(--primary-color);">Products</span></h2>
+                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 800; color: #fff;">Our <span style="color: #fff">Products</span></h2>
                 </div>
             </div>
         </div>
