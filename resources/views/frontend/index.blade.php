@@ -2431,6 +2431,69 @@
         transform: translateY(0);
     }
 </style>
+<!-- OVERRIDE FOR OUR PRODUCTS BUTTONS -->
+<style>
+    /* Target only the buttons in the Isotope grid (Our Products section) */
+    .isotope-grid .single-product {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .isotope-grid .single-product .button-head {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 10px 0 !important;
+        background: transparent !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        margin-top: 10px;
+    }
+    
+    .isotope-grid .single-product .product-action {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    .isotope-grid .single-product .product-action a {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        left: auto !important;
+        width: 40px !important;
+        height: 40px !important;
+        line-height: 40px !important;
+        border-radius: 50% !important;
+        background: #fff !important;
+        color: #333 !important;
+        text-align: center !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+    }
+    
+    .isotope-grid .single-product .product-action a:hover {
+        background: #c1540b !important;
+        color: #fff !important;
+    }
+    
+    .isotope-grid .single-product .product-action a span {
+        display: none !important; /* Hide the text span */
+    }
+</style>
 <div class="product-area section" style="background: #c1540b;">
     <div class="container">
 <div class="row">
@@ -2491,13 +2554,7 @@
 
 
                                     </a>
-                                    <div class="button-head">
-                                        <div class="product-action d-flex justify-content-center align-items-center w-100">
-                                            <a title="Add to cart" href="{{route('add-to-cart',$product->slug)}}"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
-                                            <a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class="ti-eye"></i><span>Quick Shop</span></a>
-                                            <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="product-content">
                                     <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
@@ -2509,6 +2566,14 @@
                                         <del style="padding-left:4%;">Rs:{{number_format($product->price,2)}}</del>
                                     </div>
                                 </div>
+<div class="button-head">
+                                        <div class="product-action d-flex justify-content-center align-items-center w-100">
+                                            <a title="Add to cart" href="{{route('add-to-cart',$product->slug)}}"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
+                                            <a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class="ti-eye"></i><span>Quick Shop</span></a>
+                                            <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                        </div>
+                                    </div>
+
                             </div>
                         </div>
                         @endforeach
@@ -3337,6 +3402,21 @@
     </div>
 </section>
 <!-- End Our Outlets Section -->
+
+<!-- Start Final Banner Section -->
+<section class="final-banner-section" style="padding: 60px 0; background-color: #fcf8f2;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center" data-aos="fade-up">
+                <a href="#">
+                    <img src="{{ asset('frontend/img/final-banner.jpg') }}" alt="Shoukat Nimco Banner" class="img-fluid w-100" style="border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Final Banner Section -->
+
 
 @endsection
 
