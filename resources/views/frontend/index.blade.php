@@ -2700,6 +2700,39 @@
     .modal-content {
         width: 100% !important;
     }
+        .quickview-content .add-to-cart .btn {
+        line-height: normal !important;
+        height: auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .modal-header .close {
+        position: absolute !important;
+        right: 15px !important;
+        top: 15px !important;
+        z-index: 99 !important;
+        color: #333 !important;
+        font-size: 20px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    .modal-header .close span {
+        display: block !important;
+        color: inherit !important;
+    }
+        .quickview-content .add-to-cart .btn.min {
+        height: 45px !important;
+        width: 45px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
     /* Quantity input styling */
     .quickview-content .quantity {
         margin-right: 15px;
@@ -3523,7 +3556,7 @@
         <div class="row">
             <div class="col-12 text-center" data-aos="fade-up">
                 <a href="#">
-                    <img src="{{ asset('frontend/img/final-banner.jpg') }}" alt="Shoukat Nimco Banner" class="img-fluid w-100" style="border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
+                    <img src="{{ asset('frontend/img/final-banner.jpg?v=2') }}" alt="Shoukat Nimco Banner" class="img-fluid w-100" style="border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
                 </a>
             </div>
         </div>
