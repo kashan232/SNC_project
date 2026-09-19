@@ -2674,6 +2674,20 @@
 
 <!-- START CLEAN CARD CSS OVERRIDE -->
 <style>
+    /* EQUAL HEIGHT FIX FOR OWL CAROUSEL CARDS */
+    .owl-carousel.popular-slider .owl-stage {
+        display: flex !important;
+        align-items: stretch !important;
+    }
+    .owl-carousel.popular-slider .owl-item {
+        display: flex !important;
+        height: auto !important;
+    }
+    .clean-card {
+        height: 100% !important;
+        width: 100% !important;
+    }
+
     /* Reset Clean Card */
     .clean-card {
         background: #fff !important;
