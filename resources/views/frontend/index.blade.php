@@ -1138,80 +1138,63 @@
 
 <!-- Start Categories Section (Carousel) -->
 <style>
+    /* EXPLORE MENU DESIGN */
     .kfc-category-section {
         padding: 60px 0;
-        background: #f4f6f8;
+        background-color: #fcf8f2;
+        background-image: url('https://www.transparenttextures.com/patterns/food.png'); /* Fallback pattern */
+        position: relative;
     }
     
     .kfc-header-wrap {
         display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
         margin-bottom: 40px;
         padding: 0 15px;
     }
 
     .kfc-section-title h2 {
+        font-family: 'Poppins', sans-serif !important;
         font-weight: 900;
         font-size: 28px;
         text-transform: uppercase;
-        color: #111;
+        color: #4a2e2b; /* Dark Brown */
         margin: 0 0 5px 0;
-        letter-spacing: -0.5px;
+        letter-spacing: 0.5px;
     }
 
     .kfc-title-line {
         width: 60px;
         height: 3px;
-        background: var(--primary-color);
+        background: #b59063; /* Golden */
     }
 
     .kfc-view-all {
-        font-weight: 700;
-        font-size: 14px;
-        color: #111;
-        text-transform: uppercase;
-        text-decoration: none !important;
-        position: relative;
-        padding-bottom: 3px;
-    }
-    .kfc-view-all::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: var(--primary-color);
+        display: none; /* Hidden in screenshot */
     }
 
     .kfc-card-item {
         display: block;
         text-decoration: none !important;
-        background: #fff;
-        border-radius: 90px 90px 10px 40px;
-        padding: 15px 15px 30px 15px;
+        background: #ffffff;
+        border-radius: 20px; /* Rounded rectangle */
+        padding: 15px 15px 25px 15px;
         text-align: center;
         position: relative;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.03);
-        transition: transform 0.3s ease;
-        margin: 10px 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        margin: 15px 5px;
     }
 
     .kfc-card-item:hover {
         transform: translateY(-5px);
+        box-shadow: 0 15px 25px rgba(0,0,0,0.1);
     }
 
-    /* Small decorative dot at bottom right */
     .kfc-card-item::after {
-        content: '';
-        position: absolute;
-        bottom: 12px;
-        right: 12px;
-        width: 12px;
-        height: 12px;
-        background: #f4f6f8;
-        border-radius: 50%;
+        display: none;
     }
 
     .kfc-img-box {
@@ -1220,7 +1203,7 @@
         position: relative;
         border-radius: 50%;
         margin-bottom: 15px;
-        overflow: hidden;
+        overflow: visible; /* To allow glow */
     }
 
     .kfc-img-box img {
@@ -1231,17 +1214,21 @@
         height: 100%;
         object-fit: cover;
         border-radius: 50%;
-        transition: transform 0.4s ease;
+        border: 4px solid #fff;
+        transition: all 0.3s ease;
     }
 
+    /* Hover effect golden ring */
     .kfc-card-item:hover .kfc-img-box img {
-        transform: scale(1.08);
+        border-color: #b59063;
+        box-shadow: 0 0 0 5px rgba(181, 144, 99, 0.2);
     }
 
     .kfc-cat-name {
-        font-size: 14px;
-        font-weight: 700;
-        color: #222;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 15px;
+        font-weight: 800;
+        color: #111;
         margin-bottom: 5px;
         white-space: nowrap;
         overflow: hidden;
@@ -1251,31 +1238,35 @@
     .kfc-name-line {
         width: 35px;
         height: 3px;
-        background: var(--primary-color);
+        background: #b59063; /* Golden */
         margin: 8px auto 0;
+        transition: width 0.3s ease;
+    }
+    .kfc-card-item:hover .kfc-name-line {
+        width: 50px;
     }
 
     /* KFC Slider Arrows */
     .kfc-slider .owl-nav div {
-        background: var(--primary-color);
+        background: #b59063;
         color: #fff;
-        width: 32px;
-        height: 32px;
-        line-height: 32px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
         text-align: center;
         border-radius: 50%;
         position: absolute;
         top: 40%;
         transform: translateY(-50%);
-        font-size: 16px;
+        font-size: 18px;
         transition: 0.3s;
         box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
     .kfc-slider .owl-nav div:hover {
-        background: #111;
+        background: #9a7b54;
     }
-    .kfc-slider .owl-prev { left: -40px; }
-    .kfc-slider .owl-next { right: -40px; }
+    .kfc-slider .owl-prev { left: -50px; }
+    .kfc-slider .owl-next { right: -50px; }
 
     @media (max-width: 1200px) {
         .kfc-slider .owl-prev { left: -15px; }
@@ -1286,23 +1277,13 @@
             padding: 10px 10px 20px 10px;
         }
         .kfc-cat-name {
-            font-size: 12px;
+            font-size: 13px;
         }
         .kfc-slider .owl-prev { left: -10px; }
         .kfc-slider .owl-next { right: -10px; }
         .kfc-section-title h2 { font-size: 22px; }
     }
-
-    /* Hero Banner Animations (Preserved) */
-    #Gslider .carousel-item img {
-        transition: transform 6s ease-in-out;
-        transform: scale(1);
-    }
-    #Gslider .carousel-item.active img {
-        transform: scale(1.08);
-    }
 </style>
-
 <section class="kfc-category-section">
     <div class="container" style="position: relative;">
         
@@ -1371,13 +1352,13 @@
 
 
 <!-- Start Most Popular -->
-<div class="product-area most-popular section">
+<div class="product-area most-popular section" style="background:#c1540b;">
     <div class="container">
 <div class="row">
             <div class="col-12">
                 <div class="section-title text-center" style="margin-bottom: 50px;">
                     <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Top Picks</span>
-                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #222; margin-top: 10px;">Featured <span style="color: var(--primary-color);">Products</span></h2>
+                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #fff; margin-top: 10px;">Featured <span style="color: #fff;">Products</span></h2>
                 </div>
             </div>
         </div>
