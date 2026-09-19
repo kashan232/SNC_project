@@ -1,0 +1,1075 @@
+<!-- Start Product Area -->
+<style>
+    /* Floating Action Buttons */
+    .single-product .product-img .button-head {
+        background: transparent !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        position: absolute !important;
+        bottom: 15px !important;
+        left: 0 !important;
+        width: 100% !important;
+        border: none !important;
+        z-index: 9 !important;
+    }
+    
+    .single-product .product-action {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        float: none !important;
+    }
+
+    .single-product .product-action a {
+        color: #333 !important;
+        font-size: 18px !important;
+        margin: 0 5px !important;
+        width: 40px !important;
+        height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border-radius: 50% !important;
+        background: #fff !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+        transition: all 0.3s ease !important;
+        text-decoration: none !important;
+    }
+    .single-product .product-action a:hover {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+    }
+    .single-product .product-action a i {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .filter-tope-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; border: none; flex-wrap: wrap; }
+    .filter-tope-group .btn { 
+        background: #f4f6f8 !important; 
+        color: #555 !important; 
+        border-radius: 30px; 
+        padding: 10px 30px; 
+        font-weight: 600; 
+        font-size: 15px;
+        border: 2px solid transparent; 
+        transition: all 0.3s;
+        text-transform: capitalize;
+    }
+    .filter-tope-group .btn:hover, .filter-tope-group .btn.is-checked, .filter-tope-group .btn.active { 
+        background: var(--primary-color) !important; 
+        color: #fff !important; 
+        border-color: var(--primary-color); 
+        box-shadow: 0 8px 20px rgba(3, 107, 65, 0.25);
+    }
+
+    /* Product Card Styling */
+    .single-product {
+        display: flex; flex-direction: column; background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: all 0.4s ease;
+        border: 1px solid #f0f0f0;
+        margin-bottom: 30px;
+    }
+    .single-product:hover {
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        transform: translateY(-8px);
+    }
+    .single-product .product-img {
+        position: relative;
+        overflow: hidden;
+    }
+    .single-product .product-content {
+        padding: 22px 20px;
+        text-align: left;
+    }
+    .single-product .product-content h3 {
+        margin-bottom: 10px;
+    }
+    .single-product .product-content h3 a {
+        font-size: 16px;
+        font-weight: 600;
+        color: #222 !important;
+        text-decoration: none;
+        transition: color 0.3s;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .single-product .product-content h3 a:hover {
+        color: var(--primary-color) !important;
+    }
+    .single-product .product-content .product-price {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .single-product .product-content .product-price del {
+        font-size: 14px;
+        color: #aaa;
+        font-weight: 500;
+        text-decoration: line-through;
+    }
+    
+    /* Completely Redesign Action Buttons (Vertical Floating Icons) */
+    .single-product .button-head {
+        background: transparent !important;
+        position: absolute !important;
+        top: 15px !important;
+        right: -60px !important; /* Hidden by default off-screen */
+        width: auto !important;
+        display: flex !important;
+        
+        gap: 10px !important;
+        align-items: center !important;
+        padding: 0 !important;
+        transition: right 0.4s ease !important;
+        opacity: 0 !important;
+        z-index: 9 !important;
+        border: none !important;
+        bottom: auto !important;
+        left: auto !important;
+    }
+    
+    .single-product:hover .button-head {
+        right: 15px !important;
+        opacity: 1 !important;
+    }
+
+    
+    
+    /* Common style for all 3 icons */
+    .single-product .product-action a,
+    .single-product .product-action-2 a {
+        width: 42px !important;
+        height: 42px !important;
+        background: #fff !important;
+        color: #333 !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-decoration: none !important;
+        transition: all 0.3s !important;
+        font-size: 18px !important;
+        border: none !important;
+        padding: 0 !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    }
+    
+    .single-product .product-action a:hover,
+    .single-product .product-action-2 a:hover {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        transform: scale(1.1);
+    }
+
+    /* Hide text from View/Wishlist/Cart */
+    .single-product .product-action a span,
+    .single-product .product-action-2 a span {
+        display: none !important; 
+    }
+    /* Midium Banner (Featured Products) Redesign */
+    .midium-banner {
+        padding: 60px 0 !important;
+    }
+    .midium-banner .single-banner {
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        height: 350px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .midium-banner .single-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    .midium-banner .single-banner:hover img {
+        transform: scale(1.05);
+    }
+    .midium-banner .single-banner::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(3,107,65,0.4) 100%);
+        z-index: 1;
+    }
+    .midium-banner .single-banner .content {
+        position: absolute;
+        top: 50% !important;
+        left: 40px !important;
+        transform: translateY(-50%) !important;
+        z-index: 2;
+        text-align: left !important;
+        padding: 0 !important;
+        width: 80%;
+    }
+    .midium-banner .single-banner .content p {
+        color: #fff !important;
+        font-size: 14px !important;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        background: var(--primary-color);
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 4px;
+    }
+    .midium-banner .single-banner .content h3 {
+        color: #fff !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 32px !important;
+        font-weight: 800 !important;
+        line-height: 1.3 !important;
+        margin-bottom: 20px !important;
+        text-shadow: none !important;
+        background: transparent !important;
+    }
+    .midium-banner .single-banner .content h3 span {
+        color: #fff !important; text-decoration: underline; /* Make discount pop, or use a distinct green/yellow */
+    }
+    .midium-banner .single-banner .content a {
+        background: #fff !important;
+        color: var(--primary-color) !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        padding: 12px 30px !important;
+        border-radius: 30px !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease !important;
+        display: inline-block;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+        text-shadow: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    .midium-banner .single-banner .content a:hover {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        transform: translateY(-3px);
+    }
+    /* Uniform Product Card Heights */
+    
+        flex-direction: column;
+        
+    }
+    .single-product .product-img {
+        position: relative;
+        width: 100%;
+        padding-top: 120%; /* Enforce a fixed aspect ratio for images */
+        background: #fff;
+        overflow: hidden;
+    }
+    .single-product .product-img a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .single-product .product-img img {
+        max-height: 100%;
+        width: auto !important;
+        max-width: 100%;
+        object-fit: contain;
+    }
+    .single-product .product-content {
+        flex-grow: 1;
+        display: flex;
+        
+        justify-content: flex-end;
+    }
+
+    /* Fix Card Heights and Image Contain */
+    
+        flex-direction: column;
+        
+        justify-content: space-between;
+        background: #fff;
+    }
+    .single-product .product-img {
+        position: relative;
+        width: 100%;
+        height: 300px; /* Fixed height for all images */
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .single-product .product-img a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .single-product .product-img img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain;
+    }
+    .single-product .product-content {
+        padding-top: 15px;
+    }
+
+    /* Perfect Global Section Padding */
+    .section {
+        padding: 70px 0 !important;
+    }
+    .section-title {
+        margin-bottom: 50px !important;
+    }
+    .small-banner.section {
+        padding: 40px 0 !important;
+    }
+    .midium-banner {
+        padding: 70px 0 !important;
+    }
+    /* Add Padding to Product Images inside Cards */
+    .single-product .product-img {
+        padding: 20px !important;
+    }
+    
+    /* Better Design for Slider Navigation Arrows */
+    .owl-carousel .owl-nav {
+        margin-top: 30px !important;
+        text-align: center;
+    }
+    .owl-carousel .owl-nav div {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        width: 45px !important;
+        height: 45px !important;
+        
+        text-align: center;
+        border-radius: 50% !important;
+        font-size: 20px !important;
+        transition: all 0.3s ease !important;
+        display: inline-block !important;
+        margin: 0 10px !important;
+        box-shadow: 0 4px 10px rgba(3, 107, 65, 0.3);
+    }
+    .owl-carousel .owl-nav div:hover {
+        background: #222 !important;
+        color: #fff !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    .owl-carousel .owl-nav div i {
+        
+    }
+    /* Fix Slider Icon Alignment */
+    .owl-carousel .owl-nav div {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        line-height: normal !important;
+        padding: 0 !important;
+    }
+    .owl-carousel .owl-nav div i {
+        line-height: normal !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+    /* Premium Small Banner Design for White-Background Products */
+    .small-banner .single-banner {
+        background: linear-gradient(135deg, #f0f7f4 0%, #d1e8de 100%);
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        height: 350px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .small-banner .single-banner img {
+        width: 80%;
+        height: 80%;
+        object-fit: contain;
+        mix-blend-mode: multiply; /* Magically removes the white background */
+        transition: transform 0.5s ease;
+        opacity: 0.85; /* Blend nicely with the text */
+    }
+    .small-banner .single-banner:hover img {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    
+          flex-direction: column !important;
+          justify-content: center !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        
+        align-items: center;
+        justify-content: flex-end;
+        text-align: center;
+        z-index: 2;
+        padding-bottom: 30px;
+        background: linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 50%);
+    }
+    .small-banner .single-banner .content h3 {
+        color: #023a23 !important; 
+        font-family: 'Orbitron', sans-serif;
+        font-size: 22px !important;
+        font-weight: 800 !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 15px !important;
+    }
+    .small-banner .single-banner .content a {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        padding: 10px 25px !important;
+        border-radius: 30px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        font-size: 13px !important;
+        letter-spacing: 1px;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 10px rgba(3, 107, 65, 0.3);
+    }
+    .small-banner .single-banner .content a:hover {
+        background: #023a23 !important;
+        transform: translateY(-3px);
+    }
+    /* Fixing the Small Banner Content Alignment */
+    
+        flex-direction: column !important; justify-content: center !important;
+        justify-content: flex-end !important;
+        text-align: center !important;
+        z-index: 2 !important;
+        padding: 0 !important;
+        padding-bottom: 20px !important;
+        background: transparent !important;
+    }
+    /* We add a separate pseudo element for the gradient so it doesn't mess with flex */
+    .small-banner .single-banner::before {
+        content: '' !important;
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 50% !important;
+        background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%) !important;
+        z-index: 1 !important;
+        pointer-events: none !important;
+    }
+    .small-banner .single-banner h3, 
+    .small-banner .single-banner a {
+        position: relative !important;
+        z-index: 3 !important;
+    }
+    /* Sleek Lifestyle Category Banners */
+    .small-banner .single-banner {
+        background: #000;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        height: 350px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .small-banner .single-banner img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        mix-blend-mode: normal !important;
+        transition: transform 0.5s ease;
+        opacity: 0.7; /* Darken image slightly so text is readable */
+    }
+    .small-banner .single-banner:hover img {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
+    
+        flex-direction: column !important; justify-content: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        z-index: 2 !important;
+        padding: 20px !important;
+        background: transparent !important;
+    }
+    .small-banner .single-banner::before {
+        display: none !important; /* Remove any previously added gradients */
+    }
+    .small-banner .single-banner .content h3 {
+        color: #fff !important; 
+        font-family: 'Orbitron', sans-serif;
+        font-size: 26px !important;
+        font-weight: 800 !important;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 25px !important;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .small-banner .single-banner .content a {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        padding: 12px 30px !important;
+        border-radius: 30px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        font-size: 14px !important;
+        letter-spacing: 1.5px;
+        transition: all 0.3s ease !important;
+        border: 2px solid transparent !important;
+    }
+    .small-banner .single-banner .content a:hover {
+        background: transparent !important;
+        border: 2px solid #fff !important;
+        transform: translateY(-3px);
+    }
+    /* Restore to the Elegant White-on-Green Lifestyle Design */
+    .small-banner .single-banner {
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        height: 350px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .small-banner .single-banner img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        mix-blend-mode: normal !important;
+        transition: transform 0.5s ease;
+    }
+    .small-banner .single-banner:hover img {
+        transform: scale(1.1);
+    }
+    /* The soft green gradient overlay */
+    .small-banner .single-banner::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(3,107,65,0.7) 100%) !important;
+        z-index: 1 !important;
+        pointer-events: none !important;
+        display: block !important;
+    }
+    
+        flex-direction: column !important; justify-content: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        z-index: 2 !important;
+        padding: 20px !important;
+        background: transparent !important;
+    }
+    .small-banner .single-banner .content h3 {
+        color: #fff !important; 
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 26px !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 2px !important;
+        margin-bottom: 25px !important;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
+    }
+    .small-banner .single-banner .content a {
+        background: #fff !important;
+        color: var(--primary-color) !important;
+        padding: 12px 30px !important;
+        border-radius: 4px !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        font-size: 14px !important;
+        letter-spacing: 1.5px !important;
+        transition: all 0.3s ease !important;
+        border: none !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+    }
+    .small-banner .single-banner .content a:hover {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        transform: translateY(-3px) !important;
+    }
+    /* Midium Banner (Featured Products) Redesign for White-Background Products */
+    .midium-banner .single-banner {
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        height: 350px !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+        background: linear-gradient(135deg, #f0f7f4 0%, #d1e8de 100%) !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    .midium-banner .single-banner::before {
+        display: none !important; /* Remove dark overlay */
+    }
+    .midium-banner .single-banner img {
+        width: 50% !important;
+        height: 90% !important;
+        object-fit: contain !important;
+        mix-blend-mode: multiply !important;
+        transition: transform 0.5s ease !important;
+        position: absolute !important;
+        right: 10px !important;
+        bottom: 10px !important;
+    }
+    .midium-banner .single-banner:hover img {
+        transform: scale(1.1) !important;
+    }
+    .midium-banner .single-banner .content {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        z-index: 2 !important;
+        text-align: left !important;
+        padding: 40px !important;
+        width: 60% !important;
+        background: transparent !important;
+    }
+    .midium-banner .single-banner .content p {
+        color: #fff !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        margin-bottom: 15px !important;
+        background: var(--primary-color) !important;
+        display: inline-block !important;
+        padding: 6px 15px !important;
+        border-radius: 30px !important;
+    }
+    .midium-banner .single-banner .content h3 {
+        color: #023a23 !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 30px !important;
+        font-weight: 800 !important;
+        line-height: 1.3 !important;
+        margin-bottom: 25px !important;
+        text-shadow: none !important;
+    }
+    .midium-banner .single-banner .content h3 span {
+        color: var(--primary-color) !important; 
+        text-decoration: underline !important; 
+    }
+    .midium-banner .single-banner .content a {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        padding: 12px 30px !important;
+        border-radius: 30px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        transition: all 0.3s ease !important;
+        display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1.2 !important; box-shadow: 0 4px 15px rgba(3, 107, 65, 0.3) !important;
+        border: 2px solid var(--primary-color) !important;
+    }
+    .midium-banner .single-banner .content a:hover {
+        background: transparent !important;
+        color: var(--primary-color) !important;
+        transform: translateY(-3px) !important;
+    }
+    /* Revert Midium Banner to the Original Behtreen Design */
+    .midium-banner .single-banner {
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        height: 350px !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+        background: transparent !important;
+        display: block !important;
+    }
+    .midium-banner .single-banner img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        mix-blend-mode: normal !important;
+        transition: transform 0.5s ease !important;
+        position: static !important;
+    }
+    .midium-banner .single-banner:hover img {
+        transform: scale(1.05) !important;
+    }
+    .midium-banner .single-banner::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+        background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(3,107,65,0.4) 100%) !important;
+        z-index: 1 !important;
+        display: block !important;
+    }
+    .midium-banner .single-banner .content {
+        position: absolute !important;
+        top: 50% !important;
+        left: 40px !important;
+        transform: translateY(-50%) !important;
+        z-index: 2 !important;
+        text-align: left !important;
+        padding: 0 !important;
+        width: 80% !important;
+        background: transparent !important;
+    }
+    .midium-banner .single-banner .content p {
+        color: #fff !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        margin-bottom: 10px !important;
+        background: var(--primary-color) !important;
+        display: inline-block !important;
+        padding: 4px 12px !important;
+        border-radius: 4px !important;
+    }
+    .midium-banner .single-banner .content h3 {
+        color: #fff !important;
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 32px !important;
+        font-weight: 800 !important;
+        line-height: 1.3 !important;
+        margin-bottom: 20px !important;
+        text-shadow: none !important;
+    }
+    .midium-banner .single-banner .content h3 span {
+        color: #fff !important; 
+        text-decoration: underline !important;
+    }
+    .midium-banner .single-banner .content a {
+        background: #fff !important;
+        color: var(--primary-color) !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        padding: 12px 30px !important;
+        border-radius: 30px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        transition: all 0.3s ease !important;
+        display: flex !important; align-items: center !important; justify-content: center !important; line-height: 1.2 !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+        border: none !important;
+    }
+    .midium-banner .single-banner .content a:hover {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        transform: translateY(-3px) !important;
+    }
+    /* === EMERGENCY FIX FOR LAYOUT === */
+    /* 1. Fix Product Cards Layout */
+    .single-product {
+        display: flex !important;
+        flex-direction: column !important;
+        background: #fff !important;
+    }
+    .single-product .product-img {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 300px !important; /* Force image container height */
+        padding: 20px !important;
+    }
+    .single-product .product-img img {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
+    }
+
+    /* 2. Fix Small Banners Layout (Office Chairs etc) */
+    .small-banner .single-banner .content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        left: 0 !important;
+        padding: 20px !important;
+    }
+    .small-banner .single-banner .content a {
+        display: inline-block !important; /* Prevent stretching */
+        width: auto !important;
+        text-align: center !important;
+        padding: 12px 30px !important;
+        border-radius: 4px !important;
+    }
+
+    /* 3. Fix Medium Banner Layout (Featured) */
+    .midium-banner .single-banner .content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+    }
+    .midium-banner .single-banner .content a {
+        display: inline-block !important;
+        width: auto !important;
+        text-align: center !important;
+        padding: 12px 30px !important;
+        border-radius: 30px !important;
+    }
+    /* === MOBILE RESPONSIVE FIXES FOR SLIDER === */
+    @media (max-width: 768px) {
+        #Gslider .carousel-inner img {
+            min-height: 250px !important;
+            object-fit: cover !important; /* Prevents stretching, crops instead to fit the height */
+        }
+        #Gslider .carousel-inner .carousel-caption {
+            padding: 10px !important;
+        }
+        #Gslider .carousel-inner .carousel-caption h1 {
+            font-size: 20px !important;
+            margin-bottom: 10px !important;
+            line-height: 1.3 !important;
+            letter-spacing: 1px !important;
+        }
+        #Gslider .carousel-inner .carousel-caption p {
+            font-size: 12px !important;
+            margin-bottom: 15px !important;
+            line-height: 1.4 !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 2 !important; /* Max 2 lines for description */
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+        }
+        #Gslider .btn.ws-btn {
+            padding: 8px 20px !important;
+            font-size: 12px !important;
+        }
+    }
+    @media (max-width: 400px) {
+        #Gslider .carousel-inner .carousel-caption h1 {
+            font-size: 16px !important;
+        }
+        #Gslider .carousel-inner .carousel-caption p {
+            font-size: 11px !important;
+        }
+    }
+    /* === FEATURED ITEMS RESPONSIVE FIX === */
+    @media (max-width: 768px) {
+        .midium-banner .single-banner {
+            height: auto !important; /* Allow it to grow if needed */
+            min-height: 250px !important;
+            padding-bottom: 20px !important;
+        }
+        .midium-banner .single-banner .content {
+            padding: 20px !important;
+            width: 100% !important;
+            left: 0 !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+        }
+        .midium-banner .single-banner .content p {
+            font-size: 11px !important;
+            padding: 4px 10px !important;
+            margin-bottom: 10px !important;
+        }
+        .midium-banner .single-banner .content h3 {
+            font-size: 20px !important;
+            line-height: 1.2 !important;
+            margin-bottom: 15px !important;
+            display: -webkit-box !important;
+            -webkit-line-clamp: 3 !important; /* Limit title to 3 lines */
+            -webkit-box-orient: vertical !important;
+            overflow: hidden !important;
+        }
+        .midium-banner .single-banner .content a {
+            padding: 8px 20px !important;
+            font-size: 12px !important;
+        }
+    }
+    /* === FIX FEATURED PRODUCTS CONTENT & BUTTONS === */
+    .single-product .product-content {
+        display: flex !important;
+        flex-direction: column !important; /* Stack Title and Price vertically */
+        justify-content: flex-start !important;
+        text-align: center !important;
+        padding: 15px 10px !important;
+    }
+    .single-product .product-content h3 {
+        margin-bottom: 8px !important;
+    }
+    .single-product .product-content h3 a {
+        display: block !important;
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        white-space: normal !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    .single-product .product-content .product-price {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+    }
+    .single-product .product-img .button-head {
+        display: flex !important;
+        flex-direction: row !important;
+        opacity: 1 !important; /* Make buttons visible on mobile */
+        visibility: visible !important;
+        bottom: 10px !important;
+        transform: translateY(0) !important;
+    }
+    .single-product .product-action {
+        flex-direction: row !important;
+    }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+<div class="product-area section">
+    <div class="container">
+<div class="row">
+            <div class="col-12">
+                <div class="section-title text-center" style="margin-bottom: 50px;">
+                    <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; display:block; margin-bottom: 10px;">Explore Collection</span>
+                    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 36px; font-weight: 800; color: #111;">Our <span style="color: var(--primary-color);">Products</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="product-info">
+                    <div class="nav-main">
+                        <!-- Tab Nav -->
+                        <ul class="nav nav-tabs filter-tope-group" id="myTab" role="tablist">
+                            @php
+                            $categories=DB::table('categories')->where('status','active')->where('is_parent',1)->get();
+                            // dd($categories);
+                            @endphp
+                            @if($categories)
+                            <button class="btn is-checked" data-filter="*">
+                                All Products
+                            </button>
+                            @foreach($categories as $key=>$cat)
+
+                            <button class="btn" data-filter=".{{$cat->id}}">
+                                {{$cat->title}}
+                            </button>
+                            @endforeach
+                            @endif
+                        </ul>
+                        <!--/ End Tab Nav -->
+                    </div>
+                    <div class="tab-content isotope-grid" id="myTabContent">
+                        <!-- Start Single Tab -->
+                        @if($product_lists)
+                        @foreach($product_lists as $key=>$product)
+                        <div class="col-sm-12 col-md-6 col-lg-3 p-b-35 isotope-item {{$product->cat_id}}">
+                            <div class="single-product" data-aos="fade-up" data-aos-offset="50">
+                                <div class="product-img">
+                                    <a href="{{route('product-detail',$product->slug)}}">
+                                        @php
+                                        $photo=explode(',',$product->photo);
+                                        // dd($photo);
+                                        @endphp
+                                        <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+                                        <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+                                        @if($product->stock<=0)
+                                            <span class="out-of-stock">Sale out</span>
+                                            @elseif($product->condition=='new')
+                                            <span class="new">New</span
+                                                @elseif($product->condition=='hot')
+                                            <span class="hot">Hot</span>
+                                            @else
+                                            <span class="price-dec">{{$product->discount}}% Off</span>
+                                            @endif
+
+
+                                    </a>
+                                    <div class="button-head">
+                                        <div class="product-action d-flex justify-content-center align-items-center w-100">
+                                            <a title="Add to cart" href="{{route('add-to-cart',$product->slug)}}"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
+                                            <a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class="ti-eye"></i><span>Quick Shop</span></a>
+                                            <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
+                                    <div class="product-price">
+                                        @php
+                                        $after_discount=($product->price-($product->price*$product->discount)/100);
+                                        @endphp
+                                        <span>Rs:{{number_format($after_discount,2)}}</span>
+                                        <del style="padding-left:4%;">Rs:{{number_format($product->price,2)}}</del>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+
+                        <!--/ End Single Tab -->
+                        @endif
+
+                        <!--/ End Single Tab -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Product Area -->

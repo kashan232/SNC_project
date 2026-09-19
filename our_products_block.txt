@@ -1,0 +1,764 @@
+our-products-area">
+    <div class="container">
+<div class="row">
+            <div class="col-12">
+                <div class="section-title text-center" style="margin-bottom: 50px;">
+                    <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; display:block; margin-bottom: 10px;">Explore Collection</span>
+                    <h2 style="font-family: 'Orbitron', sans-serif;font-size: 32px;font-weight: 800;color: #fff!important;margin-top: 10px;">Our <span style="/* color: var(--primary-color); */">Products</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="product-info">
+                    <div class="nav-main">
+                        <!-- Tab Nav -->
+                        <ul class="nav nav-tabs filter-tope-group" id="myTab" role="tablist">
+                            @php
+                            $categories=DB::table('categories')->where('status','active')->where('is_parent',1)->get();
+                            // dd($categories);
+                            @endphp
+                            @if($categories)
+                            <button class="btn is-checked" data-filter="*">
+                                All Products
+                            </button>
+                            @foreach($categories as $key=>$cat)
+
+                            <button class="btn" data-filter=".{{$cat->id}}">
+                                {{$cat->title}}
+                            </button>
+                            @endforeach
+                            @endif
+                        </ul>
+                        <!--/ End Tab Nav -->
+                    </div>
+                    <div class="tab-content isotope-grid" id="myTabContent">
+                        <!-- Start Single Tab -->
+                        @if($product_lists)
+                        @foreach($product_lists as $key=>$product)
+                        <div class="col-sm-12 col-md-6 col-lg-3 p-b-35 isotope-item {{$product->cat_id}}">
+                            <div class="single-product" data-aos="fade-up" data-aos-offset="50">
+                                <div class="product-img">
+                                    <a href="{{route('product-detail',$product->slug)}}">
+                                        @php
+                                        $photo=explode(',',$product->photo);
+                                        // dd($photo);
+                                        @endphp
+                                        <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+                                        <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+                                        @if($product->stock<=0)
+                                            <span class="out-of-stock">Sale out</span>
+                                            @elseif($product->condition=='new')
+                                            <span class="new">New</span
+                                                @elseif($product->condition=='hot')
+                                            <span class="hot">Hot</span>
+                                            @else
+                                            <span class="price-dec">{{$product->discount}}% Off</span>
+                                            @endif
+
+
+                                    </a>
+                                    
+                                        d-flex justify-content-center align-items-center w-100">
+                                            <a title="Add to cart" href="{{route('add-to-cart',$product->slug)}}"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
+                                            <a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class="ti-eye"></i><span>Quick Shop</span></a>
+                                            <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
+                                    <div class="product-price">
+                                        @php
+                                        $after_discount=($product->price-($product->price*$product->discount)/100);
+                                        @endphp
+                                        <span>Rs:{{number_format($after_discount,2)}}</span>
+                                        <del style="padding-left:4%;">Rs:{{number_format($product->price,2)}}</del>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+
+                        <!--/ End Single Tab -->
+                        @endif
+
+                        <!--/ End Single Tab -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Product Area -->
+
+
+
+
+
+
+
+@include('frontend.layouts.newsletter')
+
+<!-- Modal -->
+@if($product_lists)
+@foreach($product_lists as $key=>$product)
+<div class="modal fade" id="{{$product->id}}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row no-gutters">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        <!-- Product Slider -->
+                        <div class="product-gallery">
+                            <div class="quickview-slider-active">
+                                @php
+                                $photo=explode(',',$product->photo);
+                                // dd($photo);
+                                @endphp
+                                @foreach($photo as $data)
+                                <div class="single-slider">
+                                    <img src="{{$data}}" alt="{{$data}}">
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <!-- End Product slider -->
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        <div class="quickview-content">
+                            <h2>{{$product->title}}</h2>
+                            <div class="quickview-ratting-review">
+                                <div class="quickview-ratting-wrap">
+                                    <div class="quickview-ratting">
+                                        {{-- <i class="yellow fa fa-star"></i>
+                                                    <i class="yellow fa fa-star"></i>
+                                                    <i class="yellow fa fa-star"></i>
+                                                    <i class="yellow fa fa-star"></i>
+                                                    <i class="fa fa-star"></i> --}}
+                                        @php
+                                        $rate=DB::table('product_reviews')->where('product_id',$product->id)->avg('rate');
+                                        $rate_count=DB::table('product_reviews')->where('product_id',$product->id)->count();
+                                        @endphp
+                                        @for($i=1; $i<=5; $i++)
+                                            @if($rate>=$i)
+                                            <i class="yellow fa fa-star"></i>
+                                            @else
+                                            <i class="fa fa-star"></i>
+                                            @endif
+                                            @endfor
+                                    </div>
+                                    <a href="#"> ({{$rate_count}} customer review)</a>
+                                </div>
+                                <div class="quickview-stock">
+                                    @if($product->stock >0)
+                                    <span><i class="fa fa-check-circle-o"></i> {{$product->stock}} in stock</span>
+                                    @else
+                                    <span><i class="fa fa-times-circle-o text-danger"></i> {{$product->stock}} out stock</span>
+                                    @endif
+                                </div>
+                            </div>
+                            @php
+                            $after_discount=($product->price-($product->price*$product->discount)/100);
+                            @endphp
+                            <h3><small><del class="text-muted">Rs:{{number_format($product->price,2)}}</del></small> Rs:{{number_format($after_discount,2)}} </h3>
+                            <div class="quickview-peragraph">
+                                <p>{!! html_entity_decode($product->summary) !!}</p>
+                            </div>
+                            @if($product->size)
+                            <div class="size">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <h5 class="title">Size</h5>
+                                        <select>
+                                            @php
+                                            $sizes=explode(',',$product->size);
+                                            // dd($sizes);
+                                            @endphp
+                                            @foreach($sizes as $size)
+                                            <option>{{$size}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    {{-- <div class="col-lg-6 col-12">
+                                                        <h5 class="title">Color</h5>
+                                                        <select>
+                                                            <option selected="selected">orange</option>
+                                                            <option>purple</option>
+                                                            <option>black</option>
+                                                            <option>pink</option>
+                                                        </select>
+                                                    </div> --}}
+                                </div>
+                            </div>
+                            @endif
+                            <form action="{{route('single-add-to-cart')}}" method="POST" class="mt-4">
+                                @csrf
+                                <div class="quantity">
+                                    <!-- Input Order -->
+                                    <div class="input-group">
+                                        <div class="button minus">
+                                            <button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                                <i class="ti-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="hidden" name="slug" value="{{$product->slug}}">
+                                        <input type="text" name="quant[1]" class="input-number" data-min="1" data-max="1000" value="1">
+                                        <div class="button plus">
+                                            <button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
+                                                <i class="ti-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart">
+                                    <button type="submit" class="btn">Add to cart</button>
+                                    <a href="{{route('add-to-wishlist',$product->slug)}}" class="btn min"><i class="ti-heart"></i></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+@endif
+<!-- Modal end -->
+
+
+
+
+
+
+
+
+
+<!-- START CLEAN CARD CSS OVERRIDE -->
+<style>
+    /* Reset Clean Card */
+    .clean-card {
+        background: #fff !important;
+        border: 1px solid #f0f0f0 !important;
+        border-radius: 16px !important;
+        margin: 15px !important;
+        padding: 15px !important;
+        text-align: left !important;
+        position: relative !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
+        transition: box-shadow 0.3s ease, transform 0.3s ease !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .clean-card:hover {
+        box-shadow: 0 8px 25px rgba(211,84,0,0.1) !important;
+        transform: translateY(-5px) !important;
+    }
+
+    /* Product Image Box */
+    .clean-card .product-img {
+        background: #f4f4f4 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        height: 220px !important;
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .clean-card .product-img a:not(.clean-wishlist) {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Blend mode to remove white backgrounds */
+    .clean-card .product-img img.default-img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        mix-blend-mode: multiply !important;
+        transition: transform 0.4s ease !important;
+    }
+    .clean-card:hover .product-img img.default-img {
+        transform: scale(1.08) !important;
+    }
+
+    /* Wishlist Button */
+    a.clean-wishlist {
+        position: absolute !important;
+        top: 10px !important;
+        right: 10px !important;
+        width: 35px !important;
+        height: 35px !important;
+        background: #fff !important;
+        color: #888 !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 16px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        transition: all 0.2s ease !important;
+        z-index: 5 !important;
+    }
+    a.clean-wishlist:hover {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        transform: scale(1.1) !important;
+    }
+
+    /* Product Content Area */
+    .clean-card .product-content {
+        padding: 20px 50px 10px 10px !important;
+        background: transparent !important;
+        text-align: left !important;
+        position: relative !important;
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+    }
+
+    /* Title */
+    .clean-card .product-content h3 {
+        margin: 0 0 8px 0 !important;
+    }
+    .clean-card .product-content h3 a {
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        color: #111 !important;
+        text-transform: uppercase !important;
+        line-height: 1.3 !important;
+        display: block !important;
+    }
+
+    /* Price Container */
+    .clean-card .price-container {
+        display: flex !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        margin-top: auto !important; /* Push to bottom if title is short */
+    }
+    .clean-card .current-price {
+        font-size: 16px !important;
+        font-weight: 800 !important;
+        color: var(--primary-color) !important;
+    }
+    .clean-card del {
+        font-size: 13px !important;
+        color: #999 !important;
+        text-decoration: line-through !important;
+    }
+
+    /* Add to Cart Button (Bottom Right) */
+    a.clean-add-cart {
+        position: absolute !important;
+        bottom: 10px !important;
+        right: 10px !important;
+        width: 40px !important;
+        height: 40px !important;
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        border-radius: 12px !important; /* Squircle */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 18px !important;
+        box-shadow: 0 4px 10px rgba(211,84,0,0.3) !important;
+        transition: all 0.2s ease !important;
+        z-index: 5 !important;
+        text-decoration: none !important;
+    }
+    a.clean-add-cart:hover {
+        background: var(--hover-color) !important;
+        transform: scale(1.1) !important;
+        color: #fff !important;
+    }
+
+    /* Fix Carousel Arrows overlapping */
+    .popular-slider .owl-nav div {
+        background: #fff !important;
+        color: var(--primary-color) !important;
+        border: 1px solid var(--primary-color) !important;
+        border-radius: 50% !important;
+        width: 35px !important;
+        height: 35px !important;
+        line-height: 33px !important;
+        text-align: center !important;
+        font-size: 16px !important;
+        position: absolute !important;
+        top: 35% !important;
+        transform: translateY(-50%) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .popular-slider .owl-prev { left: -10px !important; }
+    .popular-slider .owl-next { right: -10px !important; }
+
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+<!-- END CLEAN CARD CSS OVERRIDE -->
+
+
+<!-- GLOBAL FONT OVERRIDE: POPPINS -->
+<style>
+    /* Force Poppins font globally */
+    body, h1, h2, h3, h4, h5, h6, p, a, span, div, li, ul, label, input, button, select, textarea {
+        font-family: 'Poppins', sans-serif !important;
+    }
+    
+    /* Make Banner Text Bold as requested */
+    #Gslider .carousel-inner .carousel-caption h1 {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 800 !important; /* Extra Bold */
+        letter-spacing: 1px !important;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.5) !important;
+    }
+    
+    #Gslider .carousel-inner .carousel-caption p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 600 !important; /* Semi Bold */
+        font-size: 18px !important;
+        text-shadow: 1px 1px 8px rgba(0,0,0,0.5) !important;
+    }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+<!-- END GLOBAL FONT OVERRIDE -->
+
+
+<style>
+    /* -------------------------------------
+       PREMIUM HERO BANNER DESIGN (NIMCO)
+       ------------------------------------- */
+    #Gslider {
+        position: relative;
+    }
+    #Gslider .carousel-inner {
+        height: 85vh;
+    }
+    #Gslider .carousel-item {
+        height: 100%;
+    }
+    #Gslider .carousel-inner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: right center; /* Focus on the bowls on the right */
+    }
+    
+    /* Overlay to ensure text readability even if the image changes */
+    #Gslider .carousel-item::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+        z-index: 1;
+    }
+
+    #Gslider .carousel-caption {
+        position: absolute;
+        top: 50%;
+        left: 8% !important; /* Push slightly from edge */
+        transform: translateY(-50%);
+        bottom: auto;
+        right: auto;
+        width: 50%; /* Only take up left half */
+        text-align: left !important;
+        z-index: 2;
+        padding: 0;
+    }
+
+    /* Small Premium Badge */
+    #Gslider .carousel-caption::before {
+        content: '🌟 100% FRESH & CRISPY';
+        display: inline-block;
+        background: color-mix(in srgb, var(--primary-color) 20%, transparent);
+        color: #f39c12;
+        border: 1px solid var(--primary-color);
+        padding: 6px 15px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    #Gslider .carousel-inner .carousel-caption h1 {
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 55px !important;
+        font-weight: 800 !important;
+        color: #ffffff !important;
+        line-height: 1.1 !important;
+        text-shadow: none !important;
+        margin-bottom: 25px !important;
+        letter-spacing: -1px !important;
+    }
+
+    #Gslider .carousel-inner .carousel-caption p {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 400 !important;
+        font-size: 18px !important;
+        color: #e0e0e0 !important;
+        line-height: 1.6 !important;
+        text-shadow: none !important;
+        margin-bottom: 35px !important;
+        max-width: 85%;
+    }
+
+    /* Primary Button */
+    #Gslider .carousel-caption a.btn {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+        padding: 15px 35px !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        border-radius: 5px !important;
+        letter-spacing: 1px;
+        border: none !important;
+        box-shadow: 0 8px 20px color-mix(in srgb, var(--primary-color) 40%, transparent) !important;
+        transition: all 0.3s ease !important;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    #Gslider .carousel-caption a.btn i {
+        margin-left: 10px;
+        font-size: 18px;
+    }
+
+    #Gslider .carousel-caption a.btn:hover {
+        background: var(--hover-color) !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 10px 25px color-mix(in srgb, var(--primary-color) 60%, transparent) !important;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        #Gslider .carousel-inner {
+        height: 85vh;
+    }
+    #Gslider .carousel-item {
+        height: 100%;
+    }
+        #Gslider .carousel-item::before {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%);
+        }
+        #Gslider .carousel-caption {
+            width: 90%;
+            left: 5% !important;
+            top: auto;
+            bottom: 10%;
+            transform: none;
+            text-align: center !important;
+        }
+        #Gslider .carousel-caption::before {
+            margin-bottom: 15px;
+        }
+        #Gslider .carousel-inner .carousel-caption h1 {
+            font-size: 36px !important;
+            text-align: center !important;
+        }
+        #Gslider .carousel-inner .carousel-caption p {
+            font-size: 15px !important;
+            max-width: 100%;
+            text-align: center !important;
+            margin-bottom: 25px !important;
+        }
+        #Gslider .carousel-caption a.btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+<style>
+    /* FINAL OVERRIDE FOR HERO BANNER HEIGHT */
+    section#Gslider .carousel-inner {
+        height: 85vh !important;
+    }
+    section#Gslider .carousel-item {
+        height: 100% !important;
+    }
+    section#Gslider .carousel-inner img.first-slide {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        display: block !important;
+    }
+    @media (max-width: 768px) {
+        section#Gslider .carousel-inner {
+            height: 70vh !important;
+        }
+    }
+    /* Hero Banner Animations (Ken Burns + Text Fade Up) */
+    #Gslider .carousel-item img {
+        transition: transform 6s ease-in-out;
+        transform: scale(1);
+    }
+    #Gslider .carousel-item.active img {
+        transform: scale(1.08); /* Slow zoom in */
+    }
+    
+    #Gslider .carousel-item .carousel-caption h1 {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease 0.3s;
+    }
+    #Gslider .carousel-item.active .carousel-caption h1 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption p {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.6s;
+    }
+    #Gslider .carousel-item.active .carousel-caption p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    #Gslider .carousel-item .carousel-caption .ws-btn {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease 0.9s;
+    }
+    #Gslider .carousel-item.active .carousel-caption .ws-btn {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<!-- Start Our Outlets Section -->
+<style>
+    #
