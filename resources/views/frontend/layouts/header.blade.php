@@ -175,8 +175,19 @@
             justify-content: flex-end !important;
             gap: 5px !important;
         }
-        .top-header-right > .action-box {
-            display: none !important; /* Hide track order, login, etc. from top bar */
+        .top-header-right > .action-box,
+        .top-header-right > div:first-child,
+        .modern-nav-actions .complaint-btn,
+        .modern-nav-actions > div:first-of-type {
+            display: none !important; /* Hide phone and complaint button on mobile */
+        }
+        
+        .modern-nav-actions {
+            padding: 0 !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            gap: 5px !important;
         }
         
         /* Adjust Icons */
@@ -364,8 +375,19 @@
             justify-content: flex-end !important;
             gap: 5px !important;
         }
-        .top-header-right > .action-box {
-            display: none !important; /* Hide track order, login, etc. from top bar */
+        .top-header-right > .action-box,
+        .top-header-right > div:first-child,
+        .modern-nav-actions .complaint-btn,
+        .modern-nav-actions > div:first-of-type {
+            display: none !important; /* Hide phone and complaint button on mobile */
+        }
+        
+        .modern-nav-actions {
+            padding: 0 !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            gap: 5px !important;
         }
         
         /* Adjust Icons */
