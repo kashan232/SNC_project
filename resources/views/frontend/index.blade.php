@@ -1171,6 +1171,27 @@
         border-color: rgba(211,84,0,0.3) !important;
         border-radius: 40px 12px 40px 12px !important;
     }
+
+    /* --- NEW ARRIVALS SPECIFIC HOVER EFFECT --- */
+    /* Override the general clean-card hover for the New Arrivals section */
+    .shop-home-list .clean-card {
+        transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+        border: 2px solid transparent !important; /* Ready for border animation */
+    }
+    
+    .shop-home-list .clean-card:hover {
+        box-shadow: 0 20px 40px rgba(193, 84, 11, 0.15) !important;
+        transform: translateY(-8px) scale(1.02) !important;
+        border: 2px solid var(--primary-color) !important; /* Full border on hover */
+        border-radius: 12px 40px 12px 40px !important; /* Opposite leaf shape */
+        background: #fffafa !important; /* Very subtle warm tint */
+    }
+    
+    /* Image animation for New Arrivals - slightly different from Featured */
+    .shop-home-list .clean-card:hover .product-img img.default-img {
+        transform: scale(1.12) rotate(-3deg) !important; /* Rotates the other way */
+        transition: transform 0.6s ease-out !important;
+    }
 </style>
 
 <!-- Slider Area -->
@@ -2985,7 +3006,7 @@
         text-align: left !important;
         position: relative !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
-        transition: box-shadow 0.3s ease, transform 0.3s ease !important;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         display: flex !important;
         flex-direction: column !important;
     }

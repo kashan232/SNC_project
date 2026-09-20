@@ -1,119 +1,11 @@
-@extends('frontend.layouts.master')
+<?php
 
-@section('title','Shoukat Nimco Center || Register Page')
+$files = [
+    'c:/xampp/htdocs/SNC_project/resources/views/frontend/pages/login.blade.php',
+    'c:/xampp/htdocs/SNC_project/resources/views/frontend/pages/register.blade.php'
+];
 
-@section('main-content')
-<!-- Breadcrumbs -->
-<div class="breadcrumbs">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="bread-inner">
-                    <ul class="bread-list">
-                        <li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
-                        <li class="active"><a href="javascript:void(0);">Register</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Breadcrumbs -->
-
-<!-- Shop Login -->
-<section class="shop login section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3 col-12">
-                <div class="login-form">
-                    
-                    
-                    <!-- Form -->
-                    
-        <div class="auth-left">
-            <h2>Welcome to Shoukat Nimco Center</h2>
-            <p>Discover the finest Nimco, Bakery Items, and Sweets to delight your taste buds. Join our community today.</p>
-        </div>
-        <div class="auth-right">
-            <h2>Create Account</h2>
-            <p>Register to checkout faster</p>
-            <form class="form" method="post" action="{{route('register.submit')}}">
-                        @csrf
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Your Name<span>*</span></label>
-                                    <input type="text" name="name" placeholder="" required="required" value="{{old('name')}}">
-                                    @error('name')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Your Email<span>*</span></label>
-                                    <input type="email" name="email" placeholder="" required="required"
-                                        value="{{ old('email') }}"
-                                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                                        title="Please enter a valid email address like name@example.com">
-                                    @error('email')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Your Password<span>*</span></label>
-                                    <input type="password" name="password" placeholder="" required="required" value="{{old('password')}}">
-                                    @error('password')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Confirm Password<span>*</span></label>
-                                    <input type="password" name="password_confirmation" placeholder="" required="required" value="{{old('password_confirmation')}}">
-                                    @error('password_confirmation')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group login-btn">
-                                    <button class="btn" type="submit">Register</button>
-                                    <a href="{{route('login.form')}}" class="btn">Login</a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <!--/ End Form --></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--/ End Login -->
-@endsection
-
-<script>
-    document.getElementById('email').addEventListener('input', function() {
-        const email = this.value.trim();
-        const pattern = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
-        const errorSpan = document.getElementById('emailError');
-
-        if (!pattern.test(email)) {
-            this.setCustomValidity("Please enter a valid email address like name@example.com");
-            errorSpan.textContent = "Please enter a valid email address like name@example.com";
-        } else {
-            this.setCustomValidity("");
-            errorSpan.textContent = "";
-        }
-    });
-</script>
-
-@push('styles')
-
+$new_css = <<<CSS
 <style>    /* Ultra Premium Split Layout for Auth Pages */
     .shop.login {
         background-color: #fcf8f2 !important;
@@ -288,5 +180,21 @@
         }
     }
 </style>
+CSS;
 
-@endpush
+foreach ($files as $file) {
+    if (file_exists($file)) {
+        $c = file_get_contents($file);
+        
+        // Remove old style block
+        $c = preg_replace('/<style>\s*\/\*\s*Ultra Premium Split Layout.*?<\/style>/s', $new_css, $c);
+        
+        // Just in case it wasn't matched perfectly by the regex:
+        if (strpos($c, 'Ultra Premium Split Layout') === false) {
+             $c = str_replace('@endpush', $new_css . "\n@endpush", $c);
+        }
+        
+        file_put_contents($file, $c);
+    }
+}
+echo "Auth pages CSS updated!";

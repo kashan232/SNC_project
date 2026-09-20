@@ -84,16 +84,20 @@
 @endsection
 @push('styles')
 
-<style>    /* Ultra Premium Split Layout for Auth Pages (Red Theme) */
+<style>    /* Ultra Premium Split Layout for Auth Pages */
     .shop.login {
-        background: #f4f7f6 !important;
-        padding: 50px 0 !important;
+        background-color: #fcf8f2 !important;
+        background-image: url('{{asset("frontend/img/food-pattern.png")}}') !important;
+        background-size: 300px;
+        background-repeat: repeat;
+        background-blend-mode: multiply;
+        padding: 80px 0 !important;
         min-height: calc(100vh - 100px);
         display: flex;
         align-items: center;
     }
     .shop.login .container {
-        max-width: 900px !important;
+        max-width: 950px !important;
     }
     .shop.login .col-lg-6.offset-lg-3 {
         flex: 0 0 100%;
@@ -103,122 +107,144 @@
     .shop.login .login-form {
         background: #fff !important;
         padding: 0 !important;
-        border-radius: 15px !important;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.1) !important;
-        border: none !important;
+        border-radius: 20px !important;
+        box-shadow: 0 25px 60px rgba(193, 84, 11, 0.15) !important;
+        border: 1px solid rgba(193, 84, 11, 0.1) !important;
         display: flex !important;
         flex-direction: row !important;
         overflow: hidden;
     }
     .auth-left {
         width: 45%;
-        background: linear-gradient(135deg, color-mix(in srgb, var(--primary-color) 90%, transparent), color-mix(in srgb, var(--hover-color) 90%, transparent)), url('{{asset('images/banners/main_banner.jpg')}}') center/cover;
+        background: linear-gradient(135deg, rgba(193, 84, 11, 0.85), rgba(74, 46, 43, 0.9)), url('{{asset('frontend/img/final-banner.jpg')}}') center/cover;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 40px 30px;
+        padding: 50px 40px;
         color: #fff;
+        position: relative;
+    }
+    .auth-left::before {
+        content: '';
+        position: absolute;
+        top: 20px; bottom: 20px; left: 20px; right: 20px;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 12px;
+        pointer-events: none;
     }
     .auth-left h2 {
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 28px !important;
+        font-family: 'Orbitron', sans-serif !important;
+        font-size: 32px !important;
         font-weight: 800 !important;
-        margin-bottom: 15px !important;
+        margin-bottom: 20px !important;
         color: #fff !important;
-        line-height: 1.4 !important;
-        padding-bottom: 0 !important;
+        line-height: 1.3 !important;
         text-align: left !important;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     .shop.login .login-form h2:before {
         display: none !important;
     }
     .auth-left p {
+        font-family: 'Poppins', sans-serif !important;
         font-size: 15px !important;
-        line-height: 1.6 !important;
-        color: #fce8e8 !important;
+        line-height: 1.7 !important;
+        color: #fff !important;
         margin-bottom: 0 !important;
         text-align: left !important;
         font-weight: 400 !important;
+        opacity: 0.9;
     }
     .auth-right {
         width: 55%;
-        padding: 40px 30px;
+        padding: 50px 40px;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        background: #fff;
     }
     .auth-right h2 {
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 26px !important;
+        font-family: 'Orbitron', sans-serif !important;
+        font-size: 28px !important;
         font-weight: 800 !important;
         color: var(--primary-color) !important;
         text-align: center !important;
-        margin-bottom: 5px !important;
+        margin-bottom: 10px !important;
         line-height: 1.3 !important;
-        padding-bottom: 0 !important;
     }
     .auth-right > p {
         text-align: center !important;
-        margin-bottom: 25px !important;
-        color: #888 !important;
+        margin-bottom: 30px !important;
+        color: #666 !important;
         font-size: 14px !important;
+        font-family: 'Poppins', sans-serif !important;
     }
     .shop.login .form {
         margin-top: 0 !important;
     }
+    .shop.login .form .form-group label {
+        font-weight: 600 !important;
+        color: #333 !important;
+        margin-bottom: 8px !important;
+    }
     .shop.login .form .form-group input {
-        height: 45px !important;
-        border-radius: 6px !important;
-        border: 2px solid #f0f0f0 !important;
-        background: #fafafa !important;
-        padding: 0 15px !important;
-        margin-bottom: 5px !important;
+        height: 50px !important;
+        border-radius: 8px !important;
+        border: 2px solid #eee !important;
+        background: #fdfdfd !important;
+        padding: 0 20px !important;
+        margin-bottom: 8px !important;
         font-family: 'Poppins', sans-serif !important;
+        font-size: 14px !important;
+        transition: all 0.3s ease !important;
     }
     .shop.login .form .form-group input:focus {
         border-color: var(--primary-color) !important;
         background: #fff !important;
-        box-shadow: none !important;
+        box-shadow: 0 0 0 4px rgba(193, 84, 11, 0.1) !important;
     }
     .shop.login .form .login-btn {
         display: flex !important;
         flex-direction: row !important;
         justify-content: space-between !important;
         gap: 15px !important;
-        margin-top: 15px !important;
+        margin-top: 20px !important;
     }
     .shop.login .form .btn {
         flex: 1 !important;
-        height: 45px !important;
-        line-height: 45px !important;
-        border-radius: 6px !important;
-        font-size: 14px !important;
-        font-weight: 600 !important;
+        height: 50px !important;
+        line-height: 50px !important;
+        border-radius: 8px !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
         text-transform: uppercase !important;
-        letter-spacing: 0.5px !important;
+        letter-spacing: 1px !important;
         padding: 0 !important;
         text-align: center !important;
         background: var(--primary-color) !important;
         color: #fff !important;
         border: none !important;
-        box-shadow: 0 4px 10px rgba(211,84,0,0.2) !important;
+        box-shadow: 0 8px 20px rgba(193, 84, 11, 0.25) !important;
         font-family: 'Poppins', sans-serif !important;
+        transition: all 0.3s ease !important;
     }
     .shop.login .form .btn:hover {
-        background: var(--hover-color) !important;
+        background: #4a2e2b !important;
         color: #fff !important;
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(74, 46, 43, 0.3) !important;
     }
     .shop.login .form a.btn {
-        background: transparent !important;
+        background: #fff !important;
         color: var(--primary-color) !important;
         border: 2px solid var(--primary-color) !important;
-        line-height: 41px !important; /* adjust for border */
+        line-height: 46px !important; 
         box-shadow: none !important;
     }
     .shop.login .form a.btn:hover {
         background: var(--primary-color) !important;
         color: #fff !important;
+        box-shadow: 0 8px 20px rgba(193, 84, 11, 0.25) !important;
     }
     @media (max-width: 768px) {
         .shop.login .login-form {
@@ -227,9 +253,10 @@
         .auth-left, .auth-right {
             width: 100%;
         }
-        .auth-left {
-            padding: 30px;
+        .auth-left, .auth-right {
+            padding: 40px 20px;
         }
-    }</style>
+    }
+</style>
 
 @endpush
