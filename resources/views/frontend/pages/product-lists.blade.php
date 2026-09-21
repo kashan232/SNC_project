@@ -1,448 +1,590 @@
 @extends('frontend.layouts.master')
 
-@section('title','Shoukat Nimco Center ||  PRODUCT PAGE')
+@section('title', 'Shoukat Nimco Center || PRODUCT PAGE')
 
 @section('main-content')
-
-		<!-- Breadcrumbs -->
-		<div class="breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="bread-inner">
-							<ul class="bread-list">
-								<li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
-								<li class="active"><a href="javascript:void(0);">Shop List</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Breadcrumbs -->
-		<form action="{{route('shop.filter')}}" method="POST">
-		@csrf
-			<!-- Product Style 1 -->
-			<section class="product-area shop-sidebar shop-list shop section">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-3 col-md-4 col-12">
-							<div class="shop-sidebar">
-                                <!-- Single Widget -->
-                                <div class="single-widget category">
-                                    <h3 class="title">Categories</h3>
-                                    <ul class="categor-list">
+    <!-- Modern Hero Section -->
+    <div class="menu-hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="bread-list-modern">
+                        <li><a href="{{route('home')}}">Home</a></li>
+                        <li><span>/</span></li>
+                        <li class="active">Our Menu</li>
+                    </ul>
+                    <h1 class="hero-title">EXPLORE <span class="text-primary">MENU</span></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <form action="{{route('shop.filter')}}" method="POST" id="filter-form">
+        @csrf
+        <section class="product-area shop-sidebar shop section" style="padding-top: 0; background: #f8f9fa;">
+            <div class="container">
+                <div class="row">
+                    <!-- SIDEBAR -->
+                    <div class="col-lg-3 col-md-12 col-12 order-2 order-lg-1">
+                        <div class="shop-sidebar product-page-sidebar">
+                                <!-- Categories Widget -->
+                                <div class="single-widget category-widget">
+                                    <h3 class="widget-title"><i class="ti-list"></i> CATEGORIES</h3>
+                                    <ul class="categor-list-modern">
 										@php
-											// $category = new Category();
 											$menu=App\Models\Category::getAllParentWithChild();
 										@endphp
 										@if($menu)
-										<li>
 											@foreach($menu as $cat_info)
-													@if($cat_info->child_cat->count()>0)
-														<li><a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a>
-															<ul>
-																@foreach($cat_info->child_cat as $sub_menu)
-																	<li><a href="{{route('product-sub-cat',[$cat_info->slug,$sub_menu->slug])}}">{{$sub_menu->title}}</a></li>
-																@endforeach
-															</ul>
-														</li>
-													@else
-														<li><a href="{{route('product-cat',$cat_info->slug)}}">{{$cat_info->title}}</a></li>
-													@endif
+                                                <li>
+                                                    <a href="{{route('product-cat',$cat_info->slug)}}" class="{{ Request::is('product-cat/'.$cat_info->slug) ? 'active' : '' }}">
+                                                        <span class="cat-icon">
+                                                            @if(stripos($cat_info->title, 'nimco') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3256/3256114.png" width="16" style="opacity: 0.6;" alt="">
+                                                            @elseif(stripos($cat_info->title, 'biscuit') !== false) <img src="https://cdn-icons-png.flaticon.com/512/2619/2619574.png" width="16" style="opacity: 0.6;" alt="">
+                                                            @elseif(stripos($cat_info->title, 'sweet') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3014/3014491.png" width="16" style="opacity: 0.6;" alt="">
+                                                            @else <i class="ti-layout-list-thumb"></i> @endif
+                                                        </span>
+                                                        <span class="cat-name">{{$cat_info->title}}</span>
+                                                        <span class="cat-count badge">{{$cat_info->products()->count()}}</span>
+                                                    </a>
+                                                </li>
 											@endforeach
-										</li>
 										@endif
-                                        {{-- @foreach(Helper::productCategoryList('products') as $cat)
-                                            @if($cat->is_parent==1)
-												<li><a href="{{route('product-cat',$cat->slug)}}">{{$cat->title}}</a></li>
-											@endif
-                                        @endforeach --}}
                                     </ul>
                                 </div>
-                                <!--/ End Single Widget -->
-                                <!-- Shop By Price -->
-								<div class="single-widget range">
-									<h3 class="title">Shop by Price</h3>
-									<div class="price-filter">
-										<div class="price-filter-inner">
-											{{-- <div id="slider-range" data-min="10" data-max="2000" data-currency="%"></div>
-												<div class="price_slider_amount">
-												<div class="label-input">
-													<span>Range:</span>
-													<input type="text" id="amount" name="price_range" value='@if(!empty($_GET['price'])) {{$_GET['price']}} @endif' placeholder="Add Your Price"/>
-												</div>
-											</div> --}}
-											@php
-												$max=DB::table('products')->max('price');
-												// dd($max);
-											@endphp
-											<div id="slider-range" data-min="0" data-max="{{$max}}"></div>
-											<div class="product_filter">
-											<button type="submit" class="filter_button">Filter</button>
-											<div class="label-input">
-												<span>Range:</span>
-												<input style="" type="text" id="amount" readonly/>
-												<input type="hidden" name="price_range" id="price_range" value="@if(!empty($_GET['price'])){{$_GET['price']}}@endif"/>
-											</div>
-											</div>
-										</div>
-									</div>
-									{{-- <ul class="check-box-list">
-										<li>
-											<label class="checkbox-inline" for="1"><input name="news" id="1" type="checkbox">$20 - $50<span class="count">(3)</span></label>
-										</li>
-										<li>
-											<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">$50 - $100<span class="count">(5)</span></label>
-										</li>
-										<li>
-											<label class="checkbox-inline" for="3"><input name="news" id="3" type="checkbox">$100 - $250<span class="count">(8)</span></label>
-										</li>
-									</ul> --}}
-								</div>
-								<!--/ End Shop By Price -->
-                                <!-- Single Widget -->
-                                <div class="single-widget recent-post">
-                                    <h3 class="title">Recent post</h3>
-                                    {{-- {{dd($recent_products)}} --}}
-                                    @foreach($recent_products as $product)
-                                        <!-- Single Post -->
-                                        @php
-                                            $photo=explode(',',$product->photo);
-                                        @endphp
-                                        <div class="single-post first">
-                                            <div class="image">
-                                                <img src="{{$photo[0]}}" alt="{{$photo[0]}}">
-                                            </div>
-                                            <div class="content">
-                                                <h5><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h5>
-                                                @php
-                                                    $org=($product->price-($product->price*$product->discount)/100);
-                                                @endphp
-                                                <p class="price"><del class="text-muted">Rs:{{number_format($product->price,2)}}</del>   Rs:{{number_format($org,2)}}  </p>
+                                
+                                <!-- Shop By Price Widget -->
+                                <div class="single-widget price-widget">
+                                    <h3 class="widget-title">FILTER BY PRICE</h3>
+                                    <div class="price-filter-modern">
+                                        <div class="custom-radio">
+                                            <input type="radio" id="price-all" name="price_range" value="" @if(empty($_GET['price'])) checked @endif>
+                                            <label for="price-all">All Prices</label>
+                                        </div>
+                                        <div class="custom-radio">
+                                            <input type="radio" id="price-300" name="price_range" value="0-300" @if(!empty($_GET['price']) && $_GET['price']=='0-300') checked @endif>
+                                            <label for="price-300">Under Rs: 300</label>
+                                        </div>
+                                        <div class="custom-radio">
+                                            <input type="radio" id="price-500" name="price_range" value="300-500" @if(!empty($_GET['price']) && $_GET['price']=='300-500') checked @endif>
+                                            <label for="price-500">Rs: 300 - Rs: 500</label>
+                                        </div>
+                                        <div class="custom-radio">
+                                            <input type="radio" id="price-above" name="price_range" value="500-10000" @if(!empty($_GET['price']) && $_GET['price']=='500-10000') checked @endif>
+                                            <label for="price-above">Above Rs: 500</label>
+                                        </div>
+                                        
+                                        <!-- Keep original hidden fields just in case backend requires them -->
+                                        <input type="hidden" name="price_range" id="price_range" value="@if(!empty($_GET['price'])){$_GET['price']}@endif"/>
+                                        
+                                        <button type="submit" class="btn-apply-filter">Apply Filter</button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PRODUCTS AREA -->
+                    <div class="col-lg-9 col-md-12 col-12 order-1 order-lg-2">
+                        <div class="shop-top-modern">
+                            <div class="shop-top-left">
+                                <h2>
+                                    @php 
+                                        $catTitle = "ALL ITEMS";
+                                        if(Request::route('slug')) {
+                                            $cat = App\Models\Category::where('slug', Request::route('slug'))->first();
+                                            if($cat) $catTitle = strtoupper($cat->title);
+                                        }
+                                    @endphp
+                                    {{$catTitle}} 
+                                    <span class="item-count">{{count($products)}} ITEMS</span>
+                                </h2>
+                            </div>
+                            <div class="shop-top-right">
+                                <label>Sort by:</label>
+                                <select class="modern-select" name="sortBy" onchange="document.getElementById('filter-form').submit();">
+                                    <option value="" @if(empty($_GET['sortBy'])) selected @endif>Recommended</option>
+                                    <option value="title" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='title') selected @endif>Name</option>
+                                    <option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Price</option>
+                                    <option value="category" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>Category</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row modern-products-list">
+                            @if(count($products)>0)
+                                @foreach($products as $product)
+                                    <div class="col-12 mb-4">
+                                        <div class="modern-product-list-card @if($product->stock<=0) card-soldout @endif">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-4">
+                                                    <!-- Top Badges -->
+                                                    <div class="card-badges">
+                                                        @if($product->condition=='hot')
+                                                            <span class="badge-bestseller"><i class="ti-star"></i> BESTSELLER</span>
+                                                        @endif
+                                                        @if($product->discount)
+                                                            <span class="badge-discount">{{$product->discount}}% OFF</span>
+                                                        @endif
+                                                        @if($product->stock<=0)
+                                                            <span class="badge-soldout">SOLD OUT</span>
+                                                        @endif
+                                                    </div>
+                                                    
+                                                    <div class="product-img-modern">
+                                                        <a href="{{route('product-detail',$product->slug)}}">
+                                                            @php $photo=explode(',',$product->photo); @endphp
+                                                            <img src="{{$photo[0]}}" alt="{{$product->title}}">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="product-info-modern-list">
+                                                        <div class="d-flex justify-content-between align-items-start">
+                                                            <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
+                                                            <!-- Wishlist Button -->
+                                                            <a href="{{route('add-to-wishlist',$product->slug)}}" class="btn-wishlist-modern-list"><i class="ti-heart"></i></a>
+                                                        </div>
+                                                        <p class="product-desc">{!! \Illuminate\Support\Str::limit(strip_tags($product->summary), 150) !!}</p>
+                                                        
+                                                        <div class="price-row">
+                                                            @php $after_discount=($product->price-($product->price*$product->discount)/100); @endphp
+                                                            <span class="current-price">Rs: {{number_format($after_discount,0)}}</span>
+                                                            @if($product->discount)
+                                                                <span class="old-price"><del>Rs: {{number_format($product->price,0)}}</del></span>
+                                                            @endif
+                                                        </div>
+                                                        
+                                                        @if($product->stock<=0)
+                                                            <button type="button" class="btn-add-modern-list btn-soldout" disabled>OUT OF STOCK</button>
+                                                        @else
+                                                            <a href="{{route('add-to-cart',$product->slug)}}" class="btn-add-modern-list"><i class="ti-plus"></i> ADD TO ORDER</a>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <!-- End Single Post -->
-                                    @endforeach
-                                </div>
-                                <!--/ End Single Widget -->
-                                <!-- Single Widget -->
-                                <div class="single-widget category">
-                                    <h3 class="title">Brands</h3>
-                                    <ul class="categor-list">
-                                        @php
-                                            $brands=DB::table('brands')->orderBy('title','ASC')->where('status','active')->get();
-                                        @endphp
-                                        @foreach($brands as $brand)
-                                            <li><a href="{{route('product-brand',$brand->slug)}}">{{$brand->title}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                <!--/ End Single Widget -->
-                        	</div>
-						</div>
-						<div class="col-lg-9 col-md-8 col-12">
-							<div class="row">
-								<div class="col-12">
-									<!-- Shop Top -->
-									<div class="shop-top">
-										<div class="shop-shorter">
-											<div class="single-shorter">
-												<label>Show :</label>
-												<select class="show" name="show" onchange="this.form.submit();">
-													<option value="">Default</option>
-													<option value="9" @if(!empty($_GET['show']) && $_GET['show']=='9') selected @endif>09</option>
-													<option value="15" @if(!empty($_GET['show']) && $_GET['show']=='15') selected @endif>15</option>
-													<option value="21" @if(!empty($_GET['show']) && $_GET['show']=='21') selected @endif>21</option>
-													<option value="30" @if(!empty($_GET['show']) && $_GET['show']=='30') selected @endif>30</option>
-												</select>
-											</div>
-											<div class="single-shorter">
-												<label>Sort By :</label>
-												<select class='sortBy' name='sortBy' onchange="this.form.submit();">
-													<option value="">Default</option>
-													<option value="title" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='title') selected @endif>Name</option>
-													<option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Price</option>
-													<option value="category" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>Category</option>
-													<option value="brand" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='brand') selected @endif>Brand</option>
-												</select>
-											</div>
-										</div>
-										<ul class="view-mode">
-											<li><a href="{{route('product-grids')}}"><i class="fa fa-th-large"></i></a></li>
-											<li class="active"><a href="javascript:void(0)"><i class="fa fa-th-list"></i></a></li>
-										</ul>
-									</div>
-									<!--/ End Shop Top -->
-								</div>
-							</div>
-							<div class="row">
-								@if(count($products))
-									@foreach($products as $product)
-									 	{{-- {{$product}} --}}
-										<!-- Start Single List -->
-										<div class="col-12">
-											<div class="row">
-												<div class="col-lg-4 col-md-6 col-sm-6">
-													<div class="single-product">
-														<div class="product-img">
-															<a href="{{route('product-detail',$product->slug)}}">
-															@php
-																$photo=explode(',',$product->photo);
-															@endphp
-															<img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-															<img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-															</a>
-															<div class="button-head">
-																<div class="product-action">
-																	<a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																	<a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}" class="wishlist" data-id="{{$product->id}}"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-																</div>
-																<div class="product-action-2">
-																	<a title="Add to cart" href="{{route('add-to-cart',$product->slug)}}">Add to cart</a>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-8 col-md-6 col-12">
-													<div class="list-content">
-														<div class="product-content">
-															<div class="product-price">
-																@php
-																	$after_discount=($product->price-($product->price*$product->discount)/100);
-																@endphp
-																<span>Rs:{{number_format($after_discount,2)}}</span>
-																<del>Rs:{{number_format($product->price,2)}}</del>
-															</div>
-															<h3 class="title"><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
-														{{-- <p>{!! html_entity_decode($product->summary) !!}</p> --}}
-														</div>
-														<p class="des pt-2">{!! html_entity_decode($product->summary) !!}</p>
-														<a href="javascript:void(0)" class="btn cart" data-id="{{$product->id}}">Buy Now!</a>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- End Single List -->
-									@endforeach
-								@else
-									<h4 class="text-warning" style="margin:100px auto;">There are no products.</h4>
-								@endif
-							</div>
-							 <div class="row">
-                            <div class="col-md-12 justify-content-center d-flex">
-                                {{-- {{$products->appends($_GET)->links()}}  --}}
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="col-12"><h4 class="text-warning text-center mt-5" style="font-family: 'Poppins';">There are no products matching your filter.</h4></div>
+                            @endif
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="row">
+                            <div class="col-12 text-center mt-4 mb-5">
+                                @if(method_exists($products, 'links'))
+                                    {{$products->appends($_GET)->links()}}
+                                @endif
                             </div>
-                          </div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!--/ End Product Style 1  -->
-		</form>
-		<!-- Modal -->
-		@if($products)
-			@foreach($products as $key=>$product)
-				<div class="modal fade" id="{{$product->id}}" tabindex="-1" role="dialog">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button>
-								</div>
-								<div class="modal-body">
-									<div class="row no-gutters">
-										<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-											<!-- Product Slider -->
-												<div class="product-gallery">
-													<div class="quickview-slider-active">
-														@php
-															$photo=explode(',',$product->photo);
-														// dd($photo);
-														@endphp
-														@foreach($photo as $data)
-															<div class="single-slider">
-																<img src="{{$data}}" alt="{{$data}}">
-															</div>
-														@endforeach
-													</div>
-												</div>
-											<!-- End Product slider -->
-										</div>
-										<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-											<div class="quickview-content">
-												<h2>{{$product->title}}</h2>
-												<div class="quickview-ratting-review">
-													<div class="quickview-ratting-wrap">
-														<div class="quickview-ratting">
-															{{-- <i class="yellow fa fa-star"></i>
-															<i class="yellow fa fa-star"></i>
-															<i class="yellow fa fa-star"></i>
-															<i class="yellow fa fa-star"></i>
-															<i class="fa fa-star"></i> --}}
-															@php
-																$rate=DB::table('product_reviews')->where('product_id',$product->id)->avg('rate');
-																$rate_count=DB::table('product_reviews')->where('product_id',$product->id)->count();
-															@endphp
-															@for($i=1; $i<=5; $i++)
-																@if($rate>=$i)
-																	<i class="yellow fa fa-star"></i>
-																@else
-																<i class="fa fa-star"></i>
-																@endif
-															@endfor
-														</div>
-														<a href="#"> ({{$rate_count}} customer review)</a>
-													</div>
-													<div class="quickview-stock">
-														@if($product->stock >0)
-														<span><i class="fa fa-check-circle-o"></i> {{$product->stock}} in stock</span>
-														@else
-														<span><i class="fa fa-times-circle-o text-danger"></i> {{$product->stock}} out stock</span>
-														@endif
-													</div>
-												</div>
-												@php
-													$after_discount=($product->price-($product->price*$product->discount)/100);
-												@endphp
-												<h3><small><del class="text-muted">Rs:{{number_format($product->price,2)}}</del></small>    Rs:{{number_format($after_discount,2)}}  </h3>
-												<div class="quickview-peragraph">
-													<p>{!! html_entity_decode($product->summary) !!}</p>
-												</div>
-												@if($product->size)
-													<div class="size">
-														<h4>Size</h4>
-														<ul>
-															@php
-																$sizes=explode(',',$product->size);
-																// dd($sizes);
-															@endphp
-															@foreach($sizes as $size)
-															<li><a href="#" class="one">{{$size}}</a></li>
-															@endforeach
-														</ul>
-													</div>
-												@endif
-												<form action="{{route('single-add-to-cart')}}" method="POST">
-													@csrf
-													<div class="quantity">
-														<!-- Input Order -->
-														<div class="input-group">
-															<div class="button minus">
-																<button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-																	<i class="ti-minus"></i>
-																</button>
-															</div>
-															<input type="hidden" name="slug" value="{{$product->slug}}">
-															<input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="1000" value="1">
-															<div class="button plus">
-																<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
-																	<i class="ti-plus"></i>
-																</button>
-															</div>
-														</div>
-														<!--/ End Input Order -->
-													</div>
-													<div class="add-to-cart">
-														<button type="submit" class="btn">Add to cart</button>
-														<a href="{{route('add-to-wishlist',$product->slug)}}" class="btn min"><i class="ti-heart"></i></a>
-													</div>
-												</form>
-												<div class="default-social">
-												<!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-				</div>
-			@endforeach
-		@endif
-			<!-- Modal end -->
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
 @endsection
-@push ('styles')
+
+@push('styles')
 <style>
-	 .pagination{
-        display:inline-flex;
+    /* --------------------------------- */
+    /* MODERN EXPLORE MENU DESIGN */
+    /* --------------------------------- */
+    
+    body, h1, h2, h3, h4, h5, h6, p, a, span, label, button, input, select {
+        font-family: 'Poppins', sans-serif !important;
     }
-	.filter_button{
-        /* height:20px; */
+    
+    body {
+        background-color: #f8f9fa !important;
+    }
+    
+    /* Hero Section */
+    .menu-hero-section {
+        background: linear-gradient(135deg, #111424 0%, #1a2235 100%);
+        padding: 50px 0 100px;
+        color: #fff;
+    }
+    .bread-list-modern {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 10px 0;
+        font-size: 13px;
+        color: #9ba4b5;
+    }
+    .bread-list-modern li a {
+        color: #9ba4b5;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .bread-list-modern li a:hover {
+        color: #fff;
+    }
+    .bread-list-modern li span {
+        margin: 0 10px;
+    }
+    .bread-list-modern li.active {
+        color: #fff;
+        font-weight: 500;
+    }
+    .hero-title {
+        font-size: 48px !important;
+        font-weight: 900 !important;
+        margin: 0;
+        letter-spacing: 1px;
+    }
+    
+    /* Desktop layout overrides */
+    @media (min-width: 992px) {
+        .product-page-sidebar {
+            margin-top: -80px;
+            position: relative;
+            z-index: 10;
+        }
+        .shop-top-modern {
+            margin-top: -80px;
+            position: relative;
+            z-index: 10;
+        }
+    }
+
+    /* Sidebar */
+    .single-widget {
+        background: #fff;
+        border-radius: 16px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        border: none;
+    }
+    .widget-title {
+        font-size: 15px !important;
+        font-weight: 800 !important;
+        color: #111;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        letter-spacing: 0.5px;
+    }
+    
+    .categor-list-modern {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .categor-list-modern li {
+        margin-bottom: 8px;
+    }
+    .categor-list-modern li a {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        border-radius: 30px;
+        color: #444;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        background: transparent;
+    }
+    .categor-list-modern li a .cat-icon {
+        margin-right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        background: #f4f5f7;
+        border-radius: 50%;
+        color: #888;
+        font-size: 14px;
+    }
+    .categor-list-modern li a .cat-count {
+        margin-left: auto;
+        background: #f0f0f0;
+        color: #666;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+    
+    /* Active & Hover state for Categories (like mockup) */
+    .categor-list-modern li a:hover,
+    .categor-list-modern li a.active {
+        background: #fff0ef;
+        color: var(--primary-color);
+    }
+    .categor-list-modern li a:hover .cat-icon,
+    .categor-list-modern li a.active .cat-icon {
+        background: #fff;
+        color: var(--primary-color);
+    }
+    .categor-list-modern li a:hover .cat-icon img,
+    .categor-list-modern li a.active .cat-icon img {
+        opacity: 1 !important;
+        filter: sepia(1) hue-rotate(-50deg) saturate(5);
+    }
+    .categor-list-modern li a:hover .cat-count,
+    .categor-list-modern li a.active .cat-count {
+        background: var(--primary-color);
+        color: #fff;
+    }
+    
+    /* Price Filter */
+    .custom-radio {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .custom-radio input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 12px;
+        accent-color: var(--primary-color);
+        cursor: pointer;
+    }
+    .custom-radio label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #444;
+        cursor: pointer;
+        margin: 0;
+    }
+    .btn-apply-filter {
+        width: 100%;
+        padding: 12px;
+        background: #f4f5f7;
+        color: #222;
+        border: none;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 14px;
+        margin-top: 15px;
+        transition: all 0.3s ease;
+    }
+    .btn-apply-filter:hover {
+        background: #e2e4e8;
+    }
+    
+    /* Shop Top */
+    .shop-top-modern {
+        background: #fff;
+        border-radius: 16px;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+    .shop-top-left h2 {
+        font-size: 16px !important;
+        font-weight: 800 !important;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: #111;
+        letter-spacing: 0.5px;
+    }
+    .shop-top-left .item-count {
+        font-size: 11px;
+        background: #f0f0f0;
+        color: #666;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+    .shop-top-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #666;
+    }
+    .modern-select {
+        border: 1px solid #eee;
+        background: #fafafa;
+        padding: 8px 30px 8px 15px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 13px;
+        color: #333;
+        outline: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 10px auto;
+        cursor: pointer;
+    }
+    
+    /* Product Cards */
+    .modern-product-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        position: relative;
+        transition: all 0.4s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .modern-product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    }
+    .card-soldout {
+        opacity: 0.6;
+    }
+    
+    .card-badges {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 5;
+    }
+    .card-badges span {
+        font-size: 9px;
+        font-weight: 800;
+        padding: 4px 10px;
+        border-radius: 6px;
+        color: #fff;
+        letter-spacing: 0.5px;
+    }
+    .badge-bestseller { background: #fdb813; color: #fff; }
+    .badge-discount { background: #111; color: #fff; }
+    .badge-soldout { background: #6c757d; color: #fff; }
+    
+    .btn-wishlist-modern {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 32px;
+        height: 32px;
+        background: #f4f5f7;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 14px;
+        z-index: 5;
+        transition: all 0.3s ease;
+    }
+    .btn-wishlist-modern:hover {
+        background: #fff0f0;
+        color: var(--primary-color);
+        transform: scale(1.1);
+    }
+    
+    .product-img-modern {
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        margin-top: 25px;
+    }
+    .product-img-modern img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        transition: transform 0.5s ease;
+    }
+    .modern-product-card:not(.card-soldout):hover .product-img-modern img {
+        transform: scale(1.08);
+    }
+    
+    .product-info-modern {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    .product-info-modern h3 {
+        margin: 0 0 8px 0;
+    }
+    .product-info-modern h3 a {
+        font-size: 16px;
+        font-weight: 800;
+        color: #111;
+        text-decoration: none;
+        line-height: 1.4;
+    }
+    .product-desc {
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.5;
+    }
+    
+    .price-row {
+        margin-top: auto;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .current-price {
+        font-size: 22px;
+        font-weight: 900;
+        color: #111;
+    }
+    .old-price del {
+        font-size: 13px;
+        font-weight: 600;
+        color: #aaa;
+    }
+    
+    .btn-add-modern {
+        display: block;
+        width: 100%;
         text-align: center;
-        background:#F7941D;
-        padding:8px 16px;
-        margin-top:10px;
-        color: white;
+        padding: 12px;
+        background: var(--primary-color);
+        color: #fff;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 13px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        letter-spacing: 0.5px;
     }
+    .btn-add-modern:hover {
+        background: #a04307;
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(193, 84, 11, 0.3);
+    }
+    
+    .btn-soldout {
+        background: #e9ecef !important;
+        color: #888 !important;
+        cursor: not-allowed;
+    }
+    .btn-soldout:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
 </style>
 @endpush
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-
-    {{-- <script>
-        $('.cart').click(function(){
-            var quantity=1;
-            var pro_id=$(this).data('id');
-            $.ajax({
-                url:"{{route('add-to-cart')}}",
-                type:"POST",
-                data:{
-                    _token:"{{csrf_token()}}",
-                    quantity:quantity,
-                    pro_id:pro_id
-                },
-                success:function(response){
-                    console.log(response);
-					if(typeof(response)!='object'){
-						response=$.parseJSON(response);
-					}
-					if(response.status){
-						swal('success',response.msg,'success').then(function(){
-							document.location.href=document.location.href;
-						});
-					}
-					else{
-                        swal('error',response.msg,'error').then(function(){
-							// document.location.href=document.location.href;
-						});
-                    }
-                }
-            })
-        });
-	</script> --}}
-	<script>
-        $(document).ready(function(){
-        /*----------------------------------------------------*/
-        /*  Jquery Ui slider js
-        /*----------------------------------------------------*/
-        if ($("#slider-range").length > 0) {
-            const max_value = parseInt( $("#slider-range").data('max') ) || 500;
-            const min_value = parseInt($("#slider-range").data('min')) || 0;
-            const currency = $("#slider-range").data('currency') || '';
-            let price_range = min_value+'-'+max_value;
-            if($("#price_range").length > 0 && $("#price_range").val()){
-                price_range = $("#price_range").val().trim();
-            }
-
-            let price = price_range.split('-');
-            $("#slider-range").slider({
-                range: true,
-                min: min_value,
-                max: max_value,
-                values: price,
-                slide: function (event, ui) {
-                    $("#amount").val(currency + ui.values[0] + " -  "+currency+ ui.values[1]);
-                    $("#price_range").val(ui.values[0] + "-" + ui.values[1]);
-                }
-            });
-            }
-        if ($("#amount").length > 0) {
-            const m_currency = $("#slider-range").data('currency') || '';
-            $("#amount").val(m_currency + $("#slider-range").slider("values", 0) +
-                "  -  "+m_currency + $("#slider-range").slider("values", 1));
-            }
-        })
-    </script>
-
 @endpush

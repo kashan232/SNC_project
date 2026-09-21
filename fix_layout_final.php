@@ -1,3 +1,8 @@
+<?php
+$file_grids = 'c:/xampp/htdocs/SNC_project/resources/views/frontend/pages/product-grids.blade.php';
+$file_lists = 'c:/xampp/htdocs/SNC_project/resources/views/frontend/pages/product-lists.blade.php';
+
+$content = <<<HTML
 @extends('frontend.layouts.master')
 
 @section('title', 'Shoukat Nimco Center || PRODUCT PAGE')
@@ -26,26 +31,26 @@
                 <div class="row">
                     <!-- SIDEBAR -->
                     <div class="col-lg-3 col-md-12 col-12 order-2 order-lg-1">
-                        <div class="shop-sidebar product-page-sidebar">
+                        <div class="shop-sidebar modern-sidebar">
                                 <!-- Categories Widget -->
                                 <div class="single-widget category-widget">
                                     <h3 class="widget-title"><i class="ti-list"></i> CATEGORIES</h3>
                                     <ul class="categor-list-modern">
 										@php
-											$menu=App\Models\Category::getAllParentWithChild();
+											\$menu=App\Models\Category::getAllParentWithChild();
 										@endphp
-										@if($menu)
-											@foreach($menu as $cat_info)
+										@if(\$menu)
+											@foreach(\$menu as \$cat_info)
                                                 <li>
-                                                    <a href="{{route('product-cat',$cat_info->slug)}}" class="{{ Request::is('product-cat/'.$cat_info->slug) ? 'active' : '' }}">
+                                                    <a href="{{route('product-cat',\$cat_info->slug)}}" class="{{ Request::is('product-cat/'.\$cat_info->slug) ? 'active' : '' }}">
                                                         <span class="cat-icon">
-                                                            @if(stripos($cat_info->title, 'nimco') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3256/3256114.png" width="16" style="opacity: 0.6;" alt="">
-                                                            @elseif(stripos($cat_info->title, 'biscuit') !== false) <img src="https://cdn-icons-png.flaticon.com/512/2619/2619574.png" width="16" style="opacity: 0.6;" alt="">
-                                                            @elseif(stripos($cat_info->title, 'sweet') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3014/3014491.png" width="16" style="opacity: 0.6;" alt="">
+                                                            @if(stripos(\$cat_info->title, 'nimco') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3256/3256114.png" width="16" style="opacity: 0.6;" alt="">
+                                                            @elseif(stripos(\$cat_info->title, 'biscuit') !== false) <img src="https://cdn-icons-png.flaticon.com/512/2619/2619574.png" width="16" style="opacity: 0.6;" alt="">
+                                                            @elseif(stripos(\$cat_info->title, 'sweet') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3014/3014491.png" width="16" style="opacity: 0.6;" alt="">
                                                             @else <i class="ti-layout-list-thumb"></i> @endif
                                                         </span>
-                                                        <span class="cat-name">{{$cat_info->title}}</span>
-                                                        <span class="cat-count badge">{{$cat_info->products()->count()}}</span>
+                                                        <span class="cat-name">{{\$cat_info->title}}</span>
+                                                        <span class="cat-count badge">{{\$cat_info->products()->count()}}</span>
                                                     </a>
                                                 </li>
 											@endforeach
@@ -58,24 +63,24 @@
                                     <h3 class="widget-title">FILTER BY PRICE</h3>
                                     <div class="price-filter-modern">
                                         <div class="custom-radio">
-                                            <input type="radio" id="price-all" name="price_range" value="" @if(empty($_GET['price'])) checked @endif>
+                                            <input type="radio" id="price-all" name="price" value="" @if(empty(\$_GET['price'])) checked @endif>
                                             <label for="price-all">All Prices</label>
                                         </div>
                                         <div class="custom-radio">
-                                            <input type="radio" id="price-300" name="price_range" value="0-300" @if(!empty($_GET['price']) && $_GET['price']=='0-300') checked @endif>
+                                            <input type="radio" id="price-300" name="price" value="0-300" @if(!empty(\$_GET['price']) && \$_GET['price']=='0-300') checked @endif>
                                             <label for="price-300">Under Rs: 300</label>
                                         </div>
                                         <div class="custom-radio">
-                                            <input type="radio" id="price-500" name="price_range" value="300-500" @if(!empty($_GET['price']) && $_GET['price']=='300-500') checked @endif>
+                                            <input type="radio" id="price-500" name="price" value="300-500" @if(!empty(\$_GET['price']) && \$_GET['price']=='300-500') checked @endif>
                                             <label for="price-500">Rs: 300 - Rs: 500</label>
                                         </div>
                                         <div class="custom-radio">
-                                            <input type="radio" id="price-above" name="price_range" value="500-10000" @if(!empty($_GET['price']) && $_GET['price']=='500-10000') checked @endif>
+                                            <input type="radio" id="price-above" name="price" value="500-10000" @if(!empty(\$_GET['price']) && \$_GET['price']=='500-10000') checked @endif>
                                             <label for="price-above">Above Rs: 500</label>
                                         </div>
                                         
                                         <!-- Keep original hidden fields just in case backend requires them -->
-                                        <input type="hidden" name="price_range" id="price_range" value="@if(!empty($_GET['price'])){$_GET['price']}@endif"/>
+                                        <input type="hidden" name="price_range" id="price_range" value="@if(!empty(\$_GET['price'])){\$_GET['price']}@endif"/>
                                         
                                         <button type="submit" class="btn-apply-filter">Apply Filter</button>
                                     </div>
@@ -89,71 +94,71 @@
                             <div class="shop-top-left">
                                 <h2>
                                     @php 
-                                        $catTitle = "ALL ITEMS";
+                                        \$catTitle = "ALL ITEMS";
                                         if(Request::route('slug')) {
-                                            $cat = App\Models\Category::where('slug', Request::route('slug'))->first();
-                                            if($cat) $catTitle = strtoupper($cat->title);
+                                            \$cat = App\Models\Category::where('slug', Request::route('slug'))->first();
+                                            if(\$cat) \$catTitle = strtoupper(\$cat->title);
                                         }
                                     @endphp
-                                    {{$catTitle}} 
-                                    <span class="item-count">{{count($products)}} ITEMS</span>
+                                    {{\$catTitle}} 
+                                    <span class="item-count">{{count(\$products)}} ITEMS</span>
                                 </h2>
                             </div>
                             <div class="shop-top-right">
                                 <label>Sort by:</label>
                                 <select class="modern-select" name="sortBy" onchange="document.getElementById('filter-form').submit();">
-                                    <option value="" @if(empty($_GET['sortBy'])) selected @endif>Recommended</option>
-                                    <option value="title" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='title') selected @endif>Name</option>
-                                    <option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Price</option>
-                                    <option value="category" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>Category</option>
+                                    <option value="" @if(empty(\$_GET['sortBy'])) selected @endif>Recommended</option>
+                                    <option value="title" @if(!empty(\$_GET['sortBy']) && \$_GET['sortBy']=='title') selected @endif>Name</option>
+                                    <option value="price" @if(!empty(\$_GET['sortBy']) && \$_GET['sortBy']=='price') selected @endif>Price</option>
+                                    <option value="category" @if(!empty(\$_GET['sortBy']) && \$_GET['sortBy']=='category') selected @endif>Category</option>
                                 </select>
                             </div>
                         </div>
                         
                         <div class="row modern-products-grid">
-                            @if(count($products)>0)
-                                @foreach($products as $product)
+                            @if(count(\$products)>0)
+                                @foreach(\$products as \$product)
                                     <div class="col-lg-4 col-md-6 col-12 mb-4">
-                                        <div class="modern-product-card @if($product->stock<=0) card-soldout @endif">
+                                        <div class="modern-product-card @if(\$product->stock<=0) card-soldout @endif">
                                             <!-- Top Badges -->
                                             <div class="card-badges">
-                                                @if($product->condition=='hot')
+                                                @if(\$product->condition=='hot')
                                                     <span class="badge-bestseller"><i class="ti-star"></i> BESTSELLER</span>
                                                 @endif
-                                                @if($product->discount)
-                                                    <span class="badge-discount">{{$product->discount}}% OFF</span>
+                                                @if(\$product->discount)
+                                                    <span class="badge-discount">{{\$product->discount}}% OFF</span>
                                                 @endif
-                                                @if($product->stock<=0)
+                                                @if(\$product->stock<=0)
                                                     <span class="badge-soldout">SOLD OUT</span>
                                                 @endif
                                             </div>
                                             
                                             <!-- Wishlist Button -->
-                                            <a href="{{route('add-to-wishlist',$product->slug)}}" class="btn-wishlist-modern"><i class="ti-heart"></i></a>
+                                            <a href="{{route('add-to-wishlist',\$product->slug)}}" class="btn-wishlist-modern"><i class="ti-heart"></i></a>
                                             
                                             <div class="product-img-modern">
-                                                <a href="{{route('product-detail',$product->slug)}}">
-                                                    @php $photo=explode(',',$product->photo); @endphp
-                                                    <img src="{{$photo[0]}}" alt="{{$product->title}}">
+                                                <a href="{{route('product-detail',\$product->slug)}}">
+                                                    @php \$photo=explode(',',\$product->photo); @endphp
+                                                    <img src="{{\$photo[0]}}" alt="{{\$product->title}}">
                                                 </a>
                                             </div>
                                             
                                             <div class="product-info-modern">
-                                                <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
-                                                <p class="product-desc">{!! \Illuminate\Support\Str::limit(strip_tags($product->summary), 55) !!}</p>
+                                                <h3><a href="{{route('product-detail',\$product->slug)}}">{{\$product->title}}</a></h3>
+                                                <p class="product-desc">{!! \Illuminate\Support\Str::limit(strip_tags(\$product->summary), 55) !!}</p>
                                                 
                                                 <div class="price-row">
-                                                    @php $after_discount=($product->price-($product->price*$product->discount)/100); @endphp
-                                                    <span class="current-price">Rs: {{number_format($after_discount,0)}}</span>
-                                                    @if($product->discount)
-                                                        <span class="old-price"><del>Rs: {{number_format($product->price,0)}}</del></span>
+                                                    @php \$after_discount=(\$product->price-(\$product->price*\$product->discount)/100); @endphp
+                                                    <span class="current-price">Rs: {{number_format(\$after_discount,0)}}</span>
+                                                    @if(\$product->discount)
+                                                        <span class="old-price"><del>Rs: {{number_format(\$product->price,0)}}</del></span>
                                                     @endif
                                                 </div>
                                                 
-                                                @if($product->stock<=0)
+                                                @if(\$product->stock<=0)
                                                     <button type="button" class="btn-add-modern btn-soldout" disabled>OUT OF STOCK</button>
                                                 @else
-                                                    <a href="{{route('add-to-cart',$product->slug)}}" class="btn-add-modern"><i class="ti-plus"></i> ADD TO ORDER</a>
+                                                    <a href="{{route('add-to-cart',\$product->slug)}}" class="btn-add-modern"><i class="ti-plus"></i> ADD TO ORDER</a>
                                                 @endif
                                             </div>
                                         </div>
@@ -167,8 +172,8 @@
                         <!-- Pagination -->
                         <div class="row">
                             <div class="col-12 text-center mt-4 mb-5">
-                                @if(method_exists($products, 'links'))
-                                    {{$products->appends($_GET)->links()}}
+                                @if(method_exists(\$products, 'links'))
+                                    {{\$products->appends(\$_GET)->links()}}
                                 @endif
                             </div>
                         </div>
@@ -233,7 +238,7 @@
     
     /* Desktop layout overrides */
     @media (min-width: 992px) {
-        .product-page-sidebar {
+        .modern-sidebar {
             margin-top: -80px;
             position: relative;
             z-index: 10;
@@ -582,3 +587,9 @@
 @endpush
 @push('scripts')
 @endpush
+HTML;
+
+file_put_contents($file_grids, $content);
+file_put_contents($file_lists, $content);
+
+echo "Fixed layout completely!";
