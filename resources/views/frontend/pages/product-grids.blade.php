@@ -82,9 +82,6 @@
                                             <label for="price-above">Above Rs: 500</label>
                                         </div>
                                         
-                                        <!-- Keep original hidden fields just in case backend requires them -->
-                                        <input type="hidden" name="price_range" id="price_range" value="@if(!empty($_GET['price'])){$_GET['price']}@endif"/>
-                                        
                                         <button type="submit" class="btn-apply-filter">Apply Filter</button>
                                     </div>
                                 </div>
@@ -157,9 +154,12 @@
                                                 </div>
                                                 
                                                 @if($product->stock<=0)
-                                                    <button type="button" class="btn-add-modern btn-soldout" disabled>OUT OF STOCK</button>
+                                                    <button type="button" class="btn-action-modern btn-soldout" disabled>OUT OF STOCK</button>
                                                 @else
-                                                    <a href="{{route('add-to-cart',$product->slug)}}" class="btn-add-modern"><i class="ti-plus"></i> ADD TO ORDER</a>
+                                                    <div class="product-action-modern">
+                                                        <a href="{{route('add-to-cart',$product->slug)}}" class="btn-action-modern btn-cart"><i class="ti-shopping-cart"></i> Cart</a>
+                                                        <a href="{{route('product-detail',$product->slug)}}" class="btn-action-modern btn-view"><i class="ti-eye"></i> View</a>
+                                                    </div>
                                                 @endif
                                             </div>
                                         </div>
@@ -505,22 +505,25 @@
         position: absolute;
         top: 20px;
         right: 20px;
-        width: 32px;
-        height: 32px;
-        background: #f4f5f7;
+        width: 36px;
+        height: 36px;
+        background: #ffffff;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #999;
-        font-size: 14px;
+        color: #ff4757;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        font-size: 16px;
+        font-weight: bold;
         z-index: 5;
         transition: all 0.3s ease;
     }
     .btn-wishlist-modern:hover {
-        background: #fff0f0;
-        color: var(--primary-color);
+        background: #ff4757;
+        color: #ffffff;
         transform: scale(1.1);
+        box-shadow: 0 6px 15px rgba(255, 71, 87, 0.3);
     }
     
     .product-img-modern {
@@ -585,32 +588,66 @@
         color: #aaa;
     }
     
-    .btn-add-modern {
-        display: block;
-        width: 100%;
+    .product-action-modern {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    .btn-action-modern {
+        flex: 1;
         text-align: center;
-        padding: 12px;
-        background: var(--primary-color);
-        color: #fff;
-        border-radius: 12px;
-        font-weight: 700;
+        padding: 10px 5px;
+        border-radius: 8px;
+        font-weight: 600;
         font-size: 13px;
         text-decoration: none;
         transition: all 0.3s ease;
         border: none;
-        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
     }
-    .btn-add-modern:hover {
+    
+    .btn-cart {
+        background: var(--primary-color);
+        color: #ffffff !important;
+    }
+    
+    .btn-cart i {
+        color: #ffffff !important;
+    }
+    
+    .btn-cart:hover {
         background: #a04307;
-        color: #fff;
+        color: #ffffff !important;
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(193, 84, 11, 0.3);
+        box-shadow: 0 4px 10px rgba(193, 84, 11, 0.2);
+    }
+    
+    .btn-view {
+        background: #f4f5f7;
+        color: #333 !important;
+    }
+    
+    .btn-view i {
+        color: #333 !important;
+    }
+    
+    .btn-view:hover {
+        background: #e2e4e8;
+        color: #111 !important;
+        transform: translateY(-2px);
     }
     
     .btn-soldout {
         background: #e9ecef !important;
         color: #888 !important;
         cursor: not-allowed;
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
     }
     .btn-soldout:hover {
         transform: none;
