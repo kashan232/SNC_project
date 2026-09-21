@@ -144,11 +144,17 @@
 													</div>
 												</form>
 
-												<p class="cat">Category :<a href="{{route('product-cat',$product_detail->cat_info['slug'])}}">{{$product_detail->cat_info['title']}}</a></p>
+												<p class="cat mt-3" style="font-weight:600; color:#444;">Category: <a href="{{route('product-cat',$product_detail->cat_info['slug'])}}" class="cat-badge">{{$product_detail->cat_info['title']}}</a></p>
 												@if($product_detail->sub_cat_info)
-												<p class="cat mt-1">Sub Category :<a href="{{route('product-sub-cat',[$product_detail->cat_info['slug'],$product_detail->sub_cat_info['slug']])}}">{{$product_detail->sub_cat_info['title']}}</a></p>
+												<p class="cat mt-2" style="font-weight:600; color:#444;">Sub Category: <a href="{{route('product-sub-cat',[$product_detail->cat_info['slug'],$product_detail->sub_cat_info['slug']])}}" class="cat-badge">{{$product_detail->sub_cat_info['title']}}</a></p>
 												@endif
-												<p class="availability">Stock : @if($product_detail->stock>0)<span class="badge badge-success">{{$product_detail->stock}}</span>@else <span class="badge badge-danger">{{$product_detail->stock}}</span>  @endif</p>
+												<p class="availability mt-3" style="font-weight:600; color:#444;">Stock: 
+													@if($product_detail->stock>0)
+														<span class="badge badge-success" style="padding: 6px 12px; font-size:13px; border-radius:6px; margin-left:10px;">{{$product_detail->stock}} Available</span>
+													@else 
+														<span class="badge badge-danger" style="padding: 6px 12px; font-size:13px; border-radius:6px; margin-left:10px;">Out of Stock</span>  
+													@endif
+												</p>
 											</div>
 											<!--/ End Product Buy -->
 										</div>
@@ -303,13 +309,14 @@
 		<!--/ End Shop Single -->
 
 		<!-- Start Most Popular -->
-	<div class="product-area most-popular related-product section">
+	<div class="product-area most-popular related-product section" style="background:#c1540b; padding-top: 60px; padding-bottom: 60px;">
         <div class="container">
             <div class="row">
 				<div class="col-12">
-					<div class="section-title">
-						<h2>Related Products</h2>
-					</div>
+					<div class="section-title text-center" style="margin-bottom: 50px;">
+<span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Top Picks</span>
+<h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #fff; margin-top: 10px;">Related <span style="color: #fff;">Products</span></h2>
+</div>
 				</div>
             </div>
             <div class="row">
@@ -318,42 +325,54 @@
                     <div class="owl-carousel popular-slider">
                         @foreach($product_detail->rel_prods as $data)
                             @if($data->id !==$product_detail->id)
-                                <!-- Start Single Product -->
-                                <div class="single-product">
-                                    <div class="product-img">
-										<a href="{{route('product-detail',$data->slug)}}">
-											@php
-												$photo=explode(',',$data->photo);
-											@endphp
-                                            <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-                                            <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-                                            <span class="price-dec">{{$data->discount}} % Off</span>
-                                                                    {{-- <span class="out-of-stock">Hot</span> --}}
-                                        </a>
-                                        <div class="button-head">
-                                            <div class="product-action">
-                                                <a data-toggle="modal" data-target="#modelExample" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                                <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-                                            </div>
-                                            <div class="product-action-2">
-                                                <a title="Add to cart" href="#">Add to cart</a>
-                                            </div>
-                                        </div>
+                                <!-- Start Modern Product -->
+                                <div class="modern-product-card @if($data->stock<=0) card-soldout @endif" style="margin: 10px 5px;">
+                                    <!-- Top Badges -->
+                                    <div class="card-badges">
+                                        @if($data->condition=='hot')
+                                            <span class="badge-bestseller"><i class="ti-star"></i> BESTSELLER</span>
+                                        @endif
+                                        @if($data->discount)
+                                            <span class="badge-discount">{{$data->discount}}% OFF</span>
+                                        @endif
+                                        @if($data->stock<=0)
+                                            <span class="badge-soldout">SOLD OUT</span>
+                                        @endif
                                     </div>
-                                    <div class="product-content">
+                                    
+                                    <!-- Wishlist Button -->
+                                    <a href="{{route('add-to-wishlist',$data->slug)}}" class="btn-wishlist-modern"><i class="ti-heart"></i></a>
+                                    
+                                    <div class="product-img-modern">
+                                        <a href="{{route('product-detail',$data->slug)}}">
+                                            @php $photo=explode(',',$data->photo); @endphp
+                                            <img src="{{$photo[0]}}" alt="{{$data->title}}">
+                                        </a>
+                                    </div>
+                                    
+                                    <div class="product-info-modern">
                                         <h3><a href="{{route('product-detail',$data->slug)}}">{{$data->title}}</a></h3>
-                                        <div class="product-price">
-                                            @php
-                                                $after_discount=($data->price-(($data->discount*$data->price)/100));
-                                            @endphp
-                                            <span class="old">Rs:{{number_format($data->price,2)}}</span>
-                                            <span>Rs:{{number_format($after_discount,2)}}</span>
+                                        <p class="product-desc">{!! \Illuminate\Support\Str::limit(strip_tags($data->summary), 55) !!}</p>
+                                        
+                                        <div class="price-row">
+                                            @php $after_discount=($data->price-($data->price*$data->discount)/100); @endphp
+                                            <span class="current-price">Rs: {{number_format($after_discount,0)}}</span>
+                                            @if($data->discount)
+                                                <span class="old-price"><del>Rs: {{number_format($data->price,0)}}</del></span>
+                                            @endif
                                         </div>
-
+                                        
+                                        @if($data->stock<=0)
+                                            <button type="button" class="btn-action-modern btn-soldout" disabled style="width:100%; border:none; padding:10px; border-radius:8px;">OUT OF STOCK</button>
+                                        @else
+                                            <div class="product-action-modern">
+                                                <a href="{{route('add-to-cart',$data->slug)}}" class="btn-action-modern btn-cart"><i class="ti-shopping-cart"></i> Cart</a>
+                                                <a href="{{route('product-detail',$data->slug)}}" class="btn-action-modern btn-view"><i class="ti-eye"></i> View</a>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
-                                <!-- End Single Product -->
+                                <!-- End Modern Product -->
 
                             @endif
                         @endforeach
@@ -481,6 +500,332 @@
 @endsection
 @push('styles')
 	<style>
+		/* Modern Product Detail Styles */
+		.shop.single.section {
+			background: #fdfdfd;
+			padding-bottom: 80px;
+		}
+		.product-gallery {
+			background: #fff;
+			border-radius: 20px;
+			padding: 20px;
+			box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+		}
+		.product-gallery img {
+			border-radius: 12px;
+		}
+		.product-des {
+			background: #fff;
+			border-radius: 20px;
+			padding: 40px;
+			box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+			height: 100%;
+		}
+		.product-des .short h4 {
+			font-size: 28px;
+			font-weight: 800;
+			color: #111;
+			margin-bottom: 15px;
+			line-height: 1.3;
+		}
+		.product-des .short .price {
+			margin-top: 25px;
+			margin-bottom: 25px;
+			display: flex;
+			align-items: center;
+			gap: 15px;
+			border-bottom: 1px solid #f0f0f0;
+			padding-bottom: 25px;
+		}
+		.product-des .short .price .discount {
+			font-size: 32px;
+			font-weight: 900;
+			color: #F7941D !important;
+		}
+		.product-des .short .price s {
+			font-size: 18px;
+			color: #999;
+		}
+		.product-des .description {
+			font-size: 15px;
+			line-height: 1.8;
+			color: #666;
+		}
+		.product-buy .quantity {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			margin-bottom: 25px;
+		}
+		.product-buy .quantity h6 {
+			font-weight: 700;
+			margin: 0;
+			font-size: 16px;
+		}
+		.add-to-cart .btn {
+			background: #F7941D;
+			color: #fff;
+			border-radius: 12px;
+			padding: 15px 40px;
+			font-weight: 700;
+			font-size: 16px;
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+			transition: all 0.3s ease;
+			border: none;
+		}
+		.add-to-cart .btn:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+			background: #F7941D;
+			filter: brightness(0.85);
+		}
+		.add-to-cart .btn.min {
+			background: #f4f5f7;
+			color: #ff4757;
+			padding: 15px 20px;
+			box-shadow: none;
+		}
+		.add-to-cart .btn.min:hover {
+			background: #ff4757;
+			color: #fff;
+			box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
+		}
+		
+		.product-info {
+			background: #fff;
+			border-radius: 20px;
+			padding: 30px;
+			margin-top: 40px;
+			box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+		}
+		.product-info .nav-tabs {
+			border-bottom: 2px solid #f0f0f0;
+		}
+		.product-info .nav-tabs .nav-link {
+			border: none;
+			color: #777;
+			font-weight: 700;
+			font-size: 16px;
+			padding: 15px 30px;
+		}
+		.product-info .nav-tabs .nav-link.active {
+			color: #F7941D !important;
+			border-bottom: 3px solid #F7941D !important;
+			background: transparent;
+		}
+		
+		.cat-badge {
+			display: inline-block;
+			background: #f4f5f7;
+			padding: 5px 12px;
+			border-radius: 6px;
+			color: #333;
+			font-weight: 600;
+			font-size: 13px;
+			text-decoration: none;
+			margin-left: 10px;
+		}
+		.cat-badge:hover {
+			background: #F7941D;
+			color: #fff;
+		}
+
+		/* Product Cards */
+    .modern-product-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        position: relative;
+        transition: all 0.4s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .modern-product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    }
+    .card-soldout {
+        opacity: 0.6;
+    }
+    
+    .card-badges {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 5;
+    }
+    .card-badges span {
+        font-size: 9px;
+        font-weight: 800;
+        padding: 4px 10px;
+        border-radius: 6px;
+        color: #fff;
+        letter-spacing: 0.5px;
+    }
+    .badge-bestseller { background: #fdb813; color: #fff; }
+    .badge-discount { background: #111; color: #fff; }
+    .badge-soldout { background: #6c757d; color: #fff; }
+    
+    .btn-wishlist-modern {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 36px;
+        height: 36px;
+        background: #ffffff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ff4757;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        font-size: 16px;
+        font-weight: bold;
+        z-index: 5;
+        transition: all 0.3s ease;
+    }
+    .btn-wishlist-modern:hover {
+        background: #ff4757;
+        color: #ffffff;
+        transform: scale(1.1);
+        box-shadow: 0 6px 15px rgba(255, 71, 87, 0.3);
+    }
+    
+    .product-img-modern {
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        margin-top: 25px;
+    }
+    .product-img-modern img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        transition: transform 0.5s ease;
+    }
+    .modern-product-card:not(.card-soldout):hover .product-img-modern img {
+        transform: scale(1.08);
+    }
+    
+    .product-info-modern {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    .product-info-modern h3 {
+        margin: 0 0 8px 0;
+    }
+    .product-info-modern h3 a {
+        font-size: 16px;
+        font-weight: 800;
+        color: #111;
+        text-decoration: none;
+        line-height: 1.4;
+    }
+    .product-desc {
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.5;
+    }
+    
+    .price-row {
+        margin-top: auto;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .current-price {
+        font-size: 22px;
+        font-weight: 900;
+        color: #111;
+    }
+    .old-price del {
+        font-size: 13px;
+        font-weight: 600;
+        color: #aaa;
+    }
+    
+    .product-action-modern {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    .btn-action-modern {
+        flex: 1;
+        text-align: center;
+        padding: 10px 5px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 13px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+    
+    .btn-cart {
+        background: #F7941D;
+        color: #ffffff !important;
+    }
+    
+    .btn-cart i {
+        color: #ffffff !important;
+    }
+    
+    .btn-cart:hover {
+        background: #F7941D;
+        filter: brightness(0.85);
+        color: #ffffff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-view {
+        background: #f4f5f7;
+        color: #333 !important;
+    }
+    
+    .btn-view i {
+        color: #333 !important;
+    }
+    
+    .btn-view:hover {
+        background: #e2e4e8;
+        color: #111 !important;
+        transform: translateY(-2px);
+    }
+    
+    .btn-soldout {
+        background: #e9ecef !important;
+        color: #888 !important;
+        cursor: not-allowed;
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+    }
+    .btn-soldout:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+
 		/* Rating */
 		.rating_box {
 		display: inline-flex;
@@ -507,7 +852,7 @@
 		float: right;
 		padding-left: 2px;
 		cursor: pointer;
-		color: #F7941D;
+		color: #F7941D !important;
 		font-size: 16px;
 		margin-top: 5px;
 		}
@@ -526,7 +871,38 @@
 		content: "\F005";
 		}
 
-	</style>
+	
+    /* FORCE THEME ORANGE OVERRIDES */
+    .product-des .short .price .discount, .price .discount, .price span.discount { color: #F7941D !important; }
+    .rating i, .ratings i, .rating li i, .rating-main .rating li i, .single-rating .rating i { color: #F7941D !important; }
+    .product-info .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active { color: #F7941D !important; border-bottom-color: #F7941D !important; background: transparent !important; background-color: transparent !important; }
+    .total-review { color: #F7941D !important; }
+    
+    /* FORCE HOVER OVERRIDES */
+    .product-info .nav-tabs .nav-link:hover, .nav-tabs .nav-item .nav-link:hover { color: #F7941D !important; background: transparent !important; background-color: transparent !important; border-bottom-color: #F7941D !important; }
+    .btn:hover, .button .btn:hover, .reply .btn:hover { background: #F7941D !important; background-color: #F7941D !important; color: #fff !important; border-color: #F7941D !important; filter: brightness(0.9) !important; }
+    a:hover { color: #F7941D !important; }
+    
+    /* FORCE HOVER OVERRIDES */
+    .product-info .nav-tabs .nav-link:hover, .nav-tabs .nav-item .nav-link:hover { color: #F7941D !important; background: transparent !important; background-color: transparent !important; border-bottom-color: #F7941D !important; }
+    .btn:hover, .button .btn:hover, .reply .btn:hover { background: #F7941D !important; background-color: #F7941D !important; color: #fff !important; border-color: #F7941D !important; filter: brightness(0.9) !important; }
+    .product-des .short .price .discount, .price .discount, .price span.discount { color: #F7941D !important; }
+    .rating i, .ratings i, .rating li i, .rating-main .rating li i, .single-rating .rating i { color: #F7941D !important; }
+    .product-info .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active { color: #F7941D !important; border-bottom-color: #F7941D !important; background: transparent !important; background-color: transparent !important; }
+    .total-review { color: #F7941D !important; }
+    
+    /* === OWL CAROUSEL IMAGE FIX === */
+    .owl-carousel .owl-item .product-img-modern img { height: 200px !important; width: 100% !important; object-fit: contain !important; display: block !important; margin: 0 auto !important; }
+    .card-badges { z-index: 10; }
+    .btn-wishlist-modern { z-index: 10; }
+    /* === OWL CAROUSEL ARROWS REDESIGN === */
+    .related-product .owl-carousel { position: relative; }
+    .related-product .owl-nav { margin: 0; }
+    .related-product .owl-nav .owl-prev, .related-product .owl-nav .owl-next { position: absolute !important; top: 50% !important; transform: translateY(-50%) !important; width: 45px !important; height: 45px !important; background: #fff !important; color: #F7941D !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important; font-size: 24px !important; line-height: 1 !important; transition: all 0.3s ease !important; z-index: 99; margin: 0 !important; padding: 0 !important; border: 2px solid transparent !important; }
+    .related-product .owl-nav .owl-prev { left: -15px !important; }
+    .related-product .owl-nav .owl-next { right: -15px !important; }
+    .related-product .owl-nav .owl-prev:hover, .related-product .owl-nav .owl-next:hover { background: #F7941D !important; color: #fff !important; border-color: #fff !important; }
+    </style>
 @endpush
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

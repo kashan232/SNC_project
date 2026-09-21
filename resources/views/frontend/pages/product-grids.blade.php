@@ -318,12 +318,12 @@
     .categor-list-modern li a:hover,
     .categor-list-modern li a.active {
         background: #fff0ef;
-        color: var(--primary-color);
+        color: #F7941D;
     }
     .categor-list-modern li a:hover .cat-icon,
     .categor-list-modern li a.active .cat-icon {
         background: #fff;
-        color: var(--primary-color);
+        color: #F7941D;
     }
     .categor-list-modern li a:hover .cat-icon img,
     .categor-list-modern li a.active .cat-icon img {
@@ -332,7 +332,7 @@
     }
     .categor-list-modern li a:hover .cat-count,
     .categor-list-modern li a.active .cat-count {
-        background: var(--primary-color);
+        background: #F7941D;
         color: #fff;
     }
     
@@ -346,7 +346,7 @@
         width: 18px;
         height: 18px;
         margin-right: 12px;
-        accent-color: var(--primary-color);
+        accent-color: #F7941D;
         cursor: pointer;
     }
     .custom-radio label {
@@ -611,7 +611,7 @@
     }
     
     .btn-cart {
-        background: var(--primary-color);
+        background: #F7941D;
         color: #ffffff !important;
     }
     
@@ -620,10 +620,11 @@
     }
     
     .btn-cart:hover {
-        background: #a04307;
+        background: #F7941D;
+        filter: brightness(0.85);
         color: #ffffff !important;
         transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(193, 84, 11, 0.2);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
     
     .btn-view {
