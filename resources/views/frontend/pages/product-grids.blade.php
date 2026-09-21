@@ -113,10 +113,10 @@
                             </div>
                         </div>
                         
-                        <div class="row modern-products-grid">
+                        <div class="row modern-products-grid" style="margin: 0 -5px;">
                             @if(count($products)>0)
                                 @foreach($products as $product)
-                                    <div class="col-lg-4 col-md-6 col-12 mb-4">
+                                    <div class="col-lg-4 col-md-6 col-6 mb-4" style="padding: 0 5px;">
                                         <div class="modern-product-card @if($product->stock<=0) card-soldout @endif">
                                             <!-- Top Badges -->
                                             <div class="card-badges">
@@ -655,7 +655,55 @@
         box-shadow: none;
     }
     
-</style>
+
+    @media (max-width: 768px) {
+        .shop-top-modern {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+        }
+        .shop-top-right {
+            width: 100%;
+        }
+        .search-bar-modern {
+            width: 100%;
+        }
+        .modern-search-input {
+            width: 100%;
+        }
+        
+        /* Buttons layout on mobile */
+        .product-action-modern {
+            flex-direction: column;
+            gap: 8px;
+        }
+        .btn-action-modern {
+            width: 100%;
+            padding: 8px 5px;
+            font-size: 12px;
+        }
+        
+        /* Reduce card padding on mobile */
+        .modern-product-card {
+            padding: 12px;
+            border-radius: 12px;
+        }
+        .product-info-modern h3 a {
+            font-size: 14px;
+        }
+        .current-price {
+            font-size: 16px;
+        }
+        .card-badges span {
+            font-size: 8px;
+            padding: 3px 6px;
+        }
+        .product-img-modern {
+            height: 120px;
+        }
+    }
+    </style>
 @endpush
 @push('scripts')
 <script>
