@@ -1506,6 +1506,72 @@
         });
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        // Featured Products Observer
+        var observerFeatured = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    anime({
+                        targets: '.most-popular .anime-card',
+                        translateY: [50, 0],
+                        opacity: [0, 1],
+                        easing: 'easeOutExpo',
+                        duration: 1000,
+                        delay: anime.stagger(150, {start: 100}),
+                        begin: function() {
+                            document.querySelectorAll('.most-popular .anime-card').forEach(function(el) {
+                                el.style.opacity = '1';
+                            });
+                        }
+                    });
+                    observer.disconnect();
+                }
+            });
+        }, observerOptions);
+
+        var targetFeatured = document.querySelector('.most-popular');
+        if (targetFeatured) {
+            observerFeatured.observe(targetFeatured);
+        }
+
+        // New Arrivals Observer
+        var observerNewArrivals = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    anime({
+                        targets: '.shop-home-list .anime-card-new',
+                        translateX: [-50, 0], // slide from left
+                        scale: [0.9, 1],
+                        opacity: [0, 1],
+                        easing: 'spring(1, 80, 10, 0)', // bouncy spring effect
+                        duration: 1200,
+                        delay: anime.stagger(100, {start: 50}),
+                        begin: function() {
+                            document.querySelectorAll('.shop-home-list .anime-card-new').forEach(function(el) {
+                                el.style.opacity = '1';
+                            });
+                        }
+                    });
+                    observer.disconnect();
+                }
+            });
+        }, observerOptions);
+
+        var targetNewArrivals = document.querySelector('.shop-home-list');
+        if (targetNewArrivals) {
+            observerNewArrivals.observe(targetNewArrivals);
+        }
+    });
+</script>
+
 @endpush
 <!-- End Categories Section -->
 
@@ -1532,7 +1598,7 @@
                     @foreach($product_lists as $product)
                     @if($product->condition=='hot')
                     <!-- Start Clean Product Card -->
-                    <div class="single-product clean-card">
+                    <div class="single-product clean-card anime-card" style="opacity: 0;">
                         <div class="product-img">
                             <a href="{{route('product-detail',$product->slug)}}">
                                 @php $photo=explode(',',$product->photo); @endphp
@@ -1583,7 +1649,7 @@
                             @endphp
                             @foreach($product_lists as $product)
                         <!-- Start Clean Product Card -->
-                        <div class="single-product clean-card">
+                        <div class="single-product clean-card anime-card-new" style="opacity: 0;">
                             <div class="product-img">
                                 <a href="{{route('product-detail',$product->slug)}}">
                                     @php $photo=explode(',',$product->photo); @endphp

@@ -31,6 +31,14 @@
                                 <div class="single-widget category-widget">
                                     <h3 class="widget-title"><i class="ti-list"></i> CATEGORIES</h3>
                                     <ul class="categor-list-modern">
+                                        <!-- All Categories -->
+                                        <li>
+                                            <a href="{{route('product-lists')}}" class="{{ Request::is('product-lists') ? 'active' : '' }}">
+                                                <span class="cat-icon"><i class="ti-layout-grid2"></i></span>
+                                                <span class="cat-name">All Items</span>
+                                                <span class="cat-count badge">{{App\Models\Product::where('status','active')->count()}}</span>
+                                            </a>
+                                        </li>
 										@php
 											$menu=App\Models\Category::getAllParentWithChild();
 										@endphp
@@ -100,13 +108,11 @@
                                 </h2>
                             </div>
                             <div class="shop-top-right">
-                                <label>Sort by:</label>
-                                <select class="modern-select" name="sortBy" onchange="document.getElementById('filter-form').submit();">
-                                    <option value="" @if(empty($_GET['sortBy'])) selected @endif>Recommended</option>
-                                    <option value="title" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='title') selected @endif>Name</option>
-                                    <option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Price</option>
-                                    <option value="category" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>Category</option>
-                                </select>
+                                <!-- Replaced Sort By with Search Bar -->
+                                <div class="search-bar-modern">
+                                    <input type="text" name="search" placeholder="Search products..." value="{{ request('search') }}" class="modern-search-input">
+                                    <button type="submit" class="modern-search-btn"><i class="ti-search"></i></button>
+                                </div>
                             </div>
                         </div>
                         
@@ -202,7 +208,7 @@
     
     /* Hero Section */
     .menu-hero-section {
-        background: linear-gradient(135deg, #111424 0%, #1a2235 100%);
+        background: var(--primary-color, #c1540b);
         padding: 50px 0 100px;
         color: #fff;
     }
@@ -265,50 +271,55 @@
         font-weight: 800 !important;
         color: #111;
         margin-bottom: 25px;
-        text-transform: uppercase;
         display: flex;
         align-items: center;
         gap: 10px;
-        letter-spacing: 0.5px;
+    }
+    .widget-title i {
+        color: var(--primary-color);
     }
     
+    /* Categories */
     .categor-list-modern {
         list-style: none;
         padding: 0;
         margin: 0;
     }
     .categor-list-modern li {
-        margin-bottom: 8px;
+        margin-bottom: 10px;
     }
     .categor-list-modern li a {
         display: flex;
         align-items: center;
-        padding: 12px 15px;
-        border-radius: 30px;
-        color: #444;
-        font-weight: 600;
-        font-size: 14px;
+        padding: 10px 15px;
+        color: #555;
         text-decoration: none;
+        border-radius: 12px;
         transition: all 0.3s ease;
-        background: transparent;
+        background: #f8f9fa;
+        font-weight: 500;
+        font-size: 14px;
     }
-    .categor-list-modern li a .cat-icon {
-        margin-right: 12px;
+    .cat-icon {
+        width: 32px;
+        height: 32px;
+        background: #fff;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 28px;
-        height: 28px;
-        background: #f4f5f7;
-        border-radius: 50%;
+        margin-right: 12px;
         color: #888;
-        font-size: 14px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        transition: all 0.3s;
     }
-    .categor-list-modern li a .cat-count {
-        margin-left: auto;
-        background: #f0f0f0;
-        color: #666;
-        padding: 5px 12px;
+    .cat-name {
+        flex-grow: 1;
+    }
+    .cat-count {
+        background: #eee;
+        color: #777;
+        padding: 4px 8px;
         border-radius: 20px;
         font-size: 12px;
         font-weight: 700;
@@ -337,36 +348,53 @@
     }
     
     /* Price Filter */
-    .custom-radio {
+    .price-filter-modern .custom-radio {
+        margin-bottom: 12px;
         display: flex;
         align-items: center;
-        margin-bottom: 15px;
     }
-    .custom-radio input[type="radio"] {
+    .price-filter-modern .custom-radio input[type="radio"] {
+        appearance: none;
         width: 18px;
         height: 18px;
-        margin-right: 12px;
-        accent-color: var(--primary-color);
+        border: 2px solid #ddd;
+        border-radius: 50%;
+        margin-right: 10px;
+        outline: none;
         cursor: pointer;
+        position: relative;
     }
-    .custom-radio label {
+    .price-filter-modern .custom-radio input[type="radio"]:checked {
+        border-color: var(--primary-color);
+    }
+    .price-filter-modern .custom-radio input[type="radio"]:checked::after {
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 8px;
+        height: 8px;
+        background: var(--primary-color);
+        border-radius: 50%;
+    }
+    .price-filter-modern .custom-radio label {
+        color: #555;
         font-size: 14px;
         font-weight: 500;
-        color: #444;
         cursor: pointer;
         margin: 0;
     }
     .btn-apply-filter {
         width: 100%;
         padding: 12px;
-        background: #f4f5f7;
-        color: #222;
+        background: #f1f3f5;
+        color: #333;
         border: none;
-        border-radius: 30px;
-        font-weight: 700;
-        font-size: 14px;
+        border-radius: 12px;
+        font-weight: 600;
         margin-top: 15px;
-        transition: all 0.3s ease;
+        cursor: pointer;
+        transition: background 0.3s;
     }
     .btn-apply-filter:hover {
         background: #e2e4e8;
@@ -394,22 +422,55 @@
         letter-spacing: 0.5px;
     }
     .shop-top-left .item-count {
-        font-size: 11px;
-        background: #f0f0f0;
-        color: #666;
+        font-size: 12px;
+        background: #f1f3f5;
         padding: 4px 10px;
         border-radius: 20px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
+        font-weight: 600;
+        color: #666;
     }
     .shop-top-right {
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-size: 13px;
-        font-weight: 600;
-        color: #666;
     }
+    
+    .search-bar-modern {
+        display: flex;
+        align-items: center;
+        background: #f8f9fa;
+        border-radius: 30px;
+        padding: 5px 15px;
+        border: 1px solid #e1e4e8;
+    }
+    
+    .modern-search-input {
+        border: none;
+        background: transparent;
+        padding: 8px 10px;
+        font-size: 14px;
+        outline: none;
+        width: 200px;
+        color: #333;
+    }
+    
+    .modern-search-btn {
+        background: var(--primary-color, #c1540b);
+        color: #fff;
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    
+    .modern-search-btn:hover {
+        background: #333;
+    }
+    
     .modern-select {
         border: 1px solid #eee;
         background: #fafafa;

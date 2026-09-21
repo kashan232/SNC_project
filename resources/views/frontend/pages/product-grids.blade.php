@@ -31,6 +31,14 @@
                                 <div class="single-widget category-widget">
                                     <h3 class="widget-title"><i class="ti-list"></i> CATEGORIES</h3>
                                     <ul class="categor-list-modern">
+                                        <!-- All Categories -->
+                                        <li>
+                                            <a href="{{route('product-grids')}}" class="{{ Request::is('product-grids') ? 'active' : '' }}">
+                                                <span class="cat-icon"><i class="ti-layout-grid2"></i></span>
+                                                <span class="cat-name">All Items</span>
+                                                <span class="cat-count badge">{{App\Models\Product::where('status','active')->count()}}</span>
+                                            </a>
+                                        </li>
 										@php
 											$menu=App\Models\Category::getAllParentWithChild();
 										@endphp
@@ -100,13 +108,11 @@
                                 </h2>
                             </div>
                             <div class="shop-top-right">
-                                <label>Sort by:</label>
-                                <select class="modern-select" name="sortBy" onchange="document.getElementById('filter-form').submit();">
-                                    <option value="" @if(empty($_GET['sortBy'])) selected @endif>Recommended</option>
-                                    <option value="title" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='title') selected @endif>Name</option>
-                                    <option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Price</option>
-                                    <option value="category" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>Category</option>
-                                </select>
+                                <!-- Replaced Sort By with Search Bar -->
+                                <div class="search-bar-modern">
+                                    <input type="text" name="search" placeholder="Search products..." value="{{ request('search') }}" class="modern-search-input">
+                                    <button type="submit" class="modern-search-btn"><i class="ti-search"></i></button>
+                                </div>
                             </div>
                         </div>
                         
@@ -196,7 +202,7 @@
     
     /* Hero Section */
     .menu-hero-section {
-        background: linear-gradient(135deg, #111424 0%, #1a2235 100%);
+        background: var(--primary-color, #c1540b);
         padding: 50px 0 100px;
         color: #fff;
     }
@@ -399,10 +405,43 @@
     .shop-top-right {
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-size: 13px;
-        font-weight: 600;
-        color: #666;
+    }
+    
+    .search-bar-modern {
+        display: flex;
+        align-items: center;
+        background: #f8f9fa;
+        border-radius: 30px;
+        padding: 5px 15px;
+        border: 1px solid #e1e4e8;
+    }
+    
+    .modern-search-input {
+        border: none;
+        background: transparent;
+        padding: 8px 10px;
+        font-size: 14px;
+        outline: none;
+        width: 200px;
+        color: #333;
+    }
+    
+    .modern-search-btn {
+        background: var(--primary-color, #c1540b);
+        color: #fff;
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    
+    .modern-search-btn:hover {
+        background: #333;
     }
     .modern-select {
         border: 1px solid #eee;
@@ -581,4 +620,25 @@
 </style>
 @endpush
 @push('scripts')
+<script>
+    $(document).ready(function() {
+        // DataTables-like Instant Search (Live Filter)
+        $('.modern-search-input').on('keyup', function() {
+            var value = $(this).val().toLowerCase();
+            var hasVisible = false;
+            
+            $('.modern-products-grid .col-lg-4').filter(function() {
+                var isVisible = $(this).text().toLowerCase().indexOf(value) > -1;
+                $(this).toggle(isVisible);
+                if(isVisible) hasVisible = true;
+            });
+            
+            // Optionally, we could show a "No products found" message here if !hasVisible
+        });
+        
+        // Prevent form submission if they press enter, let the live filter do its job, 
+        // OR allow form submission if they want to search server-side across all pages.
+        // We'll leave the form submission intact so they can search all pages if they hit Enter.
+    });
+</script>
 @endpush
