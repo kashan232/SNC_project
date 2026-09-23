@@ -4,29 +4,18 @@
 
 @section('main-content')
     <!-- Modern Hero Section -->
-    <div class="menu-hero-section" style="background-color: #0b1d2e; background-image: linear-gradient(to right, #0b1d2e 0%, #0b1d2e 45%, rgba(11, 29, 46, 0.4) 100%), url('{{asset('frontend/img/explore-banner-bg.png')}}'); background-position: right center; background-size: cover; background-repeat: no-repeat; padding: 60px 0 100px 0; position: relative;">
-        <div class="container" style="position: relative; z-index: 2;">
+    <div class="menu-hero-section">
+        <div class="container">
             <div class="row">
-                <div class="col-lg-7 col-md-9 col-12">
-                    <ul class="bread-list-modern" style="display: flex; align-items: center; list-style: none; padding: 0; margin: 0 0 15px 0; font-size: 13px; color: #fff;">
-                        <li><a href="{{route('home')}}" style="color: #fff; text-decoration: none;">Home</a></li>
-                        <li style="margin: 0 10px; color: #F7941D;"><i class="ti-angle-right" style="font-size: 10px;"></i></li>
-                        <li class="active" style="color: #fff; font-weight: 600;">Our Menu</li>
+                <div class="col-12">
+                    <ul class="bread-list-modern">
+                        <li><a href="{{route('home')}}">Home</a></li>
+                        <li><span>/</span></li>
+                        <li class="active">Our Menu</li>
                     </ul>
-                    <h1 class="hero-title" style="font-size: 48px; font-weight: 900; color: #fff; margin-bottom: 15px; letter-spacing: 1px;">EXPLORE OUR <span style="color: #F7941D;">MENU</span></h1>
-                    <p class="hero-subtitle" style="color: #e0e6ed; font-size: 15px; line-height: 1.6; font-weight: 400; max-width: 450px; margin-bottom: 0;">Premium quality Nimco, bakery items, and biscuits made with care and tradition.</p>
+                    <h1 class="hero-title">EXPLORE <span class="text-primary">MENU</span></h1>
                 </div>
             </div>
-        </div>
-        
-        <!-- Bottom Wave SVG to match mockup exactly -->
-        <div class="hero-wave" style="position: absolute; bottom: -2px; left: 0; width: 100%; overflow: hidden; line-height: 0; z-index: 1;">
-            <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 70px;">
-                <!-- Orange Outline Wave -->
-                <path d="M0,60 C320,120 420,0 720,40 C1020,80 1120,-20 1440,60 L1440,120 L0,120 Z" fill="#F7941D" transform="translate(0, -6)"></path>
-                <!-- White Fill Wave -->
-                <path d="M0,60 C320,120 420,0 720,40 C1020,80 1120,-20 1440,60 L1440,120 L0,120 Z" fill="#f8f9fa"></path>
-            </svg>
         </div>
     </div>
     
@@ -115,53 +104,14 @@
                                     <span class="item-count">{{count($products)}} ITEMS</span>
                                 </h2>
                             </div>
-                            <div class="shop-top-right d-flex align-items-center" style="gap: 15px;">
+                            <div class="shop-top-right">
+                                <!-- Replaced Sort By with Search Bar -->
                                 <div class="search-bar-modern">
                                     <input type="text" name="search" placeholder="Search products..." value="{{ request('search') }}" class="modern-search-input">
                                     <button type="submit" class="modern-search-btn"><i class="ti-search"></i></button>
                                 </div>
-                                <div class="sort-by-modern d-none d-lg-flex align-items-center">
-                                    <span style="font-size: 13px; font-weight: 600; color: #555; margin-right: 10px; white-space: nowrap;">Sort by</span>
-                                    <select class="modern-select" name="sortBy" onchange="this.form.submit();">
-                                        <option value="default">Featured</option>
-                                        <option value="title" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='title') selected @endif>Name</option>
-                                        <option value="price" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='price') selected @endif>Price</option>
-                                        <option value="category" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='category') selected @endif>Category</option>
-                                        <option value="brand" @if(!empty($_GET['sortBy']) && $_GET['sortBy']=='brand') selected @endif>Brand</option>
-                                    </select>
-                                </div>
                             </div>
                         </div>
-<!-- MOBILE SEARCH, FILTER & CATEGORIES (Matches Mockup exactly) -->
-<div class="mobile-filter-cat-area d-block d-lg-none mt-3 mb-4">
-    <!-- Filter Toggle Button for mobile -->
-    <button type="button" class="btn-mobile-filter mb-3" onclick="$('.sidebar-modern').toggle();">
-        <i class="ti-filter"></i> Filter
-    </button>
-    
-    <!-- Horizontal scrolling categories -->
-    <div class="mobile-categories-scroll">
-        <a href="{{route('product-grids')}}" class="mobile-cat-pill {{ Request::is('product-grids') ? 'active' : '' }}">
-            <i class="ti-layout-grid2" style="font-size:24px; margin-bottom:5px;"></i>
-            All Items
-        </a>
-        @php
-            $mobile_menu=App\Models\Category::getAllParentWithChild();
-        @endphp
-        @if($mobile_menu)
-            @foreach($mobile_menu as $cat_info)
-                <a href="{{route('product-cat',$cat_info->slug)}}" class="mobile-cat-pill {{ Request::is('product-cat/'.$cat_info->slug) ? 'active' : '' }}">
-                    @if(stripos($cat_info->title, 'nimco') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3256/3256114.png" alt="">
-                    @elseif(stripos($cat_info->title, 'biscuit') !== false) <img src="https://cdn-icons-png.flaticon.com/512/2619/2619574.png" alt="">
-                    @elseif(stripos($cat_info->title, 'sweet') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3014/3014491.png" alt="">
-                    @else <i class="ti-layout-list-thumb" style="font-size:24px; margin-bottom:5px;"></i> @endif
-                    {{$cat_info->title}}
-                </a>
-            @endforeach
-        @endif
-    </div>
-</div>
-
                         
                         <div class="row modern-products-grid" style="margin: 0 -5px;">
                             @if(count($products)>0)
@@ -207,8 +157,8 @@
                                                     <button type="button" class="btn-action-modern btn-soldout" disabled>OUT OF STOCK</button>
                                                 @else
                                                     <div class="product-action-modern">
-                                                        <a href="{{route('add-to-cart',$product->slug)}}" class="btn-action-modern btn-cart"><i class="ti-shopping-cart"></i> Add to Cart</a>
-                                                        <a href="{{route('product-detail',$product->slug)}}" class="btn-action-modern btn-view"><i class="ti-eye"></i> View Details</a>
+                                                        <a href="{{route('add-to-cart',$product->slug)}}" class="btn-action-modern btn-cart"><i class="ti-shopping-cart"></i> Cart</a>
+                                                        <a href="{{route('product-detail',$product->slug)}}" class="btn-action-modern btn-view"><i class="ti-eye"></i> View</a>
                                                     </div>
                                                 @endif
                                             </div>
@@ -290,12 +240,12 @@
     /* Desktop layout overrides */
     @media (min-width: 992px) {
         .product-page-sidebar {
-            margin-top: 20px;
+            margin-top: -80px;
             position: relative;
             z-index: 10;
         }
         .shop-top-modern {
-            margin-top: 20px;
+            margin-top: -80px;
             position: relative;
             z-index: 10;
         }
@@ -753,295 +703,7 @@
             height: 120px;
         }
     }
-    
-    /* OVERRIDES FOR PERFECT MOCKUP MATCH */
-    .product-action-modern {
-        display: flex;
-        gap: 10px;
-        margin-top: 15px;
-    }
-    .btn-action-modern {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        padding: 10px 5px !important;
-        border-radius: 8px !important;
-        font-weight: 600 !important;
-        font-size: 12px !important;
-        text-decoration: none !important;
-        transition: all 0.3s;
-        flex: 1; /* Equal width */
-    }
-    .btn-cart {
-        background: #F7941D !important;
-        color: #fff !important;
-        border: 1px solid #F7941D !important;
-    }
-    .btn-cart:hover {
-        background: #e08316 !important;
-        border-color: #e08316 !important;
-    }
-    .btn-view {
-        background: #fff !important;
-        color: #555 !important;
-        border: 1px solid #e0e0e0 !important;
-    }
-    .btn-view:hover {
-        border-color: #F7941D !important;
-        color: #F7941D !important;
-    }
-    
-    .price-row {
-        display: flex;
-        align-items: baseline;
-        gap: 8px;
-        margin-top: auto;
-        margin-bottom: 10px;
-    }
-    .current-price {
-        font-size: 18px !important;
-        font-weight: 800 !important;
-        color: #111 !important;
-    }
-    .old-price del {
-        font-size: 13px !important;
-        font-weight: 500 !important;
-        color: #aaa !important;
-    }
-    
-    .product-info-modern h3 a {
-        font-size: 15px !important;
-        font-weight: 700 !important;
-        color: #111 !important;
-    }
-    
-    .card-badges span {
-        font-size: 10px !important;
-        font-weight: 700 !important;
-        padding: 4px 8px !important;
-        border-radius: 4px !important;
-        color: #fff !important;
-        text-transform: uppercase !important;
-    }
-    .badge-bestseller { background: #F7941D !important; }
-    
-    .btn-wishlist-modern {
-        background: #fff !important;
-        border: 1px solid #eee !important;
-        color: #ff4757 !important;
-    }
-    
-    .modern-product-card {
-        border-radius: 12px !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.04) !important;
-        border: 1px solid #f5f5f5 !important;
-    }
-    
-    .widget-title {
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        color: #222 !important;
-    }
-    .widget-title i { display: none !important; }
-    
-    .categor-list-modern li a.active, .categor-list-modern li a:hover {
-        background: #fff0e6 !important;
-        color: #F7941D !important;
-    }
-    
-    .shop-top-modern {
-        border-radius: 12px !important;
-        padding: 15px 25px !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
-        border: 1px solid #f2f2f2 !important;
-    }
-    .shop-top-left h2 {
-        font-size: 18px !important;
-        font-weight: 700 !important;
-        color: #111 !important;
-    }
-    .modern-search-input {
-        background: #fafafa !important;
-        border-radius: 8px !important;
-    }
-    .modern-select {
-        background: #fafafa !important;
-        border-radius: 8px !important;
-    }
-    
-    /* Mobile specific fixes */
-    .btn-mobile-filter {
-        width: 100%;
-        background: #F7941D;
-        border: none;
-        border-radius: 8px;
-        padding: 12px;
-        font-weight: 600;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 15px;
-    }
-    .mobile-categories-scroll {
-        display: flex;
-        overflow-x: auto;
-        gap: 10px;
-        padding-bottom: 10px;
-        scrollbar-width: none;
-    }
-    .mobile-categories-scroll::-webkit-scrollbar { display: none; }
-    .mobile-cat-pill {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: #fff;
-        padding: 12px 10px;
-        border-radius: 12px;
-        min-width: 80px;
-        text-decoration: none !important;
-        color: #555;
-        font-size: 11px;
-        font-weight: 600;
-        border: 1px solid #eee;
-    }
-    .mobile-cat-pill.active {
-        background: #fff0e6;
-        color: #F7941D;
-        border-color: #ffd8cc;
-    }
-    .mobile-cat-pill img { width: 24px; height: 24px; margin-bottom: 8px; opacity: 0.6; }
-    .mobile-cat-pill.active img { opacity: 1; filter: sepia(1) hue-rotate(-50deg) saturate(5); }
-    
-    @media (max-width: 768px) {
-        .shop-top-modern { display: none !important; }
-        .modern-product-card { padding: 12px !important; }
-        .product-img-modern { height: 120px !important; margin-top: 10px !important; }
-        .product-info-modern h3 a { font-size: 13px !important; }
-        .product-desc { font-size: 11px !important; margin-bottom: 10px !important; }
-        .current-price { font-size: 15px !important; }
-        .old-price del { font-size: 11px !important; }
-        .btn-view { display: none !important; }
-        .btn-action-modern { padding: 8px 5px !important; font-size: 11px !important; }
-    }
-
-
-    /* CARD HEIGHT & GRID FIXES */
-    .modern-products-grid {
-        display: flex !important;
-        flex-wrap: wrap !important;
-    }
-    .modern-products-grid > [class*="col-"] {
-        display: flex !important;
-        flex-direction: column !important;
-        margin-bottom: 25px !important;
-    }
-    .modern-product-card {
-        flex: 1 1 auto !important; /* Forces card to stretch to match sibling heights */
-        width: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        overflow: hidden !important;
-    }
-    .product-info-modern {
-        display: flex !important;
-        flex-direction: column !important;
-        flex-grow: 1 !important; /* Takes up remaining space */
-    }
-    
-    /* Lock image container sizes */
-    .product-img-modern {
-        height: 180px !important;
-        min-height: 180px !important;
-        max-height: 180px !important;
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        margin: 10px 0 15px 0 !important;
-        overflow: hidden !important;
-    }
-    .product-img-modern img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: contain !important; /* Contains any image ratio inside the 180px box perfectly */
-    }
-    
-    /* Standardize Title & Desc Heights so they align beautifully */
-    .product-info-modern h3 {
-        margin-bottom: 5px !important;
-        min-height: 42px !important; /* Space for 2 lines */
-    }
-    .product-info-modern h3 a {
-        display: -webkit-box !important;
-        -webkit-line-clamp: 2 !important;
-        -webkit-box-orient: vertical !important;
-        overflow: hidden !important;
-        line-height: 1.4 !important;
-    }
-    
-    .product-desc {
-        min-height: 36px !important; /* Space for 2 lines */
-        margin-bottom: 15px !important;
-        display: -webkit-box !important;
-        -webkit-line-clamp: 2 !important;
-        -webkit-box-orient: vertical !important;
-        overflow: hidden !important;
-        line-height: 1.4 !important;
-    }
-    
-    /* Force price and buttons to the bottom */
-    .price-row {
-        margin-top: auto !important;
-        margin-bottom: 15px !important;
-    }
-    .product-action-modern {
-        margin-top: 0 !important; /* Auto handled by price-row */
-    }
-    
-    @media (max-width: 768px) {
-        .product-img-modern {
-            height: 120px !important;
-            min-height: 120px !important;
-            max-height: 120px !important;
-        }
-        .product-info-modern h3 {
-            min-height: 38px !important;
-        }
-        .product-desc {
-            min-height: 32px !important;
-            margin-bottom: 10px !important;
-        }
-    }
-
-
-    /* Fix top overlap */
-    @media (min-width: 992px) {
-        .product-page-sidebar, .col-lg-9, .shop-top-modern {
-            margin-top: 20px !important;
-        }
-    }
-
-
-    @media (max-width: 768px) {
-        .menu-hero-section {
-            padding: 40px 0 80px 0 !important;
-            background-image: linear-gradient(to right, rgba(11, 29, 46, 0.9) 0%, rgba(11, 29, 46, 0.8) 100%), url('{{asset('frontend/img/explore-banner-bg.png')}}') !important;
-        }
-        .hero-title {
-            font-size: 32px !important;
-        }
-        .hero-subtitle {
-            font-size: 14px !important;
-        }
-        .hero-wave svg {
-            height: 40px !important;
-        }
-    }
-
-</style>
+    </style>
 @endpush
 @push('scripts')
 <script>

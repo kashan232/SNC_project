@@ -35,269 +35,126 @@
 		<!-- End Breadcrumbs -->
 
 		<!-- Shop Single -->
-		<section class="shop single section">
-					<div class="container">
-						<div class="row">
-							<div class="col-12">
-								<div class="row">
-									<div class="col-lg-6 col-12">
-										<!-- Product Slider -->
-										<div class="product-gallery">
-											<!-- Images slider -->
-											<div class="flexslider-thumbnails">
-												<ul class="slides">
-													@php
-														$photo=explode(',',$product_detail->photo);
-													// dd($photo);
-													@endphp
-													@foreach($photo as $data)
-														<li data-thumb="{{$data}}" rel="adjustX:10, adjustY:">
-															<img src="{{$data}}" alt="{{$data}}">
-														</li>
-													@endforeach
-												</ul>
-											</div>
-											<!-- End Images slider -->
-										</div>
-										<!-- End Product slider -->
-									</div>
-									<div class="col-lg-6 col-12">
-										<div class="product-des">
-											<!-- Description -->
-											<div class="short">
-												<h4>{{$product_detail->title}}</h4>
-												<div class="rating-main">
-													<ul class="rating">
-														@php
-															$rate=ceil($product_detail->getReview->avg('rate'))
-														@endphp
-															@for($i=1; $i<=5; $i++)
-																@if($rate>=$i)
-																	<li><i class="fa fa-star"></i></li>
-																@else
-																	<li><i class="fa fa-star-o"></i></li>
-																@endif
-															@endfor
-													</ul>
-													<a href="#" class="total-review">({{$product_detail['getReview']->count()}}) Review</a>
-                                                </div>
-                                                @php
-                                                    $after_discount=($product_detail->price-(($product_detail->price*$product_detail->discount)/100));
-                                                @endphp
-												<p class="price"><span class="discount">Rs:{{number_format($after_discount,2)}}</span><s>Rs:{{number_format($product_detail->price,2)}}</s> </p>
-												<p class="description">{!!($product_detail->summary)!!}</p>
-											</div>
-											<!--/ End Description -->
-											<!-- Color -->
-											{{-- <div class="color">
-												<h4>Available Options <span>Color</span></h4>
-												<ul>
-													<li><a href="#" class="one"><i class="ti-check"></i></a></li>
-													<li><a href="#" class="two"><i class="ti-check"></i></a></li>
-													<li><a href="#" class="three"><i class="ti-check"></i></a></li>
-													<li><a href="#" class="four"><i class="ti-check"></i></a></li>
-												</ul>
-											</div> --}}
-											<!--/ End Color -->
-											<!-- Size -->
-											@if($product_detail->size)
-												<div class="size mt-4">
-													<h4>Size</h4>
-													<ul>
-														@php
-															$sizes=explode(',',$product_detail->size);
-															// dd($sizes);
-														@endphp
-														@foreach($sizes as $size)
-														<li><a href="#" class="one">{{$size}}</a></li>
-														@endforeach
-													</ul>
-												</div>
-											@endif
-											<!--/ End Size -->
-											<!-- Product Buy -->
-											<div class="product-buy">
-												<form action="{{route('single-add-to-cart')}}" method="POST">
-													@csrf
-													<div class="quantity">
-														<h6>Quantity :</h6>
-														<!-- Input Order -->
-														<div class="input-group">
-															<div class="button minus">
-																<button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-																	<i class="ti-minus"></i>
-																</button>
-															</div>
-															<input type="hidden" name="slug" value="{{$product_detail->slug}}">
-															<input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="1000" value="1" id="quantity">
-															<div class="button plus">
-																<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
-																	<i class="ti-plus"></i>
-																</button>
-															</div>
-														</div>
-													<!--/ End Input Order -->
-													</div>
-													<div class="add-to-cart mt-4">
-														<button type="submit" class="btn">Add to cart</button>
-														<a href="{{route('add-to-wishlist',$product_detail->slug)}}" class="btn min"><i class="ti-heart"></i></a>
-													</div>
-												</form>
-
-												<p class="cat mt-3" style="font-weight:600; color:#444;">Category: <a href="{{route('product-cat',$product_detail->cat_info['slug'])}}" class="cat-badge">{{$product_detail->cat_info['title']}}</a></p>
-												@if($product_detail->sub_cat_info)
-												<p class="cat mt-2" style="font-weight:600; color:#444;">Sub Category: <a href="{{route('product-sub-cat',[$product_detail->cat_info['slug'],$product_detail->sub_cat_info['slug']])}}" class="cat-badge">{{$product_detail->sub_cat_info['title']}}</a></p>
-												@endif
-												<p class="availability mt-3" style="font-weight:600; color:#444;">Stock: 
-													@if($product_detail->stock>0)
-														<span class="badge badge-success" style="padding: 6px 12px; font-size:13px; border-radius:6px; margin-left:10px;">{{$product_detail->stock}} Available</span>
-													@else 
-														<span class="badge badge-danger" style="padding: 6px 12px; font-size:13px; border-radius:6px; margin-left:10px;">Out of Stock</span>  
-													@endif
-												</p>
-											</div>
-											<!--/ End Product Buy -->
-										</div>
-									</div>
+		<section class="shop single section py-4">
+			<div class="container">
+				<div class="snc-product-detail-card mb-4 p-4">
+					<div class="row align-items-center">
+						<!-- Gallery Column -->
+						<div class="col-lg-6 col-12 mb-4 mb-lg-0">
+							<div class="snc-gallery-wrapper position-relative">
+								<span class="badge-bestseller-floating"><i class="fa fa-star text-warning"></i> Best Seller</span>
+								<a href="{{route('add-to-wishlist',$product_detail->slug)}}" class="btn-wishlist-top-right"><i class="fa fa-heart-o"></i></a>
+								
+								<div class="snc-main-image-container mb-3 position-relative text-center">
+									@php
+										$photo=explode(',',$product_detail->photo);
+									@endphp
+									<img id="sncMainImage" src="{{$photo[0]}}" alt="{{$product_detail->title}}" class="img-fluid py-3">
 								</div>
-								<div class="row">
-									<div class="col-12">
-										<div class="product-info">
-											<div class="nav-main">
-												<!-- Tab Nav -->
-												<ul class="nav nav-tabs" id="myTab" role="tablist">
-													<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#description" role="tab">Description</a></li>
-													<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews</a></li>
-												</ul>
-												<!--/ End Tab Nav -->
+								
+								<!-- Thumbnails Grid -->
+								@if(count($photo) > 1)
+									<div class="snc-thumbnails-grid">
+										@foreach($photo as $key => $data)
+											<div class="snc-thumb-item @if($key==0) active @endif" onclick="changeSncImage(this, '{{$data}}')">
+												<img src="{{$data}}" alt="thumb" class="img-fluid">
 											</div>
-											<div class="tab-content" id="myTabContent">
-												<!-- Description Tab -->
-												<div class="tab-pane fade show active" id="description" role="tabpanel">
-													<div class="tab-single">
-														<div class="row">
-															<div class="col-12">
-																<div class="single-des">
-																	<p>{!! ($product_detail->description) !!}</p>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<!--/ End Description Tab -->
-												<!-- Reviews Tab -->
-												<div class="tab-pane fade" id="reviews" role="tabpanel">
-													<div class="tab-single review-panel">
-														<div class="row">
-															<div class="col-12">
+										@endforeach
+									</div>
+								@endif
+							</div>
+						</div>
 
-																<!-- Review -->
-																<div class="comment-review">
-																	<div class="add-review">
-																		<h5>Add A Review</h5>
-																		<p>Your email address will not be published. Required fields are marked</p>
-																	</div>
-																	<h4>Your Rating <span class="text-danger">*</span></h4>
-																	<div class="review-inner">
-																			<!-- Form -->
-																@auth
-																<form class="form" method="post" action="{{route('review.store',$product_detail->slug)}}">
-                                                                    @csrf
-                                                                    <div class="row">
-                                                                        <div class="col-lg-12 col-12">
-                                                                            <div class="rating_box">
-                                                                                  <div class="star-rating">
-                                                                                    <div class="star-rating__wrap">
-                                                                                      <input class="star-rating__input" id="star-rating-5" type="radio" name="rate" value="5">
-                                                                                      <label class="star-rating__ico fa fa-star-o" for="star-rating-5" title="5 out of 5 stars"></label>
-                                                                                      <input class="star-rating__input" id="star-rating-4" type="radio" name="rate" value="4">
-                                                                                      <label class="star-rating__ico fa fa-star-o" for="star-rating-4" title="4 out of 5 stars"></label>
-                                                                                      <input class="star-rating__input" id="star-rating-3" type="radio" name="rate" value="3">
-                                                                                      <label class="star-rating__ico fa fa-star-o" for="star-rating-3" title="3 out of 5 stars"></label>
-                                                                                      <input class="star-rating__input" id="star-rating-2" type="radio" name="rate" value="2">
-                                                                                      <label class="star-rating__ico fa fa-star-o" for="star-rating-2" title="2 out of 5 stars"></label>
-                                                                                      <input class="star-rating__input" id="star-rating-1" type="radio" name="rate" value="1">
-																					  <label class="star-rating__ico fa fa-star-o" for="star-rating-1" title="1 out of 5 stars"></label>
-																					  @error('rate')
-																						<span class="text-danger">{{$message}}</span>
-																					  @enderror
-                                                                                    </div>
-                                                                                  </div>
-                                                                            </div>
-                                                                        </div>
-																		<div class="col-lg-12 col-12">
-																			<div class="form-group">
-																				<label>Write a review</label>
-																				<textarea name="review" rows="6" placeholder="" ></textarea>
-																			</div>
-																		</div>
-																		<div class="col-lg-12 col-12">
-																			<div class="form-group button5">
-																				<button type="submit" class="btn">Submit</button>
-																			</div>
-																		</div>
-																	</div>
-																</form>
-																@else
-																<p class="text-center p-5">
-																	You need to <a href="{{route('login.form')}}" style="color:rgb(54, 54, 204)">Login</a> OR <a style="color:blue" href="{{route('register.form')}}">Register</a>
+						<!-- Info Column -->
+						<div class="col-lg-6 col-12">
+							<div class="snc-product-info-wrap">
+								<div class="mb-2">
+									<span class="snc-stock-badge">
+										<i class="fa fa-check-circle mr-1"></i> In Stock
+									</span>
+								</div>
 
-																</p>
-																<!--/ End Form -->
-																@endauth
-																	</div>
-																</div>
+								<h2 class="snc-product-title">{{$product_detail->title}}</h2>
 
-																<div class="ratting-main">
-																	<div class="avg-ratting">
-																		{{-- @php
-																			$rate=0;
-																			foreach($product_detail->rate as $key=>$rate){
-																				$rate +=$rate
-																			}
-																		@endphp --}}
-																		<h4>{{ceil($product_detail->getReview->avg('rate'))}} <span>(Overall)</span></h4>
-																		<span>Based on {{$product_detail->getReview->count()}} Comments</span>
-																	</div>
-																	@foreach($product_detail['getReview'] as $data)
-																	<!-- Single Rating -->
-																	<div class="single-rating">
-																		<div class="rating-author">
-																			@if($data->user_info['photo'])
-																			<img src="{{$data->user_info['photo']}}" alt="{{$data->user_info['photo']}}">
-																			@else
-																			<img src="{{asset('backend/img/avatar.png')}}" alt="Profile.jpg">
-																			@endif
-																		</div>
-																		<div class="rating-des">
-																			<h6>{{$data->user_info['name']}}</h6>
-																			<div class="ratings">
+								<!-- Rating -->
+								<div class="snc-rating-row mb-3">
+									<div class="rating-stars text-warning">
+										@php $rate=ceil($product_detail->getReview->avg('rate')) @endphp
+										@for($i=1; $i<=5; $i++)
+											@if($rate>=$i)<i class="fa fa-star"></i>@else<i class="fa fa-star-o text-muted"></i>@endif
+										@endfor
+									</div>
+									<span class="text-muted small ml-2">({{$product_detail['getReview']->count()}} Reviews)</span>
+								</div>
 
-																				<ul class="rating">
-																					@for($i=1; $i<=5; $i++)
-																						@if($data->rate>=$i)
-																							<li><i class="fa fa-star"></i></li>
-																						@else
-																							<li><i class="fa fa-star-o"></i></li>
-																						@endif
-																					@endfor
-																				</ul>
-																				<div class="rate-count">(<span>{{$data->rate}}</span>)</div>
-																			</div>
-																			<p>{{$data->review}}</p>
-																		</div>
-																	</div>
-																	<!--/ End Single Rating -->
-																	@endforeach
-																</div>
+								<!-- Price Row -->
+								@php
+									$after_discount=($product_detail->price-(($product_detail->price*$product_detail->discount)/100));
+								@endphp
+								<div class="snc-price-row mb-3">
+									<span class="snc-current-price">Rs: {{number_format($after_discount, 2)}}</span>
+									@if($product_detail->discount > 0)
+										<span class="snc-old-price ml-2">Rs: {{number_format($product_detail->price, 2)}}</span>
+										<span class="snc-discount-badge ml-2">- {{$product_detail->discount}}% OFF</span>
+									@endif
+								</div>
 
-																<!--/ End Review -->
+								<!-- Short Summary -->
+								<p class="snc-summary-text mb-4">{!! strip_tags($product_detail->summary) !!}</p>
 
-															</div>
-														</div>
-													</div>
-												</div>
-												<!--/ End Reviews Tab -->
+								<!-- Size Selection -->
+								@if($product_detail->size)
+									<div class="snc-size-wrapper mb-4">
+										<label class="snc-label">Size</label>
+										<div class="d-flex flex-wrap">
+											@php $sizes=explode(',',$product_detail->size); @endphp
+											@foreach($sizes as $key => $size)
+												<button type="button" class="snc-size-btn @if($key==0) active @endif" onclick="selectSncSize(this)">{{$size}}</button>
+											@endforeach
+										</div>
+									</div>
+								@endif
+
+								<!-- Quantity & Cart Form -->
+								<form action="{{route('single-add-to-cart')}}" method="POST" class="mb-4">
+									@csrf
+									<input type="hidden" name="slug" value="{{$product_detail->slug}}">
+									<div class="snc-qty-row mb-4">
+										<label class="snc-label mb-0 mr-3">Quantity</label>
+										<div class="snc-qty-stepper">
+											<button type="button" class="snc-qty-btn" onclick="decreaseQty()"><i class="fa fa-minus"></i></button>
+											<input type="text" name="quant[1]" id="sncQtyInput" class="snc-qty-input" value="1" readonly>
+											<button type="button" class="snc-qty-btn" onclick="increaseQty()"><i class="fa fa-plus"></i></button>
+										</div>
+									</div>
+
+									<div class="d-flex align-items-center">
+										<button type="submit" class="snc-add-cart-btn">
+											<i class="fa fa-shopping-cart mr-2"></i> Add to Cart
+										</button>
+										<a href="{{route('add-to-wishlist',$product_detail->slug)}}" class="snc-wishlist-circle-btn ml-3" title="Add to Wishlist">
+											<i class="fa fa-heart-o"></i>
+										</a>
+									</div>
+								</form>
+
+								<!-- Meta Details -->
+								<div class="row pt-3 border-top">
+									<div class="col-6">
+										<div class="snc-meta-box">
+											<i class="fa fa-th-large text-success fs-5 mr-2"></i>
+											<div>
+												<span class="snc-meta-label">Category</span>
+												<a href="{{route('product-cat',$product_detail->cat_info['slug'])}}" class="snc-meta-value">{{$product_detail->cat_info['title']}}</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="snc-meta-box">
+											<i class="fa fa-cubes text-success fs-5 mr-2"></i>
+											<div>
+												<span class="snc-meta-label">Stock</span>
+												<span class="snc-stock-pill">{{$product_detail->stock}} Available</span>
 											</div>
 										</div>
 									</div>
@@ -305,6 +162,87 @@
 							</div>
 						</div>
 					</div>
+				</div>
+
+				<!-- Description / Feature Banner Section -->
+				<div class="snc-tab-card mb-5">
+					<div class="snc-tab-header">
+						<ul class="nav nav-tabs border-0" id="productTabs">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="tab" href="#descTab">Description</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#reviewTab">Reviews ({{$product_detail['getReview']->count()}})</a>
+							</li>
+						</ul>
+					</div>
+					<div class="snc-tab-body">
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="descTab">
+								<div class="row align-items-center">
+									<div class="col-md-6 border-right">
+										<div class="d-flex align-items-center mb-3">
+											<span class="snc-feature-icon-lg"><i class="fa fa-leaf"></i></span>
+											<div class="ml-3">
+												<h6 class="font-weight-bold mb-0 text-dark">Premium Quality Snacks</h6>
+												<p class="text-muted small mb-0">Enjoy the best quality snacks from Shoukat Nimco Center.</p>
+											</div>
+										</div>
+										<div class="text-muted small" style="line-height: 1.7;">
+											{!! $product_detail->description !!}
+										</div>
+									</div>
+									<div class="col-md-6 mt-4 mt-md-0">
+										<div class="row">
+											<div class="col-4 text-center">
+												<div class="snc-feature-pill-card">
+													<i class="fa fa-leaf text-success mb-2" style="font-size:24px;"></i>
+													<h6 class="font-weight-bold small mb-1">100% Natural</h6>
+													<span class="text-muted d-block" style="font-size: 10px;">Ingredients</span>
+												</div>
+											</div>
+											<div class="col-4 text-center">
+												<div class="snc-feature-pill-card">
+													<i class="fa fa-shield text-success mb-2" style="font-size:24px;"></i>
+													<h6 class="font-weight-bold small mb-1">Hygienically</h6>
+													<span class="text-muted d-block" style="font-size: 10px;">Packed</span>
+												</div>
+											</div>
+											<div class="col-4 text-center">
+												<div class="snc-feature-pill-card">
+													<i class="fa fa-truck text-success mb-2" style="font-size:24px;"></i>
+													<h6 class="font-weight-bold small mb-1">Fast & Reliable</h6>
+													<span class="text-muted d-block" style="font-size: 10px;">Delivery</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="reviewTab">
+								<div class="comments-section">
+									@foreach($product_detail['getReview'] as $rev)
+										<div class="d-flex mb-3 p-3 bg-light rounded-16">
+											<div class="font-weight-bold bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; min-width: 40px;">
+												{{ strtoupper(substr($rev->user_info['name'] ?? 'U', 0, 1)) }}
+											</div>
+											<div class="ml-3">
+												<h6 class="font-weight-bold mb-1 small">{{ $rev->user_info['name'] ?? 'Anonymous' }}</h6>
+												<div class="text-warning small mb-1">
+													@for($i=1;$i<=5;$i++)
+														@if($rev->rate>=$i)<i class="fa fa-star"></i>@else<i class="fa fa-star-o text-muted"></i>@endif
+													@endfor
+												</div>
+												<p class="text-muted mb-0 small">{{ $rev->review }}</p>
+											</div>
+										</div>
+									@endforeach
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 		<!--/ End Shop Single -->
 
@@ -500,6 +438,341 @@
 @endsection
 @push('styles')
 	<style>
+		/* Custom SNC Product Detail Layout & Styling */
+		.snc-product-detail-card {
+			background: #ffffff;
+			border-radius: 24px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+			border: 1px solid #f0f0f0;
+		}
+
+		.badge-bestseller-floating {
+			position: absolute;
+			top: 15px;
+			left: 15px;
+			background: #fff8e7;
+			color: #d97706;
+			font-weight: 700;
+			font-size: 11px;
+			padding: 6px 14px;
+			border-radius: 20px;
+			border: 1px solid #fef3c7;
+			z-index: 10;
+		}
+
+		.btn-wishlist-top-right {
+			position: absolute;
+			top: 15px;
+			right: 15px;
+			width: 36px;
+			height: 36px;
+			border-radius: 50%;
+			background: #ffffff;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #666;
+			z-index: 10;
+			transition: all 0.2s ease;
+		}
+
+		.btn-wishlist-top-right:hover {
+			color: #e11d48;
+			background: #fff1f2;
+		}
+
+		.snc-main-image-container {
+			background: #f8fafc;
+			border-radius: 20px;
+			padding: 20px;
+			min-height: 340px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.snc-main-image-container img {
+			max-height: 320px;
+			object-fit: contain;
+		}
+
+		.snc-thumbnails-grid {
+			display: flex;
+			gap: 10px;
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+
+		.snc-thumb-item {
+			width: 65px;
+			height: 65px;
+			border-radius: 12px;
+			border: 2px solid #e2e8f0;
+			padding: 4px;
+			cursor: pointer;
+			background: #fff;
+			transition: all 0.2s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.snc-thumb-item.active {
+			border-color: #166534 !important;
+		}
+
+		.snc-thumb-item img {
+			max-height: 100%;
+			max-width: 100%;
+			object-fit: contain;
+		}
+
+		.snc-stock-badge {
+			display: inline-block;
+			background: #dcfce7;
+			color: #166534;
+			font-weight: 700;
+			font-size: 11px;
+			padding: 4px 12px;
+			border-radius: 20px;
+		}
+
+		.snc-product-title {
+			font-size: 28px;
+			font-weight: 900;
+			color: #1e293b;
+			margin-bottom: 8px;
+			line-height: 1.3;
+		}
+
+		.snc-rating-row {
+			display: flex;
+			align-items: center;
+		}
+
+		.snc-price-row {
+			display: flex;
+			align-items: baseline;
+		}
+
+		.snc-current-price {
+			font-size: 32px;
+			font-weight: 900;
+			color: #166534 !important;
+		}
+
+		.snc-old-price {
+			font-size: 18px;
+			color: #94a3b8;
+			text-decoration: line-through;
+		}
+
+		.snc-discount-badge {
+			background: #dcfce7;
+			color: #166534;
+			font-weight: 700;
+			font-size: 11px;
+			padding: 4px 10px;
+			border-radius: 20px;
+		}
+
+		.snc-summary-text {
+			color: #64748b;
+			font-size: 13px;
+			line-height: 1.6;
+		}
+
+		.snc-label {
+			font-size: 12px;
+			font-weight: 700;
+			color: #1e293b;
+			display: block;
+			margin-bottom: 6px;
+		}
+
+		.snc-size-btn {
+			background: #ffffff;
+			border: 1px solid #cbd5e1;
+			color: #334155;
+			padding: 6px 16px;
+			border-radius: 8px;
+			font-weight: 700;
+			font-size: 13px;
+			margin-right: 8px;
+			margin-bottom: 8px;
+			cursor: pointer;
+			transition: all 0.2s ease;
+		}
+
+		.snc-size-btn.active, .snc-size-btn:hover {
+			background: #1e293b;
+			color: #ffffff;
+			border-color: #1e293b;
+		}
+
+		.snc-qty-row {
+			display: flex;
+			align-items: center;
+		}
+
+		.snc-qty-stepper {
+			display: inline-flex;
+			align-items: center;
+			border: 1px solid #cbd5e1;
+			border-radius: 30px;
+			overflow: hidden;
+			background: #f8fafc;
+		}
+
+		.snc-qty-btn {
+			border: none;
+			background: transparent;
+			padding: 6px 14px;
+			color: #334155;
+			cursor: pointer;
+			transition: background 0.2s;
+		}
+
+		.snc-qty-btn:hover {
+			background: #e2e8f0;
+		}
+
+		.snc-qty-input {
+			width: 45px;
+			border: none;
+			background: transparent;
+			text-align: center;
+			font-weight: 700;
+			color: #1e293b;
+		}
+
+		.snc-add-cart-btn {
+			background: #166534 !important;
+			color: #ffffff !important;
+			border: none;
+			padding: 12px 28px;
+			border-radius: 30px;
+			font-weight: 700;
+			font-size: 15px;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 4px 12px rgba(22, 101, 52, 0.25);
+			transition: all 0.2s ease;
+			flex: 1;
+		}
+
+		.snc-add-cart-btn:hover {
+			background: #14532d !important;
+			transform: translateY(-2px);
+			box-shadow: 0 6px 16px rgba(22, 101, 52, 0.35);
+		}
+
+		.snc-wishlist-circle-btn {
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			border: 1px solid #cbd5e1;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			color: #64748b;
+			font-size: 18px;
+			text-decoration: none !important;
+			transition: all 0.2s ease;
+		}
+
+		.snc-wishlist-circle-btn:hover {
+			color: #e11d48;
+			border-color: #fda4af;
+			background: #fff1f2;
+		}
+
+		.snc-meta-box {
+			background: #f8fafc;
+			padding: 10px 14px;
+			border-radius: 12px;
+			display: flex;
+			align-items: center;
+		}
+
+		.snc-meta-label {
+			display: block;
+			font-size: 10px;
+			color: #94a3b8;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+		}
+
+		.snc-meta-value {
+			font-weight: 700;
+			font-size: 12px;
+			color: #1e293b;
+			text-decoration: none !important;
+		}
+
+		.snc-stock-pill {
+			background: #166534;
+			color: #fff;
+			font-size: 10px;
+			font-weight: 700;
+			padding: 2px 8px;
+			border-radius: 10px;
+		}
+
+		.snc-tab-card {
+			background: #fff;
+			border-radius: 20px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+			border: 1px solid #f0f0f0;
+			overflow: hidden;
+		}
+
+		.snc-tab-header {
+			background: #fff;
+			border-bottom: 1px solid #f1f5f9;
+			padding: 10px 20px 0 20px;
+		}
+
+		.snc-tab-header .nav-link {
+			border: none !important;
+			font-weight: 700;
+			color: #64748b !important;
+			padding: 12px 24px;
+			font-size: 14px;
+			background: transparent !important;
+			border-bottom: 3px solid transparent !important;
+		}
+
+		.snc-tab-header .nav-link.active {
+			color: #166534 !important;
+			border-bottom-color: #166534 !important;
+		}
+
+		.snc-tab-body {
+			padding: 24px;
+		}
+
+		.snc-feature-icon-lg {
+			width: 44px;
+			height: 44px;
+			border-radius: 50%;
+			background: #dcfce7;
+			color: #166534;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 20px;
+		}
+
+		.snc-feature-pill-card {
+			background: #f8fafc;
+			border-radius: 16px;
+			padding: 16px 8px;
+		}
+
 		/* Modern Product Detail Styles */
 		.shop.single.section {
 			background: #fdfdfd;
@@ -906,38 +1179,30 @@
 @endpush
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script>
+	function changeSncImage(element, src) {
+		$('#sncMainImage').attr('src', src);
+		$('.snc-thumb-item').removeClass('active border-success').addClass('border');
+		$(element).addClass('active border-success').removeClass('border');
+	}
 
-    {{-- <script>
-        $('.cart').click(function(){
-            var quantity=$('#quantity').val();
-            var pro_id=$(this).data('id');
-            // alert(quantity);
-            $.ajax({
-                url:"{{route('add-to-cart')}}",
-                type:"POST",
-                data:{
-                    _token:"{{csrf_token()}}",
-                    quantity:quantity,
-                    pro_id:pro_id
-                },
-                success:function(response){
-                    console.log(response);
-					if(typeof(response)!='object'){
-						response=$.parseJSON(response);
-					}
-					if(response.status){
-						swal('success',response.msg,'success').then(function(){
-							document.location.href=document.location.href;
-						});
-					}
-					else{
-                        swal('error',response.msg,'error').then(function(){
-							document.location.href=document.location.href;
-						});
-                    }
-                }
-            })
-        });
-    </script> --}}
+	function selectSncSize(element) {
+		$('.snc-size-btn').removeClass('active btn-dark').addClass('btn-outline-dark');
+		$(element).addClass('active btn-dark').removeClass('btn-outline-dark');
+	}
 
+	function increaseQty() {
+		var input = $('#sncQtyInput');
+		var currentVal = parseInt(input.val()) || 1;
+		input.val(currentVal + 1);
+	}
+
+	function decreaseQty() {
+		var input = $('#sncQtyInput');
+		var currentVal = parseInt(input.val()) || 1;
+		if (currentVal > 1) {
+			input.val(currentVal - 1);
+		}
+	}
+</script>
 @endpush

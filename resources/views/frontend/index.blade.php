@@ -1260,7 +1260,117 @@
         transform: scale(1.2) rotate(15deg) !important; /* Fun rotation on hover */
         box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
     }
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(247, 148, 29, 0.3); /* Theme color shadow */
+    background: #F7941D; /* Theme color background */
+}
+.explore-card:hover .explore-img-wrap {
+    background-color: #fff !important; /* Force image background to white on hover */
+}
+.explore-info h3 {
+    transition: color 0.4s ease;
+}
+.explore-card:hover .explore-info h3 {
+    color: #fff; /* Text turns white */
+}
+.explore-card:hover .explore-btn {
+    background: #fff;
+    color: #F7941D;
+    transform: scale(1.1);
+}
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* LEAVES BACKGROUND */
+.explore-menu-section {
+    position: relative;
+    overflow: hidden; /* contain leaves */
+}
+.explore-bg-leaf {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(4px);
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="%236da45b" d="M498.4 46.2c-5.7-18.1-23.7-27.1-41.8-21.4-18.1 5.7-27.1 23.7-21.4 41.8 17.5 55.4 13.9 116.1-13.4 171-29.4-14.7-64.8-19.6-99.3-11.4-69.2 16.5-120.3 75.3-127.1 146l-46.7-46.7c-13.3-13.3-34.9-13.3-48.2 0l-57.1 57.1c-13.3 13.3-13.3 34.9 0 48.2l45.4 45.4-78.1 78.1c-13.3 13.3-13.3 34.9 0 48.2s34.9 13.3 48.2 0l78.1-78.1 45.4 45.4c13.3 13.3 34.9 13.3 48.2 0l57.1-57.1c13.3-13.3 13.3-34.9 0-48.2l-46.7-46.7c70.7-6.8 129.5-57.9 146-127.1 8.2-34.5 3.3-69.9-11.4-99.3 54.9-27.3 115.6-30.9 171-13.4 18.1 5.7 36.1-3.3 41.8-21.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.explore-leaf-top-right {
+    top: -30px;
+    right: -30px;
+    transform: rotate(45deg);
+    width: 250px;
+    height: 250px;
+    filter: blur(8px);
+}
+.explore-leaf-bottom-left {
+    bottom: -30px;
+    left: -30px;
+    transform: rotate(-135deg);
+    width: 200px;
+    height: 200px;
+    filter: blur(6px);
+}
+
+/* FORCE ARROW CENTERING AND STYLE */
+section.explore-menu-section .explore-slider.owl-carousel .owl-nav {
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translateY(-50%) !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+}
+
+section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-prev,
+section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next {
+    position: absolute !important;
+    top: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translateY(-50%) !important;
+    width: 45px !important;
+    height: 45px !important;
+    background: #fff !important;
+    color: #333 !important;
+    border: 1px solid #eee !important;
+    border-radius: 50% !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+    pointer-events: auto !important;
+    font-size: 18px !important;
+    transition: all 0.3s ease !important;
+}
+
+section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-prev {
+    left: -20px !important;
+}
+
+section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next {
+    right: -20px !important;
+}
+
+section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-prev:hover,
+section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:hover {
+    background: #F7941D !important;
+    color: #fff !important;
+    border-color: #F7941D !important;
+}
 </style>
+
 
 <!-- Slider Area -->
 @if(count($banners)>0)
@@ -1302,179 +1412,315 @@
 
 <!-- Start Categories Section (Carousel) -->
 <style>
-    /* EXPLORE MENU DESIGN */
-    .kfc-category-section {
-        padding: 60px 0;
-        background-color: #fcf8f2;
-        background-image: url('https://www.transparenttextures.com/patterns/food.png'); /* Fallback pattern */
-        position: relative;
-    }
-    
-    .kfc-header-wrap {
-        display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
+/* EXPLORE MENU DESIGN */
+.explore-menu-section {
+    padding: 80px 0;
+    background-color: #fcf9f2 !important;
+    background-image: url('{{ asset("frontend/images/explore-bg.jpg") }}') !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.explore-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+
+.explore-subtitle {
+    font-size: 13px;
+    font-weight: 700;
+    color: #F7941D;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.explore-subtitle .line {
+    width: 40px;
+    height: 2px;
+    background-color: #F7941D;
+    display: inline-block;
+}
+
+.explore-title {
+    font-size: 42px;
+    font-weight: 900;
+    color: #222;
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+}
+
+.explore-title .text-orange {
+    color: #F7941D;
+}
+
+.explore-desc {
+    font-size: 14px;
+    color: #777;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.explore-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 25px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+.explore-view-all:hover {
+    background: #F7941D;
+    border-color: #F7941D;
+    color: #fff;
+}
+
+/* CAROUSEL EQUAL HEIGHTS */
+.explore-slider .owl-stage {
+    display: flex;
+    align-items: stretch;
+}
+.explore-slider .owl-item {
+    display: flex;
+}
+
+/* CARD */
+.explore-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    text-decoration: none !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    margin: 15px 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* IMAGE WRAPPER */
+.explore-img-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* 1:1 Aspect Ratio */
+    margin-bottom: 15px;
+    display: block; /* Fixed to block so padding-top works correctly in all browsers */
+}
+
+/* THE ABSTRACT BLOB BACKGROUND */
+.explore-blob {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    right: 5%;
+    bottom: 5%;
+    border-radius: 50%;
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+/* THE TRANSPARENT IMAGE */
+.explore-img-wrap img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.explore-card:hover {
+    background: #F7941D !important;
+}
+
+.explore-card:hover .explore-img-wrap {
+    background: #fff !important;
+    border-radius: 100px !important;
+}
+
+.explore-card:hover .explore-blob {
+    background-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.explore-card:hover .explore-info h3 {
+    color: #fff !important;
+}
+
+.explore-card:hover .explore-btn {
+    background: #fff !important;
+    color: #F7941D !important;
+}
+
+/* TEXT AND BUTTONS */
+.explore-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.explore-info h3 {
+    font-size: 16px;
+    font-weight: 800;
+    color: #222;
+    margin: 0 0 15px 0;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.explore-card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: auto;
+}
+
+.explore-btn {
+    width: 36px;
+    height: 36px;
+    background: #F7941D;
+    color: #fff;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+}
+
+.explore-leaf {
+    color: #f0f0f0;
+    font-size: 24px;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+/* OWL NAV (WHITE ARROWS ON EDGES) */
+.explore-menu-section .owl-carousel {
+    position: relative;
+}
+.explore-menu-section .owl-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    left: 0;
+    pointer-events: none;
+    margin: 0;
+}
+.explore-menu-section .owl-prev,
+.explore-menu-section .owl-next {
+    position: absolute !important;
+    width: 45px !important;
+    height: 45px !important;
+    background: #fff !important;
+    color: #333 !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+    pointer-events: auto;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    transition: all 0.3s ease !important;
+    margin: 0 !important;
+    border: none !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+.explore-menu-section .owl-prev {
+    left: -20px !important;
+}
+.explore-menu-section .owl-next {
+    right: -20px !important;
+}
+.explore-menu-section .owl-prev:hover,
+.explore-menu-section .owl-next:hover {
+    background: #F7941D !important;
+    color: #fff !important;
+}
+
+@media (max-width: 768px) {
+    .explore-header {
         flex-direction: column;
-        margin-bottom: 40px;
-        padding: 0 15px;
+        align-items: flex-start;
+        gap: 20px;
     }
+    .explore-title {
+        font-size: 32px;
+    }
+}
 
-    .kfc-section-title h2 {
-        font-family: 'Poppins', sans-serif !important;
-        font-weight: 900;
-        font-size: 28px;
-        text-transform: uppercase;
-        color: #4a2e2b; /* Dark Brown */
-        margin: 0 0 5px 0;
-        letter-spacing: 0.5px;
-    }
-
-    .kfc-title-line {
-        width: 60px;
-        height: 3px;
-        background: #b59063; /* Golden */
-    }
-
-    .kfc-view-all {
-        display: none; /* Hidden in screenshot */
-    }
-
-    .kfc-card-item {
-        display: block;
-        text-decoration: none !important;
-        background: #ffffff;
-        border-radius: 20px; /* Rounded rectangle */
-        padding: 15px 15px 25px 15px;
-        text-align: center;
-        position: relative;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        transition: all 0.3s ease;
-        margin: 15px 5px;
-    }
-
-    .kfc-card-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-    }
-
-    .kfc-card-item::after {
-        display: none;
-    }
-
-    .kfc-img-box {
-        width: 100%;
-        padding-top: 100%; /* 1:1 Aspect Ratio */
-        position: relative;
-        border-radius: 50%;
-        margin-bottom: 15px;
-        overflow: visible; /* To allow glow */
-    }
-
-    .kfc-img-box img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 4px solid #fff;
-        transition: all 0.3s ease;
-    }
-
-    /* Hover effect golden ring */
-    .kfc-card-item:hover .kfc-img-box img {
-        border-color: #b59063;
-        box-shadow: 0 0 0 5px rgba(181, 144, 99, 0.2);
-    }
-
-    .kfc-cat-name {
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 15px;
-        font-weight: 800;
-        color: #111;
-        margin-bottom: 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .kfc-name-line {
-        width: 35px;
-        height: 3px;
-        background: #b59063; /* Golden */
-        margin: 8px auto 0;
-        transition: width 0.3s ease;
-    }
-    .kfc-card-item:hover .kfc-name-line {
-        width: 50px;
-    }
-
-    /* KFC Slider Arrows */
-    .kfc-slider .owl-nav div {
-        background: #b59063;
-        color: #fff;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-        border-radius: 50%;
-        position: absolute;
-        top: 40%;
-        transform: translateY(-50%);
-        font-size: 18px;
-        transition: 0.3s;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    }
-    .kfc-slider .owl-nav div:hover {
-        background: #9a7b54;
-    }
-    .kfc-slider .owl-prev { left: -50px; }
-    .kfc-slider .owl-next { right: -50px; }
-
-    @media (max-width: 1200px) {
-        .kfc-slider .owl-prev { left: -15px; }
-        .kfc-slider .owl-next { right: -15px; }
-    }
-    @media (max-width: 768px) {
-        .kfc-card-item {
-            padding: 10px 10px 20px 10px;
-        }
-        .kfc-cat-name {
-            font-size: 13px;
-        }
-        .kfc-slider .owl-prev { left: -10px; }
-        .kfc-slider .owl-next { right: -10px; }
-        .kfc-section-title h2 { font-size: 22px; }
-    }
+}
 </style>
-<section class="kfc-category-section">
-    <div class="container" style="position: relative;">
-        
-        <div class="kfc-header-wrap">
-            <div class="kfc-section-title">
-                <h2>EXPLORE MENU</h2>
-                <div class="kfc-title-line"></div>
+<section class="explore-menu-section">
+    <div class="container" style="position: relative; z-index: 2;">
+        <!-- Header -->
+        <div class="explore-header">
+            <div class="explore-header-left">
+                <div class="explore-subtitle">OUR DELICIOUS RANGE <span class="line"></span></div>
+                <h2 class="explore-title">Explore <span class="text-orange">Menu</span></h2>
+                <p class="explore-desc">Discover our wide variety of fresh and premium quality snacks,<br>made with the finest ingredients.</p>
             </div>
-            <a href="{{route('product-grids')}}" class="kfc-view-all">VIEW ALL</a>
+            <div class="explore-header-right">
+                <a href="{{route('product-grids')}}" class="explore-view-all">View All <i class="fa fa-arrow-right"></i></a>
+            </div>
         </div>
 
-        <div class="kfc-slider owl-carousel owl-theme">
+        <!-- Carousel -->
+        <div class="explore-slider owl-carousel owl-theme">
             @php
             $category_lists = DB::table('categories')->where('status','active')->where('is_parent',1)->get();
+            $blob_colors = ['#e8f4eb', '#fbe9dc', '#fdf2d5', '#fbe9dc', '#e8f4eb', '#f5eee6', '#e8f4eb'];
             @endphp
             @if($category_lists)
                 @foreach($category_lists as $cat)
-                    <a href="{{route('product-cat',$cat->slug)}}" class="kfc-card-item">
-                        <div class="kfc-img-box">
+                    @php 
+                    $bcolor = $blob_colors[$loop->index % count($blob_colors)]; 
+                    @endphp
+                    <a href="{{route('product-cat',$cat->slug)}}" class="explore-card">
+                        <div class="explore-img-wrap">
+                            <div class="explore-blob" style="background-color: {{$bcolor}};"></div>
                             @if($cat->photo)
                                 <img src="{{$cat->photo}}" alt="{{$cat->title}}">
                             @else
                                 <img src="https://placehold.co/200x200/f4f4f4/888888?text=Photo" alt="#">
                             @endif
                         </div>
-                        <div class="kfc-cat-name">{{$cat->title}}</div>
-                        <div class="kfc-name-line"></div>
+                        <div class="explore-info">
+                            <h3>{{$cat->title}}</h3>
+                            <div class="explore-card-footer">
+                                <span class="explore-btn"><i class="fa fa-arrow-right"></i></span>
+                            </div>
+                        </div>
                     </a>
                 @endforeach
             @endif
@@ -1485,7 +1731,7 @@
 @push('scripts')
 <script>
     $(document).ready(function(){
-        $('.kfc-slider').owlCarousel({
+        $('.explore-slider').owlCarousel({
             items: 6,
             autoplay: true,
             autoplayTimeout: 4000,
@@ -2660,6 +2906,64 @@
         opacity: 1;
         transform: translateY(0);
     }
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(247, 148, 29, 0.3); /* Theme color shadow */
+    background: #F7941D; /* Theme color background */
+}
+.explore-card:hover .explore-img-wrap {
+    background-color: #fff !important; /* Force image background to white on hover */
+}
+.explore-info h3 {
+    transition: color 0.4s ease;
+}
+.explore-card:hover .explore-info h3 {
+    color: #fff; /* Text turns white */
+}
+.explore-card:hover .explore-btn {
+    background: #fff;
+    color: #F7941D;
+    transform: scale(1.1);
+}
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* LEAVES BACKGROUND */
+.explore-menu-section {
+    position: relative;
+    overflow: hidden; /* contain leaves */
+}
+.explore-bg-leaf {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(4px);
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="%236da45b" d="M498.4 46.2c-5.7-18.1-23.7-27.1-41.8-21.4-18.1 5.7-27.1 23.7-21.4 41.8 17.5 55.4 13.9 116.1-13.4 171-29.4-14.7-64.8-19.6-99.3-11.4-69.2 16.5-120.3 75.3-127.1 146l-46.7-46.7c-13.3-13.3-34.9-13.3-48.2 0l-57.1 57.1c-13.3 13.3-13.3 34.9 0 48.2l45.4 45.4-78.1 78.1c-13.3 13.3-13.3 34.9 0 48.2s34.9 13.3 48.2 0l78.1-78.1 45.4 45.4c13.3 13.3 34.9 13.3 48.2 0l57.1-57.1c13.3-13.3 13.3-34.9 0-48.2l-46.7-46.7c70.7-6.8 129.5-57.9 146-127.1 8.2-34.5 3.3-69.9-11.4-99.3 54.9-27.3 115.6-30.9 171-13.4 18.1 5.7 36.1-3.3 41.8-21.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.explore-leaf-top-right {
+    top: -30px;
+    right: -30px;
+    transform: rotate(45deg);
+    width: 250px;
+    height: 250px;
+    filter: blur(8px);
+}
+.explore-leaf-bottom-left {
+    bottom: -30px;
+    left: -30px;
+    transform: rotate(-135deg);
+    width: 200px;
+    height: 200px;
+    filter: blur(6px);
+}
 </style>
 <!-- OVERRIDE FOR OUR PRODUCTS BUTTONS -->
 <style>
@@ -2723,6 +3027,64 @@
     .isotope-grid .single-product .product-action a span {
         display: none !important; /* Hide the text span */
     }
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(247, 148, 29, 0.3); /* Theme color shadow */
+    background: #F7941D; /* Theme color background */
+}
+.explore-card:hover .explore-img-wrap {
+    background-color: #fff !important; /* Force image background to white on hover */
+}
+.explore-info h3 {
+    transition: color 0.4s ease;
+}
+.explore-card:hover .explore-info h3 {
+    color: #fff; /* Text turns white */
+}
+.explore-card:hover .explore-btn {
+    background: #fff;
+    color: #F7941D;
+    transform: scale(1.1);
+}
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* LEAVES BACKGROUND */
+.explore-menu-section {
+    position: relative;
+    overflow: hidden; /* contain leaves */
+}
+.explore-bg-leaf {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(4px);
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="%236da45b" d="M498.4 46.2c-5.7-18.1-23.7-27.1-41.8-21.4-18.1 5.7-27.1 23.7-21.4 41.8 17.5 55.4 13.9 116.1-13.4 171-29.4-14.7-64.8-19.6-99.3-11.4-69.2 16.5-120.3 75.3-127.1 146l-46.7-46.7c-13.3-13.3-34.9-13.3-48.2 0l-57.1 57.1c-13.3 13.3-13.3 34.9 0 48.2l45.4 45.4-78.1 78.1c-13.3 13.3-13.3 34.9 0 48.2s34.9 13.3 48.2 0l78.1-78.1 45.4 45.4c13.3 13.3 34.9 13.3 48.2 0l57.1-57.1c13.3-13.3 13.3-34.9 0-48.2l-46.7-46.7c70.7-6.8 129.5-57.9 146-127.1 8.2-34.5 3.3-69.9-11.4-99.3 54.9-27.3 115.6-30.9 171-13.4 18.1 5.7 36.1-3.3 41.8-21.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.explore-leaf-top-right {
+    top: -30px;
+    right: -30px;
+    transform: rotate(45deg);
+    width: 250px;
+    height: 250px;
+    filter: blur(8px);
+}
+.explore-leaf-bottom-left {
+    bottom: -30px;
+    left: -30px;
+    transform: rotate(-135deg);
+    width: 200px;
+    height: 200px;
+    filter: blur(6px);
+}
 </style>
 <div class="product-area section" style="background: #c1540b;">
     <div class="container">
@@ -2978,6 +3340,64 @@
         background: #c1540b;
         border: none;
     }
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(247, 148, 29, 0.3); /* Theme color shadow */
+    background: #F7941D; /* Theme color background */
+}
+.explore-card:hover .explore-img-wrap {
+    background-color: #fff !important; /* Force image background to white on hover */
+}
+.explore-info h3 {
+    transition: color 0.4s ease;
+}
+.explore-card:hover .explore-info h3 {
+    color: #fff; /* Text turns white */
+}
+.explore-card:hover .explore-btn {
+    background: #fff;
+    color: #F7941D;
+    transform: scale(1.1);
+}
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* LEAVES BACKGROUND */
+.explore-menu-section {
+    position: relative;
+    overflow: hidden; /* contain leaves */
+}
+.explore-bg-leaf {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(4px);
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="%236da45b" d="M498.4 46.2c-5.7-18.1-23.7-27.1-41.8-21.4-18.1 5.7-27.1 23.7-21.4 41.8 17.5 55.4 13.9 116.1-13.4 171-29.4-14.7-64.8-19.6-99.3-11.4-69.2 16.5-120.3 75.3-127.1 146l-46.7-46.7c-13.3-13.3-34.9-13.3-48.2 0l-57.1 57.1c-13.3 13.3-13.3 34.9 0 48.2l45.4 45.4-78.1 78.1c-13.3 13.3-13.3 34.9 0 48.2s34.9 13.3 48.2 0l78.1-78.1 45.4 45.4c13.3 13.3 34.9 13.3 48.2 0l57.1-57.1c13.3-13.3 13.3-34.9 0-48.2l-46.7-46.7c70.7-6.8 129.5-57.9 146-127.1 8.2-34.5 3.3-69.9-11.4-99.3 54.9-27.3 115.6-30.9 171-13.4 18.1 5.7 36.1-3.3 41.8-21.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.explore-leaf-top-right {
+    top: -30px;
+    right: -30px;
+    transform: rotate(45deg);
+    width: 250px;
+    height: 250px;
+    filter: blur(8px);
+}
+.explore-leaf-bottom-left {
+    bottom: -30px;
+    left: -30px;
+    transform: rotate(-135deg);
+    width: 200px;
+    height: 200px;
+    filter: blur(6px);
+}
 </style>
 <div class="modal fade" id="{{$product->id}}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -3338,6 +3758,64 @@
         opacity: 1;
         transform: translateY(0);
     }
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(247, 148, 29, 0.3); /* Theme color shadow */
+    background: #F7941D; /* Theme color background */
+}
+.explore-card:hover .explore-img-wrap {
+    background-color: #fff !important; /* Force image background to white on hover */
+}
+.explore-info h3 {
+    transition: color 0.4s ease;
+}
+.explore-card:hover .explore-info h3 {
+    color: #fff; /* Text turns white */
+}
+.explore-card:hover .explore-btn {
+    background: #fff;
+    color: #F7941D;
+    transform: scale(1.1);
+}
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* LEAVES BACKGROUND */
+.explore-menu-section {
+    position: relative;
+    overflow: hidden; /* contain leaves */
+}
+.explore-bg-leaf {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(4px);
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="%236da45b" d="M498.4 46.2c-5.7-18.1-23.7-27.1-41.8-21.4-18.1 5.7-27.1 23.7-21.4 41.8 17.5 55.4 13.9 116.1-13.4 171-29.4-14.7-64.8-19.6-99.3-11.4-69.2 16.5-120.3 75.3-127.1 146l-46.7-46.7c-13.3-13.3-34.9-13.3-48.2 0l-57.1 57.1c-13.3 13.3-13.3 34.9 0 48.2l45.4 45.4-78.1 78.1c-13.3 13.3-13.3 34.9 0 48.2s34.9 13.3 48.2 0l78.1-78.1 45.4 45.4c13.3 13.3 34.9 13.3 48.2 0l57.1-57.1c13.3-13.3 13.3-34.9 0-48.2l-46.7-46.7c70.7-6.8 129.5-57.9 146-127.1 8.2-34.5 3.3-69.9-11.4-99.3 54.9-27.3 115.6-30.9 171-13.4 18.1 5.7 36.1-3.3 41.8-21.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.explore-leaf-top-right {
+    top: -30px;
+    right: -30px;
+    transform: rotate(45deg);
+    width: 250px;
+    height: 250px;
+    filter: blur(8px);
+}
+.explore-leaf-bottom-left {
+    bottom: -30px;
+    left: -30px;
+    transform: rotate(-135deg);
+    width: 200px;
+    height: 200px;
+    filter: blur(6px);
+}
 </style>
 <!-- END CLEAN CARD CSS OVERRIDE -->
 
@@ -3401,6 +3879,64 @@
         opacity: 1;
         transform: translateY(0);
     }
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(247, 148, 29, 0.3); /* Theme color shadow */
+    background: #F7941D; /* Theme color background */
+}
+.explore-card:hover .explore-img-wrap {
+    background-color: #fff !important; /* Force image background to white on hover */
+}
+.explore-info h3 {
+    transition: color 0.4s ease;
+}
+.explore-card:hover .explore-info h3 {
+    color: #fff; /* Text turns white */
+}
+.explore-card:hover .explore-btn {
+    background: #fff;
+    color: #F7941D;
+    transform: scale(1.1);
+}
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* LEAVES BACKGROUND */
+.explore-menu-section {
+    position: relative;
+    overflow: hidden; /* contain leaves */
+}
+.explore-bg-leaf {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(4px);
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="%236da45b" d="M498.4 46.2c-5.7-18.1-23.7-27.1-41.8-21.4-18.1 5.7-27.1 23.7-21.4 41.8 17.5 55.4 13.9 116.1-13.4 171-29.4-14.7-64.8-19.6-99.3-11.4-69.2 16.5-120.3 75.3-127.1 146l-46.7-46.7c-13.3-13.3-34.9-13.3-48.2 0l-57.1 57.1c-13.3 13.3-13.3 34.9 0 48.2l45.4 45.4-78.1 78.1c-13.3 13.3-13.3 34.9 0 48.2s34.9 13.3 48.2 0l78.1-78.1 45.4 45.4c13.3 13.3 34.9 13.3 48.2 0l57.1-57.1c13.3-13.3 13.3-34.9 0-48.2l-46.7-46.7c70.7-6.8 129.5-57.9 146-127.1 8.2-34.5 3.3-69.9-11.4-99.3 54.9-27.3 115.6-30.9 171-13.4 18.1 5.7 36.1-3.3 41.8-21.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.explore-leaf-top-right {
+    top: -30px;
+    right: -30px;
+    transform: rotate(45deg);
+    width: 250px;
+    height: 250px;
+    filter: blur(8px);
+}
+.explore-leaf-bottom-left {
+    bottom: -30px;
+    left: -30px;
+    transform: rotate(-135deg);
+    width: 200px;
+    height: 200px;
+    filter: blur(6px);
+}
 </style>
 <!-- END GLOBAL FONT OVERRIDE -->
 
@@ -3589,6 +4125,64 @@
         opacity: 1;
         transform: translateY(0);
     }
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(247, 148, 29, 0.3); /* Theme color shadow */
+    background: #F7941D; /* Theme color background */
+}
+.explore-card:hover .explore-img-wrap {
+    background-color: #fff !important; /* Force image background to white on hover */
+}
+.explore-info h3 {
+    transition: color 0.4s ease;
+}
+.explore-card:hover .explore-info h3 {
+    color: #fff; /* Text turns white */
+}
+.explore-card:hover .explore-btn {
+    background: #fff;
+    color: #F7941D;
+    transform: scale(1.1);
+}
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* LEAVES BACKGROUND */
+.explore-menu-section {
+    position: relative;
+    overflow: hidden; /* contain leaves */
+}
+.explore-bg-leaf {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(4px);
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="%236da45b" d="M498.4 46.2c-5.7-18.1-23.7-27.1-41.8-21.4-18.1 5.7-27.1 23.7-21.4 41.8 17.5 55.4 13.9 116.1-13.4 171-29.4-14.7-64.8-19.6-99.3-11.4-69.2 16.5-120.3 75.3-127.1 146l-46.7-46.7c-13.3-13.3-34.9-13.3-48.2 0l-57.1 57.1c-13.3 13.3-13.3 34.9 0 48.2l45.4 45.4-78.1 78.1c-13.3 13.3-13.3 34.9 0 48.2s34.9 13.3 48.2 0l78.1-78.1 45.4 45.4c13.3 13.3 34.9 13.3 48.2 0l57.1-57.1c13.3-13.3 13.3-34.9 0-48.2l-46.7-46.7c70.7-6.8 129.5-57.9 146-127.1 8.2-34.5 3.3-69.9-11.4-99.3 54.9-27.3 115.6-30.9 171-13.4 18.1 5.7 36.1-3.3 41.8-21.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.explore-leaf-top-right {
+    top: -30px;
+    right: -30px;
+    transform: rotate(45deg);
+    width: 250px;
+    height: 250px;
+    filter: blur(8px);
+}
+.explore-leaf-bottom-left {
+    bottom: -30px;
+    left: -30px;
+    transform: rotate(-135deg);
+    width: 200px;
+    height: 200px;
+    filter: blur(6px);
+}
 </style>
 <style>
     /* FINAL OVERRIDE FOR HERO BANNER HEIGHT */
@@ -3648,6 +4242,64 @@
         opacity: 1;
         transform: translateY(0);
     }
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(247, 148, 29, 0.3); /* Theme color shadow */
+    background: #F7941D; /* Theme color background */
+}
+.explore-card:hover .explore-img-wrap {
+    background-color: #fff !important; /* Force image background to white on hover */
+}
+.explore-info h3 {
+    transition: color 0.4s ease;
+}
+.explore-card:hover .explore-info h3 {
+    color: #fff; /* Text turns white */
+}
+.explore-card:hover .explore-btn {
+    background: #fff;
+    color: #F7941D;
+    transform: scale(1.1);
+}
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* LEAVES BACKGROUND */
+.explore-menu-section {
+    position: relative;
+    overflow: hidden; /* contain leaves */
+}
+.explore-bg-leaf {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(4px);
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="%236da45b" d="M498.4 46.2c-5.7-18.1-23.7-27.1-41.8-21.4-18.1 5.7-27.1 23.7-21.4 41.8 17.5 55.4 13.9 116.1-13.4 171-29.4-14.7-64.8-19.6-99.3-11.4-69.2 16.5-120.3 75.3-127.1 146l-46.7-46.7c-13.3-13.3-34.9-13.3-48.2 0l-57.1 57.1c-13.3 13.3-13.3 34.9 0 48.2l45.4 45.4-78.1 78.1c-13.3 13.3-13.3 34.9 0 48.2s34.9 13.3 48.2 0l78.1-78.1 45.4 45.4c13.3 13.3 34.9 13.3 48.2 0l57.1-57.1c13.3-13.3 13.3-34.9 0-48.2l-46.7-46.7c70.7-6.8 129.5-57.9 146-127.1 8.2-34.5 3.3-69.9-11.4-99.3 54.9-27.3 115.6-30.9 171-13.4 18.1 5.7 36.1-3.3 41.8-21.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.explore-leaf-top-right {
+    top: -30px;
+    right: -30px;
+    transform: rotate(45deg);
+    width: 250px;
+    height: 250px;
+    filter: blur(8px);
+}
+.explore-leaf-bottom-left {
+    bottom: -30px;
+    left: -30px;
+    transform: rotate(-135deg);
+    width: 200px;
+    height: 200px;
+    filter: blur(6px);
+}
 </style>
 
 <!-- Start Our Outlets Section -->
@@ -3742,6 +4394,64 @@
         color: var(--primary-color);
         margin-right: 5px;
     }
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(247, 148, 29, 0.3); /* Theme color shadow */
+    background: #F7941D; /* Theme color background */
+}
+.explore-card:hover .explore-img-wrap {
+    background-color: #fff !important; /* Force image background to white on hover */
+}
+.explore-info h3 {
+    transition: color 0.4s ease;
+}
+.explore-card:hover .explore-info h3 {
+    color: #fff; /* Text turns white */
+}
+.explore-card:hover .explore-btn {
+    background: #fff;
+    color: #F7941D;
+    transform: scale(1.1);
+}
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* LEAVES BACKGROUND */
+.explore-menu-section {
+    position: relative;
+    overflow: hidden; /* contain leaves */
+}
+.explore-bg-leaf {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(4px);
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="%236da45b" d="M498.4 46.2c-5.7-18.1-23.7-27.1-41.8-21.4-18.1 5.7-27.1 23.7-21.4 41.8 17.5 55.4 13.9 116.1-13.4 171-29.4-14.7-64.8-19.6-99.3-11.4-69.2 16.5-120.3 75.3-127.1 146l-46.7-46.7c-13.3-13.3-34.9-13.3-48.2 0l-57.1 57.1c-13.3 13.3-13.3 34.9 0 48.2l45.4 45.4-78.1 78.1c-13.3 13.3-13.3 34.9 0 48.2s34.9 13.3 48.2 0l78.1-78.1 45.4 45.4c13.3 13.3 34.9 13.3 48.2 0l57.1-57.1c13.3-13.3 13.3-34.9 0-48.2l-46.7-46.7c70.7-6.8 129.5-57.9 146-127.1 8.2-34.5 3.3-69.9-11.4-99.3 54.9-27.3 115.6-30.9 171-13.4 18.1 5.7 36.1-3.3 41.8-21.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.explore-leaf-top-right {
+    top: -30px;
+    right: -30px;
+    transform: rotate(45deg);
+    width: 250px;
+    height: 250px;
+    filter: blur(8px);
+}
+.explore-leaf-bottom-left {
+    bottom: -30px;
+    left: -30px;
+    transform: rotate(-135deg);
+    width: 200px;
+    height: 200px;
+    filter: blur(6px);
+}
 </style>
 
 <section id="our-outlets-premium" class="section">
@@ -4762,6 +5472,64 @@
         opacity: 1;
         transform: translateY(0);
     }
+
+.explore-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(247, 148, 29, 0.3); /* Theme color shadow */
+    background: #F7941D; /* Theme color background */
+}
+.explore-card:hover .explore-img-wrap {
+    background-color: #fff !important; /* Force image background to white on hover */
+}
+.explore-info h3 {
+    transition: color 0.4s ease;
+}
+.explore-card:hover .explore-info h3 {
+    color: #fff; /* Text turns white */
+}
+.explore-card:hover .explore-btn {
+    background: #fff;
+    color: #F7941D;
+    transform: scale(1.1);
+}
+.explore-card:hover .explore-leaf {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+
+/* LEAVES BACKGROUND */
+.explore-menu-section {
+    position: relative;
+    overflow: hidden; /* contain leaves */
+}
+.explore-bg-leaf {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    filter: blur(4px);
+    width: 150px;
+    height: 150px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path fill="%236da45b" d="M498.4 46.2c-5.7-18.1-23.7-27.1-41.8-21.4-18.1 5.7-27.1 23.7-21.4 41.8 17.5 55.4 13.9 116.1-13.4 171-29.4-14.7-64.8-19.6-99.3-11.4-69.2 16.5-120.3 75.3-127.1 146l-46.7-46.7c-13.3-13.3-34.9-13.3-48.2 0l-57.1 57.1c-13.3 13.3-13.3 34.9 0 48.2l45.4 45.4-78.1 78.1c-13.3 13.3-13.3 34.9 0 48.2s34.9 13.3 48.2 0l78.1-78.1 45.4 45.4c13.3 13.3 34.9 13.3 48.2 0l57.1-57.1c13.3-13.3 13.3-34.9 0-48.2l-46.7-46.7c70.7-6.8 129.5-57.9 146-127.1 8.2-34.5 3.3-69.9-11.4-99.3 54.9-27.3 115.6-30.9 171-13.4 18.1 5.7 36.1-3.3 41.8-21.4z"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.explore-leaf-top-right {
+    top: -30px;
+    right: -30px;
+    transform: rotate(45deg);
+    width: 250px;
+    height: 250px;
+    filter: blur(8px);
+}
+.explore-leaf-bottom-left {
+    bottom: -30px;
+    left: -30px;
+    transform: rotate(-135deg);
+    width: 200px;
+    height: 200px;
+    filter: blur(6px);
+}
 </style>
 @endpush
 
