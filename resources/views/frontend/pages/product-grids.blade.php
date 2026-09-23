@@ -25,14 +25,14 @@
                 <!-- Orange Outline Wave -->
                 <path d="M0,60 C320,120 420,0 720,40 C1020,80 1120,-20 1440,60 L1440,120 L0,120 Z" fill="#F7941D" transform="translate(0, -6)"></path>
                 <!-- White Fill Wave -->
-                <path d="M0,60 C320,120 420,0 720,40 C1020,80 1120,-20 1440,60 L1440,120 L0,120 Z" fill="#f8f9fa"></path>
+                <path d="M0,60 C320,120 420,0 720,40 C1020,80 1120,-20 1440,60 L1440,120 L0,120 Z" fill="#eff2f6"></path>
             </svg>
         </div>
     </div>
     
     <form action="{{route('shop.filter')}}" method="POST" id="filter-form">
         @csrf
-        <section class="product-area shop-sidebar shop section" style="padding-top: 0; background: #f8f9fa;">
+        <section class="product-area shop-sidebar shop section" style="padding-top: 0; background: #eff2f6;">
             <div class="container">
                 <div class="row">
                     <!-- SIDEBAR -->
@@ -134,35 +134,56 @@
                         </div>
 <!-- MOBILE SEARCH, FILTER & CATEGORIES (Matches Mockup exactly) -->
 <div class="mobile-filter-cat-area d-block d-lg-none mt-3 mb-4">
-    <!-- Filter Toggle Button for mobile -->
-    <button type="button" class="btn-mobile-filter mb-3" onclick="$('.sidebar-modern').toggle();">
-        <i class="ti-filter"></i> Filter
-    </button>
+    <!-- Top Row: Search and Filter -->
+    <div class="d-flex align-items-center mb-4" style="gap: 12px;">
+        <div class="mobile-search-box" style="flex-grow: 1; position: relative;">
+            <input type="text" name="search" placeholder="Search products..." value="{{ request('search') }}" style="width: 100%; border: 1px solid #eee; border-radius: 8px; padding: 12px 40px 12px 15px; font-size: 13px; outline: none; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+            <button type="submit" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #F7941D; font-size: 16px;"><i class="ti-search"></i></button>
+        </div>
+        <button type="button" onclick="$('.mobile-price-filter').slideToggle();" style="background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 12px 18px; font-weight: 600; color: #333; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); white-space: nowrap;">
+            <i class="ti-filter" style="color: #F7941D; font-size: 16px;"></i> Filter
+        </button>
+    </div>
+
+    <!-- Hidden Mobile Price Filter -->
+    <div class="mobile-price-filter" style="display: none; background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee;">
+        <h4 style="font-size: 13px; font-weight: 700; margin-bottom: 15px; color: #111;">FILTER BY PRICE</h4>
+        <div class="custom-radio"><input type="radio" name="price_range" value="all" id="m_price_all" checked><label for="m_price_all">All Prices</label></div>
+        <div class="custom-radio"><input type="radio" name="price_range" value="under_300" id="m_price_1"><label for="m_price_1">Under Rs: 300</label></div>
+        <div class="custom-radio"><input type="radio" name="price_range" value="300_500" id="m_price_2"><label for="m_price_2">Rs: 300 - Rs: 500</label></div>
+        <div class="custom-radio"><input type="radio" name="price_range" value="above_500" id="m_price_3"><label for="m_price_3">Above Rs: 500</label></div>
+        <button type="submit" class="btn-apply-filter" style="margin-top: 10px; padding: 10px; width: 100%; background: #F7941D; color: #fff; border: none; border-radius: 8px; font-weight: 600;">Apply Filter</button>
+    </div>
     
-    <!-- Horizontal scrolling categories -->
-    <div class="mobile-categories-scroll">
-        <a href="{{route('product-grids')}}" class="mobile-cat-pill {{ Request::is('product-grids') ? 'active' : '' }}">
-            <i class="ti-layout-grid2" style="font-size:24px; margin-bottom:5px;"></i>
-            All Items
+    <!-- Horizontal scrolling categories (Circular) -->
+    <div class="mobile-categories-scroll" style="display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; padding-top: 5px; scrollbar-width: none;">
+        <a href="{{route('product-grids')}}" class="mobile-cat-circle {{ Request::is('product-grids') ? 'active' : '' }}">
+            <div class="icon-wrap">
+                <i class="ti-layout-grid2" style="font-size:22px;"></i>
+                <span class="m-badge">{{App\Models\Product::where('status','active')->count()}}</span>
+            </div>
+            <span class="cat-text">All Items</span>
         </a>
         @php
             $mobile_menu=App\Models\Category::getAllParentWithChild();
         @endphp
         @if($mobile_menu)
             @foreach($mobile_menu as $cat_info)
-                <a href="{{route('product-cat',$cat_info->slug)}}" class="mobile-cat-pill {{ Request::is('product-cat/'.$cat_info->slug) ? 'active' : '' }}">
-                    @if(stripos($cat_info->title, 'nimco') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3256/3256114.png" alt="">
-                    @elseif(stripos($cat_info->title, 'biscuit') !== false) <img src="https://cdn-icons-png.flaticon.com/512/2619/2619574.png" alt="">
-                    @elseif(stripos($cat_info->title, 'sweet') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3014/3014491.png" alt="">
-                    @else <i class="ti-layout-list-thumb" style="font-size:24px; margin-bottom:5px;"></i> @endif
-                    {{$cat_info->title}}
+                <a href="{{route('product-cat',$cat_info->slug)}}" class="mobile-cat-circle {{ Request::is('product-cat/'.$cat_info->slug) ? 'active' : '' }}">
+                    <div class="icon-wrap">
+                        @if(stripos($cat_info->title, 'nimco') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3256/3256114.png" alt="">
+                        @elseif(stripos($cat_info->title, 'biscuit') !== false) <img src="https://cdn-icons-png.flaticon.com/512/2619/2619574.png" alt="">
+                        @elseif(stripos($cat_info->title, 'sweet') !== false) <img src="https://cdn-icons-png.flaticon.com/512/3014/3014491.png" alt="">
+                        @else <i class="ti-layout-list-thumb" style="font-size:22px;"></i> @endif
+                        <span class="m-badge">{{$cat_info->products()->count()}}</span>
+                    </div>
+                    <span class="cat-text">{{$cat_info->title}}</span>
                 </a>
             @endforeach
         @endif
     </div>
 </div>
 
-                        
                         <div class="row modern-products-grid" style="margin: 0 -5px;">
                             @if(count($products)>0)
                                 @foreach($products as $product)
@@ -170,11 +191,9 @@
                                         <div class="modern-product-card @if($product->stock<=0) card-soldout @endif">
                                             <!-- Top Badges -->
                                             <div class="card-badges">
-                                                @if($product->condition=='hot')
-                                                    <span class="badge-bestseller"><i class="ti-star"></i> BESTSELLER</span>
-                                                @endif
+                                                
                                                 @if($product->discount)
-                                                    <span class="badge-discount">{{$product->discount}}% OFF</span>
+                                                    <span class="badge-discount">{{$product->discount}}%</span>
                                                 @endif
                                                 @if($product->stock<=0)
                                                     <span class="badge-soldout">SOLD OUT</span>
@@ -460,7 +479,7 @@
     .search-bar-modern {
         display: flex;
         align-items: center;
-        background: #f8f9fa;
+        background: #eff2f6;
         border-radius: 30px;
         padding: 5px 15px;
         border: 1px solid #e1e4e8;
@@ -960,7 +979,7 @@
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        margin: 10px 0 15px 0 !important;
+        margin: 0 !important;
         overflow: hidden !important;
     }
     .product-img-modern img {
@@ -1038,6 +1057,195 @@
         }
         .hero-wave svg {
             height: 40px !important;
+        }
+    }
+
+
+    /* VISIBILITY OVERRIDES: Shadow & Body Color */
+    body { background-color: #eff2f6 !important; }
+    
+    .modern-product-card {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+        border: none !important;
+    }
+    
+    .single-widget {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+        border: none !important;
+    }
+    
+    .shop-top-modern {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+        border: none !important;
+    }
+    
+    /* Enhance the hover effect slightly so it lifts off the page */
+    .modern-product-card:hover {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
+        transform: translateY(-5px) !important;
+    }
+
+
+    
+    /* Ribbon & Wishlist Overrides */
+    .card-badges {
+        position: absolute !important;
+        top: 15px !important;
+        left: 15px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+        margin: 0 !important;
+        z-index: 5 !important;
+    }
+    .badge-discount {
+        background: #ff4757 !important; /* Beautiful Red for discount */
+        color: #fff !important;
+        border-radius: 6px !important; /* Soft corners */
+        padding: 5px 10px !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        display: inline-block;
+    }
+    .btn-wishlist-modern {
+        background: #ff4757 !important; /* Solid red by default */
+        border: none !important;
+        color: #ffffff !important; /* White heart */
+        box-shadow: 0 4px 12px rgba(255, 71, 87, 0.25) !important;
+        border-radius: 50% !important;
+    }
+    .btn-wishlist-modern:hover {
+        background: #e8414f !important; /* Slightly darker on hover */
+        transform: scale(1.05) !important;
+    }
+
+
+
+    /* COLOR THEME & FULL IMAGE WIDTH FIXES */
+    .badge-discount {
+        background: #F7941D !important; /* Theme Orange */
+        color: #fff !important;
+    }
+    .btn-wishlist-modern {
+        background: #F7941D !important; /* Theme Orange */
+        color: #fff !important;
+    }
+    .btn-wishlist-modern:hover {
+        background: #e08316 !important;
+    }
+    
+    /* Remove padding from card, apply to content so image is edge-to-edge at the top */
+    .modern-product-card {
+        padding: 0 !important;
+    }
+    .product-img-modern {
+        margin: 0 !important;
+        border-radius: 12px 12px 0 0 !important;
+        height: 220px !important; /* Slightly taller to look majestic */
+        background: #fff;
+    }
+    .product-img-modern img {
+        object-fit: cover !important; /* Forces the image to fill the entire space beautifully */
+    }
+    .product-info-modern {
+        padding: 15px 20px 20px 20px !important;
+    }
+    
+    @media (max-width: 768px) {
+        .product-img-modern {
+            height: 140px !important;
+        }
+        .product-info-modern {
+            padding: 10px 12px 12px 12px !important;
+        }
+    }
+
+
+    /* CIRCULAR MOBILE CATEGORIES */
+    .mobile-cat-circle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none !important;
+        min-width: 65px;
+    }
+    .mobile-cat-circle .icon-wrap {
+        width: 60px;
+        height: 60px;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        position: relative;
+        border: 2px solid transparent;
+        margin-bottom: 10px;
+        transition: all 0.3s;
+    }
+    .mobile-cat-circle .icon-wrap img {
+        width: 28px;
+        height: 28px;
+        opacity: 0.6;
+    }
+    .mobile-cat-circle .icon-wrap i {
+        color: #666;
+    }
+    .mobile-cat-circle .m-badge {
+        position: absolute;
+        bottom: -2px;
+        right: -4px;
+        background: #555;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #eff2f6; /* match body background */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .mobile-cat-circle .cat-text {
+        font-size: 12px;
+        font-weight: 600;
+        color: #444;
+        padding-bottom: 4px;
+        border-bottom: 2px solid transparent;
+    }
+
+    /* Active State */
+    .mobile-cat-circle.active .icon-wrap {
+        border-color: #F7941D;
+        box-shadow: 0 0 0 3px rgba(247, 148, 29, 0.15);
+    }
+    .mobile-cat-circle.active .icon-wrap img,
+    .mobile-cat-circle.active .icon-wrap i {
+        opacity: 1;
+        color: #F7941D;
+        filter: sepia(1) hue-rotate(-50deg) saturate(5); /* Make images orange */
+    }
+    .mobile-cat-circle.active .m-badge {
+        background: #F7941D;
+    }
+    .mobile-cat-circle.active .cat-text {
+        color: #F7941D;
+        border-bottom-color: #F7941D;
+    }
+    
+    .mobile-categories-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide sidebar completely on mobile so everything is driven from the top */
+    @media (max-width: 991px) {
+        .product-page-sidebar {
+            display: none !important;
         }
     }
 
