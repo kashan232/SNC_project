@@ -142,7 +142,7 @@
 								<div class="row pt-3 border-top">
 									<div class="col-6">
 										<div class="snc-meta-box">
-											<i class="fa fa-th-large text-success fs-5 mr-2"></i>
+											<i class="fa fa-th-large snc-theme-color fs-5 mr-2"></i>
 											<div>
 												<span class="snc-meta-label">Category</span>
 												<a href="{{route('product-cat',$product_detail->cat_info['slug'])}}" class="snc-meta-value">{{$product_detail->cat_info['title']}}</a>
@@ -151,7 +151,7 @@
 									</div>
 									<div class="col-6">
 										<div class="snc-meta-box">
-											<i class="fa fa-cubes text-success fs-5 mr-2"></i>
+											<i class="fa fa-cubes snc-theme-color fs-5 mr-2"></i>
 											<div>
 												<span class="snc-meta-label">Stock</span>
 												<span class="snc-stock-pill">{{$product_detail->stock}} Available</span>
@@ -196,21 +196,21 @@
 										<div class="row">
 											<div class="col-4 text-center">
 												<div class="snc-feature-pill-card">
-													<i class="fa fa-leaf text-success mb-2" style="font-size:24px;"></i>
+													<i class="fa fa-leaf snc-theme-color mb-2" style="font-size:24px;"></i>
 													<h6 class="font-weight-bold small mb-1">100% Natural</h6>
 													<span class="text-muted d-block" style="font-size: 10px;">Ingredients</span>
 												</div>
 											</div>
 											<div class="col-4 text-center">
 												<div class="snc-feature-pill-card">
-													<i class="fa fa-shield text-success mb-2" style="font-size:24px;"></i>
+													<i class="fa fa-shield snc-theme-color mb-2" style="font-size:24px;"></i>
 													<h6 class="font-weight-bold small mb-1">Hygienically</h6>
 													<span class="text-muted d-block" style="font-size: 10px;">Packed</span>
 												</div>
 											</div>
 											<div class="col-4 text-center">
 												<div class="snc-feature-pill-card">
-													<i class="fa fa-truck text-success mb-2" style="font-size:24px;"></i>
+													<i class="fa fa-truck snc-theme-color mb-2" style="font-size:24px;"></i>
 													<h6 class="font-weight-bold small mb-1">Fast & Reliable</h6>
 													<span class="text-muted d-block" style="font-size: 10px;">Delivery</span>
 												</div>
@@ -247,13 +247,13 @@
 		<!--/ End Shop Single -->
 
 		<!-- Start Most Popular -->
-	<div class="product-area most-popular related-product section" style="background:#c1540b; padding-top: 60px; padding-bottom: 60px;">
+	<div class="product-area most-popular related-product section" style="background-color: var(--primary-color); background-image: url('{{ asset('frontend/img/leaves-pattern.jpg') }}'); background-blend-mode: overlay; background-size: cover; background-attachment: fixed; position: relative;">
         <div class="container">
             <div class="row">
 				<div class="col-12">
 					<div class="section-title text-center" style="margin-bottom: 50px;">
-<span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Top Picks</span>
-<h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #fff; margin-top: 10px;">Related <span style="color: #fff;">Products</span></h2>
+<span style="color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Top Picks</span>
+<h2 style="font-family: 'Poppins', sans-serif; font-size: 32px; font-weight: 800; color: #fff; margin-top: 10px;">Related <span style="color: #fff;">Products</span></h2>
 </div>
 				</div>
             </div>
@@ -493,7 +493,7 @@
 		}
 
 		.snc-main-image-container img {
-			max-height: 320px;
+			width: 100%; max-height: 450px;
 			object-fit: contain;
 		}
 
@@ -519,7 +519,7 @@
 		}
 
 		.snc-thumb-item.active {
-			border-color: #166534 !important;
+			border-color: var(--primary-color) !important;
 		}
 
 		.snc-thumb-item img {
@@ -531,7 +531,7 @@
 		.snc-stock-badge {
 			display: inline-block;
 			background: #dcfce7;
-			color: #166534;
+			color: var(--primary-color);
 			font-weight: 700;
 			font-size: 11px;
 			padding: 4px 12px;
@@ -559,7 +559,7 @@
 		.snc-current-price {
 			font-size: 32px;
 			font-weight: 900;
-			color: #166534 !important;
+			color: var(--primary-color) !important;
 		}
 
 		.snc-old-price {
@@ -570,7 +570,7 @@
 
 		.snc-discount-badge {
 			background: #dcfce7;
-			color: #166534;
+			color: var(--primary-color);
 			font-weight: 700;
 			font-size: 11px;
 			padding: 4px 10px;
@@ -648,7 +648,7 @@
 		}
 
 		.snc-add-cart-btn {
-			background: #166534 !important;
+			background: var(--primary-color) !important;
 			color: #ffffff !important;
 			border: none;
 			padding: 12px 28px;
@@ -659,15 +659,15 @@
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
-			box-shadow: 0 4px 12px rgba(22, 101, 52, 0.25);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 			transition: all 0.2s ease;
-			flex: 1;
+			
 		}
 
 		.snc-add-cart-btn:hover {
-			background: #14532d !important;
+			filter: brightness(0.85);
 			transform: translateY(-2px);
-			box-shadow: 0 6px 16px rgba(22, 101, 52, 0.35);
+			box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 		}
 
 		.snc-wishlist-circle-btn {
@@ -714,7 +714,7 @@
 		}
 
 		.snc-stock-pill {
-			background: #166534;
+			background: var(--primary-color);
 			color: #fff;
 			font-size: 10px;
 			font-weight: 700;
@@ -747,8 +747,8 @@
 		}
 
 		.snc-tab-header .nav-link.active {
-			color: #166534 !important;
-			border-bottom-color: #166534 !important;
+			color: var(--primary-color) !important;
+			border-bottom-color: var(--primary-color) !important;
 		}
 
 		.snc-tab-body {
@@ -760,7 +760,7 @@
 			height: 44px;
 			border-radius: 50%;
 			background: #dcfce7;
-			color: #166534;
+			color: var(--primary-color);
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -813,7 +813,7 @@
 		.product-des .short .price .discount {
 			font-size: 32px;
 			font-weight: 900;
-			color: #F7941D !important;
+			color: var(--primary-color) !important;
 		}
 		.product-des .short .price s {
 			font-size: 18px;
@@ -836,7 +836,7 @@
 			font-size: 16px;
 		}
 		.add-to-cart .btn {
-			background: #F7941D;
+			background: var(--primary-color);
 			color: #fff;
 			border-radius: 12px;
 			padding: 15px 40px;
@@ -849,7 +849,7 @@
 		.add-to-cart .btn:hover {
 			transform: translateY(-3px);
 			box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-			background: #F7941D;
+			background: var(--primary-color);
 			filter: brightness(0.85);
 		}
 		.add-to-cart .btn.min {
@@ -882,8 +882,8 @@
 			padding: 15px 30px;
 		}
 		.product-info .nav-tabs .nav-link.active {
-			color: #F7941D !important;
-			border-bottom: 3px solid #F7941D !important;
+			color: var(--primary-color) !important;
+			border-bottom: 3px solid var(--primary-color) !important;
 			background: transparent;
 		}
 		
@@ -899,7 +899,7 @@
 			margin-left: 10px;
 		}
 		.cat-badge:hover {
-			background: #F7941D;
+			background: var(--primary-color);
 			color: #fff;
 		}
 
@@ -1038,7 +1038,7 @@
     }
     
     .btn-action-modern {
-        flex: 1;
+        
         text-align: center;
         padding: 10px 5px;
         border-radius: 8px;
@@ -1054,7 +1054,7 @@
     }
     
     .btn-cart {
-        background: #F7941D;
+        background: var(--primary-color);
         color: #ffffff !important;
     }
     
@@ -1063,7 +1063,7 @@
     }
     
     .btn-cart:hover {
-        background: #F7941D;
+        background: var(--primary-color);
         filter: brightness(0.85);
         color: #ffffff !important;
         transform: translateY(-2px);
@@ -1125,7 +1125,7 @@
 		float: right;
 		padding-left: 2px;
 		cursor: pointer;
-		color: #F7941D !important;
+		color: var(--primary-color) !important;
 		font-size: 16px;
 		margin-top: 5px;
 		}
@@ -1146,23 +1146,23 @@
 
 	
     /* FORCE THEME ORANGE OVERRIDES */
-    .product-des .short .price .discount, .price .discount, .price span.discount { color: #F7941D !important; }
-    .rating i, .ratings i, .rating li i, .rating-main .rating li i, .single-rating .rating i { color: #F7941D !important; }
-    .product-info .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active { color: #F7941D !important; border-bottom-color: #F7941D !important; background: transparent !important; background-color: transparent !important; }
-    .total-review { color: #F7941D !important; }
+    .product-des .short .price .discount, .price .discount, .price span.discount { color: var(--primary-color) !important; }
+    .rating i, .ratings i, .rating li i, .rating-main .rating li i, .single-rating .rating i { color: var(--primary-color) !important; }
+    .product-info .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active { color: var(--primary-color) !important; border-bottom-color: var(--primary-color) !important; background: transparent !important; background-color: transparent !important; }
+    .total-review { color: var(--primary-color) !important; }
     
     /* FORCE HOVER OVERRIDES */
-    .product-info .nav-tabs .nav-link:hover, .nav-tabs .nav-item .nav-link:hover { color: #F7941D !important; background: transparent !important; background-color: transparent !important; border-bottom-color: #F7941D !important; }
-    .btn:hover, .button .btn:hover, .reply .btn:hover { background: #F7941D !important; background-color: #F7941D !important; color: #fff !important; border-color: #F7941D !important; filter: brightness(0.9) !important; }
-    a:hover { color: #F7941D !important; }
+    .product-info .nav-tabs .nav-link:hover, .nav-tabs .nav-item .nav-link:hover { color: var(--primary-color) !important; background: transparent !important; background-color: transparent !important; border-bottom-color: var(--primary-color) !important; }
+    .btn:hover, .button .btn:hover, .reply .btn:hover { background: var(--primary-color) !important; background-color: var(--primary-color) !important; color: #fff !important; border-color: var(--primary-color) !important; filter: brightness(0.9) !important; }
+    a:hover { color: var(--primary-color) !important; }
     
     /* FORCE HOVER OVERRIDES */
-    .product-info .nav-tabs .nav-link:hover, .nav-tabs .nav-item .nav-link:hover { color: #F7941D !important; background: transparent !important; background-color: transparent !important; border-bottom-color: #F7941D !important; }
-    .btn:hover, .button .btn:hover, .reply .btn:hover { background: #F7941D !important; background-color: #F7941D !important; color: #fff !important; border-color: #F7941D !important; filter: brightness(0.9) !important; }
-    .product-des .short .price .discount, .price .discount, .price span.discount { color: #F7941D !important; }
-    .rating i, .ratings i, .rating li i, .rating-main .rating li i, .single-rating .rating i { color: #F7941D !important; }
-    .product-info .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active { color: #F7941D !important; border-bottom-color: #F7941D !important; background: transparent !important; background-color: transparent !important; }
-    .total-review { color: #F7941D !important; }
+    .product-info .nav-tabs .nav-link:hover, .nav-tabs .nav-item .nav-link:hover { color: var(--primary-color) !important; background: transparent !important; background-color: transparent !important; border-bottom-color: var(--primary-color) !important; }
+    .btn:hover, .button .btn:hover, .reply .btn:hover { background: var(--primary-color) !important; background-color: var(--primary-color) !important; color: #fff !important; border-color: var(--primary-color) !important; filter: brightness(0.9) !important; }
+    .product-des .short .price .discount, .price .discount, .price span.discount { color: var(--primary-color) !important; }
+    .rating i, .ratings i, .rating li i, .rating-main .rating li i, .single-rating .rating i { color: var(--primary-color) !important; }
+    .product-info .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active { color: var(--primary-color) !important; border-bottom-color: var(--primary-color) !important; background: transparent !important; background-color: transparent !important; }
+    .total-review { color: var(--primary-color) !important; }
     
     /* === OWL CAROUSEL IMAGE FIX === */
     .owl-carousel .owl-item .product-img-modern img { height: 200px !important; width: 100% !important; object-fit: contain !important; display: block !important; margin: 0 auto !important; }
@@ -1171,11 +1171,28 @@
     /* === OWL CAROUSEL ARROWS REDESIGN === */
     .related-product .owl-carousel { position: relative; }
     .related-product .owl-nav { margin: 0; }
-    .related-product .owl-nav .owl-prev, .related-product .owl-nav .owl-next { position: absolute !important; top: 50% !important; transform: translateY(-50%) !important; width: 45px !important; height: 45px !important; background: #fff !important; color: #F7941D !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important; font-size: 24px !important; line-height: 1 !important; transition: all 0.3s ease !important; z-index: 99; margin: 0 !important; padding: 0 !important; border: 2px solid transparent !important; }
+    .related-product .owl-nav .owl-prev, .related-product .owl-nav .owl-next { position: absolute !important; top: 50% !important; transform: translateY(-50%) !important; width: 45px !important; height: 45px !important; background: #fff !important; color: var(--primary-color) !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important; font-size: 24px !important; line-height: 1 !important; transition: all 0.3s ease !important; z-index: 99; margin: 0 !important; padding: 0 !important; border: 2px solid transparent !important; }
     .related-product .owl-nav .owl-prev { left: -15px !important; }
     .related-product .owl-nav .owl-next { right: -15px !important; }
-    .related-product .owl-nav .owl-prev:hover, .related-product .owl-nav .owl-next:hover { background: #F7941D !important; color: #fff !important; border-color: #fff !important; }
+    .related-product .owl-nav .owl-prev:hover, .related-product .owl-nav .owl-next:hover { background: var(--primary-color) !important; color: #fff !important; border-color: #fff !important; }
     </style>
+
+<style>
+/* Mobile specific image adjustments */
+@media (max-width: 768px) {
+    .snc-main-image-container img {
+        max-height: 300px !important;
+        width: 100% !important;
+        object-fit: contain;
+    }
+}
+</style>
+
+
+<style>
+.snc-theme-color { color: var(--primary-color) !important; }
+</style>
+
 @endpush
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
@@ -1205,4 +1222,21 @@
 		}
 	}
 </script>
+
+<style>
+/* Mobile specific image adjustments */
+@media (max-width: 768px) {
+    .snc-main-image-container img {
+        max-height: 300px !important;
+        width: 100% !important;
+        object-fit: contain;
+    }
+}
+</style>
+
+
+<style>
+.snc-theme-color { color: var(--primary-color) !important; }
+</style>
+
 @endpush
