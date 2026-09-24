@@ -1,20 +1,30 @@
-<!-- Start Footer Area -->
+﻿<?php
+$f = 'resources/views/frontend/layouts/footer.blade.php';
+$c = file_get_contents($f);
+
+// Replace everything from <style> to <!-- Jquery -->
+$startMarker = '<!-- Start Footer Area -->';
+$endMarker = '<!-- Jquery -->';
+
+$start = strpos($c, $startMarker);
+$end = strpos($c, $endMarker);
+
+if ($start !== false && $end !== false) {
+    $newFooter = '<!-- Start Footer Area -->
 <style>
 	/* Elegant Custom Footer */
 	.footer {
 		background-color: #fcf9f2;
-        background-image: url('{{ asset("frontend/img/footer-bg.jpg") }}');
-        background-size: cover;
-        background-position: center top;
+        background-image: url(\'https://www.transparenttextures.com/patterns/cream-paper.png\');
 		color: #5c3a21;
-		font-family: 'Playfair Display', 'Georgia', serif;
+		font-family: \'Playfair Display\', \'Georgia\', serif;
 		border-top: 5px solid #a85116;
         position: relative;
         overflow: hidden;
 	}
     /* Inner Border framing */
     .footer::before {
-        content: '';
+        content: \'\';
         position: absolute;
         top: 10px;
         left: 10px;
@@ -36,7 +46,7 @@
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 1.5px;
-        font-family: 'Playfair Display', 'Georgia', serif;
+        font-family: \'Playfair Display\', \'Georgia\', serif;
 	}
 	.footer .single-footer ul li {
 		margin-bottom: 15px;
@@ -46,7 +56,7 @@
 		transition: all 0.3s ease;
 		text-decoration: none;
 		font-size: 15px;
-		font-family: 'Poppins', sans-serif;
+		font-family: \'Poppins\', sans-serif;
 	}
 	.footer .single-footer ul li a:hover {
 		color: #d35400;
@@ -57,7 +67,7 @@
 		line-height: 1.8;
 		font-size: 14px;
 		margin-top: 20px;
-        font-family: 'Poppins', sans-serif;
+        font-family: \'Poppins\', sans-serif;
 	}
 	.footer .contact ul li {
 		color: #5c3a21;
@@ -66,7 +76,7 @@
 		align-items: center;
 		font-size: 15px;
 		line-height: 1.4;
-		font-family: 'Poppins', sans-serif;
+		font-family: \'Poppins\', sans-serif;
 	}
 	.footer .contact ul li i {
 		margin-right: 15px;
@@ -114,7 +124,7 @@
 	/* Orange Bottom Bar */
 	.footer .copyright {
 		background: #b14d0a;
-        background-image: url('https://www.transparenttextures.com/patterns/floral-flourish.png');
+        background-image: url(\'https://www.transparenttextures.com/patterns/floral-flourish.png\');
         background-blend-mode: multiply;
 		padding: 12px 0;
         position: relative;
@@ -126,7 +136,7 @@
 		font-size: 12px;
 		font-weight: 500;
 		letter-spacing: 1px;
-        font-family: 'Poppins', sans-serif;
+        font-family: \'Poppins\', sans-serif;
         text-transform: uppercase;
 	}
 	.footer .bottom-links a {
@@ -145,7 +155,7 @@
         gap: 15px;
     }
     .est-badge {
-        font-family: 'Playfair Display', serif;
+        font-family: \'Playfair Display\', serif;
         font-size: 14px;
         color: #8c4217;
         font-style: italic;
@@ -163,15 +173,15 @@
 				<div class="col-lg-4 col-md-12 col-12 mb-5 mb-lg-0">
 					<div class="single-footer about">
 						<div class="footer-logo-wrapper">
-							<a href="{{route('home')}}">
-                                <img src="{{asset('images/footer_logo.jpg')}}" alt="Shoukat Nimco Center Logo" style="width: 140px; height: 140px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); border: 4px solid #d4af37;">
+							<a href="{{route(\'home\')}}">
+                                <img src="{{asset(\'images/footer_logo.jpg\')}}" alt="Shoukat Nimco Center Logo" style="width: 140px; height: 140px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); border: 4px solid #d4af37;">
                             </a>
                             <div class="est-badge">
                                 EST.<br><span style="font-size: 20px;">1950</span>
                             </div>
 						</div>
 						@php
-						$settings = DB::table('settings')->first();
+						$settings = DB::table(\'settings\')->first();
 						@endphp
 						<p class="foot-desc">{!! $settings->description !!}</p>
 					</div>
@@ -201,7 +211,7 @@
 							<a href="https://www.instagram.com/Shoukat Nimco Center.pk/" target="_blank">
 								<i class="ti-instagram"></i>
 							</a>
-							<a href="https://wa.me/{{ preg_replace('/\D/', '', $settings->phone) }}" target="_blank">
+							<a href="https://wa.me/{{ preg_replace(\'/\D/\', \'\', $settings->phone) }}" target="_blank">
 								<i class="fa fa-whatsapp"></i>
 							</a>
 						</div>
@@ -213,8 +223,8 @@
 					<div class="single-footer links help-section">
 						<h4>Help</h4>
 						<ul>
-							<li><a href="{{route('contact')}}">Submit Your Complaint</a></li>
-							<li><a href="{{route('about-us')}}">About Us</a></li>
+							<li><a href="{{route(\'contact\')}}">Submit Your Complaint</a></li>
+							<li><a href="{{route(\'about-us\')}}">About Us</a></li>
 							<li><a href="#">Returns & Exchanges</a></li>
 						</ul>
 					</div>
@@ -242,77 +252,12 @@
 </footer>
 <!-- /End Footer Area -->
 
-<!-- Jquery -->
-<script src="{{asset('frontend/js/jquery.min.js')}}"></script>
-<script src="{{asset('frontend/js/jquery-migrate-3.0.0.js')}}"></script>
-<script src="{{asset('frontend/js/jquery-ui.min.js')}}"></script>
-<!-- Popper JS -->
-<script src="{{asset('frontend/js/popper.min.js')}}"></script>
-<!-- Bootstrap JS -->
-<script src="{{asset('frontend/js/bootstrap.min.js')}}"></script>
-<!-- Color JS -->
+<!-- Jquery -->';
 
-<!-- Slicknav JS -->
-<script src="{{asset('frontend/js/slicknav.min.js')}}"></script>
-<!-- Owl Carousel JS -->
-<script src="{{asset('frontend/js/owl-carousel.js')}}"></script>
-<!-- Magnific Popup JS -->
-<script src="{{asset('frontend/js/magnific-popup.js')}}"></script>
-<!-- Waypoints JS -->
-<script src="{{asset('frontend/js/waypoints.min.js')}}"></script>
-<!-- Countdown JS -->
-<script src="{{asset('frontend/js/finalcountdown.min.js')}}"></script>
-<!-- Nice Select JS -->
-<script src="{{asset('frontend/js/nicesellect.js')}}"></script>
-<!-- Flex Slider JS -->
-<script src="{{asset('frontend/js/flex-slider.js')}}"></script>
-<!-- ScrollUp JS -->
-<script src="{{asset('frontend/js/scrollup.js')}}"></script>
-<!-- Onepage Nav JS -->
-<script src="{{asset('frontend/js/onepage-nav.min.js')}}"></script>
-{{-- Isotope --}}
-<script src="{{asset('frontend/js/isotope/isotope.pkgd.min.js')}}"></script>
-<!-- Easing JS -->
-<script src="{{asset('frontend/js/easing.js')}}"></script>
-
-<!-- Active JS -->
-<script src="{{asset('frontend/js/active.js')}}"></script>
-
-
-<!-- AOS JS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  if(typeof AOS !== 'undefined') {
-      AOS.init({
-          duration: 800,
-          once: true,
-          offset: 100
-      });
-  }
-</script>
-@stack('scripts')
-<script>
-	setTimeout(function() {
-		$('.alert').slideUp();
-	}, 5000);
-	$(function() {
-		// ------------------------------------------------------- //
-		// Multi Level dropdowns
-		// ------------------------------------------------------ //
-		$("ul.dropdown-menu [data-toggle='dropdown']").on("click", function(event) {
-			event.preventDefault();
-			event.stopPropagation();
-
-			$(this).siblings().toggleClass("show");
-
-
-			if (!$(this).next().hasClass('show')) {
-				$(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
-			}
-			$(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
-				$('.dropdown-submenu .show').removeClass("show");
-			});
-
-		});
-	});
-</script>
+    $c = substr_replace($c, $newFooter, $start, $end - $start + strlen($endMarker));
+    file_put_contents($f, $c);
+    echo "Footer redesigned to match mockup!";
+} else {
+    echo "Markers not found.";
+}
+?>

@@ -1743,7 +1743,8 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
             dots: false,
             navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
             responsive: {
-                0: { items: 2, margin: 10 },
+                0: { items: 1, margin: 10 },
+                  480: { items: 1, margin: 10 },
                 576: { items: 3, margin: 10 },
                 768: { items: 4 },
                 992: { items: 5 },
@@ -1828,12 +1829,12 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <!-- Start Most Popular -->
-<div class="product-area most-popular section" style="background:#c1540b;">
+<div class="product-area most-popular section" style="background-color: #d35400; background-image: url('{{ asset("frontend/img/leaves-pattern.jpg") }}'); background-blend-mode: overlay; background-size: 400px; background-repeat: repeat;">
     <div class="container">
 <div class="row">
             <div class="col-12">
                 <div class="section-title text-center" style="margin-bottom: 50px;">
-                    <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Top Picks</span>
+                    <span style="color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px;">Top Picks</span>
                     <h2 style="font-family: 'Orbitron', sans-serif; font-size: 32px; font-weight: 800; color: #fff; margin-top: 10px;">Featured <span style="color: #fff;">Products</span></h2>
                 </div>
             </div>
@@ -3086,7 +3087,7 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
     filter: blur(6px);
 }
 </style>
-<div class="product-area section" style="background: #c1540b;">
+<div class="product-area section" style="background-color: #d35400; background-image: url('{{ asset("frontend/img/leaves-pattern.jpg") }}'); background-blend-mode: overlay; background-size: 400px; background-repeat: repeat;">
     <div class="container">
 <div class="row">
             <div class="col-12">
