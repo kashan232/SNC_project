@@ -2896,6 +2896,122 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 }
 </style>
 
+
+<style>
+/* MOBILE CIRCULAR CATEGORY FILTERS */
+@media (max-width: 767px) {
+    .filter-tope-group {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 15px !important;
+        gap: 15px !important;
+        margin-bottom: 20px !important;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    .filter-tope-group::-webkit-scrollbar {
+        height: 3px;
+    }
+    .filter-tope-group::-webkit-scrollbar-thumb {
+        background: #ddd;
+        border-radius: 4px;
+    }
+    .filter-tope-group .btn.desk-pill-mobile-circle {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        min-width: 70px !important;
+    }
+    .desk-pill-mobile-circle .icon-wrap {
+        width: 60px !important;
+        height: 60px !important;
+        background: #fff !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08) !important;
+        border: 2px solid transparent !important;
+        margin-bottom: 8px !important;
+        overflow: hidden !important;
+        transition: all 0.3s ease;
+    }
+    .desk-pill-mobile-circle.is-checked .icon-wrap, 
+    .desk-pill-mobile-circle.active .icon-wrap,
+    .desk-pill-mobile-circle.how-active1 .icon-wrap {
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 4px 12px rgba(247, 148, 29, 0.25) !important;
+    }
+    .desk-pill-mobile-circle .icon-wrap img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+    .desk-pill-mobile-circle .icon-wrap i {
+        font-size: 22px !important;
+        color: #777 !important;
+    }
+    .desk-pill-mobile-circle.is-checked .icon-wrap i,
+    .desk-pill-mobile-circle.active .icon-wrap i,
+    .desk-pill-mobile-circle.how-active1 .icon-wrap i {
+        color: var(--primary-color) !important;
+    }
+    .desk-pill-mobile-circle .cat-name {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        color: #fff !important;
+        white-space: nowrap !important;
+    }
+    .desk-pill-mobile-circle.is-checked .cat-name,
+    .desk-pill-mobile-circle.active .cat-name,
+    .desk-pill-mobile-circle.how-active1 .cat-name {
+        color: #fff !important;
+    }
+}
+@media (min-width: 768px) {
+    .desk-pill-mobile-circle .icon-wrap { display: none !important; }
+}
+</style>
+
+
+<style>
+/* Adjust card styling for smaller mobile grid (2 per row) */
+@media (max-width: 575px) {
+    .isotope-grid .modern-product-card {
+        margin-bottom: 10px !important;
+    }
+    .isotope-grid .modern-product-card .product-info-modern {
+        padding: 10px !important;
+    }
+    .isotope-grid .modern-product-card h3 a {
+        font-size: 12px !important;
+        line-height: 1.3 !important;
+    }
+    .isotope-grid .modern-product-card .current-price {
+        font-size: 14px !important;
+    }
+    .isotope-grid .modern-product-card .product-action-modern {
+        flex-direction: column !important;
+        gap: 5px !important;
+    }
+    .isotope-grid .modern-product-card .btn-action-modern {
+        padding: 6px 4px !important;
+        font-size: 10px !important;
+    }
+    .isotope-grid .isotope-item {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        padding-bottom: 20px !important;
+    }
+}
+</style>
+
 @endpush
 <!-- End Categories Section -->
 
@@ -4185,13 +4301,21 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
                             // dd($categories);
                             @endphp
                             @if($categories)
-                            <button class="btn is-checked" data-filter="*">
-                                All Products
+                            <button class="btn is-checked desk-pill-mobile-circle" data-filter="*">
+                                <div class="icon-wrap d-md-none"><i class="ti-layout-grid2"></i></div>
+                                <span class="cat-name">All Products</span>
                             </button>
                             @foreach($categories as $key=>$cat)
-
-                            <button class="btn" data-filter=".{{$cat->id}}">
-                                {{$cat->title}}
+                            <button class="btn desk-pill-mobile-circle" data-filter=".{{$cat->id}}">
+                                <div class="icon-wrap d-md-none">
+                                    @if($cat->photo)
+                                        @php $cat_photos = explode(',', $cat->photo); @endphp
+                                        <img src="{{$cat_photos[0]}}" alt="{{$cat->title}}">
+                                    @else
+                                        <i class="ti-tag"></i>
+                                    @endif
+                                </div>
+                                <span class="cat-name">{{$cat->title}}</span>
                             </button>
                             @endforeach
                             @endif
@@ -4202,7 +4326,7 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
                         <!-- Start Single Tab -->
                         @if($product_lists)
                         @foreach($product_lists as $key=>$product)
-                        <div class="col-sm-12 col-md-6 col-lg-3 p-b-35 isotope-item {{$product->cat_id}}">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{$product->cat_id}}">
                             
 <div class="modern-product-card {{ $product->stock<=0 ? 'card-soldout' : '' }} anime-card">
     <div class="card-badges">
@@ -7687,6 +7811,122 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 }
 </style>
 
+
+<style>
+/* MOBILE CIRCULAR CATEGORY FILTERS */
+@media (max-width: 767px) {
+    .filter-tope-group {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 15px !important;
+        gap: 15px !important;
+        margin-bottom: 20px !important;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    .filter-tope-group::-webkit-scrollbar {
+        height: 3px;
+    }
+    .filter-tope-group::-webkit-scrollbar-thumb {
+        background: #ddd;
+        border-radius: 4px;
+    }
+    .filter-tope-group .btn.desk-pill-mobile-circle {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        min-width: 70px !important;
+    }
+    .desk-pill-mobile-circle .icon-wrap {
+        width: 60px !important;
+        height: 60px !important;
+        background: #fff !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08) !important;
+        border: 2px solid transparent !important;
+        margin-bottom: 8px !important;
+        overflow: hidden !important;
+        transition: all 0.3s ease;
+    }
+    .desk-pill-mobile-circle.is-checked .icon-wrap, 
+    .desk-pill-mobile-circle.active .icon-wrap,
+    .desk-pill-mobile-circle.how-active1 .icon-wrap {
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 4px 12px rgba(247, 148, 29, 0.25) !important;
+    }
+    .desk-pill-mobile-circle .icon-wrap img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+    .desk-pill-mobile-circle .icon-wrap i {
+        font-size: 22px !important;
+        color: #777 !important;
+    }
+    .desk-pill-mobile-circle.is-checked .icon-wrap i,
+    .desk-pill-mobile-circle.active .icon-wrap i,
+    .desk-pill-mobile-circle.how-active1 .icon-wrap i {
+        color: var(--primary-color) !important;
+    }
+    .desk-pill-mobile-circle .cat-name {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        color: #fff !important;
+        white-space: nowrap !important;
+    }
+    .desk-pill-mobile-circle.is-checked .cat-name,
+    .desk-pill-mobile-circle.active .cat-name,
+    .desk-pill-mobile-circle.how-active1 .cat-name {
+        color: #fff !important;
+    }
+}
+@media (min-width: 768px) {
+    .desk-pill-mobile-circle .icon-wrap { display: none !important; }
+}
+</style>
+
+
+<style>
+/* Adjust card styling for smaller mobile grid (2 per row) */
+@media (max-width: 575px) {
+    .isotope-grid .modern-product-card {
+        margin-bottom: 10px !important;
+    }
+    .isotope-grid .modern-product-card .product-info-modern {
+        padding: 10px !important;
+    }
+    .isotope-grid .modern-product-card h3 a {
+        font-size: 12px !important;
+        line-height: 1.3 !important;
+    }
+    .isotope-grid .modern-product-card .current-price {
+        font-size: 14px !important;
+    }
+    .isotope-grid .modern-product-card .product-action-modern {
+        flex-direction: column !important;
+        gap: 5px !important;
+    }
+    .isotope-grid .modern-product-card .btn-action-modern {
+        padding: 6px 4px !important;
+        font-size: 10px !important;
+    }
+    .isotope-grid .isotope-item {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        padding-bottom: 20px !important;
+    }
+}
+</style>
+
 @endpush
 
 @push('scripts')
@@ -8838,6 +9078,122 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 .isotope-grid .modern-product-card {
     height: 100% !important;
     margin-bottom: 20px !important; /* Force margin inside the item to separate them vertically */
+}
+</style>
+
+
+<style>
+/* MOBILE CIRCULAR CATEGORY FILTERS */
+@media (max-width: 767px) {
+    .filter-tope-group {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        padding-bottom: 15px !important;
+        gap: 15px !important;
+        margin-bottom: 20px !important;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    .filter-tope-group::-webkit-scrollbar {
+        height: 3px;
+    }
+    .filter-tope-group::-webkit-scrollbar-thumb {
+        background: #ddd;
+        border-radius: 4px;
+    }
+    .filter-tope-group .btn.desk-pill-mobile-circle {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        min-width: 70px !important;
+    }
+    .desk-pill-mobile-circle .icon-wrap {
+        width: 60px !important;
+        height: 60px !important;
+        background: #fff !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08) !important;
+        border: 2px solid transparent !important;
+        margin-bottom: 8px !important;
+        overflow: hidden !important;
+        transition: all 0.3s ease;
+    }
+    .desk-pill-mobile-circle.is-checked .icon-wrap, 
+    .desk-pill-mobile-circle.active .icon-wrap,
+    .desk-pill-mobile-circle.how-active1 .icon-wrap {
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 4px 12px rgba(247, 148, 29, 0.25) !important;
+    }
+    .desk-pill-mobile-circle .icon-wrap img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+    .desk-pill-mobile-circle .icon-wrap i {
+        font-size: 22px !important;
+        color: #777 !important;
+    }
+    .desk-pill-mobile-circle.is-checked .icon-wrap i,
+    .desk-pill-mobile-circle.active .icon-wrap i,
+    .desk-pill-mobile-circle.how-active1 .icon-wrap i {
+        color: var(--primary-color) !important;
+    }
+    .desk-pill-mobile-circle .cat-name {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        color: #fff !important;
+        white-space: nowrap !important;
+    }
+    .desk-pill-mobile-circle.is-checked .cat-name,
+    .desk-pill-mobile-circle.active .cat-name,
+    .desk-pill-mobile-circle.how-active1 .cat-name {
+        color: #fff !important;
+    }
+}
+@media (min-width: 768px) {
+    .desk-pill-mobile-circle .icon-wrap { display: none !important; }
+}
+</style>
+
+
+<style>
+/* Adjust card styling for smaller mobile grid (2 per row) */
+@media (max-width: 575px) {
+    .isotope-grid .modern-product-card {
+        margin-bottom: 10px !important;
+    }
+    .isotope-grid .modern-product-card .product-info-modern {
+        padding: 10px !important;
+    }
+    .isotope-grid .modern-product-card h3 a {
+        font-size: 12px !important;
+        line-height: 1.3 !important;
+    }
+    .isotope-grid .modern-product-card .current-price {
+        font-size: 14px !important;
+    }
+    .isotope-grid .modern-product-card .product-action-modern {
+        flex-direction: column !important;
+        gap: 5px !important;
+    }
+    .isotope-grid .modern-product-card .btn-action-modern {
+        padding: 6px 4px !important;
+        font-size: 10px !important;
+    }
+    .isotope-grid .isotope-item {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        padding-bottom: 20px !important;
+    }
 }
 </style>
 
