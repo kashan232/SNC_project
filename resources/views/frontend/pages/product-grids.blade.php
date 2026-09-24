@@ -10,10 +10,10 @@
                 <div class="col-lg-7 col-md-9 col-12">
                     <ul class="bread-list-modern" style="display: flex; align-items: center; list-style: none; padding: 0; margin: 0 0 15px 0; font-size: 13px; color: #fff;">
                         <li><a href="{{route('home')}}" style="color: #fff; text-decoration: none;">Home</a></li>
-                        <li style="margin: 0 10px; color: #F7941D;"><i class="ti-angle-right" style="font-size: 10px;"></i></li>
+                        <li style="margin: 0 10px; color: var(--primary-color);"><i class="ti-angle-right" style="font-size: 10px;"></i></li>
                         <li class="active" style="color: #fff; font-weight: 600;">Our Menu</li>
                     </ul>
-                    <h1 class="hero-title" style="font-size: 48px; font-weight: 900; color: #fff; margin-bottom: 15px; letter-spacing: 1px;">EXPLORE OUR <span style="color: #F7941D;">MENU</span></h1>
+                    <h1 class="hero-title" style="font-size: 48px; font-weight: 900; color: #fff; margin-bottom: 15px; letter-spacing: 1px;">EXPLORE OUR <span style="color: var(--primary-color);">MENU</span></h1>
                     <p class="hero-subtitle" style="color: #e0e6ed; font-size: 15px; line-height: 1.6; font-weight: 400; max-width: 450px; margin-bottom: 0;">Premium quality Nimco, bakery items, and biscuits made with care and tradition.</p>
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <div class="hero-wave" style="position: absolute; bottom: -2px; left: 0; width: 100%; overflow: hidden; line-height: 0; z-index: 1;">
             <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 70px;">
                 <!-- Orange Outline Wave -->
-                <path d="M0,60 C320,120 420,0 720,40 C1020,80 1120,-20 1440,60 L1440,120 L0,120 Z" fill="#F7941D" transform="translate(0, -6)"></path>
+                <path d="M0,60 C320,120 420,0 720,40 C1020,80 1120,-20 1440,60 L1440,120 L0,120 Z" fill="var(--primary-color)" transform="translate(0, -6)"></path>
                 <!-- White Fill Wave -->
                 <path d="M0,60 C320,120 420,0 720,40 C1020,80 1120,-20 1440,60 L1440,120 L0,120 Z" fill="#eff2f6"></path>
             </svg>
@@ -138,10 +138,10 @@
     <div class="d-flex align-items-center mb-4" style="gap: 12px;">
         <div class="mobile-search-box" style="flex-grow: 1; position: relative;">
             <input type="text" name="search" placeholder="Search products..." value="{{ request('search') }}" style="width: 100%; border: 1px solid #eee; border-radius: 8px; padding: 12px 40px 12px 15px; font-size: 13px; outline: none; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
-            <button type="submit" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #F7941D; font-size: 16px;"><i class="ti-search"></i></button>
+            <button type="submit" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--primary-color); font-size: 16px;"><i class="ti-search"></i></button>
         </div>
         <button type="button" onclick="$('.mobile-price-filter').slideToggle();" style="background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 12px 18px; font-weight: 600; color: #333; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); white-space: nowrap;">
-            <i class="ti-filter" style="color: #F7941D; font-size: 16px;"></i> Filter
+            <i class="ti-filter" style="color: var(--primary-color); font-size: 16px;"></i> Filter
         </button>
     </div>
 
@@ -152,7 +152,7 @@
         <div class="custom-radio"><input type="radio" name="price_range" value="under_300" id="m_price_1"><label for="m_price_1">Under Rs: 300</label></div>
         <div class="custom-radio"><input type="radio" name="price_range" value="300_500" id="m_price_2"><label for="m_price_2">Rs: 300 - Rs: 500</label></div>
         <div class="custom-radio"><input type="radio" name="price_range" value="above_500" id="m_price_3"><label for="m_price_3">Above Rs: 500</label></div>
-        <button type="submit" class="btn-apply-filter" style="margin-top: 10px; padding: 10px; width: 100%; background: #F7941D; color: #fff; border: none; border-radius: 8px; font-weight: 600;">Apply Filter</button>
+        <button type="submit" class="btn-apply-filter" style="margin-top: 10px; padding: 10px; width: 100%; background: var(--primary-color); color: #fff; border: none; border-radius: 8px; font-weight: 600;">Apply Filter</button>
     </div>
     
     <!-- Horizontal scrolling categories (Circular) -->
@@ -271,7 +271,7 @@
     
     /* Hero Section */
     .menu-hero-section {
-        background: var(--primary-color, #c1540b);
+        background: var(--primary-color, var(--primary-color));
         padding: 50px 0 100px;
         color: #fff;
     }
@@ -387,12 +387,12 @@
     .categor-list-modern li a:hover,
     .categor-list-modern li a.active {
         background: #fff0ef;
-        color: #F7941D;
+        color: var(--primary-color);
     }
     .categor-list-modern li a:hover .cat-icon,
     .categor-list-modern li a.active .cat-icon {
         background: #fff;
-        color: #F7941D;
+        color: var(--primary-color);
     }
     .categor-list-modern li a:hover .cat-icon img,
     .categor-list-modern li a.active .cat-icon img {
@@ -401,7 +401,7 @@
     }
     .categor-list-modern li a:hover .cat-count,
     .categor-list-modern li a.active .cat-count {
-        background: #F7941D;
+        background: var(--primary-color);
         color: #fff;
     }
     
@@ -415,7 +415,7 @@
         width: 18px;
         height: 18px;
         margin-right: 12px;
-        accent-color: #F7941D;
+        accent-color: var(--primary-color);
         cursor: pointer;
     }
     .custom-radio label {
@@ -496,7 +496,7 @@
     }
     
     .modern-search-btn {
-        background: var(--primary-color, #c1540b);
+        background: var(--primary-color, var(--primary-color));
         color: #fff;
         border: none;
         width: 35px;
@@ -680,7 +680,7 @@
     }
     
     .btn-cart {
-        background: #F7941D;
+        background: var(--primary-color);
         color: #ffffff !important;
     }
     
@@ -689,7 +689,7 @@
     }
     
     .btn-cart:hover {
-        background: #F7941D;
+        background: var(--primary-color);
         filter: brightness(0.85);
         color: #ffffff !important;
         transform: translateY(-2px);
@@ -793,9 +793,9 @@
         flex: 1; /* Equal width */
     }
     .btn-cart {
-        background: #F7941D !important;
+        background: var(--primary-color) !important;
         color: #fff !important;
-        border: 1px solid #F7941D !important;
+        border: 1px solid var(--primary-color) !important;
     }
     .btn-cart:hover {
         background: #e08316 !important;
@@ -807,8 +807,8 @@
         border: 1px solid #e0e0e0 !important;
     }
     .btn-view:hover {
-        border-color: #F7941D !important;
-        color: #F7941D !important;
+        border-color: var(--primary-color) !important;
+        color: var(--primary-color) !important;
     }
     
     .price-row {
@@ -843,7 +843,7 @@
         color: #fff !important;
         text-transform: uppercase !important;
     }
-    .badge-bestseller { background: #F7941D !important; }
+    .badge-bestseller { background: var(--primary-color) !important; }
     
     .btn-wishlist-modern {
         background: #fff !important;
@@ -866,7 +866,7 @@
     
     .categor-list-modern li a.active, .categor-list-modern li a:hover {
         background: #fff0e6 !important;
-        color: #F7941D !important;
+        color: var(--primary-color) !important;
     }
     
     .shop-top-modern {
@@ -892,7 +892,7 @@
     /* Mobile specific fixes */
     .btn-mobile-filter {
         width: 100%;
-        background: #F7941D;
+        background: var(--primary-color);
         border: none;
         border-radius: 8px;
         padding: 12px;
@@ -928,7 +928,7 @@
     }
     .mobile-cat-pill.active {
         background: #fff0e6;
-        color: #F7941D;
+        color: var(--primary-color);
         border-color: #ffd8cc;
     }
     .mobile-cat-pill img { width: 24px; height: 24px; margin-bottom: 8px; opacity: 0.6; }
@@ -1126,11 +1126,11 @@
 
     /* COLOR THEME & FULL IMAGE WIDTH FIXES */
     .badge-discount {
-        background: #F7941D !important; /* Theme Orange */
+        background: var(--primary-color) !important; /* Theme Orange */
         color: #fff !important;
     }
     .btn-wishlist-modern {
-        background: #F7941D !important; /* Theme Orange */
+        background: var(--primary-color) !important; /* Theme Orange */
         color: #fff !important;
     }
     .btn-wishlist-modern:hover {
@@ -1221,21 +1221,21 @@
 
     /* Active State */
     .mobile-cat-circle.active .icon-wrap {
-        border-color: #F7941D;
+        border-color: var(--primary-color);
         box-shadow: 0 0 0 3px rgba(247, 148, 29, 0.15);
     }
     .mobile-cat-circle.active .icon-wrap img,
     .mobile-cat-circle.active .icon-wrap i {
         opacity: 1;
-        color: #F7941D;
+        color: var(--primary-color);
         filter: sepia(1) hue-rotate(-50deg) saturate(5); /* Make images orange */
     }
     .mobile-cat-circle.active .m-badge {
-        background: #F7941D;
+        background: var(--primary-color);
     }
     .mobile-cat-circle.active .cat-text {
-        color: #F7941D;
-        border-bottom-color: #F7941D;
+        color: var(--primary-color);
+        border-bottom-color: var(--primary-color);
     }
     
     .mobile-categories-scroll::-webkit-scrollbar {
