@@ -223,86 +223,10 @@
 </section>
 <!--/ End Checkout -->
 
-<!-- Start Shop Services Area  -->
-<section class="shop-services section home">
-    <div class="container">
-                                @php
-                            $firstName = old('first_name');
-                            $lastName = old('last_name');
-                            $email = old('email');
-                            if (auth()->check()) {
-                                if (!$firstName && !$lastName) {
-                                    $nameParts = explode(' ', auth()->user()->name, 2);
-                                    $firstName = $nameParts[0] ?? '';
-                                    $lastName = $nameParts[1] ?? '';
-                                }
-                                $email = $email ?? auth()->user()->email;
-                            }
-                        @endphp
-                        <div class="row">
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Service -->
-                <div class="single-service">
-                    <i class="ti-rocket"></i>
-                    <h4>Free shiping</h4>
-                    <p>Orders over Rs:1000</p>
-                </div>
-                <!-- End Single Service -->
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Service -->
-                <div class="single-service">
-                    <i class="ti-reload"></i>
-                    <h4>7 Days Return</h4>
-                    <p>Original box required</p>
-                </div>
-                <!-- End Single Service -->
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Service -->
-                <div class="single-service">
-                    <i class="ti-lock"></i>
-                    <h4>Sucure Payment</h4>
-                    <p>100% secure payment</p>
-                </div>
-                <!-- End Single Service -->
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <!-- Start Single Service -->
-                <div class="single-service">
-                    <i class="ti-tag"></i>
-                    <h4>Best Price</h4>
-                    <p>Guaranteed price</p>
-                </div>
-                <!-- End Single Service -->
-            </div>
-        </div>
-    </div>
-</section>
+
 <!-- End Shop Services -->
 
-<!-- Start Shop Newsletter  -->
-<section class="shop-newsletter section">
-    <div class="container">
-        <div class="inner-top">
-    <div class="row">
-                <div class="col-lg-8 offset-lg-2 col-12">
-                    <!-- Start Newsletter Inner -->
-                    <div class="inner">
-                        <h4>Newsletter</h4>
-                        <p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
-                        <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
-                            <input name="EMAIL" placeholder="Your email address" required="" type="email">
-                            <button class="btn">Subscribe</button>
-                        </form>
-                    </div>
-                    <!-- End Newsletter Inner -->
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Shop Newsletter -->
+
 @endsection
 @push('styles')
 <style>
@@ -353,6 +277,206 @@
         top: 14px;
     }
 </style>
+
+<style>
+    /* ========================================= */
+    /* CHECKOUT PAGE MODERN PREMIUM REDESIGN     */
+    /* ========================================= */
+    
+    .shop.checkout {
+        background: #fdfdfd;
+        padding: 60px 0;
+    }
+    
+    /* Left Column: Form Styling */
+    .checkout-form {
+        background: #fff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1); border: none;
+        border: 1px solid #f0f0f0;
+        margin-bottom: 30px;
+    }
+    .checkout-form h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 8px;
+        text-transform: capitalize;
+    }
+    .checkout-form p {
+        color: #777;
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+    .checkout-form .form-group {
+        margin-bottom: 25px;
+    }
+    .checkout-form .form-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 8px;
+    }
+    .checkout-form .form-group label span {
+        color: #ff4757;
+        margin-left: 3px;
+    }
+    .checkout-form .form-group input, 
+    .checkout-form .form-group select {
+        width: 100%;
+        height: 52px;
+        border-radius: 8px;
+        border: 1px solid #e5e5e5;
+        padding: 0 15px;
+        font-size: 15px;
+        background: #fafafa;
+        color: #333;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .checkout-form .form-group input:focus, 
+    .checkout-form .form-group select:focus {
+        border-color: var(--primary-color);
+        background: #fff;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+    }
+    .checkout-form .nice-select {
+        display: none !important; /* Force hide nice-select if initialized here */
+    }
+    .checkout-form select.form-control {
+        display: block !important; /* Force native select for better mobile UX */
+        -webkit-appearance: auto;
+    }
+    
+    /* Right Column: Order Details */
+    .order-details {
+        background: #fff;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1); border: none;
+        border: 1px solid #f0f0f0;
+    }
+    .order-details .single-widget {
+        margin-bottom: 30px;
+    }
+    .order-details .single-widget:last-child {
+        margin-bottom: 0;
+    }
+    .order-details .single-widget h2 {
+        background: var(--primary-color) !important; color: #fff !important;
+        color: #fff !important;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .order-details .single-widget .content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .order-details .single-widget .content ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px dashed #eee;
+        font-size: 15px;
+        color: #555;
+    }
+    .order-details .single-widget .content ul li span {
+        font-weight: 700;
+        color: #333;
+    }
+    .order-details .single-widget .content ul li.last {
+        font-size: 18px;
+        color: #222;
+        font-weight: 800;
+        border: none;
+        padding-top: 20px;
+    }
+    .order-details .single-widget .content ul li.last span {
+        font-size: 24px;
+        color: var(--primary-color);
+    }
+    
+    /* Shipping row customization */
+    .order-details .single-widget .content ul li.shipping {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .order-details .single-widget .content ul li.shipping select {
+        width: 100%;
+        height: 45px;
+        border-radius: 6px;
+        border: 1px solid #e0e0e0;
+        margin-top: 10px;
+        padding: 0 15px;
+        font-size: 14px;
+        background: #fdfdfd;
+        color: #333;
+        display: block !important;
+    }
+    .order-details .single-widget .content ul li.shipping .nice-select {
+        display: none !important;
+    }
+    
+    /* Payment Checkbox */
+    .order-details .single-widget .content .checkbox {
+        padding: 15px 20px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        border: 1px solid #eee;
+        margin-top: -5px;
+    }
+    .order-details .single-widget .content .checkbox label {
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+    }
+    .order-details .single-widget .content .checkbox input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--primary-color);
+        cursor: pointer;
+    }
+    
+    /* Checkout Button */
+    .single-widget.get-button .btn {
+        width: 100%;
+        height: 55px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: var(--primary-color) !important;
+        border: none !important;
+        color: #fff !important;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .single-widget.get-button .btn:hover {
+        filter: brightness(0.85) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+</style>
+
 @endpush
 @push('scripts')
 <script>
@@ -482,4 +606,204 @@
         text-transform: uppercase;
     }
 </style>
+
+<style>
+    /* ========================================= */
+    /* CHECKOUT PAGE MODERN PREMIUM REDESIGN     */
+    /* ========================================= */
+    
+    .shop.checkout {
+        background: #fdfdfd;
+        padding: 60px 0;
+    }
+    
+    /* Left Column: Form Styling */
+    .checkout-form {
+        background: #fff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1); border: none;
+        border: 1px solid #f0f0f0;
+        margin-bottom: 30px;
+    }
+    .checkout-form h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 8px;
+        text-transform: capitalize;
+    }
+    .checkout-form p {
+        color: #777;
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+    .checkout-form .form-group {
+        margin-bottom: 25px;
+    }
+    .checkout-form .form-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 8px;
+    }
+    .checkout-form .form-group label span {
+        color: #ff4757;
+        margin-left: 3px;
+    }
+    .checkout-form .form-group input, 
+    .checkout-form .form-group select {
+        width: 100%;
+        height: 52px;
+        border-radius: 8px;
+        border: 1px solid #e5e5e5;
+        padding: 0 15px;
+        font-size: 15px;
+        background: #fafafa;
+        color: #333;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .checkout-form .form-group input:focus, 
+    .checkout-form .form-group select:focus {
+        border-color: var(--primary-color);
+        background: #fff;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
+    }
+    .checkout-form .nice-select {
+        display: none !important; /* Force hide nice-select if initialized here */
+    }
+    .checkout-form select.form-control {
+        display: block !important; /* Force native select for better mobile UX */
+        -webkit-appearance: auto;
+    }
+    
+    /* Right Column: Order Details */
+    .order-details {
+        background: #fff;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1); border: none;
+        border: 1px solid #f0f0f0;
+    }
+    .order-details .single-widget {
+        margin-bottom: 30px;
+    }
+    .order-details .single-widget:last-child {
+        margin-bottom: 0;
+    }
+    .order-details .single-widget h2 {
+        background: var(--primary-color) !important; color: #fff !important;
+        color: #fff !important;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .order-details .single-widget .content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .order-details .single-widget .content ul li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px dashed #eee;
+        font-size: 15px;
+        color: #555;
+    }
+    .order-details .single-widget .content ul li span {
+        font-weight: 700;
+        color: #333;
+    }
+    .order-details .single-widget .content ul li.last {
+        font-size: 18px;
+        color: #222;
+        font-weight: 800;
+        border: none;
+        padding-top: 20px;
+    }
+    .order-details .single-widget .content ul li.last span {
+        font-size: 24px;
+        color: var(--primary-color);
+    }
+    
+    /* Shipping row customization */
+    .order-details .single-widget .content ul li.shipping {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .order-details .single-widget .content ul li.shipping select {
+        width: 100%;
+        height: 45px;
+        border-radius: 6px;
+        border: 1px solid #e0e0e0;
+        margin-top: 10px;
+        padding: 0 15px;
+        font-size: 14px;
+        background: #fdfdfd;
+        color: #333;
+        display: block !important;
+    }
+    .order-details .single-widget .content ul li.shipping .nice-select {
+        display: none !important;
+    }
+    
+    /* Payment Checkbox */
+    .order-details .single-widget .content .checkbox {
+        padding: 15px 20px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        border: 1px solid #eee;
+        margin-top: -5px;
+    }
+    .order-details .single-widget .content .checkbox label {
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+    }
+    .order-details .single-widget .content .checkbox input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--primary-color);
+        cursor: pointer;
+    }
+    
+    /* Checkout Button */
+    .single-widget.get-button .btn {
+        width: 100%;
+        height: 55px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: var(--primary-color) !important;
+        border: none !important;
+        color: #fff !important;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .single-widget.get-button .btn:hover {
+        filter: brightness(0.85) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+</style>
+
 @endpush
