@@ -48,6 +48,7 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'photo' => 'required|string',
             'size' => 'nullable',
+            'size_prices' => 'nullable|array',
             'stock' => 'required|numeric',
             'cat_id' => 'required|exists:categories,id',
             'brand_id' => 'nullable|exists:brands,id',
@@ -62,12 +63,25 @@ class ProductController extends Controller
         $slug = generateUniqueSlug($request->title, Product::class);
         $validatedData['slug'] = $slug;
         $validatedData['is_featured'] = $request->input('is_featured', 0);
+        if (empty($validatedData['discount'])) {
+            $validatedData['discount'] = 0;
+        }
 
+        
         if ($request->has('size')) {
             $validatedData['size'] = implode(',', $request->input('size'));
         } else {
             $validatedData['size'] = '';
         }
+        
+        if ($request->has('size_prices')) {
+            $validatedData['size_prices'] = json_encode(array_filter($request->input('size_prices'), function($value) {
+                return !is_null($value) && $value !== '';
+            }));
+        } else {
+            $validatedData['size_prices'] = null;
+        }
+
 
         $product = Product::create($validatedData);
 
@@ -125,6 +139,7 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'photo' => 'required|string',
             'size' => 'nullable',
+            'size_prices' => 'nullable|array',
             'stock' => 'required|numeric',
             'cat_id' => 'required|exists:categories,id',
             'child_cat_id' => 'nullable|exists:categories,id',
@@ -137,12 +152,25 @@ class ProductController extends Controller
         ]);
 
         $validatedData['is_featured'] = $request->input('is_featured', 0);
+        if (empty($validatedData['discount'])) {
+            $validatedData['discount'] = 0;
+        }
 
+        
         if ($request->has('size')) {
             $validatedData['size'] = implode(',', $request->input('size'));
         } else {
             $validatedData['size'] = '';
         }
+        
+        if ($request->has('size_prices')) {
+            $validatedData['size_prices'] = json_encode(array_filter($request->input('size_prices'), function($value) {
+                return !is_null($value) && $value !== '';
+            }));
+        } else {
+            $validatedData['size_prices'] = null;
+        }
+
 
         $status = $product->update($validatedData);
 

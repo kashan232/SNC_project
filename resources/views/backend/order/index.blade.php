@@ -14,18 +14,19 @@
   <div class="card-body">
     <div class="table-responsive">
       @if(count($orders)>0)
-      <table class="table table-bordered" id="order-dataTable" width="100%" cellspacing="0">
+      <table class="table table-hover table-bordered table-striped align-middle" id="order-dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
             <th>S.N.</th>
             <th>Order No.</th>
             <th>Name</th>
             <th>Email</th>
+              <th>City/Area</th>
             <th>Quantity</th>
             <th>Charge</th>
             <th>Total Amount</th>
             <th>Status</th>
-            <th>Action</th>
+            <th style="width: 130px;">Action</th>
           </tr>
         </thead>
         <tfoot>
@@ -34,11 +35,12 @@
             <th>Order No.</th>
             <th>Name</th>
             <th>Email</th>
+              <th>City/Area</th>
             <th>Quantity</th>
             <th>Charge</th>
             <th>Total Amount</th>
             <th>Status</th>
-            <th>Action</th>
+            <th style="width: 130px;">Action</th>
           </tr>
         </tfoot>
         <tbody>
@@ -48,9 +50,17 @@
           @endphp
           <tr>
             <td>{{$order->id}}</td>
-            <td>{{$order->order_number}}</td>
+            <td class="font-weight-bold">{{$order->order_number}}</td>
             <td>{{$order->first_name}} {{$order->last_name}}</td>
             <td>{{$order->email}}</td>
+              <td>
+                @if($order->city) 
+                    <span class="badge badge-info">{{$order->city->name}}</span>
+                @endif
+                @if($order->area)
+                    <br><small class="text-muted">{{$order->area->name}}</small>
+                @endif
+              </td>
             <td>{{$order->quantity}}</td>
             <td>@foreach($shipping_charge as $data) Rs: {{number_format($data,2)}} @endforeach</td>
             <td>Rs:{{number_format($order->total_amount,2)}}</td>

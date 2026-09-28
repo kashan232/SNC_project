@@ -59,11 +59,9 @@ class CartController extends Controller
             'slug'      =>  'required',
             'quant'      =>  'required',
         ]);
-        // dd($request->quant[1]);
-
-
+        
         $product = Product::where('slug', $request->slug)->first();
-        if($product->stock <$request->quant[1]){
+        if($product->stock < $request->quant[1]){
             return back()->with('error','Out of stock, You can add other products.');
         }
         if ( ($request->quant[1] < 1) || empty($product) ) {
@@ -71,14 +69,30 @@ class CartController extends Controller
             return back();
         }    
 
-        $already_cart = Cart::where('user_id', auth()->user()->id)->where('order_id',null)->where('product_id', $product->id)->first();
+        $selected_size = $request->input('size');
+        
+        // Find existing cart item matching product AND size
+        $already_cart = Cart::where('user_id', auth()->user()->id)
+            ->where('order_id',null)
+            ->where('product_id', $product->id)
+            ->where('size', $selected_size)
+            ->first();
 
-        // return $already_cart;
+        // Calculate specific price
+        $unit_price = $product->price;
+        if($selected_size && $product->size_prices) {
+            $sizePrices = json_decode($product->size_prices, true);
+            if(is_array($sizePrices) && isset($sizePrices[$selected_size]) && $sizePrices[$selected_size] !== "" && $sizePrices[$selected_size] !== null) {
+                $unit_price = (float)$sizePrices[$selected_size];
+            }
+        }
+        
+        // Apply discount to unit price
+        $discounted_price = ($unit_price - ($unit_price * $product->discount) / 100);
 
         if($already_cart) {
             $already_cart->quantity = $already_cart->quantity + $request->quant[1];
-            // $already_cart->price = ($product->price * $request->quant[1]) + $already_cart->price ;
-            $already_cart->amount = ($product->price * $request->quant[1])+ $already_cart->amount;
+            $already_cart->amount = ($discounted_price * $already_cart->quantity);
 
             if ($already_cart->product->stock < $already_cart->quantity || $already_cart->product->stock <= 0) return back()->with('error','Stock not sufficient!.');
 
@@ -89,16 +103,19 @@ class CartController extends Controller
             $cart = new Cart;
             $cart->user_id = auth()->user()->id;
             $cart->product_id = $product->id;
-            $cart->price = ($product->price-($product->price*$product->discount)/100);
+            $cart->size = $selected_size;
+            $cart->price = $discounted_price;
             $cart->quantity = $request->quant[1];
-            $cart->amount=($product->price * $request->quant[1]);
+            $cart->amount = ($discounted_price * $request->quant[1]);
+            
             if ($cart->product->stock < $cart->quantity || $cart->product->stock <= 0) return back()->with('error','Stock not sufficient!.');
-            // return $cart;
             $cart->save();
         }
         request()->session()->flash('success','Product successfully added to cart.');
         return back();       
-    } 
+    }    
+
+         
     
     public function cartDelete(Request $request){
         $cart = Cart::find($request->id);
@@ -134,9 +151,8 @@ class CartController extends Controller
                     // return $cart;
                     
                     if ($cart->product->stock <=0) continue;
-                    $after_price=($cart->product->price-($cart->product->price*$cart->product->discount)/100);
-                    $cart->amount = $after_price * $quant;
-                    // return $cart->price;
+                    // Use the existing unit price saved in the cart item which already accounts for size and discount
+                    $cart->amount = $cart->price * $quant;
                     $cart->save();
                     $success = 'Cart successfully updated!';
                 }else{

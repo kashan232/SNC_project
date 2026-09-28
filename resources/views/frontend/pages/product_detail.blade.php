@@ -109,16 +109,18 @@
 										<div class="d-flex flex-wrap">
 											@php $sizes=explode(',',$product_detail->size); @endphp
 											@foreach($sizes as $key => $size)
-												<button type="button" class="snc-size-btn @if($key==0) active @endif" onclick="selectSncSize(this)">{{$size}}</button>
-											@endforeach
+        @php $size = trim($size); @endphp
+        <button type="button" class="snc-size-btn @if($key==0) active @endif" onclick="selectSncSize(this, '{{$size}}')">{{$size}}</button>
+    @endforeach
 										</div>
 									</div>
 								@endif
 
 								<!-- Quantity & Cart Form -->
 								<form action="{{route('single-add-to-cart')}}" method="POST" class="mb-4">
-									@csrf
-									<input type="hidden" name="slug" value="{{$product_detail->slug}}">
+        @csrf
+        <input type="hidden" name="slug" value="{{$product_detail->slug}}">
+        <input type="hidden" name="size" id="selectedSizeInput" value="">
 									<div class="snc-qty-row mb-4">
 										<label class="snc-label mb-0 mr-3">Quantity</label>
 										<div class="snc-qty-stepper">
@@ -221,6 +223,37 @@
 							</div>
 							<div class="tab-pane fade" id="reviewTab">
 								<div class="comments-section">
+                                    
+                                    @auth
+                                    <div class="review-form mb-4 p-4 bg-light rounded-16 border">
+                                        <h5 class="mb-3 font-weight-bold">Write a Review</h5>
+                                        <form class="form" method="post" action="{{route('review.store',$product_detail->slug)}}">
+                                            @csrf
+                                            <div class="form-group mb-3">
+                                                <label class="font-weight-bold">Rating</label>
+                                                <div class="rating-stars-input" style="color: var(--primary-color); font-size: 20px; cursor: pointer;">
+                                                    <i class="fa fa-star star-rate" data-val="1"></i>
+                                                    <i class="fa fa-star star-rate" data-val="2"></i>
+                                                    <i class="fa fa-star star-rate" data-val="3"></i>
+                                                    <i class="fa fa-star star-rate" data-val="4"></i>
+                                                    <i class="fa fa-star star-rate" data-val="5"></i>
+                                                </div>
+                                                <input type="hidden" name="rate" id="rating-val" value="5" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="font-weight-bold">Your Review</label>
+                                                <textarea name="review" rows="3" class="form-control" placeholder="Write your review here..." required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary mt-3" style="background: var(--primary-color); border: none;">Submit Review</button>
+                                        </form>
+                                    </div>
+                                    @else
+                                    <div class="alert alert-info text-center">
+                                        You need to <a href="{{route('login.form')}}" style="color: var(--primary-color); font-weight: bold;">Login</a> to write a review.
+                                    </div>
+                                    @endauth
+                                    
+                                    <h5 class="mb-3 font-weight-bold">Customer Reviews</h5>
 									@foreach($product_detail['getReview'] as $rev)
 										<div class="d-flex mb-3 p-3 bg-light rounded-16">
 											<div class="font-weight-bold bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; min-width: 40px;">
@@ -1193,8 +1226,32 @@
 .snc-theme-color { color: var(--primary-color) !important; }
 </style>
 
+
+<script>
+    $(document).ready(function(){
+        $('.star-rate').click(function(){
+            var val = $(this).data('val');
+            $('#rating-val').val(val);
+            $('.star-rate').each(function(){
+                if($(this).data('val') <= val){
+                    $(this).removeClass('fa-star-o').addClass('fa-star');
+                } else {
+                    $(this).removeClass('fa-star').addClass('fa-star-o');
+                }
+            });
+        });
+    });
+</script>
+
 @endpush
 @push('scripts')
+
+<script>
+    window.baseProductPrice = {{ $product_detail->price ?? 0 }};
+    window.productDiscount = {{ $product_detail->discount ?? 0 }};
+    window.productSizePrices = {!! $product_detail->size_prices ? $product_detail->size_prices : '{}' !!};
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script>
 	function changeSncImage(element, src) {
@@ -1203,10 +1260,52 @@
 		$(element).addClass('active border-success').removeClass('border');
 	}
 
-	function selectSncSize(element) {
-		$('.snc-size-btn').removeClass('active btn-dark').addClass('btn-outline-dark');
-		$(element).addClass('active btn-dark').removeClass('btn-outline-dark');
-	}
+	
+    let sncLoaderTimeout = null;
+    function selectSncSize(element, sizeName) {
+        $('.snc-size-btn').removeClass('active btn-dark').addClass('btn-outline-dark');
+        $(element).addClass('active btn-dark').removeClass('btn-outline-dark');
+        
+        $('#selectedSizeInput').val(sizeName);
+
+        // Show a small loader to simulate loading
+        $('.current-price, .snc-current-price').html('<i class="fa fa-spinner fa-spin"></i>');
+        
+        if (sncLoaderTimeout) {
+            clearTimeout(sncLoaderTimeout);
+        }
+
+        sncLoaderTimeout = setTimeout(function() {
+            // Update the displayed price
+            let unitPrice = window.baseProductPrice;
+            if(window.productSizePrices[sizeName] !== undefined && window.productSizePrices[sizeName] !== null && window.productSizePrices[sizeName] !== "") {
+                unitPrice = parseFloat(window.productSizePrices[sizeName]);
+            }
+            
+            let discount = window.productDiscount || 0;
+            let finalPrice = unitPrice - (unitPrice * discount / 100);
+            
+            $('.current-price, .snc-current-price').hide().html('Rs: ' + finalPrice.toFixed(2)).fadeIn(200);
+            if(discount > 0) {
+                $('.old-price del, .snc-old-price').html('Rs: ' + unitPrice.toFixed(2));
+                $('.product-des .short .price .discount').html('Rs: ' + finalPrice.toFixed(2));
+                $('.product-des .short .price s').html('Rs: ' + unitPrice.toFixed(2));
+            } else {
+                $('.old-price del, .snc-old-price').html('');
+                $('.product-des .short .price .discount').html('Rs: ' + finalPrice.toFixed(2));
+                $('.product-des .short .price s').html('');
+            }
+        }, 400); // 400ms loader simulation
+    }
+
+    $(document).ready(function() {
+        // Set the initial hidden input value to the active button
+        let activeSize = $('.snc-size-btn.active').text().trim();
+        if(activeSize) {
+            selectSncSize($('.snc-size-btn.active')[0], activeSize);
+        }
+    });
+
 
 	function increaseQty() {
 		var input = $('#sncQtyInput');
@@ -1238,5 +1337,22 @@
 <style>
 .snc-theme-color { color: var(--primary-color) !important; }
 </style>
+
+
+<script>
+    $(document).ready(function(){
+        $('.star-rate').click(function(){
+            var val = $(this).data('val');
+            $('#rating-val').val(val);
+            $('.star-rate').each(function(){
+                if($(this).data('val') <= val){
+                    $(this).removeClass('fa-star-o').addClass('fa-star');
+                } else {
+                    $(this).removeClass('fa-star').addClass('fa-star-o');
+                }
+            });
+        });
+    });
+</script>
 
 @endpush

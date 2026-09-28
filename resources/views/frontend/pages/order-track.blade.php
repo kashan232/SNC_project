@@ -58,6 +58,13 @@
                                             <strong>{{ strtoupper($order->payment_method) }}</strong>
                                         </div>
                                         <div class="info-row">
+                                            <span>City/Area:</span>
+                                            <strong>
+                                                @if($order->city) {{ $order->city->name }} @else {{ $order->country }} @endif 
+                                                @if($order->area) - {{ $order->area->name }} @endif
+                                            </strong>
+                                        </div>
+                                        <div class="info-row">
                                             <span>Current Status:</span>
                                             @if($status == 'cancel')
                                                 <strong class="text-danger">CANCELLED</strong>
@@ -141,7 +148,12 @@
                                                     <tr>
                                                         <td style="padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; align-items: center;">
                                                             <img src="{{$photo[0]}}" alt="{{$cart->product['title']}}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px; margin-right: 15px; border: 1px solid #ddd;">
-                                                            <span style="font-weight: 600; color: #333;">{{$cart->product['title']}}</span>
+                                                            <div>
+                <span style="font-weight: 600; color: #333; display: block;">{{$cart->product['title']}}</span>
+                @if($cart->size)
+                    <span style="font-size: 11px; background: #eee; padding: 2px 6px; border-radius: 10px; color: #666; font-weight: 600; margin-top: 4px; display: inline-block;">Size: {{$cart->size}}</span>
+                @endif
+            </div>
                                                         </td>
                                                         <td style="padding: 15px 20px; border-bottom: 1px solid #eee; vertical-align: middle;">Rs. {{number_format($cart->price, 2)}}</td>
                                                         <td style="padding: 15px 20px; border-bottom: 1px solid #eee; vertical-align: middle;">{{$cart->quantity}}</td>

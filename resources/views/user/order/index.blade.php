@@ -14,7 +14,7 @@
     <div class="card-body">
       <div class="table-responsive">
         @if(count($orders)>0)
-        <table class="table table-bordered" id="order-dataTable" width="100%" cellspacing="0">
+        <table class="table table-hover table-bordered table-striped align-middle" id="order-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
               <th>S.N.</th>
@@ -25,7 +25,7 @@
               <th>Charge</th>
               <th>Total Amount</th>
               <th>Status</th>
-              <th>Action</th>
+              <th style="width: 100px;">Action</th>
             </tr>
           </thead>
           <tfoot>
@@ -38,19 +38,19 @@
               <th>Charge</th>
               <th>Total Amount</th>
               <th>Status</th>
-              <th>Action</th>
+              <th style="width: 100px;">Action</th>
               </tr>
           </tfoot>
           <tbody>
             @foreach($orders as $order)
                 <tr>
                     <td>{{$order->id}}</td>
-                    <td>{{$order->order_number}}</td>
+                    <td class="font-weight-bold">{{$order->order_number}}</td>
                     <td>{{$order->first_name}} {{$order->last_name}}</td>
                     <td>{{$order->email}}</td>
                     <td>{{$order->quantity}}</td>
-                    <td>Rs:{{$order->shipping->price ?? '' }}</td>
-                    <td>Rs:{{number_format($order->total_amount,2)}}</td>
+                    <td>Rs. {{ number_format($order->shipping->price ?? 0, 2) }}</td>
+                    <td class="font-weight-bold text-primary">Rs. {{number_format($order->total_amount,2)}}</td>
                     <td>
                         @if($order->status=='new')
                           <span class="badge badge-primary">{{$order->status}}</span>
@@ -64,11 +64,15 @@
                     </td>
                     <td>
                         <a href="{{route('user.order.show',$order->id)}}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>
+                        
+                        @if($order->status == 'new')
                         <form method="POST" action="{{route('user.order.delete',[$order->id])}}">
                           @csrf
                           @method('delete')
-                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Cancel Order"><i class="fas fa-times"></i></button>
                         </form>
+                        @endif
+
                     </td>
                 </tr>
             @endforeach
@@ -133,7 +137,7 @@
               e.preventDefault();
               swal({
                     title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this data!",
+                    text: "Are you sure you want to cancel this order?",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -142,7 +146,7 @@
                     if (willDelete) {
                        form.submit();
                     } else {
-                        swal("Your data is safe!");
+                        swal("Order is safe!");
                     }
                 });
           })

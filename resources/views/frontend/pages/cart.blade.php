@@ -47,6 +47,9 @@
 											<td class="image" data-title="No"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></td>
 											<td class="product-des" data-title="Description">
 												<p class="product-name"><a href="{{route('product-detail',$cart->product['slug'])}}" target="_blank">{{$cart->product['title']}}</a></p>
+														@if($cart->size)
+															<p style="font-size: 12px; color: #777; margin-top: 5px;">Size: <strong style="color: #333;">{{ $cart->size }}</strong></p>
+														@endif
 												<p class="product-des">{!!($cart['summary']) !!}</p>
 											</td>
 											<td class="price" data-title="Price"><span>Rs:{{number_format($cart['price'],2)}}</span></td>

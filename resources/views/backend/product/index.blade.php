@@ -69,7 +69,25 @@
                     <td>{{(($product->is_featured==1)? 'Yes': 'No')}}</td>
                     <td>Rs. {{$product->price}} /-</td>
                     <td>  {{$product->discount}}% OFF</td>
-                    <td>{{$product->size}}</td>
+                    <td>
+                        @if($product->size)
+                            @php 
+                                $sizes = explode(',', $product->size);
+                                $szPrices = $product->size_prices ? json_decode($product->size_prices, true) : [];
+                            @endphp
+                            @foreach($sizes as $sz)
+                                @php $sz = trim($sz); @endphp
+                                @if($sz !== "")
+                                    <span class="badge badge-info" style="font-size:12px; margin-bottom:2px;">
+                                        {{$sz}} 
+                                        @if(is_array($szPrices) && isset($szPrices[$sz]) && $szPrices[$sz] !== "")
+                                            (Rs. {{$szPrices[$sz]}})
+                                        @endif
+                                    </span><br>
+                                @endif
+                            @endforeach
+                        @endif
+                      </td>
                     <td>{{$product->condition}}</td>
                     <td> {{ucfirst($product->brand->title ?? "")}}</td>
                     <td>

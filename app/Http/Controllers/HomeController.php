@@ -65,19 +65,26 @@ class HomeController extends Controller
     {
         $order = Order::find($id);
         if ($order) {
+            // Check time difference (in hours)
+            $createdAt = \Carbon\Carbon::parse($order->created_at);
+            $now = \Carbon\Carbon::now();
+            $hoursDiff = $createdAt->diffInHours($now);
+
             if ($order->status == "process" || $order->status == 'delivered' || $order->status == 'cancel') {
-                return redirect()->back()->with('error', 'You can not delete this order now');
+                return redirect()->back()->with('error', 'You can not cancel this order because it is already processed or delivered.');
             } else {
-                $status = $order->delete();
+                // Change status to cancel instead of fully deleting from DB to keep record
+                $order->status = 'cancel';
+                $status = $order->save();
                 if ($status) {
-                    request()->session()->flash('success', 'Order Successfully deleted');
+                    request()->session()->flash('success', 'Order Successfully cancelled');
                 } else {
-                    request()->session()->flash('error', 'Order can not deleted');
+                    request()->session()->flash('error', 'Order could not be cancelled');
                 }
                 return redirect()->route('user.order.index');
             }
         } else {
-            request()->session()->flash('error', 'Order can not found');
+            request()->session()->flash('error', 'Order not found');
             return redirect()->back();
         }
     }

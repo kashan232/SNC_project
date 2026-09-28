@@ -74,15 +74,12 @@
           @enderror
         </div>
         <div class="form-group">
-          <label for="size">Size</label>
-          <select name="size[]" class="form-control selectpicker"  multiple data-live-search="true">
-              <option value="">--Select any size--</option>
-              <option value="S">Small (S)</option>
-              <option value="M">Medium (M)</option>
-              <option value="L">Large (L)</option>
-              <option value="XL">Extra Large (XL)</option>
+          <label for="size">Sizes (Type a size and press Enter)</label>
+          <select name="size[]" id="size" class="form-control select2-tags" multiple="multiple">
           </select>
         </div>
+        <div id="size-price-container" style="background:#f9f9f9; padding: 15px; border-radius: 5px; margin-top: 10px; display: none;"></div>
+
 
         <div class="form-group">
           <label for="brand_id">Brand</label>
@@ -152,6 +149,7 @@
 @push('styles')
 <link rel="stylesheet" href="{{asset('backend/summernote/summernote.min.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<link href="{{asset('frontend/js/select2/css/select2.min.css')}}" rel="stylesheet" />
 @endpush
 @push('scripts')
 <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
@@ -222,4 +220,81 @@
     }
   })
 </script>
+
+<script>
+    $(document).ready(function() {
+        let existingPrices = {};
+        
+        function renderSizePrices() {
+            let sizes = $("#size").val();
+            let container = $("#size-price-container");
+            container.empty();
+            
+            if (sizes) {
+                sizes = sizes.filter(s => s !== "");
+            }
+
+            if (sizes && sizes.length > 0) {
+                container.show();
+                container.append("<h5 style='font-size: 14px; margin-bottom: 15px; font-weight: bold; color: #333;'>Set Specific Prices for Selected Sizes (Optional)</h5>");
+                sizes.forEach(function(size) {
+                    let priceVal = existingPrices[size] !== undefined ? existingPrices[size] : "";
+                    container.append(`
+                        <div class="form-group row" style="margin-bottom: 10px; align-items: center;">
+                            <label class="col-sm-3 col-form-label" style="margin-bottom: 0;">Price for Size <strong>${size}</strong></label>
+                            <div class="col-sm-9">
+                                <input type="number" step="0.01" name="size_prices[${size}]" class="form-control" value="${priceVal}" placeholder="Enter specific price for ${size} (leave empty to use default price)">
+                            </div>
+                        </div>
+                    `);
+                });
+            } else {
+                container.hide();
+            }
+        }
+        
+        $("#size").on("change changed.bs.select", function() {
+            $("#size-price-container input").each(function() {
+                let name = $(this).attr("name");
+                let match = name.match(/\[(.*?)\]/);
+                if(match && match[1]) {
+                    existingPrices[match[1]] = $(this).val();
+                }
+            });
+            renderSizePrices();
+        });
+        
+        setTimeout(renderSizePrices, 500);
+    });
+</script>
+
+<link href="{{asset('frontend/js/select2/css/select2.min.css')}}" rel="stylesheet" />
+
+
+<script src="{{asset('frontend/js/select2/js/select2.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        // Forcefully remove bootstrap-select if it hijacked the element
+        setTimeout(function() {
+            try {
+                if ($("#size").parent().hasClass("bootstrap-select")) {
+                    $("#size").selectpicker("destroy");
+                }
+            } catch(e) {}
+            
+            $(".select2-tags").select2({
+                tags: true,
+                tokenSeparators: [","],
+                placeholder: "Type a size and press Enter...",
+                allowClear: true
+            });
+            
+            $(".select2-tags").on("select2:select select2:unselect", function (e) {
+                $(this).trigger("change");
+            });
+        }, 150); // delay slightly to let any global initializers finish first
+    });
+</script>
+
+
 @endpush

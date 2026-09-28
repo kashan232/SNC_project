@@ -518,6 +518,9 @@
                                 <a href="{{route('cart-delete',$data->id)}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
                                 <a class="cart-img" href="#"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></a>
                                 <div class="cart-item-content" style="flex: 1; padding-left: 10px;"><h4><a href="{{route('product-detail',$data->product['slug'])}}" target="_blank">{{$data->product['title']}}</a></h4>
+																			@if($data->size)
+																				<p style="font-size: 11px; color: #888; margin-top: 2px; margin-bottom: 2px;">Size: <strong>{{ $data->size }}</strong></p>
+																			@endif
                                 <p class="quantity">{{$data->quantity}} x - <span class="amount">Rs:{{number_format($data->price,2)}}</span></p></div>
                             </li>
                             @endforeach
@@ -623,6 +626,9 @@
                                 <a href="{{route('wishlist-delete',$data->id)}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
                                 <a class="cart-img" href="#"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></a>
                                 <div class="cart-item-content" style="flex: 1; padding-left: 10px;"><h4><a href="{{route('product-detail',$data->product['slug'])}}" target="_blank">{{$data->product['title']}}</a></h4>
+																			@if($data->size)
+																				<p style="font-size: 11px; color: #888; margin-top: 2px; margin-bottom: 2px;">Size: <strong>{{ $data->size }}</strong></p>
+																			@endif
                                 <p class="quantity">{{$data->quantity}} x - <span class="amount">Rs:{{number_format($data->price,2)}}</span></p></div>
                             </li>
                             @endforeach
@@ -661,6 +667,9 @@
                                 <a href="{{route('cart-delete',$data->id)}}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
                                 <a class="cart-img" href="#"><img src="{{$photo[0]}}" alt="{{$photo[0]}}"></a>
                                 <div class="cart-item-content" style="flex: 1; padding-left: 10px;"><h4><a href="{{route('product-detail',$data->product['slug'])}}" target="_blank">{{$data->product['title']}}</a></h4>
+																			@if($data->size)
+																				<p style="font-size: 11px; color: #888; margin-top: 2px; margin-bottom: 2px;">Size: <strong>{{ $data->size }}</strong></p>
+																			@endif
                                 <p class="quantity">{{$data->quantity}} x - <span class="amount">Rs:{{number_format($data->price,2)}}</span></p></div>
                             </li>
                             @endforeach

@@ -1,9 +1,9 @@
-<ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #000;">
+<ul class="navbar-nav  sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: var(--primary-color, #F7941D);">
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin') }}">
     <div class="sidebar-brand-icon">
-      <img src="{{ asset('backend/img/logo.png') }}"
-        style="height:30px; width:auto;">
+      <img src="{{ asset('images/footer_logo.jpg') }}"
+        style="height:50px; width:50px; border-radius:50%; object-fit:cover; border:2px solid #fff;">
     </div>
   </a>
 
@@ -40,20 +40,7 @@
     </li>
     
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <div class="sidebar-heading">
-      Posts
-    </div>
-    <!-- Comments -->
-    <li class="nav-item">
-      <a class="nav-link" href="{{route('user.post-comment.index')}}">
-          <i class="fas fa-comments fa-chart-area"></i>
-          <span>Comments</span>
-      </a>
-    </li>
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>

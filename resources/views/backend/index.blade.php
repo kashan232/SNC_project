@@ -84,6 +84,77 @@
         </div>
       </div>
     </div>
+    
+    <div class="row">
+
+      <!-- New Orders -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">New Orders (Amount)</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Rs. {{number_format($newAmount, 2)}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-plus-circle fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Process Orders -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Process Orders (Amount)</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Rs. {{number_format($processAmount, 2)}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-spinner fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delivered Orders -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Delivered Orders (Amount)</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Rs. {{number_format($deliveredAmount, 2)}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cancelled Orders -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-danger shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Cancelled Orders (Amount)</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800">Rs. {{number_format($cancelAmount, 2)}}</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-times-circle fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row">
 
       <!-- Area Chart -->
@@ -117,7 +188,35 @@
         </div>
       </div>
     </div>
-    <!-- Content Row -->
+
+    </div>
+    
+    <!-- City & Area Charts Row -->
+    <div class="row">
+        <!-- City Chart -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Orders by City</h6>
+                </div>
+                <div class="card-body" style="overflow:hidden;">
+                    <div id="city_pie_chart" style="width:100%; height:320px;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Area Chart -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Orders by Area</h6>
+                </div>
+                <div class="card-body" style="overflow:hidden;">
+                    <div id="area_pie_chart" style="width:100%; height:320px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     
   </div>
 @endsection
@@ -142,6 +241,36 @@
       chart.draw(data, options);
   }
 </script>
+<script type="text/javascript">
+
+  var cityDataArray = <?php echo $cityChart; ?>;
+  var areaDataArray = <?php echo $areaChart; ?>;
+
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawCityAreaCharts);
+
+  function drawCityAreaCharts()
+  {
+      if (cityDataArray.length > 1) {
+          var cityData = google.visualization.arrayToDataTable(cityDataArray);
+          var cityOptions = { title : 'Overall Orders by City' };
+          var cityChart = new google.visualization.PieChart(document.getElementById('city_pie_chart'));
+          cityChart.draw(cityData, cityOptions);
+      } else {
+          document.getElementById('city_pie_chart').innerHTML = '<p class="text-center mt-5">No city data available</p>';
+      }
+
+      if (areaDataArray.length > 1) {
+          var areaData = google.visualization.arrayToDataTable(areaDataArray);
+          var areaOptions = { title : 'Overall Orders by Area' };
+          var areaChart = new google.visualization.PieChart(document.getElementById('area_pie_chart'));
+          areaChart.draw(areaData, areaOptions);
+      } else {
+          document.getElementById('area_pie_chart').innerHTML = '<p class="text-center mt-5">No area data available</p>';
+      }
+  }
+</script>
+
   {{-- line chart --}}
   <script type="text/javascript">
     const url = "{{route('product.order.income')}}";
@@ -230,7 +359,7 @@
                           padding: 10,
                           // Include a dollar sign in the ticks
                           callback: function(value, index, values) {
-                            return '$' + number_format(value);
+                            return 'Rs. ' + number_format(value);
                           }
                         },
                         gridLines: {
@@ -262,7 +391,7 @@
                       callbacks: {
                         label: function(tooltipItem, chart) {
                           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+                          return datasetLabel + ': Rs. ' + number_format(tooltipItem.yLabel);
                         }
                       }
                     }

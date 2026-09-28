@@ -16,8 +16,8 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $data = User::select(\DB::raw("COUNT(*) as count"), \DB::raw("DAYNAME(created_at) as day_name"), \DB::raw("DAY(created_at) as day"))
-            ->where('created_at', '>', Carbon::today()->subDay(6))
+        $data = \App\User::select(\DB::raw("COUNT(*) as count"), \DB::raw("DAYNAME(created_at) as day_name"), \DB::raw("DAY(created_at) as day"))
+            ->where('created_at', '>', \Carbon\Carbon::today()->subDay(6))
             ->groupBy('day_name', 'day')
             ->orderBy('day')
             ->get();
@@ -25,8 +25,47 @@ class AdminController extends Controller
         foreach ($data as $key => $value) {
             $array[++$key] = [$value->day_name, $value->count];
         }
-        //  return $data;
-        return view('backend.index')->with('users', json_encode($array));
+
+        // Status Totals
+        $newAmount = \App\Models\Order::where('status', 'new')->sum('total_amount');
+        $processAmount = \App\Models\Order::where('status', 'process')->sum('total_amount');
+        $deliveredAmount = \App\Models\Order::where('status', 'delivered')->sum('total_amount');
+        $cancelAmount = \App\Models\Order::where('status', 'cancel')->sum('total_amount');
+
+        // All Cities (for chart)
+        $allCitiesData = \DB::table('orders')
+            ->join('cities', 'orders.city_id', '=', 'cities.id')
+            ->select('cities.name', \DB::raw('COUNT(orders.id) as total_orders'))
+            ->groupBy('cities.id', 'cities.name')
+            ->get();
+            
+        $cityChart = [['City', 'Orders']];
+        foreach ($allCitiesData as $c) {
+            $cityChart[] = [$c->name, (int)$c->total_orders];
+        }
+
+        // All Areas (for chart)
+        $allAreasData = \DB::table('orders')
+            ->join('areas', 'orders.area_id', '=', 'areas.id')
+            ->join('cities', 'areas.city_id', '=', 'cities.id')
+            ->select('areas.name as area_name', 'cities.name as city_name', \DB::raw('COUNT(orders.id) as total_orders'))
+            ->groupBy('areas.id', 'areas.name', 'cities.name')
+            ->get();
+            
+        $areaChart = [['Area', 'Orders']];
+        foreach ($allAreasData as $a) {
+            $areaChart[] = [$a->area_name . ' (' . $a->city_name . ')', (int)$a->total_orders];
+        }
+
+        return view('backend.index', [
+            'users' => json_encode($array),
+            'newAmount' => $newAmount,
+            'processAmount' => $processAmount,
+            'deliveredAmount' => $deliveredAmount,
+            'cancelAmount' => $cancelAmount,
+            'cityChart' => json_encode($cityChart),
+            'areaChart' => json_encode($areaChart)
+        ]);
     }
 
     public function profile()
