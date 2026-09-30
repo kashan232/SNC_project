@@ -152,6 +152,22 @@
         text-align: center;
         line-height: 1.2;
     }
+
+    @media(max-width: 768px) {
+        .footer-logo-img {
+            width: 90px !important;
+            height: 90px !important;
+        }
+        .est-badge {
+            width: 60px !important;
+            height: 60px !important;
+            font-size: 10px !important;
+            right: 0 !important;
+        }
+        .est-badge span {
+            font-size: 14px !important;
+        }
+    }
 </style>
 
 <footer class="footer">
@@ -164,7 +180,7 @@
 					<div class="single-footer about">
 						<div class="footer-logo-wrapper">
 							<a href="{{route('home')}}">
-                                <img src="{{asset('images/footer_logo.jpg')}}" alt="Shoukat Nimco Center Logo" style="width: 140px; height: 140px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); border: 4px solid #d4af37;">
+                                <img src="{{asset('images/footer_logo.jpg')}}" alt="Shoukat Nimco Center Logo" class="footer-logo-img" style="width: 140px; height: 140px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 20px rgba(0,0,0,0.15); border: 4px solid #d4af37;">
                             </a>
                             <div class="est-badge">
                                 EST.<br><span style="font-size: 20px;">1950</span>
@@ -230,10 +246,12 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="bottom-links">
-						POWERED BY <a href="#" style="text-decoration: underline;">PROWAVE TECHNOLOGIES</a> 
-                        | <a href="https://wa.me/923173836223"><i class="fa fa-whatsapp"></i> +92 317 3836223</a> 
-                        | <a href="#">PRIVACY POLICY</a> 
-                        | <a href="#">FAQS</a>
+						<div class="bottom-links-inner">
+                        POWERED BY <a href="#" style="text-decoration: underline;">PROWAVE TECHNOLOGIES</a> 
+                        <span class="pipe">|</span> <a href="https://wa.me/923173836223"><i class="fa fa-whatsapp"></i> +92 317 3836223</a> 
+                        <span class="pipe">|</span> <a href="#">PRIVACY POLICY</a> 
+                        <span class="pipe">|</span> <a href="#">FAQS</a>
+                    </div>
 					</div>
 				</div>
 			</div>
@@ -316,3 +334,28 @@
 		});
 	});
 </script>
+
+<style>
+@media(max-width: 768px) {
+    .footer .bottom-links {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px; /* for scrollbar if any */
+    }
+    .footer .bottom-links::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for clean look */
+    }
+    .bottom-links-inner {
+        display: inline-block;
+        font-size: 10px !important;
+        letter-spacing: 0.5px !important;
+    }
+    .bottom-links-inner a {
+        margin: 0 4px !important;
+        font-size: 10px !important;
+    }
+    .bottom-links-inner .pipe {
+        margin: 0 2px !important;
+    }
+}
+</style>

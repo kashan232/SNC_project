@@ -2,6 +2,17 @@
 @section('title','Shoukat Nimco Center')
 @section('main-content')
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* Floating Action Buttons */
     .single-product .product-img .button-head {
         background: transparent !important;
@@ -1412,6 +1423,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 <!-- Start Categories Section (Carousel) -->
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* EXPLORE MENU DESIGN */
 .explore-menu-section {
     padding: 80px 0;
@@ -1820,6 +1842,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 </script>
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* --------------------------------- */
     /* MODERN EXPLORE MENU DESIGN */
     /* --------------------------------- */
@@ -2815,6 +2848,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 </style>
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* OVERRIDE FOR HOME PAGE CARDS (BUTTONS & BADGES) */
 .isotope-grid .modern-product-card .card-badges {
     align-items: flex-start !important; /* Prevents badges from stretching full width */
@@ -2878,6 +2922,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* INCREASE CARD PADDING */
 .isotope-grid .modern-product-card .product-info-modern {
     padding: 20px 22px 25px 22px !important; /* Slightly more breathing room */
@@ -2886,6 +2941,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* FIX ISOTOPE VERTICAL SPACING */
 .isotope-grid .isotope-item {
     padding-bottom: 40px !important; /* Extra padding between rows */
@@ -2898,6 +2964,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* MOBILE CIRCULAR CATEGORY FILTERS */
 @media (max-width: 767px) {
     .filter-tope-group {
@@ -2981,6 +3058,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* Adjust card styling for smaller mobile grid (2 per row) */
 @media (max-width: 575px) {
     .isotope-grid .modern-product-card {
@@ -3122,6 +3210,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 <!-- Start Product Area -->
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* Floating Action Buttons */
     .single-product .product-img .button-head {
         background: transparent !important;
@@ -4161,6 +4260,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 </style>
 <!-- OVERRIDE FOR OUR PRODUCTS BUTTONS -->
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* Target only the buttons in the Isotope grid (Our Products section) */
     .isotope-grid .single-product {
         display: flex !important;
@@ -4326,7 +4436,7 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
                         <!-- Start Single Tab -->
                         @if($product_lists)
                         @foreach($product_lists as $key=>$product)
-                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{$product->cat_id}}">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{$product->cat_id}}">
                             
 <div class="modern-product-card {{ $product->stock<=0 ? 'card-soldout' : '' }} anime-card">
     <div class="card-badges">
@@ -4399,6 +4509,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 @foreach($product_lists as $key=>$product)
 <!-- OVERRIDE FOR QUICK VIEW MODAL -->
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     .modal-content {
         border-radius: 20px;
         border: none;
@@ -4739,6 +4860,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 <!-- START CLEAN CARD CSS OVERRIDE -->
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* EQUAL HEIGHT FIX FOR OWL CAROUSEL CARDS */
     .owl-carousel.popular-slider .owl-stage {
         display: flex !important;
@@ -4902,26 +5034,39 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
         color: #fff !important;
     }
 
-    /* Fix Carousel Arrows overlapping */
+    /* Fix Carousel Arrows perfectly centered */
+    .popular-slider {
+        position: relative !important;
+    }
+    .popular-slider .owl-nav {
+        position: absolute !important;
+        top: 50% !important;
+        width: 100% !important;
+        left: 0 !important;
+        margin: 0 !important;
+        transform: translateY(-50%) !important;
+        pointer-events: none !important; 
+    }
     .popular-slider .owl-nav div {
         background: #fff !important;
         color: var(--primary-color) !important;
         border: 1px solid var(--primary-color) !important;
         border-radius: 50% !important;
-        width: 35px !important;
-        height: 35px !important;
-        line-height: 33px !important;
+        width: 36px !important;
+        height: 36px !important;
+        line-height: 34px !important;
         text-align: center !important;
         font-size: 16px !important;
         position: absolute !important;
-        top: 35% !important;
+        top: 0 !important;
         transform: translateY(-50%) !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
         margin: 0 !important;
         padding: 0 !important;
+        pointer-events: auto !important;
     }
-    .popular-slider .owl-prev { left: -10px !important; }
-    .popular-slider .owl-next { right: -10px !important; }
+    .popular-slider .owl-prev { left: 0px !important; }
+    .popular-slider .owl-next { right: 0px !important; }
 
     /* Hero Banner Animations (Ken Burns + Text Fade Up) */
     #Gslider .carousel-item img {
@@ -5025,6 +5170,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 <!-- GLOBAL FONT OVERRIDE: POPPINS -->
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* Force Poppins font globally */
     body, h1, h2, h3, h4, h5, h6, p, a, span, div, li, ul, label, input, button, select, textarea {
         font-family: 'Poppins', sans-serif !important;
@@ -5145,6 +5301,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* -------------------------------------
        PREMIUM HERO BANNER DESIGN (NIMCO)
        ------------------------------------- */
@@ -5388,6 +5555,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 }
 </style>
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* FINAL OVERRIDE FOR HERO BANNER HEIGHT */
     section#Gslider .carousel-inner {
         height: 85vh !important;
@@ -5507,6 +5685,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 <!-- Start Our Outlets Section -->
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     #our-outlets-premium {
         padding: 80px 0;
         background-color: #f9f9fa;
@@ -5701,7 +5890,7 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
         <div class="row">
             <div class="col-12 text-center">
                 <a href="#">
-                    <img src="{{ asset('frontend/img/final-banner.jpg?v=2') }}" alt="Shoukat Nimco Banner" class="img-fluid w-100" style="border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
+                    <img src="{{ asset('frontend/img/final-banner.jpg?v=2') }}" alt="Shoukat Nimco Banner" class="img-fluid w-100 final-banner-img" style="border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
                 </a>
             </div>
         </div>
@@ -5716,6 +5905,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons' async='async'></script>
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5f2e5abf393162001291e431&product=inline-share-buttons' async='async'></script>
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* Floating Action Buttons */
     .single-product .product-img .button-head {
         background: transparent !important;
@@ -6735,6 +6935,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 }
 </style>
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* --------------------------------- */
     /* MODERN EXPLORE MENU DESIGN */
     /* --------------------------------- */
@@ -7730,6 +7941,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 </style>
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* OVERRIDE FOR HOME PAGE CARDS (BUTTONS & BADGES) */
 .isotope-grid .modern-product-card .card-badges {
     align-items: flex-start !important; /* Prevents badges from stretching full width */
@@ -7793,6 +8015,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* INCREASE CARD PADDING */
 .isotope-grid .modern-product-card .product-info-modern {
     padding: 20px 22px 25px 22px !important; /* Slightly more breathing room */
@@ -7801,6 +8034,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* FIX ISOTOPE VERTICAL SPACING */
 .isotope-grid .isotope-item {
     padding-bottom: 40px !important; /* Extra padding between rows */
@@ -7813,6 +8057,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* MOBILE CIRCULAR CATEGORY FILTERS */
 @media (max-width: 767px) {
     .filter-tope-group {
@@ -7896,6 +8151,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* Adjust card styling for smaller mobile grid (2 per row) */
 @media (max-width: 575px) {
     .isotope-grid .modern-product-card {
@@ -8005,6 +8271,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 </script>
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
     /* --------------------------------- */
     /* MODERN EXPLORE MENU DESIGN */
     /* --------------------------------- */
@@ -9000,6 +9277,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 </style>
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* OVERRIDE FOR HOME PAGE CARDS (BUTTONS & BADGES) */
 .isotope-grid .modern-product-card .card-badges {
     align-items: flex-start !important; /* Prevents badges from stretching full width */
@@ -9063,6 +9351,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* INCREASE CARD PADDING */
 .isotope-grid .modern-product-card .product-info-modern {
     padding: 20px 22px 25px 22px !important; /* Slightly more breathing room */
@@ -9071,6 +9370,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* FIX ISOTOPE VERTICAL SPACING */
 .isotope-grid .isotope-item {
     padding-bottom: 40px !important; /* Extra padding between rows */
@@ -9083,6 +9393,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* MOBILE CIRCULAR CATEGORY FILTERS */
 @media (max-width: 767px) {
     .filter-tope-group {
@@ -9166,6 +9487,17 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 <style>
+    @media(max-width: 768px) {
+        .final-banner-section {
+            padding: 30px 0 !important;
+        }
+        .final-banner-img {
+            min-height: 120px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
 /* Adjust card styling for smaller mobile grid (2 per row) */
 @media (max-width: 575px) {
     .isotope-grid .modern-product-card {
@@ -9209,3 +9541,29 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 
 
 
+
+<style>
+/* FORCE PRODUCT BUTTONS HORIZONTAL ON 1-COLUMN MOBILE LAYOUT */
+@media (max-width: 768px) {
+    .isotope-grid .modern-product-card .product-action-modern {
+        flex-direction: row !important;
+        gap: 8px !important;
+    }
+    .isotope-grid .modern-product-card .btn-action-modern {
+        padding: 10px 8px !important;
+        font-size: 13px !important;
+        flex: 1 !important;
+    }
+    .isotope-grid .modern-product-card .product-img-modern img {
+        height: 250px !important;
+        object-fit: cover !important;
+        width: 100% !important;
+    }
+    .isotope-grid .modern-product-card h3 a {
+        font-size: 18px !important;
+    }
+    .isotope-grid .modern-product-card .current-price {
+        font-size: 18px !important;
+    }
+}
+</style>
