@@ -172,9 +172,8 @@
         animation: bounceInLogo 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
     #locationModal .modal-body {
-        animation: slideUpFade 0.6s ease-out forwards;
-        animation-delay: 0.2s;
-        opacity: 0;
+        /* Removed animation to prevent blank screen bug on mobile */
+        opacity: 1;
     }
     
     #locationModal .modal-header-custom {
@@ -194,7 +193,7 @@
 </style>
 
 <!-- Location Modal -->
-<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="z-index: 99999999 !important;">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px;">
         <div class="modal-content">
             <div class="modal-header-custom">

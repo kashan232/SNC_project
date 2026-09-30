@@ -465,7 +465,7 @@
     <!-- Left: Logo & Simple Location -->
     <div class="top-header-left" style="display: flex; align-items: center; gap: 30px;">
         <a href="{{route('home')}}" style="display: block; margin-top: 5px;">
-            <img src="{{asset('images/footer_logo.jpg')}}" alt="Shoukat Nimco Center Logo" style="width: 75px; height: 75px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <img src="{{asset('images/footer_logo.jpg')}}" alt="Shoukat Nimco Center Logo" style="width: 75px; height: 75px; min-width: 75px; min-height: 75px; flex-shrink: 0; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         </a>
         <div onclick="$('#locationModal').modal('show');" style="cursor: pointer; display: flex; align-items: center; gap: 8px; color: #444; font-size: 15px; font-weight: 600; background: #f9f9f9; padding: 8px 15px; border-radius: 30px; border: 1px solid #eee; transition: all 0.3s;">
             <i class="fa fa-map-marker" style="color: var(--primary-color); font-size: 18px;"></i>
@@ -571,7 +571,7 @@
         <!-- Center Logo -->
         <div class="top-header-center">
             <a href="{{route('home')}}">
-                <img src="{{asset('images/footer_logo.jpg')}}" alt="Shoukat Nimco Center Logo" style="width: 75px; height: 75px; object-fit: cover; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                <img src="{{asset('images/footer_logo.jpg')}}" alt="Shoukat Nimco Center Logo" style="width: 75px; height: 75px; min-width: 75px; min-height: 75px; flex-shrink: 0; display: block; object-fit: cover; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
             </a>
         </div>
 
@@ -825,7 +825,7 @@
             align-items: center;
         }
         .sidebar-logo {
-            width: 50px; height: 50px; border-radius: 50%; object-fit: cover;
+            width: 50px; height: 50px; min-width: 50px; min-height: 50px; flex-shrink: 0; border-radius: 50%; object-fit: cover; display: block;
         }
         .close-sidebar-btn {
             background: rgba(255,0,0,0.1);
