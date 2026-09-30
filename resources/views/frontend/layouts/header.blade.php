@@ -296,6 +296,38 @@
     }
 
     /* Mobile overrides */
+
+    @media(max-width: 991px) {
+        .modern-top-header {
+            padding: 5px 15px !important;
+            min-height: 60px !important;
+        }
+        .modern-top-header .top-header-left {
+            gap: 10px !important;
+        }
+        .modern-logo-img {
+            width: 50px !important;
+            height: 50px !important;
+            min-width: 50px !important;
+            min-height: 50px !important;
+        }
+        .modern-location-btn {
+            padding: 5px 10px !important;
+            font-size: 13px !important;
+        }
+        .modern-location-btn i {
+            font-size: 14px !important;
+        }
+        .modern-nav-actions {
+            gap: 10px !important;
+            padding: 4px 10px !important;
+        }
+        /* Hide the call text on mobile to save space */
+        .modern-top-header .top-header-right > div:first-child {
+            display: none !important;
+        }
+    }
+
             @media(max-width: 991px) {
         /* Standard Navbar Layout */
         .custom-top-header {
@@ -465,9 +497,9 @@
     <!-- Left: Logo & Simple Location -->
     <div class="top-header-left" style="display: flex; align-items: center; gap: 30px;">
         <a href="{{route('home')}}" style="display: block; margin-top: 5px;">
-            <img src="{{asset('images/footer_logo.jpg')}}" alt="Shoukat Nimco Center Logo" style="width: 75px; height: 75px; min-width: 75px; min-height: 75px; flex-shrink: 0; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            <img src="{{asset('images/footer_logo.jpg')}}" alt="Shoukat Nimco Center Logo" class="modern-logo-img" style="width: 75px; height: 75px; min-width: 75px; min-height: 75px; flex-shrink: 0; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         </a>
-        <div onclick="$('#locationModal').modal('show');" style="cursor: pointer; display: flex; align-items: center; gap: 8px; color: #444; font-size: 15px; font-weight: 600; background: #f9f9f9; padding: 8px 15px; border-radius: 30px; border: 1px solid #eee; transition: all 0.3s;">
+        <div onclick="$('#locationModal').modal('show');" class="modern-location-btn" style="cursor: pointer; display: flex; align-items: center; gap: 8px; color: #444; font-size: 15px; font-weight: 600; background: #f9f9f9; padding: 8px 15px; border-radius: 30px; border: 1px solid #eee; transition: all 0.3s;">
             <i class="fa fa-map-marker" style="color: var(--primary-color); font-size: 18px;"></i>
             <span id="display-selected-location">Select Location</span>
             <i class="fa fa-angle-down" style="font-size: 14px; margin-left: 2px; color: #999;"></i>
