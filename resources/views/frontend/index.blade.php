@@ -1387,10 +1387,11 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
 @if(count($banners)>0)
 <section id="Gslider" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-        @foreach($banners as $key=>$banner)
-        <li data-target="#Gslider" data-slide-to="{{$key}}" class="{{(($key==0)? 'active' : '')}}"></li>
-        @endforeach
-    </ol>
+    @foreach($banners as $key=>$banner)
+    <li data-target="#Gslider" data-slide-to="{{$key}}" class="{{(($key==0)? 'active' : '')}}"></li>
+    @endforeach
+</ol>
+
     <div class="carousel-inner" role="listbox">
         @foreach($banners as $key=>$banner)
         <div class="carousel-item {{(($key==0)? 'active' : '')}}">
@@ -1400,14 +1401,18 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
         @endforeach
     </div>
     
-    <a class="carousel-control-prev" href="#Gslider" role="button" data-slide="prev" style="width: 50px; background: rgba(0,0,0,0.2);">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#Gslider" role="button" data-slide="next" style="width: 50px; background: rgba(0,0,0,0.2);">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+    <!-- Previous Arrow Removed -->
+    <!-- Next Arrow Removed -->
+
+        <!-- Bottom Wave SVG to match mockup exactly -->
+        <div class="hero-wave" style="position: absolute; bottom: -2px; left: 0; width: 100%; overflow: hidden; line-height: 0; z-index: 10;">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="display: block; width: 100%; height: 70px;">
+                <!-- Orange Outline Wave -->
+                <path d="M0,60 C320,120 420,0 720,40 C1020,80 1120,-20 1440,60 L1440,120 L0,120 Z" fill="var(--primary-color)" transform="translate(0, -6)"></path>
+                <!-- White Fill Wave -->
+                <path d="M0,60 C320,120 420,0 720,40 C1020,80 1120,-20 1440,60 L1440,120 L0,120 Z" fill="#fcf9f2"></path>
+            </svg>
+        </div>
 </section>
 @endif
 <!--/ End Slider Area -->
@@ -6050,7 +6055,7 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
     }
 
     #Gslider .carousel-indicators {
-        bottom: 30px;
+        bottom: 55px;
     }
     
     #Gslider .carousel-indicators li {
@@ -9622,6 +9627,14 @@ section.explore-menu-section .explore-slider.owl-carousel .owl-nav div.owl-next:
         max-height: 220px !important;
         object-fit: cover !important;
         width: 100% !important;
+    }
+}
+</style>
+
+<style>
+@media (max-width: 768px) {
+    #Gslider .hero-wave svg {
+        height: 40px !important;
     }
 }
 </style>
