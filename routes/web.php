@@ -276,10 +276,26 @@ Route::post('/api/save-location', 'App\Http\Controllers\AreaController@autoSaveL
 // FALLBACK ROUTE FOR STORAGE IMAGES (Solves cPanel symlink issues)
 Route::get('storage/{path}', function ($path) {
     $path = urldecode($path);
-    $fullPath = storage_path('app/public/' . $path);
-    if (file_exists($fullPath)) {
+    
+    // Check multiple possible locations for the file
+    $possiblePaths = [
+        storage_path('app/public/' . $path),
+        base_path('public_html/storage/' . $path),
+        base_path('public/storage/' . $path),
+        storage_path($path),
+    ];
+    
+    $foundPath = null;
+    foreach ($possiblePaths as $p) {
+        if (file_exists($p) && is_file($p)) {
+            $foundPath = $p;
+            break;
+        }
+    }
+    
+    if ($foundPath) {
         try {
-            $ext = pathinfo($fullPath, PATHINFO_EXTENSION);
+            $ext = pathinfo($foundPath, PATHINFO_EXTENSION);
             $mimes = [
                 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg',
                 'png' => 'image/png', 'gif' => 'image/gif', 
@@ -287,15 +303,17 @@ Route::get('storage/{path}', function ($path) {
             ];
             $mime = $mimes[strtolower($ext)] ?? 'application/octet-stream';
             
-            return response()->file($fullPath, [
+            return response()->file($foundPath, [
                 'Content-Type' => $mime,
                 'Cache-Control' => 'public, max-age=31536000'
             ]);
         } catch (\Exception $e) {
-            // If anything fails (like fileinfo), just return the raw file content manually
-            return response(file_get_contents($fullPath), 200)
-                   ->header('Content-Type', 'image/jpeg'); // Safe default for LFM
+            return response(file_get_contents($foundPath), 200)
+                   ->header('Content-Type', 'image/jpeg');
         }
     }
-    abort(404);
+    
+    // If not found, return a dummy transparent image or 404
+    // Returning 404 so we know it is genuinely missing
+    abort(404, "File not found in any storage path.");
 })->where('path', '.*');
