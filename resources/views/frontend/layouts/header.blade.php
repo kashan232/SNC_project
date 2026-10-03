@@ -790,7 +790,7 @@
                 
                 <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif"><a href="{{route('product-grids')}}"><i class="ti-package"></i> Our Menu</a></li>
                 <li>
-                    <a href="#catSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="display:flex; justify-content:space-between; align-items:center;"><span style="display:flex; align-items:center;"><i class="ti-view-grid" style="margin-right:10px;"></i> Categories</span> <i class="fa fa-angle-down"></i></a>
+                    <a href="#catSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="display:flex; justify-content:space-between; align-items:center;"><span style="display:flex; align-items:center;"><i class="ti-view-grid" style="margin-right:10px;"></i> Categories</span></a>
                     <ul class="collapse list-unstyled" id="catSubmenu" style="background: #fafafa; border-left: 3px solid var(--primary-color);">
                         @php
                             $categories = \App\Models\Category::where('is_parent',1)->where('status','active')->orderBy('title','ASC')->get();

@@ -12,10 +12,21 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $messages=Message::paginate(20);
+    public function index(Request $request){
+        $query = Message::query();
+        
+        if ($request->has('type')) {
+            if ($request->type == 'voice') {
+                $query->where('subject', 'LIKE', '%Voice Complaint%');
+            } elseif ($request->type == 'text') {
+                $query->where('subject', 'NOT LIKE', '%Voice Complaint%');
+            }
+        }
+        
+        $messages = $query->orderBy('id', 'DESC')->paginate(20);
         return view('backend.message.index')->with('messages',$messages);
     }
+
     public function messageFive()
     {
         $message=Message::whereNull('read_at')->limit(5)->get();
@@ -125,4 +136,43 @@ class MessageController extends Controller
         }
         return back();
     }
+
+    public function submitComplain(Request $request)
+    {
+        $message = new Message();
+        $message->name = $request->name ?? 'Unknown';
+        $message->phone = $request->phone ?? 'Unknown';
+        $message->email = $request->email ?? 'no-email@example.com';
+        
+        $type = $request->feedback_type; // 'voice' or 'text'
+        if ($type == 'voice') {
+            $message->subject = "Voice Complaint - Branch: " . ($request->branch ?? 'N/A');
+            
+            if ($request->hasFile('audio')) {
+                $file = $request->file('audio');
+                $filename = time() . '_' . uniqid() . '.webm';
+                // Move to public/storage/complaints (make sure this works, or just public/complaints)
+                $file->move(public_path('storage/complaints'), $filename);
+                $url = asset('storage/complaints/' . $filename);
+                $message->message = "Voice Complaint: <br><audio controls><source src='{$url}' type='audio/webm'></audio>";
+            } else {
+                $message->message = "Voice Complaint (No Audio File Attached)";
+            }
+        } else {
+            $message->subject = "Text Complaint - Branch: " . ($request->branch ?? 'N/A') . " - Channel: " . ($request->channel ?? 'N/A');
+            $message->message = $request->message ?? 'No Message';
+            
+            if ($request->hasFile('attachment')) {
+                $file = $request->file('attachment');
+                $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('storage/complaints'), $filename);
+                $message->photo = asset('storage/complaints/'.$filename);
+            }
+        }
+        
+        $message->save();
+        
+        return response()->json(['status' => 'success', 'message' => 'Feedback submitted successfully.']);
+    }
+
 }

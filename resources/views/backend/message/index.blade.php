@@ -6,7 +6,16 @@
        @include('backend.layouts.notification')
     </div>
   </div>
-  <h5 class="card-header">Messages</h5>
+  
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="m-0 font-weight-bold text-primary">Complaints & Messages</h5>
+    <div>
+      <a href="{{ route('message.index') }}" class="btn btn-outline-secondary btn-sm">All</a>
+      <a href="{{ route('message.index', ['type' => 'text']) }}" class="btn btn-outline-info btn-sm">Text Complaints</a>
+      <a href="{{ route('message.index', ['type' => 'voice']) }}" class="btn btn-outline-warning btn-sm">Voice Complaints</a>
+    </div>
+  </div>
+
   <div class="card-body">
     @if(count($messages)>0)
     <table class="table message-table" id="message-dataTable">
@@ -14,7 +23,7 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Name</th>
-          <th scope="col">Subject</th>
+          <th scope="col">Subject</th><th scope="col">Content</th>
           <th scope="col">Date</th>
           <th scope="col">Action</th>
         </tr>
@@ -26,6 +35,14 @@
           <td scope="row">{{$loop->index +1}}</td>
           <td>{{$message->name}} {{$message->read_at}}</td>
           <td>{{$message->subject}}</td>
+          <td>
+            @if(str_contains($message->subject, 'Voice Complaint'))
+                {!! str_replace('<br>', '', $message->message) !!}
+            @else
+                {{ \Illuminate\Support\Str::limit($message->message, 50) }}
+            @endif
+          </td>
+
           <td>{{$message->created_at->format('F d, Y h:i A')}}</td>
           <td>
             <a href="{{route('message.show',$message->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>

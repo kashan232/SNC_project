@@ -151,6 +151,14 @@
       <span>Reviews</span></a>
   </li>
 
+    <!-- Complaints -->
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('message.index')}}">
+      <i class="fas fa-envelope"></i>
+      <span>Complaints</span></a>
+  </li>
+
+
 
   <!-- Divider -->
   <hr class="sidebar-divider">

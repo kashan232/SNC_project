@@ -70,6 +70,7 @@
     Route::get('/about-us', [FrontendController::class, 'aboutUs'])->name('about-us');
     Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
     Route::get('/complain', function() { return view('frontend.pages.complain'); })->name('complain');
+    Route::post('/complain/submit', [\App\Http\Controllers\MessageController::class, 'submitComplain'])->name('complain.submit');
     Route::post('/contact/message', [MessageController::class, 'store'])->name('contact.store');
     Route::get('product-detail/{slug}', [FrontendController::class, 'productDetail'])->name('product-detail');
     Route::post('/product/search', [FrontendController::class, 'productSearch'])->name('product.search');

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SNC || Submit Your Complaint</title>
@@ -424,18 +425,18 @@
                         <h2 class="welcome-title mt-4" style="font-size: 24px;">Voice Feedback</h2>
                         <p class="welcome-text mb-2">Share your experience with us. Record your voice feedback.</p>
                         
-                        <form id="voiceForm">
+                        <form id="voiceForm" onsubmit="event.preventDefault(); submitVoiceForm();">
                             <div class="row mt-4">
                                 <div class="col-md-6">
                                     <div class="custom-form-group">
                                         <label>Your Name <span>*</span></label>
-                                        <input type="text" placeholder="Enter your full name" required>
+                                        <input type="text" name="name" placeholder="Enter your full name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="custom-form-group">
                                         <label>Phone Number <span>*</span></label>
-                                        <input type="text" placeholder="03xx-xxxxxxx" required>
+                                        <input type="text" name="phone" placeholder="03xx-xxxxxxx" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -447,7 +448,7 @@
                                 <div class="col-md-6">
                                     <div class="custom-form-group">
                                         <label>Branch Name <span>*</span></label>
-                                        <select required>
+                                        <select name="branch" required>
                                             <option value="">-- Select Branch --</option>
                                             <option value="Clifton">Clifton Branch</option>
                                             <option value="Gulshan">Gulshan Branch</option>
@@ -466,7 +467,7 @@
                             </div>
                             
                             <div class="mt-4 d-flex justify-content-center" style="gap: 15px;">
-                                <button type="button" class="btn-primary-custom" onclick="alert('Voice feedback submit ready for backend!')">Submit Feedback</button>
+                                <button type="button" class="btn-primary-custom" onclick="submitVoiceForm()">Submit Feedback</button>
                                 <button type="reset" class="btn-outline-custom" onclick="resetRecorder()">Reset Form</button>
                             </div>
                         </form>
@@ -507,25 +508,25 @@
 
                         <h2 class="welcome-title mt-4" style="font-size: 24px;">Message Feedback</h2>
                         
-                        <form id="messageForm">
+                        <form id="messageForm" onsubmit="event.preventDefault(); submitMessageForm();">
                             <h3 class="section-title">Contact Details</h3>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="custom-form-group">
                                         <label>Full Name <span>*</span></label>
-                                        <input type="text" placeholder="Enter your full name" required>
+                                        <input type="text" name="name" placeholder="Enter your full name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="custom-form-group">
                                         <label>Phone Number <span>*</span></label>
-                                        <input type="text" placeholder="03xx-xxxxxxx" required>
+                                        <input type="text" name="phone" placeholder="03xx-xxxxxxx" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="custom-form-group">
                                         <label>Email (Optional)</label>
-                                        <input type="email" placeholder="Enter your email">
+                                        <input type="email" name="email" placeholder="Enter your email">
                                     </div>
                                 </div>
                             </div>
@@ -535,7 +536,7 @@
                                 <div class="col-md-6">
                                     <div class="custom-form-group">
                                         <label>Branch Name <span>*</span></label>
-                                        <select required>
+                                        <select name="branch" required>
                                             <option value="">-- Select Branch --</option>
                                             <option value="Clifton">Clifton Branch</option>
                                             <option value="Gulshan">Gulshan Branch</option>
@@ -544,10 +545,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="custom-form-group">
-                                        <label>Feedback Channel <span>*</span></label>
-                                        <select required>
+                                        <label>Feedback Channel <span>*</span></label><select name="channel" required>
                                             <option value="">-- Select --</option>
-                                            <option value="Quality">Food Quality</option>
+                                            <select name="channel" required><option value="Quality">Food Quality</option>
                                             <option value="Service">Customer Service</option>
                                             <option value="Ambience">Ambience</option>
                                             <option value="Other">Other</option>
@@ -557,19 +557,19 @@
                                 <div class="col-md-12">
                                     <div class="custom-form-group">
                                         <label>Feedback Message <span>*</span></label>
-                                        <textarea rows="4" placeholder="Enter your feedback" required></textarea>
+                                        <textarea rows="4" name="message" placeholder="Enter your feedback" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="custom-form-group border p-3 rounded" style="background: #fff;">
                                         <label>Attachment (Optional, max 10MB)</label>
-                                        <input type="file" style="border: none; padding: 0; background: transparent;">
+                                        <input type="file" name="attachment" style="border: none; padding: 0; background: transparent;">
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="mt-4">
-                                <button type="button" class="btn-primary-custom" onclick="alert('Message feedback submit ready for backend!')" style="width: 200px;">Submit Feedback</button>
+                                <button type="button" class="btn-primary-custom" onclick="submitMessageForm()" style="width: 200px;">Submit Feedback</button>
                             </div>
                         </form>
                     </div>
@@ -579,7 +579,60 @@
         </div>
 	</section>
 
-    <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
+    <script src="{{asset('frontend/js/jquery.min.js')}}">
+        function submitVoiceForm() {
+            let form = document.getElementById("voiceForm");
+            if(!form.checkValidity()) { form.reportValidity(); return; }
+            if(!currentAudioBlob) { alert("Please record an audio message first!"); return; }
+            
+            let formData = new FormData(form);
+            formData.append("feedback_type", "voice");
+            formData.append("audio", currentAudioBlob, "voice_record.webm");
+            
+            let btn = form.querySelector("button[onclick]");
+            btn.innerText = "Submitting...";
+            btn.disabled = true;
+            
+            fetch("{{ route('complain.submit') }}", {
+                method: "POST",
+                headers: { "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content },
+                body: formData
+            }).then(res => res.json()).then(data => {
+                alert(data.message);
+                window.location.reload();
+            }).catch(err => {
+                alert("An error occurred");
+                btn.innerText = "Submit Voice Feedback";
+                btn.disabled = false;
+            });
+        }
+        
+        function submitMessageForm() {
+            let form = document.getElementById("messageForm");
+            if(!form.checkValidity()) { form.reportValidity(); return; }
+            
+            let formData = new FormData(form);
+            formData.append("feedback_type", "text");
+            
+            let btn = form.querySelector("button[onclick]");
+            btn.innerText = "Submitting...";
+            btn.disabled = true;
+            
+            fetch("{{ route('complain.submit') }}", {
+                method: "POST",
+                headers: { "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content },
+                body: formData
+            }).then(res => res.json()).then(data => {
+                alert(data.message);
+                window.location.reload();
+            }).catch(err => {
+                alert("An error occurred");
+                btn.innerText = "Submit Feedback";
+                btn.disabled = false;
+            });
+        }
+    </script>
+
     <script>
         // Form Navigation
         function goToStep(stepId) {
@@ -618,6 +671,7 @@
 
                 mediaRecorder.addEventListener("stop", () => {
                     const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    currentAudioBlob = audioBlob;
                     const audioUrl = URL.createObjectURL(audioBlob);
                     audioPlayback.src = audioUrl;
                     audioPlayback.style.display = 'block';
@@ -672,6 +726,59 @@
             audioPlayback.src = '';
             audioChunks = [];
         }
+    
+        function submitVoiceForm() {
+            let form = document.getElementById("voiceForm");
+            if(!form.checkValidity()) { form.reportValidity(); return; }
+            if(!currentAudioBlob) { alert("Please record an audio message first!"); return; }
+            
+            let formData = new FormData(form);
+            formData.append("feedback_type", "voice");
+            formData.append("audio", currentAudioBlob, "voice_record.webm");
+            
+            let btn = form.querySelector("button[onclick]");
+            btn.innerText = "Submitting...";
+            btn.disabled = true;
+            
+            fetch("{{ route('complain.submit') }}", {
+                method: "POST",
+                headers: { "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content },
+                body: formData
+            }).then(res => res.json()).then(data => {
+                alert(data.message);
+                window.location.reload();
+            }).catch(err => {
+                alert("An error occurred");
+                btn.innerText = "Submit Voice Feedback";
+                btn.disabled = false;
+            });
+        }
+        
+        function submitMessageForm() {
+            let form = document.getElementById("messageForm");
+            if(!form.checkValidity()) { form.reportValidity(); return; }
+            
+            let formData = new FormData(form);
+            formData.append("feedback_type", "text");
+            
+            let btn = form.querySelector("button[onclick]");
+            btn.innerText = "Submitting...";
+            btn.disabled = true;
+            
+            fetch("{{ route('complain.submit') }}", {
+                method: "POST",
+                headers: { "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content },
+                body: formData
+            }).then(res => res.json()).then(data => {
+                alert(data.message);
+                window.location.reload();
+            }).catch(err => {
+                alert("An error occurred");
+                btn.innerText = "Submit Feedback";
+                btn.disabled = false;
+            });
+        }
     </script>
+
 </body>
 </html>
