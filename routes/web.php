@@ -55,15 +55,20 @@
         $target = storage_path('app/public');
         
         // Try public_html first (common on cPanel), then fallback to standard public_path
-        // Remove the symlink because cPanel Apache throws 500 error on symlinks!
+        // Remove the symlink or directory because cPanel Apache throws 500 error on it!
         $publicDir = base_path('public_html');
         if (!is_dir($publicDir)) {
             $publicDir = public_path();
         }
         $link = $publicDir . '/storage';
         
-        if (file_exists($link) || is_link($link)) {
-            @unlink($link); // Just delete it!
+        if (is_link($link)) {
+            @unlink($link); 
+        } elseif (is_dir($link)) {
+            // Delete directory and contents if it was copied by mistake
+            \Illuminate\Support\Facades\File::deleteDirectory($link);
+        } elseif (file_exists($link)) {
+            @unlink($link);
         }
         // Do NOT recreate the symlink! Our fallback route will handle the requests.
         
@@ -273,11 +278,24 @@ Route::get('storage/{path}', function ($path) {
     $path = urldecode($path);
     $fullPath = storage_path('app/public/' . $path);
     if (file_exists($fullPath)) {
-        $mime = \Illuminate\Support\Facades\File::mimeType($fullPath);
-        return response()->file($fullPath, [
-            'Content-Type' => $mime,
-            'Cache-Control' => 'public, max-age=31536000'
-        ]);
+        try {
+            $ext = pathinfo($fullPath, PATHINFO_EXTENSION);
+            $mimes = [
+                'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg',
+                'png' => 'image/png', 'gif' => 'image/gif', 
+                'svg' => 'image/svg+xml', 'webp' => 'image/webp'
+            ];
+            $mime = $mimes[strtolower($ext)] ?? 'application/octet-stream';
+            
+            return response()->file($fullPath, [
+                'Content-Type' => $mime,
+                'Cache-Control' => 'public, max-age=31536000'
+            ]);
+        } catch (\Exception $e) {
+            // If anything fails (like fileinfo), just return the raw file content manually
+            return response(file_get_contents($fullPath), 200)
+                   ->header('Content-Type', 'image/jpeg'); // Safe default for LFM
+        }
     }
     abort(404);
 })->where('path', '.*');
