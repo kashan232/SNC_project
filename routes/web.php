@@ -38,6 +38,34 @@
 
 
     // STORAGE LINKED ROUTE
+    
+    // FIX FILE MANAGER & LIVE URLS ROUTE
+    Route::get('fix-live-issues', function () {
+        // Update APP_URL in .env
+        $envFile = base_path('.env');
+        if (file_exists($envFile)) {
+            $url = request()->getSchemeAndHttpHost();
+            $env = file_get_contents($envFile);
+            $env = preg_replace('/^APP_URL=(.*)$/m', 'APP_URL='.$url, $env);
+            file_put_contents($envFile, $env);
+        }
+        
+        // Force symlink
+        $target = storage_path('app/public');
+        $link = public_path('storage');
+        
+        if (file_exists($link)) {
+            @unlink($link);
+        }
+        @symlink($target, $link);
+        
+        // Clear caches
+        \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+        
+        request()->session()->flash('success', 'Live Server Issues Fixed! (APP_URL updated, Caches cleared, Symlink restored)');
+        return redirect()->back();
+    })->name('fix.live.issues');
+
     Route::get('storage-link',[AdminController::class,'storageLink'])->name('storage.link');
 
 

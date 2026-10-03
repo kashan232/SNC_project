@@ -4,7 +4,12 @@
     <button id="sidebarToggleTop" class="btn btn-link  rounded-circle mr-3">
       <i class="fa fa-bars"></i>
     </button>
-    <a href="{{route('storage.link')}}"  class="btn btn-outline-warning btn-sm mr-3">
+    
+      <a href="{{route('fix.live.issues')}}"  class="btn btn-outline-success btn-sm mr-3" data-toggle="tooltip" title="Click this if images are broken in File Manager">
+        Fix Live Images
+      </a>
+
+      <a href="{{route('storage.link')}}"  class="btn btn-outline-warning btn-sm mr-3">
         Storage Link
     </a>
     <a href="{{route('cache.clear')}}"  class="btn btn-outline-danger btn-sm mr-3">
