@@ -51,13 +51,24 @@
         }
         
         // Force symlink
+        // Force symlink specifically for cPanel public_html vs local public
         $target = storage_path('app/public');
-        $link = public_path('storage');
         
-        if (file_exists($link)) {
+        // Try public_html first (common on cPanel), then fallback to standard public_path
+        $publicDir = base_path('public_html');
+        if (!is_dir($publicDir)) {
+            $publicDir = public_path();
+        }
+        
+        $link = $publicDir . '/storage';
+        
+        if (file_exists($link) || is_link($link)) {
             @unlink($link);
         }
         @symlink($target, $link);
+        
+        // Let's also fix the spaces in filenames issue for LFM if any, by ensuring LFM allows spaces or just renaming them?
+        // Actually the issue is usually just the symlink is in the wrong place!
         
         // Clear caches
         \Illuminate\Support\Facades\Artisan::call('optimize:clear');
@@ -255,3 +266,18 @@ Route::post('/api/save-location', 'App\Http\Controllers\AreaController@autoSaveL
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         Lfm::routes();
     });
+
+
+// FALLBACK ROUTE FOR STORAGE IMAGES (Solves cPanel symlink issues)
+Route::get('storage/{path}', function ($path) {
+    $path = urldecode($path);
+    $fullPath = storage_path('app/public/' . $path);
+    if (file_exists($fullPath)) {
+        $mime = \Illuminate\Support\Facades\File::mimeType($fullPath);
+        return response()->file($fullPath, [
+            'Content-Type' => $mime,
+            'Cache-Control' => 'public, max-age=31536000'
+        ]);
+    }
+    abort(404);
+})->where('path', '.*');
