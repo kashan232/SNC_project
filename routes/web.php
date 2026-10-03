@@ -55,17 +55,17 @@
         $target = storage_path('app/public');
         
         // Try public_html first (common on cPanel), then fallback to standard public_path
+        // Remove the symlink because cPanel Apache throws 500 error on symlinks!
         $publicDir = base_path('public_html');
         if (!is_dir($publicDir)) {
             $publicDir = public_path();
         }
-        
         $link = $publicDir . '/storage';
         
         if (file_exists($link) || is_link($link)) {
-            @unlink($link);
+            @unlink($link); // Just delete it!
         }
-        @symlink($target, $link);
+        // Do NOT recreate the symlink! Our fallback route will handle the requests.
         
         // Let's also fix the spaces in filenames issue for LFM if any, by ensuring LFM allows spaces or just renaming them?
         // Actually the issue is usually just the symlink is in the wrong place!
